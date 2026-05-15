@@ -1,0 +1,454 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "MCQ",
+      "topic": "Continents — Area Rankings",
+      "difficulty": "easy",
+      "question": "Which of the following is the third largest continent in the world by area?",
+      "options": {
+        "a": "South America",
+        "b": "Europe",
+        "c": "Africa",
+        "d": "North America"
+      },
+      "correct": "d",
+      "explanation": "Continents ranked by area: Asia > Africa > North America > South America > Antarctica > Europe > Australia/Oceania. North America ranks third; Africa is second — a common confusion."
+    },
+    {
+      "id": 2,
+      "type": "Statement",
+      "topic": "Continents — Population Rankings",
+      "difficulty": "easy",
+      "question": "Statement I: Asia is the most populous continent in the world.\n\nStatement II: Africa ranks second in population among all continents.",
+      "options": {
+        "a": "Only Statement I is correct",
+        "b": "Only Statement II is correct",
+        "c": "Both Statement I and Statement II are correct",
+        "d": "Neither Statement I nor Statement II is correct"
+      },
+      "correct": "c",
+      "explanation": "Both statements are correct. Population ranking by continent: Asia (1st) > Africa (2nd) > Europe (3rd) > North America (4th). Asia leads in both area and population."
+    },
+    {
+      "id": 3,
+      "type": "MCQ",
+      "topic": "Southeast Asia — Indonesia",
+      "difficulty": "easy",
+      "question": "What is the new capital of Indonesia, which replaced Jakarta?",
+      "options": {
+        "a": "Surabaya",
+        "b": "Nusantara",
+        "c": "Bali",
+        "d": "Bandung"
+      },
+      "correct": "b",
+      "explanation": "Indonesia's new capital is Nusantara. Jakarta was the old capital. Surabaya, Bali, and Bandung are major Indonesian cities but not the new capital."
+    },
+    {
+      "id": 4,
+      "type": "MCQ",
+      "topic": "Southeast Asia — Straits",
+      "difficulty": "medium",
+      "question": "The Strait of Malacca connects which two water bodies?",
+      "options": {
+        "a": "Indian Ocean and South China Sea",
+        "b": "Bay of Bengal and Andaman Sea",
+        "c": "South China Sea and Andaman Sea",
+        "d": "Java Sea and Indian Ocean"
+      },
+      "correct": "c",
+      "explanation": "The Strait of Malacca connects the South China Sea and the Andaman Sea, separating Malaysia from Indonesia. The Sunda Strait — not the Malacca — connects the Java Sea to the Indian Ocean."
+    },
+    {
+      "id": 5,
+      "type": "AssertionReason",
+      "topic": "Southwest Asia — Iraq",
+      "difficulty": "hard",
+      "question": "Assertion (A): Iraq was historically known as Mesopotamia, meaning 'the land between two rivers.'\n\nReason (R): Iraq is situated between the Tigris and Euphrates rivers, which flow through its territory.",
+      "options": {
+        "a": "Both A and R are true, and R is the correct explanation of A",
+        "b": "Both A and R are true, but R is NOT the correct explanation of A",
+        "c": "A is true but R is false",
+        "d": "A is false but R is true"
+      },
+      "correct": "a",
+      "explanation": "Both A and R are true. The name 'Mesopotamia' derives from Greek meaning 'land between two rivers,' directly referring to the Tigris and Euphrates — which is precisely what R states, making R the correct explanation of A."
+    },
+    {
+      "id": 6,
+      "type": "Match",
+      "topic": "Southeast Asia — Capitals",
+      "difficulty": "medium",
+      "question": "Match the following:\n\nColumn I\nI. Thailand\nII. Myanmar\nIII. Laos\nIV. Vietnam\n\nColumn II\nP. Naypyidaw\nQ. Bangkok\nR. Hanoi\nS. Vientiane",
+      "options": {
+        "a": "I-P, II-Q, III-R, IV-S",
+        "b": "I-Q, II-P, III-S, IV-R",
+        "c": "I-R, II-S, III-P, IV-Q",
+        "d": "I-S, II-R, III-Q, IV-P"
+      },
+      "correct": "b",
+      "explanation": "Thailand — Bangkok; Myanmar (earlier known as Burma) — Naypyidaw; Laos (a landlocked country) — Vientiane; Vietnam — Hanoi."
+    },
+    {
+      "id": 7,
+      "type": "MCQ",
+      "topic": "East Asia — Japan",
+      "difficulty": "easy",
+      "question": "Which is the largest island of Japan?",
+      "options": {
+        "a": "Hokkaido",
+        "b": "Kyushu",
+        "c": "Shikoku",
+        "d": "Honshu"
+      },
+      "correct": "d",
+      "explanation": "Honshu is the largest island of Japan, where the capital Tokyo is located. Hokkaido is the second largest, while Kyushu and Shikoku are considerably smaller."
+    },
+    {
+      "id": 8,
+      "type": "Statement",
+      "topic": "East Asia — Taiwan and North Korea",
+      "difficulty": "medium",
+      "question": "Statement I: Taiwan was earlier known as Formosa.\n\nStatement II: The capital of North Korea is Seoul.",
+      "options": {
+        "a": "Only Statement I is correct",
+        "b": "Only Statement II is correct",
+        "c": "Both Statement I and Statement II are correct",
+        "d": "Neither Statement I nor Statement II is correct"
+      },
+      "correct": "a",
+      "explanation": "Statement I is correct — Taiwan was historically known as Formosa, with its capital at Taipei. Statement II is false — Seoul is the capital of South Korea; the capital of North Korea is Pyongyang."
+    },
+    {
+      "id": 9,
+      "type": "MCQ",
+      "topic": "Asia — Trans-Siberian Railway",
+      "difficulty": "easy",
+      "question": "The Trans-Siberian Railway, the world's longest rail link, has an approximate length of ______ km.",
+      "options": {
+        "a": "7,200",
+        "b": "8,500",
+        "c": "10,200",
+        "d": "9,289"
+      },
+      "correct": "d",
+      "explanation": "The Trans-Siberian Railway is 9,289 km (5,772 miles) long, connecting Vladivostok and Siberia. It is the world's longest rail link."
+    },
+    {
+      "id": 10,
+      "type": "MCQ",
+      "topic": "Central Asia — Doubly Landlocked Countries",
+      "difficulty": "medium",
+      "question": "Which of the following countries in Asia is classified as a doubly landlocked nation — surrounded entirely by other landlocked countries?",
+      "options": {
+        "a": "Mongolia",
+        "b": "Uzbekistan",
+        "c": "Kazakhstan",
+        "d": "Afghanistan"
+      },
+      "correct": "b",
+      "explanation": "Uzbekistan is one of only two doubly landlocked countries in the world (the other being Liechtenstein in Europe). Mongolia, Kazakhstan, and Afghanistan are landlocked but each shares a border with at least one country having sea access."
+    },
+    {
+      "id": 11,
+      "type": "MCQ",
+      "topic": "Straits — Bab-al-Mandab",
+      "difficulty": "easy",
+      "question": "Which of the following straits is also known as the 'Gateway of Grief' or the 'Gateway of Tears'?",
+      "options": {
+        "a": "Kerch Strait",
+        "b": "Strait of Hormuz",
+        "c": "Palk Strait",
+        "d": "Bab-al-Mandab Strait"
+      },
+      "correct": "d",
+      "explanation": "The Bab-al-Mandab Strait is known as the Gateway of Grief or Gateway of Tears. It connects the Red Sea to the Gulf of Aden."
+    },
+    {
+      "id": 12,
+      "type": "MCQ",
+      "topic": "Southeast Asia — Straits",
+      "difficulty": "medium",
+      "question": "The Sunda Strait connects the Java Sea to the Indian Ocean and separates which two Indonesian islands?",
+      "options": {
+        "a": "Sumatra and Java",
+        "b": "Java and Kalimantan",
+        "c": "Sumatra and Sulawesi",
+        "d": "Java and Bali"
+      },
+      "correct": "a",
+      "explanation": "The Sunda Strait separates the Indonesian islands of Sumatra and Java. The Strait of Malacca, by contrast, separates Malaysia from Indonesia (Sumatra)."
+    },
+    {
+      "id": 13,
+      "type": "Match",
+      "topic": "Straits — World",
+      "difficulty": "medium",
+      "question": "Match the following:\n\nColumn I\nI. Strait of Hormuz\nII. Bab-al-Mandab\nIII. Palk Strait\nIV. Bosphorus Strait\n\nColumn II\nP. Red Sea and Gulf of Aden\nQ. Persian Gulf and Gulf of Oman\nR. Black Sea and Sea of Marmara\nS. Bay of Bengal and Gulf of Mannar",
+      "options": {
+        "a": "I-P, II-Q, III-R, IV-S",
+        "b": "I-Q, II-P, III-S, IV-R",
+        "c": "I-R, II-S, III-P, IV-Q",
+        "d": "I-S, II-R, III-Q, IV-P"
+      },
+      "correct": "b",
+      "explanation": "Strait of Hormuz — Persian Gulf to Gulf of Oman; Bab-al-Mandab — Red Sea to Gulf of Aden; Palk Strait — Bay of Bengal to Gulf of Mannar (separates India and Sri Lanka); Bosphorus Strait — Black Sea to Sea of Marmara."
+    },
+    {
+      "id": 14,
+      "type": "MCQ",
+      "topic": "Caspian Sea — Bordering Countries",
+      "difficulty": "medium",
+      "question": "Which of the following countries does NOT share a border with the Caspian Sea?",
+      "options": {
+        "a": "Russia",
+        "b": "Uzbekistan",
+        "c": "Iran",
+        "d": "Kazakhstan"
+      },
+      "correct": "b",
+      "explanation": "The five countries bordering the Caspian Sea are Turkmenistan, Azerbaijan, Russia, Iran, and Kazakhstan (mnemonic: TARIK). Uzbekistan is a Central Asian landlocked country but does not border the Caspian Sea."
+    },
+    {
+      "id": 15,
+      "type": "Statement",
+      "topic": "Africa — Nile River",
+      "difficulty": "medium",
+      "question": "Statement I: The Nile River is the longest river in the world and empties into the Mediterranean Sea.\n\nStatement II: The Blue Nile originates from Lake Victoria in Tanzania.",
+      "options": {
+        "a": "Only Statement I is correct",
+        "b": "Only Statement II is correct",
+        "c": "Both Statement I and Statement II are correct",
+        "d": "Neither Statement I nor Statement II is correct"
+      },
+      "correct": "a",
+      "explanation": "Statement I is correct. Statement II is false — the Blue Nile originates from Lake Tana in Ethiopia; it is the White Nile that originates from Lake Victoria in Tanzania."
+    },
+    {
+      "id": 16,
+      "type": "MCQ",
+      "topic": "South America — Andes Mountains",
+      "difficulty": "medium",
+      "question": "Which mountain range is the longest continuous chain on land, running along the western coast of South America?",
+      "options": {
+        "a": "Rocky Mountains",
+        "b": "Andes Mountains",
+        "c": "Himalayas",
+        "d": "Atlas Mountains"
+      },
+      "correct": "b",
+      "explanation": "The Andes is the longest mountain range on land, spanning the western coast of South America across seven countries (Venezuela, Colombia, Ecuador, Peru, Bolivia, Chile, Argentina). It is a Young Fold mountain range."
+    },
+    {
+      "id": 17,
+      "type": "MCQ",
+      "topic": "South America — Mt. Aconcagua",
+      "difficulty": "easy",
+      "question": "Mt. Aconcagua, the highest peak of the Andes located in Argentina, has an elevation of approximately ______ m.",
+      "options": {
+        "a": "6,960",
+        "b": "8,848",
+        "c": "5,642",
+        "d": "7,200"
+      },
+      "correct": "a",
+      "explanation": "Mt. Aconcagua stands at approximately 6,960 m. Option (b) 8,848 m is Mt. Everest's height; option (c) 5,642 m is the height of Mt. Elbrus, the highest peak of Europe."
+    },
+    {
+      "id": 18,
+      "type": "Match",
+      "topic": "World — Cities on Rivers",
+      "difficulty": "medium",
+      "question": "Match the following:\n\nColumn I\nI. Budapest\nII. Moscow\nIII. Paris\nIV. Baghdad\n\nColumn II\nP. Tigris\nQ. Seine\nR. Danube\nS. Moskva",
+      "options": {
+        "a": "I-P, II-Q, III-R, IV-S",
+        "b": "I-Q, II-P, III-S, IV-R",
+        "c": "I-R, II-S, III-Q, IV-P",
+        "d": "I-S, II-R, III-Q, IV-P"
+      },
+      "correct": "c",
+      "explanation": "Budapest is on the Danube; Moscow is on the Moskva River; Paris is on the Seine; Baghdad is on the Tigris River."
+    },
+    {
+      "id": 19,
+      "type": "AssertionReason",
+      "topic": "Africa — Latitudes",
+      "difficulty": "hard",
+      "question": "Assertion (A): Africa is the only continent through which all three major latitudes — the Equator, Tropic of Cancer, and Tropic of Capricorn — pass.\n\nReason (R): Africa's vast north-south geographic extent places it across multiple hemispheres, accommodating all three major latitudinal lines.",
+      "options": {
+        "a": "Both A and R are true, and R is the correct explanation of A",
+        "b": "Both A and R are true, but R is NOT the correct explanation of A",
+        "c": "A is true but R is false",
+        "d": "A is false but R is true"
+      },
+      "correct": "b",
+      "explanation": "A is true — Africa is the only continent through which all three major latitudes pass. R is also true — Africa does span a large north-south extent. However, R does not fully explain why Africa is the ONLY such continent; Asia also has great north-south extent but the Tropic of Capricorn does not pass through it. Geographic positioning, not just extent, determines this uniqueness."
+    },
+    {
+      "id": 20,
+      "type": "MCQ",
+      "topic": "South America — Atacama Desert",
+      "difficulty": "medium",
+      "question": "The Atacama Desert, considered the driest desert in the world, is bordered by the Pacific Ocean to the west and the Andes Mountains to the east. In which country is it primarily located?",
+      "options": {
+        "a": "Peru",
+        "b": "Argentina",
+        "c": "Chile",
+        "d": "Bolivia"
+      },
+      "correct": "c",
+      "explanation": "The Atacama Desert is located in northern Chile, bordered by the Pacific Ocean (west) and the Andes Mountains (east). Although small portions extend into Peru and Bolivia, it is primarily within Chile."
+    },
+    {
+      "id": 21,
+      "type": "Statement",
+      "topic": "Europe — Mountain Ranges",
+      "difficulty": "hard",
+      "question": "Statement I: The Alps are the highest mountain range in Europe and are classified as Young Fold Mountains.\n\nStatement II: The Ural Mountains are Young Fold Mountains that separate Europe from Asia.",
+      "options": {
+        "a": "Only Statement I is correct",
+        "b": "Only Statement II is correct",
+        "c": "Both Statement I and Statement II are correct",
+        "d": "Neither Statement I nor Statement II is correct"
+      },
+      "correct": "a",
+      "explanation": "Statement I is correct — the Alps are the highest mountain range in Europe and are Young Fold Mountains. Statement II is false — the Ural Mountains are Old Fold Mountains, not Young Fold Mountains. They do separate Europe from Asia, but the geological classification is wrong."
+    },
+    {
+      "id": 22,
+      "type": "MCQ",
+      "topic": "Europe — Mt. Elbrus",
+      "difficulty": "medium",
+      "question": "Mt. Elbrus (5,642 m), the highest peak of both Russia and Europe, is located in which mountain range?",
+      "options": {
+        "a": "Alps",
+        "b": "Carpathian Mountains",
+        "c": "Ural Mountains",
+        "d": "Caucasus Mountains"
+      },
+      "correct": "d",
+      "explanation": "Mt. Elbrus is located in the Caucasus Mountains, situated between the Black Sea and the Caspian Sea. The Alps, Carpathians, and Ural Mountains are all separate and distinct European mountain ranges."
+    },
+    {
+      "id": 23,
+      "type": "MCQ",
+      "topic": "North America — International Boundaries",
+      "difficulty": "easy",
+      "question": "The 49th Parallel line serves as the international boundary between which two countries?",
+      "options": {
+        "a": "USA and Mexico",
+        "b": "USA and Canada",
+        "c": "Russia and China",
+        "d": "North Korea and South Korea"
+      },
+      "correct": "b",
+      "explanation": "The 49th Parallel is the boundary between the USA and Canada. The 38th Parallel separates North and South Korea, while the USA-Mexico border does not follow the 49th Parallel."
+    },
+    {
+      "id": 24,
+      "type": "AssertionReason",
+      "topic": "Africa — Congo River",
+      "difficulty": "hard",
+      "question": "Assertion (A): The Congo River is the only major river in Africa that crosses the equator twice.\n\nReason (R): The Congo River follows a curved basin path through Central Africa, looping across the equator in both directions.",
+      "options": {
+        "a": "Both A and R are true, and R is the correct explanation of A",
+        "b": "Both A and R are true, but R is NOT the correct explanation of A",
+        "c": "A is true but R is false",
+        "d": "A is false but R is true"
+      },
+      "correct": "a",
+      "explanation": "Both A and R are true, and R correctly explains A. The Congo River's curved path through the Congo Basin allows it to cross the equator twice — once flowing northward and once flowing southward through its course."
+    },
+    {
+      "id": 25,
+      "type": "MCQ",
+      "topic": "North America — Great Lakes",
+      "difficulty": "medium",
+      "question": "Which of the following is the world's largest freshwater lake by surface area?",
+      "options": {
+        "a": "Lake Baikal",
+        "b": "Lake Superior",
+        "c": "Lake Huron",
+        "d": "Lake Michigan"
+      },
+      "correct": "b",
+      "explanation": "Lake Superior is the world's largest freshwater lake by surface area. Lake Baikal is the world's deepest lake but smaller in surface area. Both Lake Huron and Lake Michigan are smaller than Lake Superior."
+    },
+    {
+      "id": 26,
+      "type": "Match",
+      "topic": "Africa — Capitals",
+      "difficulty": "medium",
+      "question": "Match the following:\n\nColumn I\nI. Ethiopia\nII. Zimbabwe\nIII. Malawi\nIV. Zambia\n\nColumn II\nP. Lusaka\nQ. Lilongwe\nR. Harare\nS. Addis Ababa",
+      "options": {
+        "a": "I-P, II-Q, III-R, IV-S",
+        "b": "I-Q, II-P, III-S, IV-R",
+        "c": "I-R, II-S, III-P, IV-Q",
+        "d": "I-S, II-R, III-Q, IV-P"
+      },
+      "correct": "d",
+      "explanation": "Ethiopia — Addis Ababa (old name: Abyssinia); Zimbabwe — Harare; Malawi — Lilongwe (old name: Nyasaland); Zambia — Lusaka."
+    },
+    {
+      "id": 27,
+      "type": "MCQ",
+      "topic": "Southeast Asia — Indonesia",
+      "difficulty": "easy",
+      "question": "Which country has the highest Muslim population in the world?",
+      "options": {
+        "a": "Saudi Arabia",
+        "b": "Pakistan",
+        "c": "Bangladesh",
+        "d": "Indonesia"
+      },
+      "correct": "d",
+      "explanation": "Indonesia has the highest Muslim population of any country in the world. Saudi Arabia, Pakistan, and Bangladesh also have very large Muslim populations but rank lower than Indonesia."
+    },
+    {
+      "id": 28,
+      "type": "Statement",
+      "topic": "East Asia — Korean Peninsula",
+      "difficulty": "medium",
+      "question": "Statement I: North Korea and South Korea are separated by the 38th Parallel line.\n\nStatement II: The capital of North Korea is Pyongyang.",
+      "options": {
+        "a": "Only Statement I is correct",
+        "b": "Only Statement II is correct",
+        "c": "Both Statement I and Statement II are correct",
+        "d": "Neither Statement I nor Statement II is correct"
+      },
+      "correct": "c",
+      "explanation": "Both statements are correct. The 38th Parallel (with a Demilitarized Zone) separates North and South Korea. Pyongyang is the capital of North Korea; Seoul is the capital of South Korea."
+    },
+    {
+      "id": 29,
+      "type": "MCQ",
+      "topic": "Australia — Great Barrier Reef",
+      "difficulty": "easy",
+      "question": "The Great Barrier Reef, the world's largest barrier reef and largest coral reef system, is located off which coast of Australia?",
+      "options": {
+        "a": "Western Coast",
+        "b": "North Eastern Coast",
+        "c": "Southern Coast",
+        "d": "South Western Coast"
+      },
+      "correct": "b",
+      "explanation": "The Great Barrier Reef is located off the North Eastern Coast of Australia. It is both the world's largest barrier reef and the world's largest coral reef system."
+    },
+    {
+      "id": 30,
+      "type": "MCQ",
+      "topic": "Africa — Lakes",
+      "difficulty": "medium",
+      "question": "Lake Tanganyika, the longest lake in Africa, stretches approximately ______ km in a north-south direction.",
+      "options": {
+        "a": "676",
+        "b": "420",
+        "c": "540",
+        "d": "800"
+      },
+      "correct": "a",
+      "explanation": "Lake Tanganyika stretches approximately 676 km (420 miles) in a north-south direction, making it the longest lake in Africa. The 420-mile figure is its length in miles, not kilometres — a common distractor."
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "quizzes": [
+    {
+      "file": "Solar_System.json",
+      "title": "Solar System Quiz"
+    },
+    {
+      "file": "World_Map.json",
+      "title": "World Map Quiz"
+    }
+  ]
+}

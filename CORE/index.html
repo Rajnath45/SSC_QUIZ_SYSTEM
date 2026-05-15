@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SSC Quiz</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1 id="appTitle">SSC Quiz</h1>
+    <div class="header-controls">
+      <label class="quiz-picker" for="quizSelect">
+        <span>Quiz</span>
+        <select id="quizSelect" aria-label="Select quiz"></select>
+      </label>
+      <div id="timer" class="timer">00:00</div>
+      <button id="themeToggle" class="icon-btn" type="button" aria-label="Toggle dark mode">🌙</button>
+      <button id="fullscreenBtn" class="icon-btn" type="button" aria-label="Toggle fullscreen">⛶</button>
+    </div>
+  </header>
+
+  <main class="quiz-container">
+    <div id="quizStatus" class="quiz-status hidden"></div>
+    <div id="markingInfo" class="marking-info">Marking: +1, -0</div>
+
+    <section id="progressSection" class="progress-section">
+      <div class="progress-meta">
+        <span>Progress: <span id="progressText">0/0</span></span>
+        <span>Attempted: <span id="attemptedText">0</span></span>
+      </div>
+      <div class="progress-bar">
+        <div id="progressBar" class="progress-fill"></div>
+      </div>
+    </section>
+
+    <section id="questionSection" class="question">
+      <div class="question-header">
+        <div id="questionCounter" class="question-counter">Question 0 of 0</div>
+        <button id="bookmarkBtn" class="bookmark-btn" type="button">
+          <span>🔖</span>
+          <span>Bookmark</span>
+        </button>
+      </div>
+      <div id="questionText" class="question-text"></div>
+      <div id="optionsContainer" class="options-container"></div>
+    </section>
+
+    <section id="result-section" class="result-section hidden"></section>
+  </main>
+
+  <nav id="bottomNav" class="navigation">
+    <button id="prevBtn" class="nav-btn prev" type="button">← Previous</button>
+    <button id="clearBtn" class="nav-btn clear" type="button">Clear</button>
+    <button id="nextBtn" class="nav-btn next" type="button">Next →</button>
+    <button id="submitBtn" class="nav-btn submit hidden" type="button">Submit Quiz</button>
+  </nav>
+
+  <button id="paletteFab" class="palette-fab" type="button" aria-label="Open question palette">
+    <span id="paletteIcon">📋</span>
+    <span id="paletteBadge" class="palette-badge">0</span>
+  </button>
+
+  <div id="paletteOverlay" class="palette-overlay"></div>
+
+  <aside id="questionPalette" class="question-palette" aria-label="Question Palette">
+    <div class="palette-header">
+      <h2>Question Palette</h2>
+      <button id="paletteClose" class="palette-close" type="button" aria-label="Close question palette">×</button>
+    </div>
+    <div class="palette-body">
+      <div class="palette-stats">
+        <div class="palette-stat stat-answered">
+          <strong id="paletteAnswered">0</strong>
+          <span>Answered</span>
+        </div>
+        <div class="palette-stat stat-not">
+          <strong id="paletteNotAnswered">0</strong>
+          <span>Not Answered</span>
+        </div>
+        <div class="palette-stat stat-bookmarked">
+          <strong id="paletteBookmarked">0</strong>
+          <span>Bookmarked</span>
+        </div>
+      </div>
+      <input id="paletteSearch" class="palette-search" type="number" min="1" max="1" placeholder="Jump to question number...">
+      <div id="paletteGrid" class="palette-grid"></div>
+      <div class="palette-legend">
+        <div class="legend-item"><span class="legend-swatch answered"></span>Answered</div>
+        <div class="legend-item"><span class="legend-swatch"></span>Not Answered</div>
+        <div class="legend-item"><span class="legend-swatch current"></span>Current</div>
+        <div class="legend-item"><span class="legend-swatch bookmarked"></span>Bookmarked</div>
+      </div>
+    </div>
+  </aside>
+
+  <script src="script.js"></script>
+</body>
+</html>
