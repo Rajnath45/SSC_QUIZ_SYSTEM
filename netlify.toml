@@ -1,2 +1,3 @@
 [build]
+  command = "mkdir -p CORE/QUIZZES && cp QUIZZES/*.json CORE/QUIZZES/"
   publish = "CORE"

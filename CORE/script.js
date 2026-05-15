@@ -1,4 +1,4 @@
-const QUIZ_FOLDER = '../QUIZZES/';
+const QUIZ_FOLDER = 'QUIZZES/';
 const QUIZ_MANIFEST = `${QUIZ_FOLDER}quizzes.json`;
 const DEFAULT_QUIZ_FILE = 'Solar_System.json';
 const FALLBACK_QUIZZES = [
