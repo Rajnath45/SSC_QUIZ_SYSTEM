@@ -32,6 +32,14 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 function cacheElements() {
   els.appTitle = document.getElementById('appTitle');
+  els.heroStartBtn = document.getElementById('heroStartBtn');
+  els.chapterCards = document.getElementById('chapterCards');
+  els.dashboardQuizTitle = document.getElementById('dashboardQuizTitle');
+  els.homeQuizCount = document.getElementById('homeQuizCount');
+  els.homeQuestionCount = document.getElementById('homeQuestionCount');
+  els.homeAttemptedCount = document.getElementById('homeAttemptedCount');
+  els.homeProgressPercent = document.getElementById('homeProgressPercent');
+  els.homeProgressBar = document.getElementById('homeProgressBar');
   els.quizSelect = document.getElementById('quizSelect');
   els.quizStatus = document.getElementById('quizStatus');
   els.timer = document.getElementById('timer');
@@ -67,12 +75,16 @@ function cacheElements() {
 }
 
 function initTheme() {
-  const savedTheme = localStorage.getItem('quizTheme') || 'light';
+  const savedTheme = localStorage.getItem('quizTheme') || 'dark';
   document.documentElement.setAttribute('data-theme', savedTheme);
-  els.themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+  els.themeToggle.textContent = savedTheme === 'dark' ? 'Light' : 'Dark';
 }
 
 function initEventListeners() {
+  els.heroStartBtn.addEventListener('click', function () {
+    startQuizExperience(currentQuizFile);
+  });
+
   els.quizSelect.addEventListener('change', function () {
     loadSelectedQuiz(els.quizSelect.value, { updateUrl: true });
   });
@@ -145,6 +157,68 @@ function populateQuizSelect() {
     option.textContent = quiz.title;
     els.quizSelect.appendChild(option);
   });
+  renderChapterCards();
+  updateDashboardStats();
+}
+
+function renderChapterCards() {
+  if (!els.chapterCards) return;
+
+  els.chapterCards.innerHTML = '';
+
+  quizCatalog.forEach(function (quiz, index) {
+    const card = document.createElement('article');
+    card.className = 'chapter-card';
+    if (quiz.file === currentQuizFile) card.classList.add('active');
+
+    const activeQuestionCount = quiz.file === currentQuizFile && questions.length ? `${questions.length} questions` : 'Practice set';
+
+    card.innerHTML = `
+      <div>
+        <span class="chapter-kicker">Chapter ${String(index + 1).padStart(2, '0')}</span>
+        <h3>${escHtml(quiz.title)}</h3>
+        <p>${escHtml(getChapterDescription(quiz.title, index))}</p>
+        <div class="chapter-meta">
+          <span>${escHtml(activeQuestionCount)}</span>
+          <span>JSON powered</span>
+          <span>Instant result</span>
+        </div>
+      </div>
+      <button class="chapter-start" type="button">Start quiz</button>
+    `;
+
+    card.querySelector('.chapter-start').addEventListener('click', function () {
+      startQuizExperience(quiz.file);
+    });
+
+    els.chapterCards.appendChild(card);
+  });
+}
+
+function getChapterDescription(title, index) {
+  const descriptions = [
+    'Build accuracy with focused SSC-style objective questions and quick review.',
+    'Practice recall, eliminate weak areas, and keep your attempt moving.',
+    'Use bookmarks to flag doubts and return to them before submission.'
+  ];
+
+  if (/map|world|geo/i.test(title)) {
+    return 'Sharpen geography recall with map-based practice and fast answer review.';
+  }
+
+  if (/solar|science|system/i.test(title)) {
+    return 'Strengthen science fundamentals with compact, exam-ready questions.';
+  }
+
+  return descriptions[index % descriptions.length];
+}
+
+async function startQuizExperience(file) {
+  if (file && file !== currentQuizFile) {
+    await loadSelectedQuiz(file, { updateUrl: true });
+  }
+
+  document.getElementById('quizWorkspace').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function getInitialQuizFile() {
@@ -190,6 +264,8 @@ async function loadSelectedQuiz(file, options) {
     resetQuizView();
     updateMarkingInfo();
     createPalette();
+    renderChapterCards();
+    updateDashboardStats();
 
     const resumed = loadFromLocalStorage();
     if (!resumed) {
@@ -284,8 +360,9 @@ function getQuizTitle(file, data) {
 }
 
 function updatePageTitle() {
-  document.title = `${currentQuizTitle} | SSC Quiz`;
+  document.title = `${currentQuizTitle} | SSC Prep Hub`;
   els.appTitle.textContent = currentQuizTitle;
+  if (els.dashboardQuizTitle) els.dashboardQuizTitle.textContent = currentQuizTitle;
 }
 
 function updateQuizSelect() {
@@ -294,6 +371,7 @@ function updateQuizSelect() {
     populateQuizSelect();
   }
   els.quizSelect.value = currentQuizFile;
+  renderChapterCards();
 }
 
 function setQuizControlsDisabled(disabled) {
@@ -454,6 +532,7 @@ function updateProgress() {
     els.progressBar.style.width = '0%';
     els.progressText.textContent = '0/0';
     els.attemptedText.textContent = '0';
+    updateDashboardStats();
     return;
   }
 
@@ -461,6 +540,21 @@ function updateProgress() {
   els.progressBar.style.width = `${progress}%`;
   els.progressText.textContent = `${currentQuestion + 1}/${questions.length}`;
   els.attemptedText.textContent = Object.keys(answers).length;
+  updateDashboardStats();
+}
+
+function updateDashboardStats() {
+  if (!els.homeQuizCount) return;
+
+  const attempted = Object.keys(answers).length;
+  const attemptPercent = questions.length ? Math.round((attempted / questions.length) * 100) : 0;
+
+  els.homeQuizCount.textContent = quizCatalog.length;
+  els.homeQuestionCount.textContent = questions.length;
+  els.homeAttemptedCount.textContent = attempted;
+  els.homeProgressPercent.textContent = `${attemptPercent}%`;
+  els.homeProgressBar.style.width = `${attemptPercent}%`;
+  if (els.dashboardQuizTitle) els.dashboardQuizTitle.textContent = currentQuizTitle;
 }
 
 function prevQuestion() {
@@ -512,11 +606,11 @@ function updateTimerDisplay() {
 }
 
 function toggleTheme() {
-  const current = document.documentElement.getAttribute('data-theme') || 'light';
+  const current = document.documentElement.getAttribute('data-theme') || 'dark';
   const next = current === 'dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', next);
   localStorage.setItem('quizTheme', next);
-  els.themeToggle.textContent = next === 'dark' ? '☀️' : '🌙';
+  els.themeToggle.textContent = next === 'dark' ? 'Light' : 'Dark';
 }
 
 function toggleFullscreen() {
@@ -570,7 +664,7 @@ function togglePalette(force) {
   els.paletteOverlay.classList.toggle('show', shouldOpen);
   els.paletteFab.classList.toggle('open', shouldOpen);
   document.body.classList.toggle('palette-open', shouldOpen);
-  els.paletteIcon.textContent = shouldOpen ? '✕' : '📋';
+  els.paletteIcon.textContent = shouldOpen ? 'Close' : 'Grid';
   els.paletteFab.setAttribute('aria-label', shouldOpen ? 'Close question palette' : 'Open question palette');
   if (shouldOpen) {
     els.paletteSearch.value = '';
@@ -672,6 +766,7 @@ function buildResultsHtml() {
 
   return `
     <div class="score-card">
+      <p>Final result</p>
       <h2>${score}/${totalMarks}</h2>
       <p>${percentage.toFixed(2)}% Score</p>
       <p>Time Taken: ${formatTime(timerSeconds)}</p>
@@ -705,8 +800,8 @@ function buildReviewItem(q) {
     if (isUser) classes.push('user-selected');
 
     let prefix = '';
-    if (isCorrect) prefix += '✓ ';
-    if (isUser) prefix += '➤ ';
+    if (isCorrect) prefix += 'Correct: ';
+    if (isUser) prefix += 'Your answer: ';
 
     optionsHtml += `<div class="${classes.join(' ')}">${prefix}${String.fromCharCode(64 + i)}. ${escHtml(cleanOption(q[`option${i}`]))}</div>`;
   }

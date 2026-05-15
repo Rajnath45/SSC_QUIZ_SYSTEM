@@ -3,61 +3,138 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SSC Quiz</title>
+  <title>SSC Prep Hub</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="app-header">
-    <h1 id="appTitle">SSC Quiz</h1>
-    <div class="header-controls">
-      <label class="quiz-picker" for="quizSelect">
-        <span>Quiz</span>
-        <select id="quizSelect" aria-label="Select quiz"></select>
-      </label>
-      <div id="timer" class="timer">00:00</div>
-      <button id="themeToggle" class="icon-btn" type="button" aria-label="Toggle dark mode">🌙</button>
-      <button id="fullscreenBtn" class="icon-btn" type="button" aria-label="Toggle fullscreen">⛶</button>
-    </div>
+    <nav class="topbar" aria-label="Primary navigation">
+      <a class="brand" href="#home" aria-label="SSC Prep Hub home">
+        <span class="brand-mark">S</span>
+        <span>
+          <strong>SSC Prep Hub</strong>
+          <small>Practice dashboard</small>
+        </span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#chapters">Chapters</a>
+        <a href="#quizWorkspace">Quiz</a>
+        <a href="#progressSection">Progress</a>
+      </div>
+
+      <div class="header-controls">
+        <label class="quiz-picker" for="quizSelect">
+          <span>Quiz</span>
+          <select id="quizSelect" aria-label="Select quiz"></select>
+        </label>
+        <div id="timer" class="timer">00:00</div>
+        <button id="themeToggle" class="icon-btn" type="button" aria-label="Toggle theme">Theme</button>
+        <button id="fullscreenBtn" class="icon-btn" type="button" aria-label="Toggle fullscreen">Full</button>
+      </div>
+    </nav>
   </header>
 
-  <main class="quiz-container">
-    <div id="quizStatus" class="quiz-status hidden"></div>
-    <div id="markingInfo" class="marking-info">Marking: +1, -0</div>
-
-    <section id="progressSection" class="progress-section">
-      <div class="progress-meta">
-        <span>Progress: <span id="progressText">0/0</span></span>
-        <span>Attempted: <span id="attemptedText">0</span></span>
+  <main>
+    <section id="home" class="home-section">
+      <div class="hero-copy">
+        <p class="eyebrow">SSC preparation website</p>
+        <h1>Practice smarter with chapter-wise quizzes, live progress, and instant review.</h1>
+        <p class="hero-text">Choose a chapter, start a focused attempt, track your answered questions, bookmark doubts, and review every option after submission.</p>
+        <div class="hero-actions">
+          <button id="heroStartBtn" class="primary-action" type="button">Start selected quiz</button>
+          <a class="secondary-action" href="#chapters">Explore chapters</a>
+        </div>
       </div>
-      <div class="progress-bar">
-        <div id="progressBar" class="progress-fill"></div>
+
+      <div class="dashboard-preview" aria-label="Preparation overview">
+        <div class="dashboard-topline">
+          <span>Live dashboard</span>
+          <strong id="dashboardQuizTitle">SSC Quiz</strong>
+        </div>
+        <div class="metric-grid">
+          <div class="metric-card">
+            <span id="homeQuizCount">0</span>
+            <small>Chapters</small>
+          </div>
+          <div class="metric-card">
+            <span id="homeQuestionCount">0</span>
+            <small>Questions</small>
+          </div>
+          <div class="metric-card">
+            <span id="homeAttemptedCount">0</span>
+            <small>Attempted</small>
+          </div>
+        </div>
+        <div class="mini-progress">
+          <div>
+            <span>Attempt progress</span>
+            <strong id="homeProgressPercent">0%</strong>
+          </div>
+          <div class="mini-progress-track">
+            <div id="homeProgressBar" class="mini-progress-fill"></div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="questionSection" class="question">
-      <div class="question-header">
-        <div id="questionCounter" class="question-counter">Question 0 of 0</div>
-        <button id="bookmarkBtn" class="bookmark-btn" type="button">
-          <span>🔖</span>
-          <span>Bookmark</span>
-        </button>
+    <section id="chapters" class="chapter-section">
+      <div class="section-heading">
+        <p class="eyebrow">Chapter practice</p>
+        <h2>Pick your next SSC drill</h2>
       </div>
-      <div id="questionText" class="question-text"></div>
-      <div id="optionsContainer" class="options-container"></div>
+      <div id="chapterCards" class="chapter-grid" aria-live="polite"></div>
     </section>
 
-    <section id="result-section" class="result-section hidden"></section>
+    <section id="quizWorkspace" class="workspace-section">
+      <div class="workspace-heading">
+        <div>
+          <p class="eyebrow">Active quiz</p>
+          <h2 id="appTitle">SSC Quiz</h2>
+        </div>
+        <div id="markingInfo" class="marking-info">Marking: +1, -0</div>
+      </div>
+
+      <div class="quiz-container">
+        <div id="quizStatus" class="quiz-status hidden"></div>
+
+        <section id="progressSection" class="progress-section">
+          <div class="progress-meta">
+            <span>Progress: <span id="progressText">0/0</span></span>
+            <span>Attempted: <span id="attemptedText">0</span></span>
+          </div>
+          <div class="progress-bar">
+            <div id="progressBar" class="progress-fill"></div>
+          </div>
+        </section>
+
+        <section id="questionSection" class="question">
+          <div class="question-header">
+            <div id="questionCounter" class="question-counter">Question 0 of 0</div>
+            <button id="bookmarkBtn" class="bookmark-btn" type="button">
+              <span aria-hidden="true">!</span>
+              <span>Bookmark</span>
+            </button>
+          </div>
+          <div id="questionText" class="question-text"></div>
+          <div id="optionsContainer" class="options-container"></div>
+        </section>
+
+        <section id="result-section" class="result-section hidden"></section>
+      </div>
+    </section>
   </main>
 
-  <nav id="bottomNav" class="navigation">
-    <button id="prevBtn" class="nav-btn prev" type="button">← Previous</button>
+  <nav id="bottomNav" class="navigation" aria-label="Quiz controls">
+    <button id="prevBtn" class="nav-btn prev" type="button">Previous</button>
     <button id="clearBtn" class="nav-btn clear" type="button">Clear</button>
-    <button id="nextBtn" class="nav-btn next" type="button">Next →</button>
+    <button id="nextBtn" class="nav-btn next" type="button">Next</button>
     <button id="submitBtn" class="nav-btn submit hidden" type="button">Submit Quiz</button>
   </nav>
 
   <button id="paletteFab" class="palette-fab" type="button" aria-label="Open question palette">
-    <span id="paletteIcon">📋</span>
+    <span id="paletteIcon">Grid</span>
     <span id="paletteBadge" class="palette-badge">0</span>
   </button>
 
@@ -66,7 +143,7 @@
   <aside id="questionPalette" class="question-palette" aria-label="Question Palette">
     <div class="palette-header">
       <h2>Question Palette</h2>
-      <button id="paletteClose" class="palette-close" type="button" aria-label="Close question palette">×</button>
+      <button id="paletteClose" class="palette-close" type="button" aria-label="Close question palette">x</button>
     </div>
     <div class="palette-body">
       <div class="palette-stats">
