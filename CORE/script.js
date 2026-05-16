@@ -2,13 +2,15 @@ const QUIZ_FOLDER = 'QUIZZES/';
 const QUIZ_MANIFEST = `${QUIZ_FOLDER}quizzes.json`;
 const DEFAULT_QUIZ_FILE = 'Solar_System.json';
 const FALLBACK_QUIZZES = [
-  { file: 'Solar_System.json', title: 'Solar System Quiz' },
-  { file: 'World_Map.json', title: 'World Map Quiz' }
+  { id: 'solar-system', file: 'Solar_System.json', title: 'Solar System Quiz', subject: 'science', questionCount: 25 },
+  { id: 'world-map', file: 'World_Map.json', title: 'World Map Quiz', subject: 'geography', questionCount: 30 }
 ];
 
 let quizCatalog = [];
 let currentQuizFile = DEFAULT_QUIZ_FILE;
 let currentQuizTitle = 'SSC Quiz';
+let selectedQuizFile = '';
+let activeSubject = 'all';
 let questions = [];
 let currentQuestion = 0;
 let answers = {};
@@ -26,7 +28,12 @@ document.addEventListener('DOMContentLoaded', async function () {
   initEventListeners();
   preventDoubleTapZoom();
   await initQuizCatalog();
-  await loadSelectedQuiz(getInitialQuizFile());
+  currentQuizFile = getInitialQuizFile();
+  const initialQuiz = getQuizByFile(currentQuizFile);
+  currentQuizTitle = initialQuiz ? initialQuiz.title : 'SSC Quiz';
+  updatePageTitle();
+  updateDashboardStats();
+  updateTimerDisplay();
   setInterval(saveToLocalStorage, 5000);
 });
 
@@ -34,13 +41,17 @@ function cacheElements() {
   els.appTitle = document.getElementById('appTitle');
   els.heroStartBtn = document.getElementById('heroStartBtn');
   els.chapterCards = document.getElementById('chapterCards');
+  els.chapterSearch = document.getElementById('chapterSearch');
+  els.subjectTabs = Array.from(document.querySelectorAll('.tab'));
+  els.hamburger = document.getElementById('hamburger');
+  els.navLinks = document.querySelector('.nav-links');
+  els.headerControls = document.querySelector('.header-controls');
   els.dashboardQuizTitle = document.getElementById('dashboardQuizTitle');
   els.homeQuizCount = document.getElementById('homeQuizCount');
   els.homeQuestionCount = document.getElementById('homeQuestionCount');
   els.homeAttemptedCount = document.getElementById('homeAttemptedCount');
   els.homeProgressPercent = document.getElementById('homeProgressPercent');
   els.homeProgressBar = document.getElementById('homeProgressBar');
-  els.quizSelect = document.getElementById('quizSelect');
   els.quizStatus = document.getElementById('quizStatus');
   els.timer = document.getElementById('timer');
   els.themeToggle = document.getElementById('themeToggle');
@@ -82,12 +93,32 @@ function initTheme() {
 
 function initEventListeners() {
   els.heroStartBtn.addEventListener('click', function () {
-    startQuizExperience(currentQuizFile);
+    if (selectedQuizFile) launchQuiz(selectedQuizFile);
   });
 
-  els.quizSelect.addEventListener('change', function () {
-    loadSelectedQuiz(els.quizSelect.value, { updateUrl: true });
+  if (els.chapterSearch) els.chapterSearch.addEventListener('input', applyChapterFilters);
+  els.subjectTabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      els.subjectTabs.forEach(function (item) { item.classList.remove('active'); });
+      tab.classList.add('active');
+      activeSubject = tab.dataset.subject || 'all';
+      applyChapterFilters();
+    });
   });
+  if (els.hamburger) {
+    els.hamburger.addEventListener('click', function () {
+      const open = !els.navLinks.classList.contains('open');
+      els.navLinks.classList.toggle('open', open);
+      els.headerControls.classList.toggle('open', open);
+      els.hamburger.setAttribute('aria-expanded', String(open));
+    });
+  }
+  document.querySelectorAll('a[href="#home"]').forEach(function (link) {
+    link.addEventListener('click', function () {
+      if (document.body.classList.contains('quiz-active')) exitQuiz();
+    });
+  });
+
   els.prevBtn.addEventListener('click', prevQuestion);
   els.nextBtn.addEventListener('click', nextQuestion);
   els.clearBtn.addEventListener('click', clearAnswer);
@@ -110,7 +141,7 @@ function initEventListeners() {
   });
 
   window.addEventListener('beforeunload', function (e) {
-    if (!quizSubmitted && questions.length) {
+    if (document.body.classList.contains('quiz-active') && !quizSubmitted && questions.length) {
       saveToLocalStorage();
       e.preventDefault();
       e.returnValue = '';
@@ -132,17 +163,29 @@ async function initQuizCatalog() {
 }
 
 function normalizeQuizCatalog(manifest) {
-  const items = Array.isArray(manifest) ? manifest : manifest.quizzes;
-  if (!Array.isArray(items)) throw new Error('Quiz manifest must contain a quizzes array.');
+  const items = Array.isArray(manifest) ? manifest : (manifest.chapters || manifest.quizzes);
+  if (!Array.isArray(items)) throw new Error('Quiz manifest must contain a chapters array.');
 
-  return items.map(function (item) {
+  return items.map(function (item, index) {
     if (typeof item === 'string') {
-      return { file: item, title: titleFromFileName(item) };
+      return {
+        id: slugify(titleFromFileName(item)),
+        file: item,
+        title: titleFromFileName(item),
+        subject: inferSubject(titleFromFileName(item)),
+        questionCount: 0
+      };
     }
 
+    const file = item.file || item.filename || item.path;
+    const title = item.title || item.name || titleFromFileName(file);
+    const rawCount = Array.isArray(item.questions) ? item.questions.length : (item.questionCount || item.questions || item.count || 0);
     return {
-      file: item.file || item.filename || item.path,
-      title: item.title || item.name || titleFromFileName(item.file || item.filename || item.path)
+      id: item.id || slugify(title) || `chapter-${index + 1}`,
+      file: file,
+      title: title,
+      subject: normalizeSubject(item.subject || inferSubject(title)),
+      questionCount: Number(rawCount) || 0
     };
   }).filter(function (item) {
     return item.file && isSafeQuizFile(item.file);
@@ -150,13 +193,6 @@ function normalizeQuizCatalog(manifest) {
 }
 
 function populateQuizSelect() {
-  els.quizSelect.innerHTML = '';
-  quizCatalog.forEach(function (quiz) {
-    const option = document.createElement('option');
-    option.value = quiz.file;
-    option.textContent = quiz.title;
-    els.quizSelect.appendChild(option);
-  });
   renderChapterCards();
   updateDashboardStats();
 }
@@ -165,34 +201,56 @@ function renderChapterCards() {
   if (!els.chapterCards) return;
 
   els.chapterCards.innerHTML = '';
+  if (!quizCatalog.length) {
+    els.chapterCards.innerHTML = `
+      <div class="empty-state">
+        <span>📚</span>
+        <h3>No chapters available yet</h3>
+        <p>Check back soon or contact the admin.</p>
+      </div>
+    `;
+    updateHeroStartState();
+    return;
+  }
 
   quizCatalog.forEach(function (quiz, index) {
     const card = document.createElement('article');
     card.className = 'chapter-card';
+    card.dataset.title = quiz.title;
+    card.dataset.subject = quiz.subject;
+    card.dataset.chapterId = quiz.id;
+    card.dataset.file = quiz.file;
+    if (quiz.file === selectedQuizFile) card.classList.add('selected');
     if (quiz.file === currentQuizFile) card.classList.add('active');
 
-    const activeQuestionCount = quiz.file === currentQuizFile && questions.length ? `${questions.length} questions` : 'Practice set';
+    const questionCount = quiz.file === currentQuizFile && questions.length ? questions.length : quiz.questionCount;
+    const questionText = questionCount ? `${questionCount} questions` : 'Practice set';
 
     card.innerHTML = `
       <div>
-        <span class="chapter-kicker">Chapter ${String(index + 1).padStart(2, '0')}</span>
+        <span class="subject-badge">${escHtml(labelFromSubject(quiz.subject))}</span>
         <h3>${escHtml(quiz.title)}</h3>
-        <p>${escHtml(getChapterDescription(quiz.title, index))}</p>
+        <p>${escHtml(questionText)} · JSON powered · Instant result</p>
         <div class="chapter-meta">
-          <span>${escHtml(activeQuestionCount)}</span>
-          <span>JSON powered</span>
-          <span>Instant result</span>
+          <span>Chapter ${String(index + 1).padStart(2, '0')}</span>
+          <span>${escHtml(getChapterDescription(quiz.title, index))}</span>
         </div>
       </div>
       <button class="chapter-start" type="button">Start quiz</button>
     `;
 
+    card.addEventListener('click', function () {
+      selectChapterCard(quiz.file);
+    });
     card.querySelector('.chapter-start').addEventListener('click', function () {
-      startQuizExperience(quiz.file);
+      launchQuiz(quiz.id);
     });
 
     els.chapterCards.appendChild(card);
   });
+
+  applyChapterFilters();
+  updateHeroStartState();
 }
 
 function getChapterDescription(title, index) {
@@ -213,12 +271,108 @@ function getChapterDescription(title, index) {
   return descriptions[index % descriptions.length];
 }
 
-async function startQuizExperience(file) {
-  if (file && file !== currentQuizFile) {
-    await loadSelectedQuiz(file, { updateUrl: true });
-  }
+function getQuizByFile(file) {
+  return quizCatalog.find(function (quiz) { return quiz.file === file; });
+}
 
-  document.getElementById('quizWorkspace').scrollIntoView({ behavior: 'smooth', block: 'start' });
+function getQuizByIdOrFile(idOrFile) {
+  return quizCatalog.find(function (quiz) {
+    return quiz.id === idOrFile || quiz.file === idOrFile;
+  });
+}
+
+function normalizeSubject(subject) {
+  return String(subject || 'general').toLowerCase().trim().replace(/[^a-z0-9-]+/g, '-');
+}
+
+function inferSubject(title) {
+  if (/map|world|geo/i.test(title)) return 'geography';
+  if (/solar|science|system/i.test(title)) return 'science';
+  if (/history|ancient|medieval|modern/i.test(title)) return 'history';
+  if (/math|arith|algebra|number|geometry/i.test(title)) return 'math';
+  return 'general';
+}
+
+function labelFromSubject(subject) {
+  return String(subject || 'general')
+    .replace(/[-_]+/g, ' ')
+    .replace(/\b\w/g, function (char) { return char.toUpperCase(); });
+}
+
+function selectChapterCard(file) {
+  selectedQuizFile = file;
+  document.querySelectorAll('.chapter-card').forEach(function (card) {
+    card.classList.toggle('selected', card.dataset.file === selectedQuizFile);
+  });
+  updateHeroStartState();
+}
+
+function updateHeroStartState() {
+  if (!els.heroStartBtn) return;
+  const hasSelection = Boolean(selectedQuizFile);
+  els.heroStartBtn.disabled = !hasSelection;
+  els.heroStartBtn.style.opacity = hasSelection ? '1' : '0.55';
+}
+
+function applyChapterFilters() {
+  const q = (els.chapterSearch && els.chapterSearch.value || '').toLowerCase().trim();
+  let visibleCount = 0;
+
+  document.querySelectorAll('.chapter-card').forEach(function (card) {
+    const matchesSearch = !q || (card.dataset.title || '').toLowerCase().includes(q);
+    const matchesSubject = activeSubject === 'all' || card.dataset.subject === activeSubject;
+    const visible = matchesSearch && matchesSubject;
+    card.style.display = visible ? '' : 'none';
+    if (visible) visibleCount++;
+  });
+
+  let empty = document.getElementById('chapterFilterEmpty');
+  if (!visibleCount && quizCatalog.length) {
+    if (!empty) {
+      empty = document.createElement('div');
+      empty.id = 'chapterFilterEmpty';
+      empty.className = 'empty-state';
+      empty.innerHTML = '<span>📚</span><h3>No matching chapters</h3><p>Try another search or subject.</p>';
+      els.chapterCards.appendChild(empty);
+    }
+  } else if (empty) {
+    empty.remove();
+  }
+}
+
+async function launchQuiz(chapterId) {
+  const quiz = getQuizByIdOrFile(chapterId);
+  const file = quiz ? quiz.file : chapterId;
+  if (!file) return;
+
+  document.body.classList.add('quiz-active');
+  if (els.navLinks) els.navLinks.classList.remove('open');
+  if (els.headerControls) els.headerControls.classList.remove('open');
+  if (els.hamburger) els.hamburger.setAttribute('aria-expanded', 'false');
+  const loaded = await loadSelectedQuiz(file, { updateUrl: true, resume: true });
+  if (loaded) {
+    startTimer();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else {
+    stopTimer();
+  }
+}
+
+function exitQuiz() {
+  document.body.classList.remove('quiz-active');
+  stopTimer();
+  resetTimer();
+  togglePalette(false);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetTimer() {
+  timerSeconds = 0;
+  updateTimerDisplay();
+}
+
+async function startQuizExperience(file) {
+  await launchQuiz(file);
 }
 
 function getInitialQuizFile() {
@@ -241,7 +395,7 @@ async function loadSelectedQuiz(file, options) {
   const settings = options || {};
   if (!isSafeQuizFile(file)) {
     showQuizError('That quiz file name is not allowed.');
-    return;
+    return false;
   }
 
   stopTimer();
@@ -256,23 +410,24 @@ async function loadSelectedQuiz(file, options) {
     currentQuizFile = file;
     currentQuizTitle = getQuizTitle(file, data);
     questions = normalizedQuestions;
+    const catalogItem = getQuizByFile(currentQuizFile);
+    if (catalogItem) catalogItem.questionCount = questions.length;
     localStorage.setItem('selectedQuizFile', currentQuizFile);
 
     resetAttemptState();
     updatePageTitle();
-    updateQuizSelect();
+    updateActiveChapterState();
     resetQuizView();
     updateMarkingInfo();
     createPalette();
     renderChapterCards();
     updateDashboardStats();
 
-    const resumed = loadFromLocalStorage();
+    const resumed = settings.resume ? loadFromLocalStorage() : false;
     if (!resumed) {
       loadQuestion(0);
     }
 
-    startTimer();
     hideQuizStatus();
 
     if (settings.updateUrl) {
@@ -280,9 +435,11 @@ async function loadSelectedQuiz(file, options) {
       url.searchParams.set('quiz', currentQuizFile);
       window.history.replaceState({}, '', url);
     }
+    return true;
   } catch (error) {
     questions = [];
     showQuizError(`Could not load quiz: ${error.message}`);
+    return false;
   } finally {
     setQuizControlsDisabled(false);
   }
@@ -365,17 +522,21 @@ function updatePageTitle() {
   if (els.dashboardQuizTitle) els.dashboardQuizTitle.textContent = currentQuizTitle;
 }
 
-function updateQuizSelect() {
+function updateActiveChapterState() {
   if (!quizCatalog.some(function (quiz) { return quiz.file === currentQuizFile; })) {
-    quizCatalog.push({ file: currentQuizFile, title: currentQuizTitle });
+    quizCatalog.push({
+      id: slugify(currentQuizTitle),
+      file: currentQuizFile,
+      title: currentQuizTitle,
+      subject: inferSubject(currentQuizTitle),
+      questionCount: questions.length
+    });
     populateQuizSelect();
   }
-  els.quizSelect.value = currentQuizFile;
   renderChapterCards();
 }
 
 function setQuizControlsDisabled(disabled) {
-  els.quizSelect.disabled = disabled;
   els.prevBtn.disabled = disabled || currentQuestion === 0;
   els.nextBtn.disabled = disabled || currentQuestion >= questions.length - 1;
   els.clearBtn.disabled = disabled;
@@ -547,13 +708,16 @@ function updateDashboardStats() {
   if (!els.homeQuizCount) return;
 
   const attempted = Object.keys(answers).length;
-  const attemptPercent = questions.length ? Math.round((attempted / questions.length) * 100) : 0;
+  const catalogItem = getQuizByFile(currentQuizFile);
+  const totalQuestions = questions.length || (catalogItem && catalogItem.questionCount) || 0;
+  const attemptPercent = totalQuestions ? Math.round((attempted / totalQuestions) * 100) : 0;
 
   els.homeQuizCount.textContent = quizCatalog.length;
-  els.homeQuestionCount.textContent = questions.length;
+  els.homeQuestionCount.textContent = totalQuestions;
   els.homeAttemptedCount.textContent = attempted;
-  els.homeProgressPercent.textContent = `${attemptPercent}%`;
+  els.homeProgressPercent.textContent = attempted === 0 ? 'Start a quiz to track your progress' : `${attemptPercent}%`;
   els.homeProgressBar.style.width = `${attemptPercent}%`;
+  els.homeProgressBar.closest('.mini-progress-track').classList.toggle('is-empty', attempted === 0);
   if (els.dashboardQuizTitle) els.dashboardQuizTitle.textContent = currentQuizTitle;
 }
 
@@ -574,6 +738,7 @@ function selectOption(n) {
 }
 
 function handleKeyboard(e) {
+  if (!document.body.classList.contains('quiz-active')) return;
   const tag = document.activeElement.tagName.toLowerCase();
   if (isPaletteOpen || tag === 'input' || tag === 'textarea' || tag === 'select') return;
 
@@ -680,6 +845,7 @@ function jumpFromSearch() {
 }
 
 function saveToLocalStorage() {
+  if (!document.body.classList.contains('quiz-active')) return;
   if (quizSubmitted || !questions.length) return;
   const state = {
     currentQuestion: currentQuestion,
@@ -783,6 +949,7 @@ function buildResultsHtml() {
       <button class="action-btn restart-btn" type="button" onclick="restartQuiz()">Restart Quiz</button>
       <button class="action-btn download-btn" type="button" onclick="downloadResults()">Download Results</button>
       <button class="action-btn print-btn" type="button" onclick="window.print()">Print Results</button>
+      <button class="action-btn home-btn" type="button" onclick="exitQuiz()">Go Home</button>
     </div>
   `;
 }
@@ -817,6 +984,7 @@ function buildReviewItem(q) {
 function restartQuiz() {
   if (!confirm('Restart quiz?')) return;
 
+  document.body.classList.add('quiz-active');
   resetAttemptState();
   localStorage.removeItem(getQuizStateKey());
 

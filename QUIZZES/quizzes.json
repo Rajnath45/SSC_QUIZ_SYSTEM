@@ -1,12 +1,18 @@
 {
-  "quizzes": [
+  "chapters": [
     {
-      "file": "Solar_System.json",
-      "title": "Solar System Quiz"
+      "id": "solar-system",
+      "title": "Solar System Quiz",
+      "subject": "science",
+      "questionCount": 25,
+      "file": "Solar_System.json"
     },
     {
-      "file": "World_Map.json",
-      "title": "World Map Quiz"
+      "id": "world-map",
+      "title": "World Map Quiz",
+      "subject": "geography",
+      "questionCount": 30,
+      "file": "World_Map.json"
     }
   ]
 }
