@@ -1,0 +1,244 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "MCQ",
+      "topic": "Longitudes and Latitudes — Jet Streams",
+      "difficulty": "medium",
+      "question": "At what latitude does the easterly jet stream blow over peninsular India during the summer months?",
+      "options": {
+        "a": "24°N",
+        "b": "30°N",
+        "c": "14°N",
+        "d": "28°N"
+      },
+      "correct": "c",
+      "explanation": "The tropical easterly jet stream blows at approximately 14°N over peninsular India during summer. It is a geostrophic wind blowing horizontally through the upper layers of the troposphere, generally from west to east. Located between 8° and 35° North latitude, it is connected to the southwest monsoon in India. 24°N, 28°N, and 30°N are all too far north to be associated with the tropical easterly jet stream."
+    },
+    {
+      "id": 2,
+      "type": "MCQ",
+      "topic": "Longitudes and Latitudes — ITCZ",
+      "difficulty": "medium",
+      "question": "In which month is the InterTropical Convergence Zone (ITCZ) located around 20°N-25°N latitude (over the Gangetic plain)?",
+      "options": {
+        "a": "May",
+        "b": "August",
+        "c": "June",
+        "d": "July"
+      },
+      "correct": "d",
+      "explanation": "In July, the ITCZ shifts northward to around 20°N–25°N latitude, approximately over the Gangetic plain. This northward migration corresponds with the peak of the southwest monsoon season. May and June see the ITCZ still moving northward, and by August it begins to retreat southward. The ITCZ located over the Gangetic plain in July is sometimes called the monsoon trough."
+    },
+    {
+      "id": 3,
+      "type": "MCQ",
+      "topic": "Longitudes and Latitudes — Ocean Temperature Factors",
+      "difficulty": "easy",
+      "question": "Which of the below statements is/are incorrect?\n\nStatement 1: Longitude directly determines the temperature of ocean water.\n\nStatement 2: Ocean currents influence ocean water temperature by transporting warm and cold water masses.",
+      "options": {
+        "a": "Only Statement 1",
+        "b": "Only Statement 2",
+        "c": "Both Statement 1 and 2",
+        "d": "None of the above"
+      },
+      "correct": "a",
+      "explanation": "Statement 1 is incorrect — it is latitude (not longitude) that primarily determines ocean surface temperature, since latitude governs the angle of incoming solar radiation. Longitude primarily governs time zones, not temperature. Statement 2 is correct — ocean currents do transport warm and cold water masses and significantly influence regional sea surface temperatures (e.g., warm Gulf Stream, cold Labrador Current)."
+    },
+    {
+      "id": 4,
+      "type": "MCQ",
+      "topic": "Longitudes and Latitudes — Coriolis Force",
+      "difficulty": "medium",
+      "question": "Which of the following statements is INCORRECT regarding the Coriolis force?",
+      "options": {
+        "a": "The Coriolis force is an apparent force caused by Earth's rotation",
+        "b": "The Coriolis force is maximum at the poles and absent at the equator",
+        "c": "Deflection is less when the wind is high",
+        "d": "The Coriolis force also affects ocean currents"
+      },
+      "correct": "c",
+      "explanation": "Option (c) is incorrect — in reality, the Coriolis deflection increases with wind speed (higher wind speed = greater deflection), not less. The remaining options are all correct: (a) Coriolis force is an apparent force caused by Earth's rotation; (b) it is maximum at the poles and absent at the equator; (d) it acts perpendicular to the pressure gradient force and also influences ocean currents."
+    },
+    {
+      "id": 5,
+      "type": "MCQ",
+      "topic": "Longitudes and Latitudes — Heat Zones",
+      "difficulty": "easy",
+      "question": "Which of the below statements is/are correct?\n\nStatement 1: The Torrid Zone lies between the Tropic of Cancer (23.5° N) and the Tropic of Capricorn (23.5° S).\n\nStatement 2: The Frigid Zones are located between the Tropics and the Arctic/Antarctic Circles.",
+      "options": {
+        "a": "Only Statement 1",
+        "b": "Only Statement 2",
+        "c": "Both Statement 1 and 2",
+        "d": "None of the above"
+      },
+      "correct": "a",
+      "explanation": "Statement 1 is correct — the Torrid Zone lies between the Tropic of Cancer (23.5°N) and Tropic of Capricorn (23.5°S); the sun shines vertically overhead somewhere in this zone throughout the year. Statement 2 is incorrect — the zones located between the Tropics and the Arctic/Antarctic Circles are the Temperate Zones (not Frigid). The Frigid Zones lie between the Arctic/Antarctic Circles and their respective poles."
+    },
+    {
+      "id": 6,
+      "type": "MCQ",
+      "topic": "Longitudes and Latitudes — Standard Meridian of India",
+      "difficulty": "easy",
+      "question": "Which is the Standard Meridian of India?",
+      "options": {
+        "a": "93°30' E",
+        "b": "82°30' E",
+        "c": "83°30' E",
+        "d": "84°40' E"
+      },
+      "correct": "b",
+      "explanation": "82°30' E is the Standard Meridian of India, used to calculate Indian Standard Time (IST = UTC+5:30). It passes through Mirzapur in Uttar Pradesh, also crossing Madhya Pradesh, Chhattisgarh, Odisha, and Andhra Pradesh. 93°30'E runs through the far northeast, 83°30'E and 84°40'E are plausible distractors but are not the standard meridian."
+    },
+    {
+      "id": 7,
+      "type": "MCQ",
+      "topic": "Longitudes and Latitudes — ITCZ",
+      "difficulty": "medium",
+      "question": "Which of the following sets of statements are correct about Inter Tropical Convergence Zone (ITCZ)?\n\nA. The ITCZ is a broad trough of low pressure in equatorial latitudes.\nB. This is where the northeast and the southeast trade winds converge.\nC. The ITCZ is the equatorial trough normally positioned about 5°N of the equator and remains there throughout the year.\nD. The ITCZ moves over to the plane of Ganga in Summer.",
+      "options": {
+        "a": "Only A and C",
+        "b": "A, B and C",
+        "c": "Only B and D",
+        "d": "A, B and D"
+      },
+      "correct": "d",
+      "explanation": "A, B, and D are correct. The ITCZ is a broad trough of low pressure in equatorial latitudes (A) where northeast and southeast trade winds converge (B), and it migrates northward over the Gangetic plain in summer (D). Statement C is incorrect — the ITCZ does not remain stationary at 5°N throughout the year; it migrates seasonally, shifting northward during the Northern Hemisphere summer and southward during winter."
+    },
+    {
+      "id": 8,
+      "type": "MCQ",
+      "topic": "Longitudes and Latitudes — Earth's Revolution",
+      "difficulty": "easy",
+      "question": "During October-November, the apparent movement of the sun is towards the _____.",
+      "options": {
+        "a": "North",
+        "b": "North-East",
+        "c": "North-West",
+        "d": "South"
+      },
+      "correct": "d",
+      "explanation": "After the autumnal equinox (around 23 September), the sun's apparent position moves southward toward the Tropic of Capricorn (where it reaches on 22 December — Winter Solstice in the Northern Hemisphere). Thus during October-November, the apparent movement is towards the South. The sun moves northward only from December 22 to June 21."
+    },
+    {
+      "id": 9,
+      "type": "Match",
+      "topic": "Longitudes and Latitudes — Indian Channels",
+      "difficulty": "medium",
+      "question": "Match the following waterbodies with the locations they separate:\n\nColumn I\nI. 8° Channel\nII. 9° Channel\nIII. 10° Channel\nIV. 11° Channel\n\nColumn II\nP. Andaman Islands and Nicobar Islands\nQ. Minicoy and Maldives\nR. Minicoy and Lakshadweep main group\nS. Aminidivi Islands & Cannanore Islands",
+      "options": {
+        "a": "I-Q, II-R, III-P, IV-S",
+        "b": "I-Q, II-R, III-S, IV-P",
+        "c": "I-S, II-Q, III-P, IV-R",
+        "d": "I-Q, II-S, III-R, IV-P"
+      },
+      "correct": "a",
+      "explanation": "8° Channel (I) separates Minicoy Island and the Maldives (Q); 9° Channel (II) separates Minicoy and the main Lakshadweep group (R); 10° Channel (III) separates the Andaman Islands and the Nicobar Islands (P); 11° Channel (IV) separates the Aminidivi Islands from the Cannanore Islands (S)."
+    },
+    {
+      "id": 10,
+      "type": "MCQ",
+      "topic": "Longitudes and Latitudes — Heat Zones",
+      "difficulty": "easy",
+      "question": "The southern part of India lies in the _____ belt.",
+      "options": {
+        "a": "Rain",
+        "b": "Temperate",
+        "c": "Polar",
+        "d": "Warm"
+      },
+      "correct": "d",
+      "explanation": "The Tropic of Cancer passes through the middle of India. The southern parts, being much closer to the Equator, experience high temperatures throughout the year and therefore lie in the warm belt. The Temperate belt applies to mid-latitude regions, the Polar belt applies to near-polar regions, and 'Rain' is not a standard latitudinal climate belt classification."
+    },
+    {
+      "id": 11,
+      "type": "MCQ",
+      "topic": "Longitudes and Latitudes — Tropic of Cancer",
+      "difficulty": "medium",
+      "question": "Which of the following states of India is NOT crossed by the Tropic of Cancer (23°30' N)?",
+      "options": {
+        "a": "Gujarat",
+        "b": "Rajasthan",
+        "c": "Chhattisgarh",
+        "d": "Kerala"
+      },
+      "correct": "d",
+      "explanation": "The Tropic of Cancer passes through 8 Indian states: Gujarat (Jasdan), Rajasthan (Kalinjarh), Madhya Pradesh (Shajapur), Chhattisgarh (Sonhat), Jharkhand (Lohardaga), West Bengal (Krishnanagar), Tripura (Udaipur), and Mizoram (Champhai). Kerala lies entirely south of the Tropic of Cancer and is therefore not crossed by it. Gujarat, Rajasthan, and Chhattisgarh all fall on the Tropic."
+    },
+    {
+      "id": 12,
+      "type": "MCQ",
+      "topic": "Longitudes and Latitudes — Equinox and Solstice",
+      "difficulty": "easy",
+      "question": "On which of the following two dates does the equinox fall?",
+      "options": {
+        "a": "21 June and 23 September",
+        "b": "21 March and 21 June",
+        "c": "21 March and 23 September",
+        "d": "23 September and 22 December"
+      },
+      "correct": "c",
+      "explanation": "Equinoxes occur around 21 March (Spring/Vernal Equinox) and 23 September (Autumnal Equinox), when the sun is directly over the equator and day and night are equal globally. 21 June is the Summer Solstice (sun directly over Tropic of Cancer — longest day in Northern Hemisphere) and 22 December is the Winter Solstice (sun directly over Tropic of Capricorn) — neither is an equinox."
+    },
+    {
+      "id": 13,
+      "type": "MCQ",
+      "topic": "Longitudes and Latitudes — Extent of India",
+      "difficulty": "medium",
+      "question": "From the north most to south most point of India, what is the extent of India?",
+      "options": {
+        "a": "4109 km",
+        "b": "2914 km",
+        "c": "3214 km",
+        "d": "3785 km"
+      },
+      "correct": "c",
+      "explanation": "India's north-south extent, from Indira Col (northernmost point) to Indira Point in Great Nicobar Island (southernmost point), is approximately 3,214 km. The east-west extent is about 2,933 km. The land frontier is 15,200 km and the coastline is 7,516.6 km. 4,109 km and 3,785 km are incorrect; 2,914 km is closer to the east-west span, not north-south."
+    },
+    {
+      "id": 14,
+      "type": "MCQ",
+      "topic": "Longitudes and Latitudes — Heat Zones",
+      "difficulty": "easy",
+      "question": "What is the zone between the arctic circle and north pole called?",
+      "options": {
+        "a": "Torrid zone",
+        "b": "Frigid zone",
+        "c": "North temperate zone",
+        "d": "South temperate zone"
+      },
+      "correct": "b",
+      "explanation": "The North Frigid Zone lies between the North Pole (90°N) and the Arctic Circle (66°33'48.7°N), covering approximately 4.12% of Earth's surface. The Torrid Zone lies between the two tropics, the Temperate Zones lie between the tropics and polar circles, and the South Temperate/Frigid zones are their equivalents in the Southern Hemisphere."
+    },
+    {
+      "id": 15,
+      "type": "MCQ",
+      "topic": "Longitudes and Latitudes — Isolines",
+      "difficulty": "hard",
+      "question": "Consider the following statements:\n\n1. Isochronos are lines joining points located at equal travel time from a common centre.\n2. Isohalines are lines connecting points of equal temperature in the ocean.\n\nWhich of the statements given above is/are correct?",
+      "options": {
+        "a": "Only 1",
+        "b": "Only 2",
+        "c": "Both 1 and 2",
+        "d": "Neither 1 nor 2"
+      },
+      "correct": "a",
+      "explanation": "Statement 1 is correct — Isochronos (isochrones) are lines connecting points with equal travel time from a common centre. Statement 2 is incorrect — Isohalines are lines connecting points of equal salinity in the ocean, not equal temperature. Lines connecting points of equal temperature in the ocean are called isotherms. Isonomal connects points of equal abundance values of a plant species sampled in different sections of an area."
+    },
+    {
+      "id": 16,
+      "type": "MCQ",
+      "topic": "Longitudes and Latitudes — Latitudinal Distance",
+      "difficulty": "easy",
+      "question": "1° latitude is equal to approximately _____ km.",
+      "options": {
+        "a": "111",
+        "b": "145",
+        "c": "133",
+        "d": "122"
+      },
+      "correct": "a",
+      "explanation": "1° of latitude equals approximately 111 km. This distance is not perfectly uniform across all latitudes — it decreases marginally as one travels toward the poles and increases marginally toward the equator, due to Earth's oblate spheroid shape. 145 km, 133 km, and 122 km are all incorrect values for 1° of latitude."
+    }
+  ]
+}

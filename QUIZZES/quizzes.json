@@ -13,6 +13,13 @@
       "subject": "geography",
       "questionCount": 30,
       "file": "World_Map.json"
+    },
+    {
+      "id": "latitudes-longitudes",
+      "title": "Latitudes and Longitudes Quiz",
+      "subject": "geography",
+      "questionCount": 16,
+      "file": "Latitudes_Longitudes.json"
     }
   ]
 }
