@@ -1041,17 +1041,69 @@ function formatTime(totalSeconds) {
 
 function formatQuestion(rawText) {
   const text = normalizeQuestionDisplayText(cleanHindi(rawText));
-  let className = 'q-text';
-
-  if (/Statement\s+(?:I{1,3}|IV|V|\d+)\s*:/i.test(text) || /^Assertion\s*\(A\)\s*:/i.test(text)) {
-    className += ' statement-block';
-  }
 
   if (/Match\s+the\s+following/i.test(text) || /\bColumn\s+I\b/i.test(text)) {
-    className += ' match-block';
+    return formatMatchQuestion(text);
   }
 
-  return `<div class="${className}">${escHtml(text)}</div>`;
+  if (/Statement\s+(?:I{1,3}|IV|V|\d+)\s*:/i.test(text) || /^Assertion\s*\(A\)\s*:/i.test(text)) {
+    return formatStatementQuestion(text);
+  }
+
+  return `<div class="q-text">${escHtml(text)}</div>`;
+}
+
+function formatMatchQuestion(text) {
+  var lines = text.split('\n').map(function (l) { return l.trim(); }).filter(Boolean);
+
+  var colIIdx = lines.findIndex(function (l) {
+    return /^Column\s+I\b/i.test(l) && !/^Column\s+II\b/i.test(l);
+  });
+  var colIIIdx = lines.findIndex(function (l) { return /^Column\s+II\b/i.test(l); });
+
+  if (colIIdx === -1 || colIIIdx === -1) {
+    return '<div class="q-text match-block">' + escHtml(text) + '</div>';
+  }
+
+  var intro = lines.slice(0, colIIdx).join(' ');
+  var colIItems = lines.slice(colIIdx + 1, colIIIdx);
+  var colIIItems = lines.slice(colIIIdx + 1);
+
+  var colIHtml = colIItems.map(function (item) {
+    return '<div class="match-row">' + escHtml(item) + '</div>';
+  }).join('');
+
+  var colIIHtml = colIIItems.map(function (item) {
+    return '<div class="match-row">' + escHtml(item) + '</div>';
+  }).join('');
+
+  return '<div class="q-text match-block">' +
+    (intro ? '<div class="match-intro">' + escHtml(intro) + '</div>' : '') +
+    '<div class="match-columns">' +
+      '<div class="match-col">' +
+        '<div class="match-col-header">Column I</div>' +
+        colIHtml +
+      '</div>' +
+      '<div class="match-col">' +
+        '<div class="match-col-header">Column II</div>' +
+        colIIHtml +
+      '</div>' +
+    '</div>' +
+  '</div>';
+}
+
+function formatStatementQuestion(text) {
+  var lines = text.split('\n').map(function (l) { return l.trim(); }).filter(Boolean);
+  var html = '<div class="q-text statement-block">';
+  lines.forEach(function (line) {
+    if (/^(Statement\s+(?:I{1,3}|IV|V|\d+)|Assertion\s*\(A\)|Reason\s*\(R\))\s*:/i.test(line)) {
+      html += '<div class="statement-line">' + escHtml(line) + '</div>';
+    } else {
+      html += '<div class="statement-plain">' + escHtml(line) + '</div>';
+    }
+  });
+  html += '</div>';
+  return html;
 }
 
 function normalizeQuestionDisplayText(text) {
