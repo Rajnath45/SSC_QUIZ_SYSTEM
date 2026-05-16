@@ -1,6 +1,9 @@
 const QUIZ_FOLDER = 'QUIZZES/';
 const QUIZ_MANIFEST = `${QUIZ_FOLDER}quizzes.json`;
 const DEFAULT_QUIZ_FILE = 'Solar_System.json';
+// To add future chapters: place the new JSON file in /QUIZZES, add it to
+// /QUIZZES/quizzes.json, and keep the file name simple (letters, numbers,
+// spaces, underscores, hyphens). Netlify copies those files into CORE/QUIZZES.
 const FALLBACK_QUIZZES = [
   { id: 'solar-system', file: 'Solar_System.json', title: 'Solar System Quiz', subject: 'science', questionCount: 25 },
   { id: 'world-map', file: 'World_Map.json', title: 'World Map Quiz', subject: 'geography', questionCount: 30 }
@@ -15,10 +18,14 @@ let questions = [];
 let currentQuestion = 0;
 let answers = {};
 let bookmarks = new Set();
+let revisionQueue = new Set();
 let timerSeconds = 0;
 let timerInterval = null;
 let isPaletteOpen = false;
 let quizSubmitted = false;
+let firebaseApi = null;
+let currentUser = null;
+let firebaseBridgeReady = false;
 
 const els = {};
 
@@ -26,6 +33,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   cacheElements();
   initTheme();
   initEventListeners();
+  initFirebaseBridge();
   preventDoubleTapZoom();
   await initQuizCatalog();
   currentQuizFile = getInitialQuizFile();
@@ -46,6 +54,9 @@ function cacheElements() {
   els.hamburger = document.getElementById('hamburger');
   els.navLinks = document.querySelector('.nav-links');
   els.headerControls = document.querySelector('.header-controls');
+  els.authStatus = document.getElementById('authStatus');
+  els.authActionBtn = document.getElementById('authActionBtn');
+  els.dashboardLink = document.getElementById('dashboardLink');
   els.dashboardQuizTitle = document.getElementById('dashboardQuizTitle');
   els.homeQuizCount = document.getElementById('homeQuizCount');
   els.homeQuestionCount = document.getElementById('homeQuestionCount');
@@ -64,6 +75,7 @@ function cacheElements() {
   els.questionSection = document.getElementById('questionSection');
   els.questionCounter = document.getElementById('questionCounter');
   els.bookmarkBtn = document.getElementById('bookmarkBtn');
+  els.revisionBtn = document.getElementById('revisionBtn');
   els.questionText = document.getElementById('questionText');
   els.optionsContainer = document.getElementById('optionsContainer');
   els.resultSection = document.getElementById('result-section');
@@ -83,6 +95,7 @@ function cacheElements() {
   els.paletteBookmarked = document.getElementById('paletteBookmarked');
   els.paletteSearch = document.getElementById('paletteSearch');
   els.paletteGrid = document.getElementById('paletteGrid');
+  els.toastHost = document.getElementById('toastHost');
 }
 
 function initTheme() {
@@ -124,6 +137,8 @@ function initEventListeners() {
   els.clearBtn.addEventListener('click', clearAnswer);
   els.submitBtn.addEventListener('click', submitQuiz);
   els.bookmarkBtn.addEventListener('click', toggleBookmark);
+  els.revisionBtn.addEventListener('click', toggleRevisionItem);
+  if (els.authActionBtn) els.authActionBtn.addEventListener('click', handleAuthAction);
   els.themeToggle.addEventListener('click', toggleTheme);
   els.fullscreenBtn.addEventListener('click', toggleFullscreen);
   els.paletteFab.addEventListener('click', function () { togglePalette(); });
@@ -147,6 +162,66 @@ function initEventListeners() {
       e.returnValue = '';
     }
   });
+}
+
+async function initFirebaseBridge() {
+  try {
+    firebaseApi = await import('./firebase-module.js');
+    firebaseBridgeReady = true;
+
+    if (!firebaseApi.isFirebaseReady()) {
+      updateAuthUi();
+      showToast('Firebase config is pending. Add real values in CORE/firebase-config.js to enable login and cloud tracking.', 'error');
+      return;
+    }
+
+    firebaseApi.onAuthState(function (user) {
+      currentUser = user;
+      updateAuthUi();
+    });
+  } catch (error) {
+    firebaseBridgeReady = false;
+    console.warn('Firebase module could not be loaded. Quiz will continue without cloud tracking.', error);
+    updateAuthUi();
+  }
+}
+
+function updateAuthUi() {
+  if (!els.authStatus || !els.authActionBtn) return;
+
+  if (currentUser) {
+    els.authStatus.textContent = currentUser.displayName || currentUser.email || 'Signed in';
+    els.authActionBtn.textContent = 'Logout';
+    if (els.dashboardLink) els.dashboardLink.classList.remove('hidden');
+  } else {
+    els.authStatus.textContent = firebaseBridgeReady ? 'Guest' : 'Offline';
+    els.authActionBtn.textContent = 'Login';
+  }
+}
+
+async function handleAuthAction() {
+  if (currentUser && firebaseApi && firebaseApi.logoutUser) {
+    const result = await firebaseApi.logoutUser();
+    if (result.success) {
+      currentUser = null;
+      updateAuthUi();
+      showToast('Logged out successfully.', 'success');
+    } else {
+      showToast(result.error || 'Logout failed.', 'error');
+    }
+    return;
+  }
+
+  window.location.href = getLoginUrl();
+}
+
+function getLoginUrl() {
+  const next = encodeURIComponent(window.location.pathname + window.location.search + window.location.hash);
+  return `../auth/login.html?next=${next}`;
+}
+
+function shouldRequireLoginForTracking() {
+  return Boolean(firebaseApi && firebaseApi.isFirebaseReady && firebaseApi.isFirebaseReady());
 }
 
 async function initQuizCatalog() {
@@ -341,6 +416,19 @@ function applyChapterFilters() {
 }
 
 async function launchQuiz(chapterId) {
+  if (firebaseApi && firebaseApi.authReady && shouldRequireLoginForTracking() && !currentUser) {
+    currentUser = await firebaseApi.authReady;
+    updateAuthUi();
+  }
+
+  if (shouldRequireLoginForTracking() && !currentUser) {
+    showToast('Login first so your quiz attempt, score, bookmarks, and revision queue can be saved.', 'error');
+    setTimeout(function () {
+      window.location.href = getLoginUrl();
+    }, 900);
+    return;
+  }
+
   const quiz = getQuizByIdOrFile(chapterId);
   const file = quiz ? quiz.file : chapterId;
   if (!file) return;
@@ -495,6 +583,7 @@ function normalizeAnswer(value) {
 function resetAttemptState() {
   answers = {};
   bookmarks = new Set();
+  revisionQueue = new Set();
   currentQuestion = 0;
   timerSeconds = 0;
   quizSubmitted = false;
@@ -641,6 +730,7 @@ function loadQuestion(index) {
   }
 
   els.bookmarkBtn.classList.toggle('active', bookmarks.has(q.sr_no));
+  els.revisionBtn.classList.toggle('active', revisionQueue.has(q.sr_no));
   els.prevBtn.disabled = currentQuestion === 0;
   els.nextBtn.disabled = currentQuestion === questions.length - 1;
   els.nextBtn.classList.toggle('hidden', currentQuestion === questions.length - 1);
@@ -678,6 +768,9 @@ function clearAnswer() {
 
 function toggleBookmark() {
   const srNo = questions[currentQuestion].sr_no;
+  const q = questions[currentQuestion];
+  const shouldAdd = !bookmarks.has(srNo);
+
   if (bookmarks.has(srNo)) {
     bookmarks.delete(srNo);
   } else {
@@ -686,6 +779,61 @@ function toggleBookmark() {
   els.bookmarkBtn.classList.toggle('active', bookmarks.has(srNo));
   updatePalette();
   saveToLocalStorage();
+
+  if (currentUser && firebaseApi && firebaseApi.isFirebaseReady && firebaseApi.isFirebaseReady()) {
+    const record = buildQuestionRecord(q);
+    const action = shouldAdd ? firebaseApi.addBookmark(currentUser.uid, record) : firebaseApi.removeBookmark(currentUser.uid, record);
+    action.then(function (result) {
+      if (!result.success) showToast(result.error, 'error');
+      if (result.success && shouldAdd) showToast('Question bookmarked for revision.', 'success');
+    });
+  } else if (shouldAdd && shouldRequireLoginForTracking()) {
+    showToast('Login to sync bookmarks across devices.', 'error');
+  }
+}
+
+function toggleRevisionItem() {
+  const srNo = questions[currentQuestion].sr_no;
+  const q = questions[currentQuestion];
+  const shouldAdd = !revisionQueue.has(srNo);
+
+  if (revisionQueue.has(srNo)) {
+    revisionQueue.delete(srNo);
+  } else {
+    revisionQueue.add(srNo);
+  }
+
+  els.revisionBtn.classList.toggle('active', revisionQueue.has(srNo));
+  saveToLocalStorage();
+
+  if (shouldAdd && currentUser && firebaseApi && firebaseApi.addRevisionItem && firebaseApi.isFirebaseReady()) {
+    firebaseApi.addRevisionItem(currentUser.uid, buildQuestionRecord(q)).then(function (result) {
+      if (result.success) showToast('Added to revision queue.', 'success');
+      else showToast(result.error, 'error');
+    });
+  } else if (shouldAdd && shouldRequireLoginForTracking()) {
+    showToast('Login to sync your revision queue.', 'error');
+  }
+}
+
+function buildQuestionRecord(q) {
+  const quiz = getQuizByFile(currentQuizFile);
+  return {
+    chapterId: quiz ? quiz.id : slugify(currentQuizTitle),
+    chapter: currentQuizTitle,
+    quizTitle: currentQuizTitle,
+    questionId: q.sr_no,
+    questionText: cleanHindi(q.question),
+    selectedAnswer: answers[q.sr_no] || '',
+    correctAnswer: q.answer,
+    explanation: q.explanation || '',
+    options: {
+      A: cleanOption(q.option1),
+      B: cleanOption(q.option2),
+      C: cleanOption(q.option3),
+      D: cleanOption(q.option4)
+    }
+  };
 }
 
 function updateProgress() {
@@ -745,6 +893,7 @@ function handleKeyboard(e) {
   if (e.key === 'ArrowLeft') prevQuestion();
   if (e.key === 'ArrowRight' || e.key === 'Enter') nextQuestion();
   if (e.key.toLowerCase() === 'b') toggleBookmark();
+  if (e.key.toLowerCase() === 'r') toggleRevisionItem();
   if (e.key.toLowerCase() === 'c') clearAnswer();
   if (e.key.toLowerCase() === 'p') togglePalette();
   if (['1', '2', '3', '4'].includes(e.key)) selectOption(e.key);
@@ -851,6 +1000,7 @@ function saveToLocalStorage() {
     currentQuestion: currentQuestion,
     answers: answers,
     bookmarks: Array.from(bookmarks),
+    revisionQueue: Array.from(revisionQueue),
     timerSeconds: timerSeconds,
     timestamp: Date.now()
   };
@@ -868,6 +1018,7 @@ function loadFromLocalStorage() {
       if (confirm('Resume your saved quiz attempt?')) {
         answers = state.answers || {};
         bookmarks = new Set(state.bookmarks || []);
+        revisionQueue = new Set(state.revisionQueue || []);
         timerSeconds = Number(state.timerSeconds) || 0;
         currentQuestion = Math.min(Math.max(Number(state.currentQuestion) || 0, 0), questions.length - 1);
         updateTimerDisplay();
@@ -895,6 +1046,7 @@ function submitQuiz() {
   stopTimer();
   localStorage.removeItem(getQuizStateKey());
   togglePalette(false);
+  const result = calculateQuizResult();
 
   els.questionSection.classList.add('hidden');
   els.progressSection.classList.add('hidden');
@@ -902,16 +1054,19 @@ function submitQuiz() {
   els.paletteFab.classList.add('hidden');
   els.bottomNav.classList.add('hidden');
 
-  els.resultSection.innerHTML = buildResultsHtml();
+  els.resultSection.innerHTML = buildResultsHtml(result);
   els.resultSection.classList.remove('hidden');
+  bindResultActions();
+  persistQuizAttempt(result);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function buildResultsHtml() {
+function calculateQuizResult() {
   let correct = 0;
   let wrong = 0;
   let score = 0;
   let totalMarks = 0;
+  const wrongAnswers = [];
 
   questions.forEach(function (q) {
     totalMarks += parseFloat(q.positive_marking || '0');
@@ -923,25 +1078,49 @@ function buildResultsHtml() {
     } else {
       wrong++;
       score -= parseFloat(q.negative_marking || '0');
+      wrongAnswers.push(buildQuestionRecord(q));
     }
   });
 
   const unattempted = questions.length - correct - wrong;
-  const percentage = totalMarks ? (score / totalMarks) * 100 : 0;
+  const scorePercentage = totalMarks ? (score / totalMarks) * 100 : 0;
+  const answered = correct + wrong;
+  const accuracy = answered ? (correct / answered) * 100 : 0;
+  const bookmarkedQuestions = questions.filter(function (q) { return bookmarks.has(q.sr_no); }).map(buildQuestionRecord);
+  const revisionQuestions = questions.filter(function (q) { return revisionQueue.has(q.sr_no); }).map(buildQuestionRecord);
+
+  return {
+    correct: correct,
+    wrong: wrong,
+    unattempted: unattempted,
+    score: score,
+    totalMarks: totalMarks,
+    totalQuestions: questions.length,
+    scorePercentage: scorePercentage,
+    accuracy: accuracy,
+    timeTaken: timerSeconds,
+    wrongAnswers: wrongAnswers,
+    bookmarkedQuestions: bookmarkedQuestions,
+    revisionQuestions: revisionQuestions
+  };
+}
+
+function buildResultsHtml(result) {
   const reviewHtml = questions.map(buildReviewItem).join('');
 
   return `
     <div class="score-card">
       <p>Final result</p>
-      <h2>${score}/${totalMarks}</h2>
-      <p>${percentage.toFixed(2)}% Score</p>
-      <p>Time Taken: ${formatTime(timerSeconds)}</p>
+      <h2>${result.score}/${result.totalMarks}</h2>
+      <p>${result.scorePercentage.toFixed(2)}% Score &middot; ${result.accuracy.toFixed(2)}% Accuracy</p>
+      <p>Time Taken: ${formatTime(result.timeTaken)}</p>
     </div>
+    <div id="saveStatus" class="save-status">Saving attempt to your dashboard...</div>
     <div class="stats-grid">
-      <div class="stat-card correct-stat"><strong>${correct}</strong><span>Correct</span></div>
-      <div class="stat-card wrong-stat"><strong>${wrong}</strong><span>Wrong</span></div>
-      <div class="stat-card unattempted-stat"><strong>${unattempted}</strong><span>Unattempted</span></div>
-      <div class="stat-card"><strong>${questions.length}</strong><span>Total</span></div>
+      <div class="stat-card correct-stat"><strong>${result.correct}</strong><span>Correct</span></div>
+      <div class="stat-card wrong-stat"><strong>${result.wrong}</strong><span>Wrong</span></div>
+      <div class="stat-card unattempted-stat"><strong>${result.unattempted}</strong><span>Unattempted</span></div>
+      <div class="stat-card"><strong>${result.totalQuestions}</strong><span>Total</span></div>
     </div>
     <h2 class="review-title">Question Review</h2>
     <div class="review-list">${reviewHtml}</div>
@@ -950,6 +1129,7 @@ function buildResultsHtml() {
       <button class="action-btn download-btn" type="button" onclick="downloadResults()">Download Results</button>
       <button class="action-btn print-btn" type="button" onclick="window.print()">Print Results</button>
       <button class="action-btn home-btn" type="button" onclick="exitQuiz()">Go Home</button>
+      <a class="action-btn dashboard-btn" href="../dashboard/dashboard.html">Open Dashboard</a>
     </div>
   `;
 }
@@ -977,8 +1157,119 @@ function buildReviewItem(q) {
     <div class="review-item">
       <h3 class="review-question-title">Q${q.sr_no}: ${escHtml(cleanHindi(q.question))}</h3>
       ${optionsHtml}
+      <div class="review-actions">
+        <button class="review-mini-btn" type="button" data-review-action="bookmark" data-question-id="${escHtml(q.sr_no)}">Save Bookmark</button>
+        <button class="review-mini-btn" type="button" data-review-action="revision" data-question-id="${escHtml(q.sr_no)}">Add to Revision</button>
+      </div>
     </div>
   `;
+}
+
+function bindResultActions() {
+  els.resultSection.querySelectorAll('[data-review-action]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      const q = questions.find(function (item) {
+        return String(item.sr_no) === String(button.dataset.questionId);
+      });
+      if (!q) return;
+
+      const action = button.dataset.reviewAction;
+      if (action === 'bookmark') {
+        bookmarks.add(q.sr_no);
+        saveToLocalStorage();
+        saveQuestionBookmark(q, button);
+      }
+      if (action === 'revision') {
+        revisionQueue.add(q.sr_no);
+        saveToLocalStorage();
+        saveQuestionRevision(q, button);
+      }
+    });
+  });
+}
+
+async function persistQuizAttempt(result) {
+  if (!firebaseApi || !firebaseApi.isFirebaseReady || !firebaseApi.isFirebaseReady()) {
+    setSaveStatus('Firebase is not configured yet. Result is shown locally; add config to enable cloud tracking.', 'error');
+    return;
+  }
+
+  if (!currentUser) {
+    setSaveStatus('Login required to save this result to your dashboard.', 'error');
+    return;
+  }
+
+  const quiz = getQuizByFile(currentQuizFile);
+  const payload = {
+    chapter: currentQuizTitle,
+    chapterId: quiz ? quiz.id : slugify(currentQuizTitle),
+    quizTitle: currentQuizTitle,
+    score: result.score,
+    totalMarks: result.totalMarks,
+    correct: result.correct,
+    wrong: result.wrong,
+    unattempted: result.unattempted,
+    totalQuestions: result.totalQuestions,
+    accuracy: Number(result.accuracy.toFixed(2)),
+    timeTaken: result.timeTaken,
+    wrongAnswers: result.wrongAnswers,
+    bookmarkedQuestions: result.bookmarkedQuestions,
+    revisionQuestions: result.revisionQuestions
+  };
+
+  const attemptResult = await firebaseApi.saveQuizAttempt(currentUser.uid, payload);
+  if (!attemptResult.success) {
+    setSaveStatus(attemptResult.error || 'Could not save quiz attempt.', 'error');
+    return;
+  }
+
+  await Promise.all([
+    ...result.bookmarkedQuestions.map(function (item) { return firebaseApi.addBookmark(currentUser.uid, item); }),
+    ...result.revisionQuestions.map(function (item) { return firebaseApi.addRevisionItem(currentUser.uid, item); })
+  ]);
+
+  setSaveStatus('Attempt saved to dashboard with score, accuracy, wrong answers, time taken, bookmarks, and revision items.', 'success');
+}
+
+function saveQuestionBookmark(q, button) {
+  if (!currentUser || !firebaseApi || !firebaseApi.addBookmark || !firebaseApi.isFirebaseReady()) {
+    showToast('Login to sync this bookmark to your dashboard.', 'error');
+    return;
+  }
+
+  firebaseApi.addBookmark(currentUser.uid, buildQuestionRecord(q)).then(function (result) {
+    if (result.success) {
+      button.textContent = 'Bookmarked';
+      button.disabled = true;
+      showToast('Bookmark saved.', 'success');
+    } else {
+      showToast(result.error, 'error');
+    }
+  });
+}
+
+function saveQuestionRevision(q, button) {
+  if (!currentUser || !firebaseApi || !firebaseApi.addRevisionItem || !firebaseApi.isFirebaseReady()) {
+    showToast('Login to sync this revision item to your dashboard.', 'error');
+    return;
+  }
+
+  firebaseApi.addRevisionItem(currentUser.uid, buildQuestionRecord(q)).then(function (result) {
+    if (result.success) {
+      button.textContent = 'Added';
+      button.disabled = true;
+      showToast('Revision item saved.', 'success');
+    } else {
+      showToast(result.error, 'error');
+    }
+  });
+}
+
+function setSaveStatus(message, type) {
+  const status = document.getElementById('saveStatus');
+  if (!status) return;
+  status.textContent = message;
+  status.className = `save-status ${type || ''}`;
 }
 
 function restartQuiz() {
@@ -1134,6 +1425,17 @@ function cleanOption(text) {
 function escHtml(t) {
   return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;')
                   .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function showToast(message, type) {
+  if (!els.toastHost) return;
+  const toast = document.createElement('div');
+  toast.className = `toast ${type || ''}`;
+  toast.textContent = message;
+  els.toastHost.appendChild(toast);
+  setTimeout(function () {
+    toast.remove();
+  }, 4600);
 }
 
 function preventDoubleTapZoom() {

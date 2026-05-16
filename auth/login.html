@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | SSC Prep Hub</title>
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body data-auth-page="login">
+  <main class="auth-shell">
+    <section class="auth-panel" aria-label="Login form">
+      <a class="brand" href="../CORE/index.html">
+        <span class="brand-mark">S</span>
+        <span>
+          <strong>SSC Prep Hub</strong>
+          <small>Track every practice attempt</small>
+        </span>
+      </a>
+
+      <div class="auth-heading">
+        <p class="eyebrow">Welcome back</p>
+        <h1>Sign in to continue your preparation.</h1>
+        <p>Your attempts, weak chapters, bookmarks, and revision queue stay synced with Firebase.</p>
+      </div>
+
+      <div id="authMessage" class="auth-message hidden" role="status" aria-live="polite"></div>
+
+      <form id="loginForm" class="auth-form" novalidate>
+        <label class="field">
+          <span>Email address</span>
+          <input id="loginEmail" type="email" autocomplete="email" placeholder="you@example.com" required>
+          <small id="loginEmailError" class="form-error"></small>
+        </label>
+
+        <label class="field">
+          <span>Password</span>
+          <div class="password-row">
+            <input id="loginPassword" type="password" autocomplete="current-password" placeholder="Your password" required>
+            <button class="ghost-icon toggle-password" type="button" data-target="loginPassword">Show</button>
+          </div>
+          <small id="loginPasswordError" class="form-error"></small>
+        </label>
+
+        <button id="emailAuthBtn" class="auth-btn primary" type="submit">Login</button>
+      </form>
+
+      <div class="divider"><span>or</span></div>
+      <button id="googleAuthBtn" class="auth-btn google" type="button">
+        <span class="google-dot">G</span>
+        Continue with Google
+      </button>
+
+      <p class="auth-switch">New here? <a href="signup.html">Create an account</a></p>
+    </section>
+
+    <aside class="auth-showcase" aria-label="Platform highlights">
+      <div class="showcase-card">
+        <span class="metric">92%</span>
+        <small>accuracy target</small>
+      </div>
+      <div class="showcase-copy">
+        <p class="eyebrow">SSC Prep Dashboard</p>
+        <h2>Practice with memory, not guesswork.</h2>
+        <p>Every submitted quiz becomes a progress signal for chapter strength, revision priority, and next-attempt focus.</p>
+      </div>
+      <div class="feature-list">
+        <span>Firestore attempt history</span>
+        <span>Weak chapter detection</span>
+        <span>Bookmark and revision queue</span>
+      </div>
+    </aside>
+  </main>
+
+  <script type="module" src="auth.js"></script>
+</body>
+</html>

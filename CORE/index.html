@@ -27,9 +27,12 @@
         <a href="#home">Home</a>
         <a href="#chapters">Chapters</a>
         <a href="#progressOverview">Progress</a>
+        <a id="dashboardLink" href="../dashboard/dashboard.html">Dashboard</a>
       </div>
 
       <div class="header-controls">
+        <span id="authStatus" class="auth-status">Guest</span>
+        <button id="authActionBtn" class="icon-btn" type="button">Login</button>
         <button id="themeToggle" class="icon-btn" type="button" title="Toggle dark/light mode" aria-label="Toggle theme">Light</button>
         <button id="fullscreenBtn" class="icon-btn" type="button" title="Toggle fullscreen" aria-label="Toggle fullscreen">Full</button>
       </div>
@@ -150,10 +153,16 @@
         <section id="questionSection" class="question">
           <div class="question-header">
             <div id="questionCounter" class="question-counter">Question 0 of 0</div>
-            <button id="bookmarkBtn" class="bookmark-btn" type="button">
-              <span aria-hidden="true">!</span>
-              <span>Bookmark</span>
-            </button>
+            <div class="question-actions">
+              <button id="bookmarkBtn" class="bookmark-btn" type="button">
+                <span aria-hidden="true">!</span>
+                <span>Bookmark</span>
+              </button>
+              <button id="revisionBtn" class="bookmark-btn revision-btn" type="button">
+                <span aria-hidden="true">+</span>
+                <span>Revision</span>
+              </button>
+            </div>
           </div>
           <div id="questionText" class="question-text"></div>
           <div id="optionsContainer" class="options-container"></div>
@@ -177,6 +186,7 @@
   </button>
 
   <div id="paletteOverlay" class="palette-overlay"></div>
+  <div id="toastHost" class="toast-host" aria-live="polite"></div>
 
   <aside id="questionPalette" class="question-palette" aria-label="Question Palette">
     <div class="palette-header">

@@ -1,285 +1,168 @@
-/**
- * AUTHENTICATION MODULE
- * Handles login, signup, and Google sign-in
- */
+import {
+  authReady,
+  isFirebaseReady,
+  signInWithEmail,
+  signInWithGoogle,
+  signUpWithEmail
+} from "../CORE/firebase-module.js";
 
-let authForm = null;
-let messageEl = null;
+const page = document.body.dataset.authPage;
+const messageEl = document.getElementById("authMessage");
+const emailAuthBtn = document.getElementById("emailAuthBtn");
+const googleAuthBtn = document.getElementById("googleAuthBtn");
 let isLoading = false;
 
-document.addEventListener('DOMContentLoaded', function() {
-  initializeAuth();
-});
+document.addEventListener("DOMContentLoaded", initAuthPage);
 
-async function initializeAuth() {
-  // Wait for Firebase to initialize
-  await new Promise(resolve => {
-    const checkFirebase = setInterval(() => {
-      if (typeof firebase !== 'undefined') {
-        clearInterval(checkFirebase);
-        resolve();
-      }
-    }, 100);
-  });
+async function initAuthPage() {
+  setupPasswordToggles();
+  setupForms();
 
-  // Initialize Firebase
-  await initFirebase();
+  const user = await authReady;
+  if (user) redirectAfterAuth();
 
-  // Set up event listeners
-  setupEventListeners();
-
-  // Check if user is already logged in
-  checkAuthState();
+  if (!isFirebaseReady()) {
+    showMessage("Firebase config is pending. Add your real values in CORE/firebase-config.js before using login.", "error");
+  }
 }
 
-function setupEventListeners() {
-  // Get form based on current page
-  const currentPage = document.body.getAttribute('data-page');
-  
-  if (window.location.pathname.includes('login')) {
-    setupLoginForm();
-  } else if (window.location.pathname.includes('signup')) {
-    setupSignupForm();
+function setupForms() {
+  if (page === "login") {
+    const form = document.getElementById("loginForm");
+    if (form) form.addEventListener("submit", handleLogin);
   }
 
-  // Password visibility toggles
-  document.querySelectorAll('.toggle-password').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      const targetId = this.getAttribute('data-target');
-      const input = document.getElementById(targetId);
-      const isPassword = input.type === 'password';
-      input.type = isPassword ? 'text' : 'password';
-      this.classList.toggle('active');
+  if (page === "signup") {
+    const form = document.getElementById("signupForm");
+    if (form) form.addEventListener("submit", handleSignup);
+  }
+
+  if (googleAuthBtn) {
+    googleAuthBtn.addEventListener("click", handleGoogle);
+  }
+}
+
+function setupPasswordToggles() {
+  document.querySelectorAll(".toggle-password").forEach(function (button) {
+    button.addEventListener("click", function () {
+      const input = document.getElementById(button.dataset.target);
+      if (!input) return;
+      const show = input.type === "password";
+      input.type = show ? "text" : "password";
+      button.textContent = show ? "Hide" : "Show";
     });
   });
 }
 
-function setupLoginForm() {
-  authForm = document.getElementById('loginForm');
-  messageEl = document.getElementById('authMessage');
-
-  if (authForm) {
-    authForm.addEventListener('submit', handleLoginSubmit);
-  }
-
-  // Google Sign-In
-  const googleBtn = document.getElementById('googleSignInBtn');
-  if (googleBtn) {
-    googleBtn.addEventListener('click', handleGoogleSignIn);
-  }
-}
-
-function setupSignupForm() {
-  authForm = document.getElementById('signupForm');
-  messageEl = document.getElementById('authMessage');
-
-  if (authForm) {
-    authForm.addEventListener('submit', handleSignupSubmit);
-  }
-
-  // Google Sign-Up
-  const googleBtn = document.getElementById('googleSignUpBtn');
-  if (googleBtn) {
-    googleBtn.addEventListener('click', handleGoogleSignIn);
-  }
-}
-
-async function handleLoginSubmit(e) {
-  e.preventDefault();
-
+async function handleLogin(event) {
+  event.preventDefault();
   if (isLoading) return;
-  isLoading = true;
 
-  // Clear previous errors
-  document.querySelectorAll('.form-error').forEach(el => el.textContent = '');
+  clearErrors();
+  const email = valueOf("loginEmail");
+  const password = valueOf("loginPassword");
+  let valid = true;
 
-  const email = document.getElementById('loginEmail')?.value.trim();
-  const password = document.getElementById('loginPassword')?.value;
+  if (!isEmail(email)) valid = setError("loginEmailError", "Enter a valid email address.");
+  if (!password) valid = setError("loginPasswordError", "Password is required.");
+  if (!valid) return;
 
-  // Validate
-  let isValid = true;
-  if (!email) {
-    document.getElementById('loginEmailError').textContent = 'Email is required';
-    isValid = false;
-  } else if (!validateEmail(email)) {
-    document.getElementById('loginEmailError').textContent = 'Please enter a valid email';
-    isValid = false;
-  }
-
-  if (!password) {
-    document.getElementById('loginPasswordError').textContent = 'Password is required';
-    isValid = false;
-  } else if (password.length < 6) {
-    document.getElementById('loginPasswordError').textContent = 'Password must be at least 6 characters';
-    isValid = false;
-  }
-
-  if (!isValid) {
-    isLoading = false;
-    return;
-  }
-
-  showMessage('Signing in...', 'loading');
-
+  setLoading(true, "Signing in...");
   const result = await signInWithEmail(email, password);
-  
+  setLoading(false);
+
   if (result.success) {
-    showMessage('Sign in successful! Redirecting...', 'success');
-    setTimeout(() => {
-      window.location.href = '../dashboard/dashboard.html';
-    }, 1500);
+    showMessage("Signed in. Opening dashboard...", "success");
+    setTimeout(redirectAfterAuth, 700);
   } else {
-    showMessage('Sign in failed: ' + result.error, 'error');
+    showMessage(result.error, "error");
   }
-
-  isLoading = false;
 }
 
-async function handleSignupSubmit(e) {
-  e.preventDefault();
-
+async function handleSignup(event) {
+  event.preventDefault();
   if (isLoading) return;
-  isLoading = true;
 
-  // Clear previous errors
-  document.querySelectorAll('.form-error').forEach(el => el.textContent = '');
+  clearErrors();
+  const name = valueOf("signupName");
+  const email = valueOf("signupEmail");
+  const password = valueOf("signupPassword");
+  const confirmPassword = valueOf("signupConfirmPassword");
+  const terms = document.getElementById("signupTerms");
+  let valid = true;
 
-  const name = document.getElementById('signupName')?.value.trim();
-  const email = document.getElementById('signupEmail')?.value.trim();
-  const password = document.getElementById('signupPassword')?.value;
-  const confirmPassword = document.getElementById('signupConfirmPassword')?.value;
-  const termsChecked = document.getElementById('signupTerms')?.checked;
+  if (name.length < 2) valid = setError("signupNameError", "Enter your full name.");
+  if (!isEmail(email)) valid = setError("signupEmailError", "Enter a valid email address.");
+  if (password.length < 8) valid = setError("signupPasswordError", "Use at least 8 characters.");
+  if (password !== confirmPassword) valid = setError("signupConfirmPasswordError", "Passwords do not match.");
+  if (!terms || !terms.checked) valid = setError("signupTermsError", "Please accept the practice tracking terms.");
+  if (!valid) return;
 
-  // Validate
-  let isValid = true;
+  setLoading(true, "Creating account...");
+  const result = await signUpWithEmail(email, password, name);
+  setLoading(false);
 
-  if (!name) {
-    document.getElementById('signupNameError').textContent = 'Name is required';
-    isValid = false;
-  } else if (name.length < 2) {
-    document.getElementById('signupNameError').textContent = 'Name must be at least 2 characters';
-    isValid = false;
-  }
-
-  if (!email) {
-    document.getElementById('signupEmailError').textContent = 'Email is required';
-    isValid = false;
-  } else if (!validateEmail(email)) {
-    document.getElementById('signupEmailError').textContent = 'Please enter a valid email';
-    isValid = false;
-  }
-
-  if (!password) {
-    document.getElementById('signupPasswordError').textContent = 'Password is required';
-    isValid = false;
-  } else if (password.length < 8) {
-    document.getElementById('signupPasswordError').textContent = 'Password must be at least 8 characters';
-    isValid = false;
-  }
-
-  if (!confirmPassword) {
-    document.getElementById('signupConfirmPasswordError').textContent = 'Please confirm your password';
-    isValid = false;
-  } else if (password !== confirmPassword) {
-    document.getElementById('signupConfirmPasswordError').textContent = 'Passwords do not match';
-    isValid = false;
-  }
-
-  if (!termsChecked) {
-    document.getElementById('signupTermsError').textContent = 'You must agree to the terms';
-    isValid = false;
-  }
-
-  if (!isValid) {
-    isLoading = false;
-    return;
-  }
-
-  showMessage('Creating account...', 'loading');
-
-  // Create auth user
-  const authResult = await signUpWithEmail(email, password);
-  
-  if (authResult.success) {
-    // Update display name
-    await authResult.user.updateProfile({ displayName: name });
-    
-    // Update Firestore with name
-    try {
-      const db = firebase.firestore();
-      await db.collection('users').doc(authResult.user.uid).update({
-        name: name,
-        email: email
-      });
-    } catch (error) {
-      console.error('Error updating user profile:', error);
-    }
-
-    showMessage('Account created! Redirecting to dashboard...', 'success');
-    setTimeout(() => {
-      window.location.href = '../dashboard/dashboard.html';
-    }, 1500);
+  if (result.success) {
+    showMessage("Account created. Opening dashboard...", "success");
+    setTimeout(redirectAfterAuth, 700);
   } else {
-    showMessage('Sign up failed: ' + authResult.error, 'error');
+    showMessage(result.error, "error");
   }
-
-  isLoading = false;
 }
 
-async function handleGoogleSignIn(e) {
-  e.preventDefault();
-
+async function handleGoogle() {
   if (isLoading) return;
-  isLoading = true;
 
-  showMessage('Signing in with Google...', 'loading');
-
+  setLoading(true, "Opening Google sign-in...");
   const result = await signInWithGoogle();
-  
-  if (result.success) {
-    showMessage('Sign in successful! Redirecting...', 'success');
-    setTimeout(() => {
-      window.location.href = '../dashboard/dashboard.html';
-    }, 1500);
-  } else {
-    showMessage('Google sign-in failed: ' + result.error, 'error');
-  }
+  setLoading(false);
 
-  isLoading = false;
+  if (result.success) {
+    showMessage("Signed in with Google. Opening dashboard...", "success");
+    setTimeout(redirectAfterAuth, 700);
+  } else {
+    showMessage(result.error, "error");
+  }
 }
 
-function checkAuthState() {
-  onAuthStateChanged(user => {
-    if (user) {
-      // User is logged in, redirect to dashboard
-      if (!window.location.pathname.includes('dashboard')) {
-        window.location.href = '../dashboard/dashboard.html';
-      }
-    } else {
-      // User is not logged in
-      if (window.location.pathname.includes('dashboard')) {
-        window.location.href = './login.html';
-      }
-    }
-  });
+function redirectAfterAuth() {
+  const params = new URLSearchParams(window.location.search);
+  const next = params.get("next");
+  window.location.href = next && next.startsWith("/") ? next : "../dashboard/dashboard.html";
+}
+
+function setLoading(loading, message) {
+  isLoading = loading;
+  document.body.classList.toggle("is-loading", loading);
+  if (emailAuthBtn) emailAuthBtn.disabled = loading;
+  if (googleAuthBtn) googleAuthBtn.disabled = loading;
+  if (message) showMessage(message, "loading");
 }
 
 function showMessage(text, type) {
   if (!messageEl) return;
-
   messageEl.textContent = text;
   messageEl.className = `auth-message ${type}`;
-  messageEl.classList.remove('hidden');
-
-  if (type === 'success' || type === 'error') {
-    setTimeout(() => {
-      messageEl.classList.add('hidden');
-    }, 5000);
-  }
+  messageEl.classList.remove("hidden");
 }
 
-function validateEmail(email) {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
+function clearErrors() {
+  document.querySelectorAll(".form-error").forEach(function (item) {
+    item.textContent = "";
+  });
+}
+
+function setError(id, message) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = message;
+  return false;
+}
+
+function valueOf(id) {
+  const el = document.getElementById(id);
+  return el ? el.value.trim() : "";
+}
+
+function isEmail(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }

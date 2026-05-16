@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | SSC Prep Hub</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div id="toastHost" class="toast-host" aria-live="polite"></div>
+
+  <header class="dashboard-header">
+    <nav class="topbar" aria-label="Dashboard navigation">
+      <a class="brand" href="../CORE/index.html">
+        <span class="brand-mark">S</span>
+        <span>
+          <strong>SSC Prep Hub</strong>
+          <small>Learning dashboard</small>
+        </span>
+      </a>
+
+      <div class="topbar-actions">
+        <a class="ghost-link" href="../CORE/index.html">Practice</a>
+        <button id="logoutBtn" class="logout-btn" type="button">Logout</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="dashboard-shell">
+    <section class="hero-strip">
+      <div>
+        <p class="eyebrow">Personal progress</p>
+        <h1>Welcome, <span id="userName">SSC Aspirant</span></h1>
+        <p id="userEmail" class="hero-subtext">Loading your synced quiz history...</p>
+      </div>
+      <div class="streak-card">
+        <span id="currentStreak">0</span>
+        <small>day streak</small>
+      </div>
+    </section>
+
+    <section id="loadingState" class="loading-state">
+      <div class="loader"></div>
+      <span>Loading dashboard...</span>
+    </section>
+
+    <section id="dashboardContent" class="dashboard-content hidden">
+      <div class="metrics-grid">
+        <article class="metric-card">
+          <small>Quizzes attempted</small>
+          <strong id="totalQuizzes">0</strong>
+        </article>
+        <article class="metric-card">
+          <small>Questions attempted</small>
+          <strong id="totalQuestions">0</strong>
+        </article>
+        <article class="metric-card">
+          <small>Overall accuracy</small>
+          <strong id="overallAccuracy">0%</strong>
+        </article>
+        <article class="metric-card">
+          <small>Revision queue</small>
+          <strong id="revisionCount">0</strong>
+        </article>
+      </div>
+
+      <div class="dashboard-grid">
+        <section class="panel latest-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Recent activity</p>
+              <h2>Latest quiz attempts</h2>
+            </div>
+            <a href="../CORE/index.html#chapters">Start quiz</a>
+          </div>
+          <div id="latestAttempts" class="attempt-list"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Focus areas</p>
+              <h2>Weak chapters</h2>
+            </div>
+          </div>
+          <div id="weakChapters" class="weak-list"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Saved doubts</p>
+              <h2>Bookmarked questions</h2>
+            </div>
+          </div>
+          <div id="bookmarks" class="question-list"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Next review</p>
+              <h2>Revision queue</h2>
+            </div>
+          </div>
+          <div id="revisionQueue" class="question-list"></div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="dashboard.js"></script>
+</body>
+</html>

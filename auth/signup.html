@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup | SSC Prep Hub</title>
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body data-auth-page="signup">
+  <main class="auth-shell">
+    <section class="auth-panel" aria-label="Signup form">
+      <a class="brand" href="../CORE/index.html">
+        <span class="brand-mark">S</span>
+        <span>
+          <strong>SSC Prep Hub</strong>
+          <small>Personal SSC practice tracker</small>
+        </span>
+      </a>
+
+      <div class="auth-heading">
+        <p class="eyebrow">Create your account</p>
+        <h1>Start tracking every chapter from today.</h1>
+        <p>Use email/password or Google sign-in. Your dashboard is generated automatically from saved quiz attempts.</p>
+      </div>
+
+      <div id="authMessage" class="auth-message hidden" role="status" aria-live="polite"></div>
+
+      <form id="signupForm" class="auth-form" novalidate>
+        <label class="field">
+          <span>Full name</span>
+          <input id="signupName" type="text" autocomplete="name" placeholder="Your name" required>
+          <small id="signupNameError" class="form-error"></small>
+        </label>
+
+        <label class="field">
+          <span>Email address</span>
+          <input id="signupEmail" type="email" autocomplete="email" placeholder="you@example.com" required>
+          <small id="signupEmailError" class="form-error"></small>
+        </label>
+
+        <label class="field">
+          <span>Password</span>
+          <div class="password-row">
+            <input id="signupPassword" type="password" autocomplete="new-password" placeholder="Minimum 8 characters" required>
+            <button class="ghost-icon toggle-password" type="button" data-target="signupPassword">Show</button>
+          </div>
+          <small id="signupPasswordError" class="form-error"></small>
+        </label>
+
+        <label class="field">
+          <span>Confirm password</span>
+          <div class="password-row">
+            <input id="signupConfirmPassword" type="password" autocomplete="new-password" placeholder="Repeat password" required>
+            <button class="ghost-icon toggle-password" type="button" data-target="signupConfirmPassword">Show</button>
+          </div>
+          <small id="signupConfirmPasswordError" class="form-error"></small>
+        </label>
+
+        <label class="terms-row">
+          <input id="signupTerms" type="checkbox" required>
+          <span>I agree to use SSC Prep Hub for practice tracking and revision planning.</span>
+        </label>
+        <small id="signupTermsError" class="form-error"></small>
+
+        <button id="emailAuthBtn" class="auth-btn primary" type="submit">Create account</button>
+      </form>
+
+      <div class="divider"><span>or</span></div>
+      <button id="googleAuthBtn" class="auth-btn google" type="button">
+        <span class="google-dot">G</span>
+        Continue with Google
+      </button>
+
+      <p class="auth-switch">Already registered? <a href="login.html">Login</a></p>
+    </section>
+
+    <aside class="auth-showcase" aria-label="Platform highlights">
+      <div class="showcase-card">
+        <span class="metric">1</span>
+        <small>dashboard for all chapters</small>
+      </div>
+      <div class="showcase-copy">
+        <p class="eyebrow">Built for revision</p>
+        <h2>Turn wrong answers into a focused queue.</h2>
+        <p>Bookmarks and revision items are stored under your Firebase user, ready for the next study session.</p>
+      </div>
+      <div class="feature-list">
+        <span>Google sign-in</span>
+        <span>Email/password login</span>
+        <span>Netlify-ready static pages</span>
+      </div>
+    </aside>
+  </main>
+
+  <script type="module" src="auth.js"></script>
+</body>
+</html>
