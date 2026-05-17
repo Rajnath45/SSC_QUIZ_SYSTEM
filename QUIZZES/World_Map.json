@@ -449,6 +449,456 @@
       },
       "correct": "a",
       "explanation": "Lake Tanganyika stretches approximately 676 km (420 miles) in a north-south direction, making it the longest lake in Africa. The 420-mile figure is its length in miles, not kilometres — a common distractor."
+    },
+    {
+      "id": 31,
+      "type": "MCQ",
+      "topic": "Southwest Asia — Deserts",
+      "difficulty": "medium",
+      "question": "Dasht-e Kavir Desert is located in which country?",
+      "options": {
+        "a": "Saudi Arabia",
+        "b": "Sudan",
+        "c": "Iraq",
+        "d": "Iran"
+      },
+      "correct": "d",
+      "explanation": "Dasht-e Kavir is a great salt desert of north-central Iran, located in a basin southeast of the Elburz Mountains. It is approximately 390 km wide and is distinguished by its salt crust, caused by the almost rainless climate and intense surface evaporation, making it almost uninhabited."
+    },
+    {
+      "id": 32,
+      "type": "MCQ",
+      "topic": "North America — Volcanoes",
+      "difficulty": "easy",
+      "question": "Mount St. Helens is an active stratovolcano located in which of the following countries?",
+      "options": {
+        "a": "Japan",
+        "b": "United States of America",
+        "c": "Chile",
+        "d": "Italy"
+      },
+      "correct": "b",
+      "explanation": "Mount St. Helens is located in Skamania County, Washington, in the Pacific Northwest region of the United States. It lies on the plate boundary between the Juan de Fuca plate and the North American plate."
+    },
+    {
+      "id": 33,
+      "type": "MCQ",
+      "topic": "Europe — Plateaus",
+      "difficulty": "medium",
+      "question": "In which country is the Meseta Plateau located?",
+      "options": {
+        "a": "Turkey",
+        "b": "Ethiopia",
+        "c": "Spain",
+        "d": "Iran"
+      },
+      "correct": "c",
+      "explanation": "The Meseta occupies most of the Iberian Peninsula's land area. Spain is the third largest country in Europe, and about 45% of it is covered by the Meseta Plateau. In the west the Meseta slopes gently down into neighbouring Portugal."
+    },
+    {
+      "id": 34,
+      "type": "MCQ",
+      "topic": "Europe/Asia — Mountain Ranges",
+      "difficulty": "easy",
+      "question": "Which among the following mountain ranges is located in Russia?",
+      "options": {
+        "a": "Rocky",
+        "b": "Andes",
+        "c": "Himalayas",
+        "d": "Ural"
+      },
+      "correct": "d",
+      "explanation": "The Ural Mountains run approximately north to south through western Russia, from the coast of the Arctic Ocean to the Ural River and northwestern Kazakhstan. The mountain range forms part of the conventional boundary between the continents of Europe and Asia."
+    },
+    {
+      "id": 35,
+      "type": "MCQ",
+      "topic": "World Map — Equatorial Countries",
+      "difficulty": "medium",
+      "question": "The Equator does NOT pass through which of the following countries?",
+      "options": {
+        "a": "Kenya",
+        "b": "Mexico",
+        "c": "Indonesia",
+        "d": "Brazil"
+      },
+      "correct": "b",
+      "explanation": "The equator passes through 13 countries: Ecuador, Colombia, Brazil, São Tomé & Príncipe, Gabon, Republic of Congo, Uganda, Kenya, Somalia, Maldives, Indonesia, and Kiribati. Mexico is entirely in the Northern Hemisphere and is not among them."
+    },
+    {
+      "id": 36,
+      "type": "MCQ",
+      "topic": "South America — Volcanoes",
+      "difficulty": "medium",
+      "question": "Where is the world's highest active volcanic mountain Cotopaxi located?",
+      "options": {
+        "a": "Japan",
+        "b": "Philippines",
+        "c": "Ecuador",
+        "d": "Hawaiian Islands"
+      },
+      "correct": "c",
+      "explanation": "Cotopaxi is an active stratovolcano in the Andes Mountains, located in the Latacunga canton of Cotopaxi Province, northeast of the city of Latacunga, Ecuador. It reaches a height of 5,897 m and is the second highest summit in Ecuador."
+    },
+    {
+      "id": 37,
+      "type": "MCQ",
+      "topic": "World Map — Volcanoes",
+      "difficulty": "medium",
+      "question": "Which of the following pairs is NOT correctly matched?",
+      "options": {
+        "a": "Etna : Italy",
+        "b": "Fujiyama : Japan",
+        "c": "Popa : Myanmar",
+        "d": "Krakatau : Malaysia"
+      },
+      "correct": "d",
+      "explanation": "Krakatau (or Krakatoa) is a volcanic island in the Sunda Strait between the islands of Java and Sumatra, in the Indonesian province of Lampung — not Malaysia. The massive eruptions of Krakatoa in August 1883 were among the most violent volcanic events in recorded history."
+    },
+    {
+      "id": 38,
+      "type": "MCQ",
+      "topic": "Oceania — New Zealand",
+      "difficulty": "easy",
+      "question": "Where is the Southern Alps mountain range located?",
+      "options": {
+        "a": "Australia",
+        "b": "New Zealand",
+        "c": "South Africa",
+        "d": "Indonesia"
+      },
+      "correct": "b",
+      "explanation": "The Southern Alps is a mountain range extending along much of the length of New Zealand's South Island. The range includes the South Island's Main Divide, which separates the water catchments of the more heavily populated eastern side from the west coast."
+    },
+    {
+      "id": 39,
+      "type": "MCQ",
+      "topic": "South America — Waterfalls",
+      "difficulty": "hard",
+      "question": "World famous Kaieteur Falls is situated on which river?",
+      "options": {
+        "a": "Potaro",
+        "b": "Mississippi",
+        "c": "St. Lawrence",
+        "d": "Zambezi"
+      },
+      "correct": "a",
+      "explanation": "Kaieteur Falls is located on the Potaro River in the Kaieteur National Park in Guyana. It sits in a section of the Amazon rainforest in the Potaro-Siparuni region, and is the world's largest single-drop waterfall by the volume of water flowing over it."
+    },
+    {
+      "id": 40,
+      "type": "MCQ",
+      "topic": "Europe — Germany",
+      "difficulty": "easy",
+      "question": "Black Forest is a large forested mountain range found in which country?",
+      "options": {
+        "a": "Brazil",
+        "b": "Germany",
+        "c": "South Africa",
+        "d": "Belgium"
+      },
+      "correct": "b",
+      "explanation": "The Black Forest is a large forested mountain range in the state of Baden-Württemberg in southern Germany. It is bounded by the Rhine valley to the west and south, and is the highest part of the South German Scarplands."
+    },
+    {
+      "id": 41,
+      "type": "MCQ",
+      "topic": "Europe — Rivers",
+      "difficulty": "medium",
+      "question": "Which river passes through the maximum number of countries in the world?",
+      "options": {
+        "a": "Rhine",
+        "b": "Danube",
+        "c": "Amazon",
+        "d": "Volga"
+      },
+      "correct": "b",
+      "explanation": "The Danube River flows through more countries than any other river in the world. Originating in Germany, it passes through or borders Austria, Slovakia, Hungary, Croatia, Serbia, Romania, Bulgaria, Moldova, and Ukraine before draining into the Black Sea. Its drainage basin extends into nine additional countries."
+    },
+    {
+      "id": 42,
+      "type": "MCQ",
+      "topic": "South Asia — Sri Lanka",
+      "difficulty": "hard",
+      "question": "Which of the following is the highest peak in Sri Lanka?",
+      "options": {
+        "a": "Kirigalpotta",
+        "b": "Hakgala",
+        "c": "Mount Pedro",
+        "d": "Bible Rock"
+      },
+      "correct": "c",
+      "explanation": "Pidurutalagala, or Mount Pedro, at 2,524 m is the tallest and ultra-prominent peak in Sri Lanka, situated near the town of Nuwara Eliya. Its summit houses the central communications array of the Government of Sri Lanka and armed forces."
+    },
+    {
+      "id": 43,
+      "type": "MCQ",
+      "topic": "Asia — Volcanoes",
+      "difficulty": "medium",
+      "question": "Which of the following is the only active volcano in South Asia?",
+      "options": {
+        "a": "Dhinodhar Hills",
+        "b": "Tosham Hills",
+        "c": "Barren Island",
+        "d": "Narcondam Island"
+      },
+      "correct": "c",
+      "explanation": "Barren Island is an island in the Andaman Sea dominated by Barren Volcano — the only confirmed active volcano in South Asia, and the only active volcano along a chain from Sumatra to Myanmar. Along with the Andaman Islands, it is part of the Indian Union Territory of Andaman and Nicobar Islands."
+    },
+    {
+      "id": 44,
+      "type": "MCQ",
+      "topic": "Himalayas — Mountain Peaks",
+      "difficulty": "medium",
+      "question": "Which among the following peaks is NOT located in Nepal Himalayas?",
+      "options": {
+        "a": "Lhotse",
+        "b": "Mount Everest",
+        "c": "Annapurna",
+        "d": "Kamet"
+      },
+      "correct": "d",
+      "explanation": "Kamet is the second highest mountain in the Garhwal region of Uttarakhand, India, lying under Garhwal Himalayas in the Chamoli District. Due to its position near the Tibet Plateau, Kamet is remote and not easily accessible, unlike the Nepalese peaks Lhotse, Everest, and Annapurna."
+    },
+    {
+      "id": 45,
+      "type": "MCQ",
+      "topic": "Africa — Islands",
+      "difficulty": "easy",
+      "question": "Madagascar is located in the ___ Ocean.",
+      "options": {
+        "a": "Pacific",
+        "b": "Arctic",
+        "c": "Indian",
+        "d": "Atlantic"
+      },
+      "correct": "c",
+      "explanation": "Madagascar is an island country in the Indian Ocean, situated off the coast of East Africa across the Mozambique Channel. It was previously known as the Malagasy Republic."
+    },
+    {
+      "id": 46,
+      "type": "MCQ",
+      "topic": "Asia — Lakes",
+      "difficulty": "easy",
+      "question": "Lake Baikal, the world's largest freshwater lake by volume, is located in which country?",
+      "options": {
+        "a": "Russia",
+        "b": "Tanzania",
+        "c": "Canada",
+        "d": "Uganda"
+      },
+      "correct": "a",
+      "explanation": "Lake Baikal is situated in northern Siberia, Russia. It contains 22–23% of the world's fresh surface water and is the world's deepest lake with a maximum depth of 1,642 m. It is also the world's oldest lake. Note: Lake Superior (Q25) is larger by surface area, but Baikal holds far more water by volume."
+    },
+    {
+      "id": 47,
+      "type": "MCQ",
+      "topic": "World Map — Water Bodies",
+      "difficulty": "medium",
+      "question": "Which water body is adjacent to the Atlantic Ocean, located in the southeast of the Gulf of Mexico?",
+      "options": {
+        "a": "Arabian Sea",
+        "b": "Baltic Sea",
+        "c": "Caspian Sea",
+        "d": "Caribbean Sea"
+      },
+      "correct": "d",
+      "explanation": "The Caribbean Sea is a body of water adjacent to the Atlantic Ocean, southeast of the Gulf of Mexico. It is bordered by Venezuela, Colombia, and Panama to the south; and by Cuba, Jamaica, Dominican Republic, and Puerto Rico on the north. It covers an area of about 2,754,000 km²."
+    },
+    {
+      "id": 48,
+      "type": "MCQ",
+      "topic": "Central Asia — Caspian Sea",
+      "difficulty": "easy",
+      "question": "How many countries share the natural heritage of the Caspian Sea?",
+      "options": {
+        "a": "Two",
+        "b": "Five",
+        "c": "Four",
+        "d": "Three"
+      },
+      "correct": "b",
+      "explanation": "Five countries — Azerbaijan, Kazakhstan, Russia, Turkmenistan, and Iran (mnemonic: TARIK) — share the Caspian Sea. The Caspian is the world's largest inland body of water, often described as the world's largest lake or a full-fledged sea."
+    },
+    {
+      "id": 49,
+      "type": "MCQ",
+      "topic": "South Asia — Beaches",
+      "difficulty": "easy",
+      "question": "Cox's Bazar, considered the world's longest natural sea beach, is located in which country?",
+      "options": {
+        "a": "Sri Lanka",
+        "b": "Bangladesh",
+        "c": "Nepal",
+        "d": "India"
+      },
+      "correct": "b",
+      "explanation": "Cox's Bazar Beach in Bangladesh is the longest natural sea beach in the world, running approximately 150 km (93 miles). It is the most popular tourist destination in Bangladesh."
+    },
+    {
+      "id": 50,
+      "type": "MCQ",
+      "topic": "South Asia — Forests",
+      "difficulty": "easy",
+      "question": "Which of the following is the largest contiguous mangrove forest in the world?",
+      "options": {
+        "a": "Godavari-Krishna Mangroves",
+        "b": "Pichavaram Forest",
+        "c": "Gulf of Panama Mangroves",
+        "d": "Sundarbans Reserve Forest"
+      },
+      "correct": "d",
+      "explanation": "The Sundarbans Reserve Forest (SRF) is the largest contiguous mangrove forest in the world. It is located in the south-west of Bangladesh between the river Baleswar (East) and the Harinbanga (West), adjoining the Bay of Bengal. About 60% lies in Bangladesh and the rest in India."
+    },
+    {
+      "id": 51,
+      "type": "MCQ",
+      "topic": "World Map — Oceans",
+      "difficulty": "easy",
+      "question": "Which is the largest ocean on Earth?",
+      "options": {
+        "a": "Atlantic Ocean",
+        "b": "Indian Ocean",
+        "c": "Arctic Ocean",
+        "d": "Pacific Ocean"
+      },
+      "correct": "d",
+      "explanation": "The Pacific Ocean is the largest ocean on Earth, covering more than one-third of Earth's surface and nearly half of Earth's water surface. It is bound by North and South America on the east, Asia and Australia on the west, and Antarctica in the south."
+    },
+    {
+      "id": 52,
+      "type": "MCQ",
+      "topic": "South America — River Basins",
+      "difficulty": "medium",
+      "question": "Which is the world's largest drainage basin with an area of about 70,00,000 km²?",
+      "options": {
+        "a": "Congo basin",
+        "b": "Amur basin",
+        "c": "Amazon basin",
+        "d": "Nile basin"
+      },
+      "correct": "c",
+      "explanation": "The Amazon basin is the largest drainage basin in the world at approximately 7,000,000 km². It includes parts of Bolivia, Brazil, Colombia, Ecuador, Guyana, Peru, Suriname, and Venezuela."
+    },
+    {
+      "id": 53,
+      "type": "MCQ",
+      "topic": "Polar Regions — People",
+      "difficulty": "easy",
+      "question": "\"Eskimos\" are associated with which geographical region?",
+      "options": {
+        "a": "Arid Region",
+        "b": "Polar Region",
+        "c": "Savanna Grassland",
+        "d": "Tropical Rainforest Region"
+      },
+      "correct": "b",
+      "explanation": "The term Eskimos refers to people who inhabit the polar region. It refers to two closely related Indigenous peoples: the Inuit and the Yupik (or Yuit) of eastern Siberia and Alaska."
+    },
+    {
+      "id": 54,
+      "type": "MCQ",
+      "topic": "World — Mineral Resources",
+      "difficulty": "medium",
+      "question": "Which among the following countries has the world's largest reserves of Uranium?",
+      "options": {
+        "a": "Russia",
+        "b": "China",
+        "c": "Australia",
+        "d": "Jordan"
+      },
+      "correct": "c",
+      "explanation": "Australia has about one-third of the world's known uranium resources. Canada was the world's leading producer until 2008, when it was overtaken by Kazakhstan. Other countries with known resources include Russia, USA, South Africa, Namibia, Niger, Brazil, and Ukraine."
+    },
+    {
+      "id": 55,
+      "type": "MCQ",
+      "topic": "World — Mineral Resources",
+      "difficulty": "medium",
+      "question": "Which is the largest uranium producing country in the world?",
+      "options": {
+        "a": "Uzbekistan",
+        "b": "Kazakhstan",
+        "c": "USA",
+        "d": "India"
+      },
+      "correct": "b",
+      "explanation": "Kazakhstan is the world's largest producer of uranium, producing 43% of global mining output as of 2019. Canada ranks second with a 13% share, followed by Australia with 12%. Australia also holds around 30% of the world's largest known uranium reserves."
+    },
+    {
+      "id": 56,
+      "type": "MCQ",
+      "topic": "Europe — International Boundaries",
+      "difficulty": "medium",
+      "question": "The Oder-Neisse Line is the international boundary between which of the following countries?",
+      "options": {
+        "a": "Israel and Palestine",
+        "b": "Germany and Poland",
+        "c": "China and Vietnam",
+        "d": "Mexico and USA"
+      },
+      "correct": "b",
+      "explanation": "The Oder-Neisse line is the international border between Germany and Poland. It was drawn at the Potsdam Conference in the aftermath of the Second World War, primarily delineated along the Oder and Lusatian Neisse rivers in Central Europe."
+    },
+    {
+      "id": 57,
+      "type": "MCQ",
+      "topic": "East Asia — China",
+      "difficulty": "medium",
+      "question": "China shares borders with the largest number of countries in the world. How many countries does China border?",
+      "options": {
+        "a": "10",
+        "b": "12",
+        "c": "14",
+        "d": "16"
+      },
+      "correct": "c",
+      "explanation": "China shares its 22,117 km borders with 14 sovereign states — the largest number of any country. These are: India, Pakistan, Afghanistan, Tajikistan, Kyrgyzstan, Kazakhstan, Mongolia, Russia, North Korea, Vietnam, Laos, Myanmar, Bhutan, and Nepal. For comparison, the Russian Federation has 13 neighbours."
+    },
+    {
+      "id": 58,
+      "type": "MCQ",
+      "topic": "South Asia — Sri Lanka",
+      "difficulty": "medium",
+      "question": "What is the official capital of Sri Lanka?",
+      "options": {
+        "a": "Colombo",
+        "b": "Sri Jayawardenepura Kotte",
+        "c": "Ceylon",
+        "d": "Kandy"
+      },
+      "correct": "b",
+      "explanation": "Sri Jayawardenepura Kotte is the official and legislative capital of Sri Lanka, situated within the urban area of Colombo. Colombo is the commercial capital. Sri Jayawardenepura Kotte was the capital of the Sinhalese kingdom of Kotte from 1415 to 1565."
+    },
+    {
+      "id": 59,
+      "type": "MCQ",
+      "topic": "South America — Brazil",
+      "difficulty": "easy",
+      "question": "Copacabana Beach is situated in which country?",
+      "options": {
+        "a": "Peru",
+        "b": "Australia",
+        "c": "Mexico",
+        "d": "Brazil"
+      },
+      "correct": "d",
+      "explanation": "Copacabana Beach is located in Rio de Janeiro, Brazil. It was once called Sacopenapa, from the Tupi word soco, referring to a bird native to the area."
+    },
+    {
+      "id": 60,
+      "type": "MCQ",
+      "topic": "World Map — Seas",
+      "difficulty": "medium",
+      "question": "Which is the largest sea located in the North Indian Ocean, covering an area of about 3.86 million square kilometres?",
+      "options": {
+        "a": "Bay of Bengal",
+        "b": "Arabian Sea",
+        "c": "Red Sea",
+        "d": "Andaman Sea"
+      },
+      "correct": "b",
+      "explanation": "The Arabian Sea is the largest sea in the North Indian Ocean at about 3.86 million km². It has two important features: (a) the Gulf of Aden in the southwest, connecting with the Red Sea through the Strait of Bab-el-Mandeb, and (b) the Gulf of Oman in the northwest, connecting with the Persian Gulf."
     }
   ]
 }

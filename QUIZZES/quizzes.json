@@ -11,7 +11,7 @@
       "id": "world-map",
       "title": "World Map Quiz",
       "subject": "geography",
-      "questionCount": 30,
+      "questionCount": 60,
       "file": "World_Map.json"
     },
     {
