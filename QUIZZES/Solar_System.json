@@ -1,277 +1,707 @@
 [
   {
-    "sr_no": 1,
+    "id": 1,
+    "type": "MCQ",
+    "topic": "Sun — Solar Wind",
+    "difficulty": "easy",
     "question": "What are the streams of charged particles ejected by the Sun into space called?",
-    "option1": "Sunspots",
-    "option2": "Solar wind",
-    "option3": "Solar flares",
-    "option4": "Coronal loops",
-    "answer": "2",
-    "positive_marking": "1",
-    "negative_marking": "0"
+    "options": {
+      "a": "Sunspots",
+      "b": "Solar wind",
+      "c": "Solar flares",
+      "d": "Coronal loops"
+    },
+    "correct": "b",
+    "explanation": "Solar wind is a continuous stream of charged particles (mainly electrons and protons) ejected from the Sun's corona into space. Sunspots are dark, cooler regions on the Sun's surface caused by magnetic activity. Solar flares are intense bursts of radiation, while coronal loops are arches of plasma following magnetic field lines — none of these involve continuous particle streams into space."
   },
   {
-    "sr_no": 2,
+    "id": 2,
+    "type": "MCQ",
+    "topic": "Sun — Solar Storms",
+    "difficulty": "medium",
     "question": "Which of the following systems can be affected by a solar storm?\n\n1. GPS signal accuracy\n2. Power transmission systems\n3. Submarine communication cables\n4. Pipeline infrastructure",
-    "option1": "2 and 3 only",
-    "option2": "1 and 2 only",
-    "option3": "3 and 4 only",
-    "option4": "1, 2, 3, and 4 all of these",
-    "answer": "4",
-    "positive_marking": "1",
-    "negative_marking": "0"
+    "options": {
+      "a": "2 and 3 only",
+      "b": "1 and 2 only",
+      "c": "3 and 4 only",
+      "d": "1, 2, 3, and 4 all of these"
+    },
+    "correct": "d",
+    "explanation": "Solar storms cause geomagnetic disturbances that can affect all four systems: (1) GPS signals are disrupted due to ionospheric disturbances; (2) power grids suffer damage from geomagnetically induced currents; (3) submarine communication cables experience voltage surges; (4) pipelines undergo accelerated corrosion due to induced currents. The 1989 Quebec blackout is a classic example of solar storm damage to power grids."
   },
   {
-    "sr_no": 3,
-    "question": "Consider the following statements:\n\n1. A solar eclipse - The Moon casts a shadow on Earth when it comes between the Sun and Earth.\n\n2. A lunar eclipse - During the new moon phase, the Moon passes through the Earth's shadow.\n\nWhich of the statements given above is/are correct?",
-    "option1": "Both 1 and 2",
-    "option2": "1 only",
-    "option3": "2 only",
-    "option4": "Neither 1 nor 2",
-    "answer": "2",
-    "positive_marking": "1",
-    "negative_marking": "0"
+    "id": 3,
+    "type": "Statement",
+    "topic": "Earth — Solar and Lunar Eclipses",
+    "difficulty": "medium",
+    "question": "Statement I: A solar eclipse occurs when the Moon casts a shadow on Earth as it comes between the Sun and Earth.\n\nStatement II: A lunar eclipse occurs during the new moon phase, when the Moon passes through Earth's shadow.",
+    "options": {
+      "a": "Both Statement I and Statement II are correct",
+      "b": "Only Statement I is correct",
+      "c": "Only Statement II is correct",
+      "d": "Neither Statement I nor Statement II is correct"
+    },
+    "correct": "b",
+    "explanation": "Statement I is correct — a solar eclipse occurs on a New Moon day when the Moon positions itself between the Sun and the Earth, casting its shadow on Earth. Statement II is incorrect — a lunar eclipse occurs on a Full Moon day (not New Moon) when the Earth comes between the Sun and the Moon, and Earth's shadow falls on the Moon. During the New Moon phase, a solar eclipse occurs, not a lunar eclipse."
   },
   {
-    "sr_no": 4,
+    "id": 4,
+    "type": "MCQ",
+    "topic": "Stars — Life Cycle of a Sun-like Star",
+    "difficulty": "medium",
     "question": "Which of the following is the correct sequence in the life cycle of a star like the Sun?",
-    "option1": "Protostar → White Dwarf → Red Giant → Main Sequence",
-    "option2": "Nebula → Red Giant → Main Sequence → White Dwarf",
-    "option3": "Main Sequence → Red Giant → White Dwarf",
-    "option4": "Red Giant → Protostar → White Dwarf",
-    "answer": "3",
-    "positive_marking": "1",
-    "negative_marking": "0"
+    "options": {
+      "a": "Protostar → White Dwarf → Red Giant → Main Sequence",
+      "b": "Nebula → Red Giant → Main Sequence → White Dwarf",
+      "c": "Main Sequence → Red Giant → White Dwarf",
+      "d": "Red Giant → Protostar → White Dwarf"
+    },
+    "correct": "c",
+    "explanation": "The complete life cycle of a Sun-like star: Nebula (cloud of gas and dust) → Protostar → Main Sequence (longest stable phase; hydrogen fusion occurs — the Sun has been here for ~4.6 billion years) → Red Giant (hydrogen fuel exhausted, outer layers expand) → Planetary Nebula (outer layers shed) → White Dwarf (dense cooling core). Option (c) correctly shows the sequence after the main sequence. Stars much more massive than the Sun end as neutron stars or black holes instead."
   },
   {
-    "sr_no": 5,
+    "id": 5,
+    "type": "MCQ",
+    "topic": "Sun — Faint Young Sun Paradox",
+    "difficulty": "hard",
     "question": "How does the Faint Young Sun paradox challenge our understanding of early Earth's climate?",
-    "option1": "It implies there was no liquid water on early Earth.",
-    "option2": "It proves the Moon once had an atmosphere.",
-    "option3": "It suggests that early solar output was too weak to prevent global freezing.",
-    "option4": "It shows Earth was too hot due to excessive solar radiation.",
-    "answer": "3",
-    "positive_marking": "1",
-    "negative_marking": "0"
+    "options": {
+      "a": "It implies there was no liquid water on early Earth.",
+      "b": "It proves the Moon once had an atmosphere.",
+      "c": "It suggests that early solar output was too weak to prevent global freezing.",
+      "d": "It shows Earth was too hot due to excessive solar radiation."
+    },
+    "correct": "c",
+    "explanation": "The Faint Young Sun paradox, proposed by Carl Sagan and George Mullen in 1972, notes that the early Sun was about 70% as luminous as today. Standard climate models suggest this should have frozen Earth's oceans 2–3 billion years ago — yet geological evidence shows liquid water existed. The paradox remains partly unresolved; leading explanations include higher concentrations of greenhouse gases (CO₂, methane) in the early atmosphere that compensated for the weaker solar output."
   },
   {
-    "sr_no": 6,
+    "id": 6,
+    "type": "MCQ",
+    "topic": "Galaxies — Hubble Classification",
+    "difficulty": "easy",
     "question": "Which type of galaxy has no regular shape and is rich in gas and dust?",
-    "option1": "Elliptical Galaxy",
-    "option2": "Lenticular Galaxies",
-    "option3": "Irregular Galaxy",
-    "option4": "Spiral Galaxy",
-    "answer": "3",
-    "positive_marking": "1",
-    "negative_marking": "0"
+    "options": {
+      "a": "Elliptical Galaxy",
+      "b": "Lenticular Galaxy",
+      "c": "Irregular Galaxy",
+      "d": "Spiral Galaxy"
+    },
+    "correct": "c",
+    "explanation": "Irregular galaxies have no definite shape and are rich in gas and dust, making them active star-forming regions. Edwin Hubble classified galaxies into four types: Spiral (disc-shaped with arms; e.g., Milky Way), Elliptical (egg/sphere-shaped; old stars, little gas), Lenticular (intermediate between spiral and elliptical; disc but no arms), and Irregular (no defined shape; gas-rich). The Magellanic Clouds visible from the southern hemisphere are well-known irregular galaxies."
   },
   {
-    "sr_no": 7,
+    "id": 7,
+    "type": "MCQ",
+    "topic": "Planets — Rotation Periods",
+    "difficulty": "easy",
     "question": "Which planet has the longest day in the solar system?",
-    "option1": "Venus",
-    "option2": "Mars",
-    "option3": "Jupiter",
-    "option4": "Earth",
-    "answer": "1",
-    "positive_marking": "1",
-    "negative_marking": "0"
+    "options": {
+      "a": "Venus",
+      "b": "Mars",
+      "c": "Jupiter",
+      "d": "Earth"
+    },
+    "correct": "a",
+    "explanation": "Venus has the longest day in the solar system — it takes approximately 243 Earth days to complete one rotation on its axis, making its day longer than its year (225 Earth days). Additionally, Venus rotates in the opposite direction (retrograde rotation) compared to most planets. Jupiter has the shortest day (~10 hours), Earth has a 24-hour day, and Mars has a similar day to Earth at ~24.6 hours."
   },
   {
-    "sr_no": 8,
-    "question": "Consider the following statements about the Geoid:\n\n1. The term Geoid refers to the axis of the Earth.\n\n2. The Earth is slightly flattened at the poles and bulges at the equator due to the outward force caused by its rotation.\n\nWhich of the above statements is/are correct?",
-    "option1": "1 only",
-    "option2": "2 only",
-    "option3": "Both 1 and 2",
-    "option4": "Neither 1 nor 2",
-    "answer": "2",
-    "positive_marking": "1",
-    "negative_marking": "0"
+    "id": 8,
+    "type": "Statement",
+    "topic": "Earth — Shape and Geoid",
+    "difficulty": "medium",
+    "question": "Statement I: The term Geoid refers to the axis of the Earth.\n\nStatement II: The Earth is slightly flattened at the poles and bulges at the equator due to the outward force caused by its rotation.",
+    "options": {
+      "a": "Only Statement I is correct",
+      "b": "Only Statement II is correct",
+      "c": "Both Statement I and Statement II are correct",
+      "d": "Neither Statement I nor Statement II is correct"
+    },
+    "correct": "b",
+    "explanation": "Statement I is incorrect — the Geoid is a model of the Earth's shape defined by the mean sea level surface and its hypothetical extension under landmasses, accounting for variations in gravity. It is not the axis of the Earth. Statement II is correct — Earth's rotation generates centrifugal (outward) force, which is greatest at the equator, causing equatorial bulging and polar flattening. This oblate spheroid shape is called an 'oblate ellipsoid.' The equatorial radius (6,378 km) exceeds the polar radius (6,357 km) by about 21 km."
   },
   {
-    "sr_no": 9,
+    "id": 9,
+    "type": "MCQ",
+    "topic": "Universe — Expanding Universe",
+    "difficulty": "easy",
     "question": "Who gave the expanding universe hypothesis?",
-    "option1": "Galileo Galilei",
-    "option2": "Edwin Hubble",
-    "option3": "James Clerk Maxwell",
-    "option4": "CV Raman",
-    "answer": "2",
-    "positive_marking": "1",
-    "negative_marking": "0"
+    "options": {
+      "a": "Galileo Galilei",
+      "b": "Edwin Hubble",
+      "c": "James Clerk Maxwell",
+      "d": "C.V. Raman"
+    },
+    "correct": "b",
+    "explanation": "Edwin Hubble (1889–1953) proposed the expanding universe hypothesis in 1929 after observing that distant galaxies are moving away from us — a phenomenon called the redshift of galaxies. The further a galaxy, the faster it recedes (Hubble's Law). This discovery became the observational foundation of the Big Bang Theory. Galileo improved the telescope; Maxwell formulated electromagnetic theory; C.V. Raman discovered the Raman Effect (inelastic scattering of light)."
   },
   {
-    "sr_no": 10,
-    "question": "Which of the below statements is/are correct?\n\nStatement 1: Callisto, Europa, and Ganymede are natural satellites of Jupiter.\n\nStatement 2: Triton is the largest moon of Neptune.",
-    "option1": "Only Statement 1",
-    "option2": "Only Statement 2",
-    "option3": "Both Statement 1 and 2",
-    "option4": "None of the above",
-    "answer": "3",
-    "positive_marking": "1",
-    "negative_marking": "0"
+    "id": 10,
+    "type": "Statement",
+    "topic": "Planets — Moons of Jupiter and Neptune",
+    "difficulty": "medium",
+    "question": "Statement I: Callisto, Europa, and Ganymede are natural satellites of Jupiter.\n\nStatement II: Triton is the largest moon of Neptune.",
+    "options": {
+      "a": "Only Statement I is correct",
+      "b": "Only Statement II is correct",
+      "c": "Both Statement I and Statement II are correct",
+      "d": "None of the above"
+    },
+    "correct": "c",
+    "explanation": "Both statements are correct. Jupiter's four largest moons — known as the Galilean moons (discovered by Galileo in 1610) — are Io, Europa, Ganymede, and Callisto. Statement I correctly names three of them. Ganymede is also the largest moon in the solar system, larger than Mercury. Statement II is also correct — Triton is the largest of Neptune's 16 known moons and uniquely orbits Neptune in the retrograde direction (opposite to Neptune's rotation), suggesting it was a captured Kuiper Belt object."
   },
   {
-    "sr_no": 11,
+    "id": 11,
+    "type": "MCQ",
+    "topic": "Dwarf Planets — Ceres",
+    "difficulty": "easy",
     "question": "Which is, by far, the closest dwarf planet orbiting at only 2.8 times Earth's distance from the Sun?",
-    "option1": "Ceres",
-    "option2": "Makemake",
-    "option3": "Eris",
-    "option4": "Pluto",
-    "answer": "1",
-    "positive_marking": "1",
-    "negative_marking": "0"
+    "options": {
+      "a": "Ceres",
+      "b": "Makemake",
+      "c": "Eris",
+      "d": "Pluto"
+    },
+    "correct": "a",
+    "explanation": "Ceres is the closest dwarf planet to the Sun, located in the asteroid belt between Mars and Jupiter at about 2.8 AU from the Sun. It is also the largest object in the asteroid belt, with a diameter of ~940 km. Pluto orbits at ~39 AU, Makemake at ~45 AU, and Eris at ~68 AU — all in the distant Kuiper Belt or scattered disc. Ceres was classified as a dwarf planet by the IAU in 2006, the same year Pluto was reclassified."
   },
   {
-    "sr_no": 12,
-    "question": "Consider the following statements about a nebula:\n\n1. A nebula is a cloud of dust and gas inside a galaxy, consisting mainly of hydrogen, helium, and other ionized gases.\n\n2. Originally, the term nebula was used to describe only galaxies within the Milky Way.\n\nWhich of the above statements is/are correct?",
-    "option1": "1 only",
-    "option2": "2 only",
-    "option3": "Both 1 and 2",
-    "option4": "Neither 1 nor 2",
-    "answer": "1",
-    "positive_marking": "1",
-    "negative_marking": "0"
+    "id": 12,
+    "type": "Statement",
+    "topic": "Universe — Nebulae",
+    "difficulty": "medium",
+    "question": "Statement I: A nebula is a cloud of dust and gas inside a galaxy, consisting mainly of hydrogen, helium, and other ionized gases.\n\nStatement II: Originally, the term nebula was used to describe only galaxies within the Milky Way.",
+    "options": {
+      "a": "Only Statement I is correct",
+      "b": "Only Statement II is correct",
+      "c": "Both Statement I and Statement II are correct",
+      "d": "Neither Statement I nor Statement II is correct"
+    },
+    "correct": "a",
+    "explanation": "Statement I is correct — a nebula is indeed an interstellar cloud of gas (mainly hydrogen and helium) and dust within galaxies. They are birthplaces of stars; e.g., the Orion Nebula. Statement II is incorrect — historically, the term 'nebula' was used to describe any diffuse astronomical object, including other galaxies beyond the Milky Way. Galaxies like Andromeda were once called 'spiral nebulae.' It was Edwin Hubble who proved in the 1920s that these 'nebulae' were actually separate galaxies."
   },
   {
-    "sr_no": 13,
+    "id": 13,
+    "type": "MCQ",
+    "topic": "Stars — Constellations",
+    "difficulty": "medium",
     "question": "A distinctive cross-shaped constellation best seen in the northern hemisphere during the summer and fall months around September is:",
-    "option1": "Cygnus",
-    "option2": "Ursa Major",
-    "option3": "Pegasus",
-    "option4": "Cassiopeia",
-    "answer": "1",
-    "positive_marking": "1",
-    "negative_marking": "0"
+    "options": {
+      "a": "Cygnus",
+      "b": "Ursa Major",
+      "c": "Pegasus",
+      "d": "Cassiopeia"
+    },
+    "correct": "a",
+    "explanation": "Cygnus (the Swan) is a prominent northern constellation known for its distinctive cross shape, sometimes called the 'Northern Cross.' It is best visible in the northern hemisphere from July through September. Its brightest star, Deneb, forms one corner of the Summer Triangle (along with Vega and Altair). Ursa Major contains the Big Dipper, Cassiopeia is W-shaped, and Pegasus features a Great Square — none have the cross shape associated with Cygnus."
   },
   {
-    "sr_no": 14,
-    "question": "Consider the following statements regarding planetary atmospheres:\n\n1. Venus has thick white and yellowish clouds of sulphuric acid in its atmosphere.\n\n2. Mars' atmosphere is mainly composed of methane, with traces of sulfur dioxide.\n\n3. Uranus is the coldest planet in the Solar System.\n\n4. Venus is often referred to as the \"morning star.\"\n\nWhich of the above statements is/are incorrect?",
-    "option1": "Only 2",
-    "option2": "Only 1 and 2",
-    "option3": "Only 2 and 3",
-    "option4": "Only 3 and 4",
-    "answer": "1",
-    "positive_marking": "1",
-    "negative_marking": "0"
+    "id": 14,
+    "type": "Statement",
+    "topic": "Planets — Planetary Atmospheres",
+    "difficulty": "hard",
+    "question": "Consider the following statements regarding planetary atmospheres:\n\n1. Venus has thick white and yellowish clouds of sulphuric acid in its atmosphere.\n2. Mars' atmosphere is mainly composed of methane, with traces of sulfur dioxide.\n3. Uranus is the coldest planet in the Solar System.\n4. Venus is often referred to as the 'morning star.'\n\nWhich of the above statements is/are incorrect?",
+    "options": {
+      "a": "Only 2",
+      "b": "Only 1 and 2",
+      "c": "Only 2 and 3",
+      "d": "Only 3 and 4"
+    },
+    "correct": "a",
+    "explanation": "Only Statement 2 is incorrect. Mars' atmosphere is mainly composed of carbon dioxide (CO₂, ~95%), with traces of nitrogen and argon — not methane. Statement 1 is correct — Venus has thick clouds of sulphuric acid, creating an extreme greenhouse effect (surface temperature ~465°C). Statement 3 is correct — despite being farther from the Sun, Neptune is warmer; Uranus holds the record for the coldest planetary temperature recorded (~−224°C), likely due to its unusual axial tilt causing minimal heat redistribution. Statement 4 is correct — Venus appears as the brightest object after the Moon and is visible near sunrise/sunset."
   },
   {
-    "sr_no": 15,
-    "question": "The colour of the surface of Mars is red because of the presence of large amounts of chemical compounds in it. What is the name of that compound?",
-    "option1": "Magnesium oxide",
-    "option2": "Tin oxide",
-    "option3": "Iron oxide",
-    "option4": "Nitrogen oxide",
-    "answer": "3",
-    "positive_marking": "1",
-    "negative_marking": "0"
+    "id": 15,
+    "type": "MCQ",
+    "topic": "Planets — Mars",
+    "difficulty": "easy",
+    "question": "The colour of the surface of Mars is red because of the presence of large amounts of which chemical compound?",
+    "options": {
+      "a": "Magnesium oxide",
+      "b": "Tin oxide",
+      "c": "Iron oxide",
+      "d": "Nitrogen oxide"
+    },
+    "correct": "c",
+    "explanation": "Mars appears red because its surface is covered in iron oxide (Fe₂O₃), commonly known as rust. The Martian soil is rich in iron, which has oxidized over billions of years due to chemical reactions with oxygen in the atmosphere. This is why Mars is called the 'Red Planet.' Mars is the fourth planet from the Sun, has two small moons (Phobos and Deimos), and hosts the solar system's largest volcano — Olympus Mons."
   },
   {
-    "sr_no": 16,
+    "id": 16,
+    "type": "MCQ",
+    "topic": "Dwarf Planets — Makemake",
+    "difficulty": "medium",
     "question": "Which dwarf planet orbits the Sun in 310 years at a distance between 38.5 to 53 AU?",
-    "option1": "Eris",
-    "option2": "Ceres",
-    "option3": "Makemake",
-    "option4": "Pluto",
-    "answer": "3",
-    "positive_marking": "1",
-    "negative_marking": "0"
+    "options": {
+      "a": "Eris",
+      "b": "Ceres",
+      "c": "Makemake",
+      "d": "Pluto"
+    },
+    "correct": "c",
+    "explanation": "Makemake is a dwarf planet in the Kuiper Belt that orbits the Sun every ~310 years at a distance ranging from 38.5 to 53 AU. It was discovered in March 2005 and formally classified as a dwarf planet in 2008. Makemake has one known moon (MK2). Eris orbits at ~38–98 AU in ~559 years; Pluto orbits at ~30–50 AU in ~248 years; Ceres is in the asteroid belt at ~2.8 AU with a ~4.6-year orbital period."
   },
   {
-    "sr_no": 17,
+    "id": 17,
+    "type": "MCQ",
+    "topic": "Stars — Distance from Earth",
+    "difficulty": "medium",
     "question": "Which of the following is the second nearest star to Earth?",
-    "option1": "Proxima Centauri",
-    "option2": "Polaris",
-    "option3": "Sirius",
-    "option4": "Delta Velorum",
-    "answer": "1",
-    "positive_marking": "1",
-    "negative_marking": "0"
+    "options": {
+      "a": "Proxima Centauri",
+      "b": "Polaris",
+      "c": "Sirius",
+      "d": "Delta Velorum"
+    },
+    "correct": "a",
+    "explanation": "The Sun is the nearest star to Earth. Proxima Centauri is the second nearest star, located approximately 4.24 light-years away. It is a red dwarf star and part of the Alpha Centauri triple star system. Sirius (the 'Dog Star') is the brightest star in the night sky but is ~8.6 light-years away. Polaris (the North Star/Pole Star) is ~433 light-years away and is used for navigation as it aligns closely with Earth's rotational axis."
   },
   {
-    "sr_no": 18,
+    "id": 18,
+    "type": "MCQ",
+    "topic": "Planets — Saturn",
+    "difficulty": "medium",
     "question": "Which of the following statements most accurately describes the planet Saturn?",
-    "option1": "It is a gas giant made up mostly of hydrogen and helium, and its density is less than that of water.",
-    "option2": "Its surface is reddish in colour.",
-    "option3": "It was the seventh planet discovered in the Solar System.",
-    "option4": "Its cloud-like outer regions consist of methane in the gaseous form and ammonia in crystalline form.",
-    "answer": "1",
-    "positive_marking": "1",
-    "negative_marking": "0"
+    "options": {
+      "a": "It is a gas giant made up mostly of hydrogen and helium, and its density is less than that of water.",
+      "b": "Its surface is reddish in colour.",
+      "c": "It was the seventh planet discovered in the Solar System.",
+      "d": "Its cloud-like outer regions consist of methane in gaseous form and ammonia in crystalline form."
+    },
+    "correct": "a",
+    "explanation": "Saturn is composed primarily of hydrogen and helium and is famously the least dense planet in the solar system — with a density of about 0.687 g/cm³, it would theoretically float on water. Option (b) is incorrect — the reddish surface is Mars. Option (c) is incorrect — Saturn is the sixth planet from the Sun and has been known since antiquity; Uranus was the first planet discovered by telescope (by Herschel in 1781). Option (d) describes the outer atmosphere of Uranus and Neptune more accurately. Saturn is also famous for its extensive ring system."
   },
   {
-    "sr_no": 19,
-    "question": "Which of the following rocky planets is the fastest planet in our solar system, travelling through space at about 29 miles (47 kilometers) per second?",
-    "option1": "Earth",
-    "option2": "Mercury",
-    "option3": "Venus",
-    "option4": "Mars",
-    "answer": "2",
-    "positive_marking": "1",
-    "negative_marking": "0"
+    "id": 19,
+    "type": "MCQ",
+    "topic": "Planets — Mercury",
+    "difficulty": "easy",
+    "question": "Which of the following rocky planets is the fastest planet in our solar system, travelling through space at about 29 miles (47 km) per second?",
+    "options": {
+      "a": "Earth",
+      "b": "Mercury",
+      "c": "Venus",
+      "d": "Mars"
+    },
+    "correct": "b",
+    "explanation": "Mercury is the fastest planet in the solar system, orbiting the Sun at approximately 47 km/s (29 miles/s) with an orbital period of just 88 Earth days. This is because it is closest to the Sun and experiences stronger gravitational pull, requiring higher orbital speed to maintain its orbit (Kepler's Third Law — planets closer to the Sun move faster). Mercury is also the smallest planet and has the most eccentric orbit among the eight planets."
   },
   {
-    "sr_no": 20,
+    "id": 20,
+    "type": "MCQ",
+    "topic": "Galaxies — Largest Spiral Galaxy",
+    "difficulty": "hard",
     "question": "Which of the following is one of the largest spiral galaxies?",
-    "option1": "NGC 6872",
-    "option2": "Milky Way",
-    "option3": "Cygnus A",
-    "option4": "Maffei 1",
-    "answer": "1",
-    "positive_marking": "1",
-    "negative_marking": "0"
+    "options": {
+      "a": "NGC 6872",
+      "b": "Milky Way",
+      "c": "Cygnus A",
+      "d": "Maffei 1"
+    },
+    "correct": "a",
+    "explanation": "NGC 6872 (also known as the Condor Galaxy) is one of the largest known spiral galaxies, spanning over 522,000 light-years in diameter — more than five times the size of the Milky Way. It is located in the constellation Pavo. The Milky Way is a barred spiral galaxy of about 100,000 light-years diameter. Cygnus A is a massive elliptical/radio galaxy, and Maffei 1 is an elliptical galaxy — neither are spiral galaxies."
   },
   {
-    "sr_no": 21,
-    "question": "Match the following:\n\nColumn I\nA. Mercury\nB. Venus\nC. Mars\nD. Neptune\n\nColumn II\ni. 25 hours\nii. 1,408 hours\niii. 5,832 hours\niv. 16 hours",
-    "option1": "A-ii, B-iii, C-i, D-iv",
-    "option2": "A-iii, B-ii, C-i, D-iv",
-    "option3": "A-ii, B-iv, C-i, D-iii",
-    "option4": "A-iv, B-iii, C-ii, D-i",
-    "answer": "1",
-    "positive_marking": "1",
-    "negative_marking": "0"
+    "id": 21,
+    "type": "Match",
+    "topic": "Planets — Rotation Periods",
+    "difficulty": "medium",
+    "question": "Match the following planets with their approximate length of day:\n\nColumn I\nA. Mercury\nB. Venus\nC. Mars\nD. Neptune\n\nColumn II\ni. 25 hours\nii. 1,408 hours\niii. 5,832 hours\niv. 16 hours",
+    "options": {
+      "a": "A-ii, B-iii, C-i, D-iv",
+      "b": "A-iii, B-ii, C-i, D-iv",
+      "c": "A-ii, B-iv, C-i, D-iii",
+      "d": "A-iv, B-iii, C-ii, D-i"
+    },
+    "correct": "a",
+    "explanation": "Mercury takes ~1,408 hours (~58.6 Earth days) to rotate once; Venus takes ~5,832 hours (~243 Earth days — the longest day, and retrograde); Mars takes ~25 hours (very similar to Earth's day); Neptune rotates in ~16 hours (one of the shortest days despite being a distant giant). SSC Trap: Venus has the longest day but a shorter year (~225 days) than its day (~243 days) — the only planet where the day exceeds the year."
   },
   {
-    "sr_no": 22,
+    "id": 22,
+    "type": "MCQ",
+    "topic": "Solar System — Historical Discoveries",
+    "difficulty": "easy",
     "question": "Who was the first to develop a mathematical predictive heliocentric model of the solar system?",
-    "option1": "Nicolaus Copernicus",
-    "option2": "Galileo Galilei",
-    "option3": "Pierre-Simon Laplace",
-    "option4": "Immanuel Kant",
-    "answer": "1",
-    "positive_marking": "1",
-    "negative_marking": "0"
+    "options": {
+      "a": "Nicolaus Copernicus",
+      "b": "Galileo Galilei",
+      "c": "Pierre-Simon Laplace",
+      "d": "Immanuel Kant"
+    },
+    "correct": "a",
+    "explanation": "Nicolaus Copernicus (1473–1543), a Polish astronomer, was the first to propose a mathematically predictive heliocentric (Sun-centred) model of the solar system in his work De Revolutionibus Orbium Coelestium (1543). Before this, the geocentric (Earth-centred) model by Ptolemy was dominant. Galileo Galilei later provided observational evidence supporting heliocentrism using a telescope. Laplace and Kant are associated with the nebular hypothesis of solar system formation."
   },
   {
-    "sr_no": 23,
+    "id": 23,
+    "type": "MCQ",
+    "topic": "Planets — Neptune Discovery",
+    "difficulty": "hard",
     "question": "Who calculated the approximate location of the planet Neptune by studying gravity-induced disturbances in the motion of Uranus?",
-    "option1": "John Couch Adams",
-    "option2": "Percival Lowell",
-    "option3": "Johann Gottfried Galle",
-    "option4": "Urbain-Jean-Joseph Le Verrier",
-    "answer": "4",
-    "positive_marking": "1",
-    "negative_marking": "0"
+    "options": {
+      "a": "John Couch Adams",
+      "b": "Percival Lowell",
+      "c": "Johann Gottfried Galle",
+      "d": "Urbain-Jean-Joseph Le Verrier"
+    },
+    "correct": "d",
+    "explanation": "Urbain Le Verrier (French mathematician) independently calculated Neptune's position mathematically in 1846, and Johann Gottfried Galle used those calculations to observe Neptune for the first time. John Couch Adams (British mathematician) also independently predicted Neptune's location around the same time, but Le Verrier's predictions led to the actual discovery. Percival Lowell later predicted (incorrectly) a Planet X, which eventually led to Pluto's discovery. Neptune was the first planet discovered through mathematical prediction rather than direct observation."
   },
   {
-    "sr_no": 24,
-    "question": "Which of the below statements is/are correct?\n\nStatement 1: Apogee is the point in the orbit of an object around the Earth where it is farthest from the Earth's center.\n\nStatement 2: Perigee refers to the point where the Moon's orbit is closest to the Earth.",
-    "option1": "Only Statement 1",
-    "option2": "Only Statement 2",
-    "option3": "Both Statement 1 and 2",
-    "option4": "None of the above",
-    "answer": "3",
-    "positive_marking": "1",
-    "negative_marking": "0"
+    "id": 24,
+    "type": "Statement",
+    "topic": "Moon — Orbital Points",
+    "difficulty": "medium",
+    "question": "Statement I: Apogee is the point in the orbit of an object around the Earth where it is farthest from the Earth's centre.\n\nStatement II: Perigee refers to the point where the Moon's orbit is closest to the Earth.",
+    "options": {
+      "a": "Only Statement I is correct",
+      "b": "Only Statement II is correct",
+      "c": "Both Statement I and Statement II are correct",
+      "d": "None of the above"
+    },
+    "correct": "c",
+    "explanation": "Both statements are correct. Apogee (prefix 'apo' = away) is the point in an Earth-orbiting object's path where it is farthest from Earth's centre. Perigee (prefix 'peri' = near) is the closest point. When the Moon is at perigee and is also a full moon, it appears larger and brighter — this is called a 'Supermoon.' Similar terms exist for solar orbits: Aphelion (farthest from Sun, Earth reaches it in July) and Perihelion (closest to Sun, Earth reaches it in January)."
   },
   {
-    "sr_no": 25,
-    "question": "Which of the below statements is/are incorrect?\n\nStatement 1: The Big Dipper is an asterism formed by the seven brightest stars in the constellation Orion.\n\nStatement 2: Ursa Major is the largest constellation in the entire sky.",
-    "option1": "Only Statement 1",
-    "option2": "Only Statement 2",
-    "option3": "Both Statement 1 and 2",
-    "option4": "None of the above",
-    "answer": "3",
-    "positive_marking": "1",
-    "negative_marking": "0"
+    "id": 25,
+    "type": "Statement",
+    "topic": "Stars — Constellations and Asterisms",
+    "difficulty": "medium",
+    "question": "Which of the below statements is/are incorrect?\n\nStatement I: The Big Dipper is an asterism formed by the seven brightest stars in the constellation Orion.\n\nStatement II: Ursa Major is the largest constellation in the entire sky.",
+    "options": {
+      "a": "Only Statement I is incorrect",
+      "b": "Only Statement II is incorrect",
+      "c": "Both Statement I and Statement II are incorrect",
+      "d": "None of the above"
+    },
+    "correct": "c",
+    "explanation": "Both statements are incorrect. Statement I is wrong — the Big Dipper is an asterism (not a constellation) formed by seven bright stars in Ursa Major, not Orion. Orion (the Hunter) is a separate constellation. Statement II is also incorrect — Ursa Major is the third largest constellation, not the largest. Hydra is the largest constellation by area, followed by Virgo and Ursa Major. SSC Trap: The Big Dipper is an asterism (part of a constellation), not a constellation itself."
+  },
+  {
+    "id": 26,
+    "type": "MCQ",
+    "topic": "Earth — Eclipses",
+    "difficulty": "easy",
+    "question": "The phenomenon where the Sun, Earth, and Moon align to cause a total or partial shadow is called a __________.",
+    "options": {
+      "a": "Eclipse",
+      "b": "Transit",
+      "c": "Conjunction",
+      "d": "Revolution"
+    },
+    "correct": "a",
+    "explanation": "An eclipse occurs when the Sun, Earth, and Moon align in a straight or near-straight line (called syzygy), causing one celestial body to cast a shadow on another. A Solar Eclipse occurs on a New Moon when the Moon blocks sunlight from reaching Earth. A Lunar Eclipse occurs on a Full Moon when Earth's shadow falls on the Moon. A Transit is when a smaller body passes across the disc of a larger one (e.g., Mercury's transit across the Sun). Conjunction is when two objects appear close in the sky."
+  },
+  {
+    "id": 27,
+    "type": "MCQ",
+    "topic": "Planets — Venus",
+    "difficulty": "easy",
+    "question": "Which planet in our solar system is known as both the 'Morning Star' and the 'Evening Star'?",
+    "options": {
+      "a": "Mars",
+      "b": "Venus",
+      "c": "Mercury",
+      "d": "Jupiter"
+    },
+    "correct": "b",
+    "explanation": "Venus is known as both the 'Morning Star' (visible in the east just before sunrise) and the 'Evening Star' (visible in the west just after sunset) because its orbit lies between Earth and the Sun (inferior planet). Venus is the brightest natural object in the night sky after the Moon, as its thick atmosphere reflects about 70% of sunlight. It is also the hottest planet (~465°C) due to its extreme greenhouse effect, despite Mercury being closer to the Sun."
+  },
+  {
+    "id": 28,
+    "type": "MCQ",
+    "topic": "Planets — Mars",
+    "difficulty": "easy",
+    "question": "Which planet is known as the Red Planet?",
+    "options": {
+      "a": "Earth",
+      "b": "Mars",
+      "c": "Jupiter",
+      "d": "Venus"
+    },
+    "correct": "b",
+    "explanation": "Mars is called the 'Red Planet' due to the abundance of iron oxide (rust) on its surface. It is the fourth planet from the Sun and the second smallest planet (after Mercury). Mars has the largest volcano in the solar system (Olympus Mons, ~21 km tall) and the longest canyon (Valles Marineris, ~4,000 km). It has two small, irregularly shaped moons — Phobos and Deimos — named after the sons of the Greek war god Ares."
+  },
+  {
+    "id": 29,
+    "type": "MCQ",
+    "topic": "Universe — Galaxies",
+    "difficulty": "easy",
+    "question": "Which of the following is classified as a galaxy?",
+    "options": {
+      "a": "Sirius",
+      "b": "Orion",
+      "c": "Ursa Minor",
+      "d": "Andromeda"
+    },
+    "correct": "d",
+    "explanation": "Andromeda (M31) is a giant spiral galaxy and the closest major galaxy to our Milky Way, located approximately 2.5 million light-years away. It is the most distant object visible to the naked eye. Sirius is a star (brightest in the night sky); Orion and Ursa Minor are constellations. Andromeda and the Milky Way are expected to collide in about 4.5 billion years, eventually merging into a giant elliptical galaxy."
+  },
+  {
+    "id": 30,
+    "type": "MCQ",
+    "topic": "Dwarf Planets — Pluto",
+    "difficulty": "easy",
+    "question": "Which of the following celestial bodies is classified as a dwarf planet?",
+    "options": {
+      "a": "Jupiter",
+      "b": "Earth",
+      "c": "Pluto",
+      "d": "Venus"
+    },
+    "correct": "c",
+    "explanation": "Pluto was reclassified from a full planet to a 'dwarf planet' by the International Astronomical Union (IAU) in 2006. To qualify as a full planet, a body must: (1) orbit the Sun, (2) have sufficient mass for hydrostatic equilibrium (nearly round shape), and (3) have cleared the neighbourhood around its orbit. Pluto fails the third criterion as it shares its orbital zone with many Kuiper Belt objects. The five recognized dwarf planets are Pluto, Ceres, Eris, Makemake, and Haumea."
+  },
+  {
+    "id": 31,
+    "type": "MCQ",
+    "topic": "Solar System — Asteroid Belt",
+    "difficulty": "easy",
+    "question": "What is the asteroid belt primarily composed of?",
+    "options": {
+      "a": "Rocks and metals",
+      "b": "Gases and ice",
+      "c": "Liquid water",
+      "d": "Volcanic magma"
+    },
+    "correct": "a",
+    "explanation": "The asteroid belt is located between the orbits of Mars and Jupiter and consists primarily of solid rocky and metallic bodies (mainly iron-nickel alloys, silicates, and carbonaceous materials). These are remnants from the early solar system that never coalesced into a planet due to Jupiter's gravitational influence. The largest object in the asteroid belt is the dwarf planet Ceres (~940 km diameter). The total mass of all asteroids combined is less than that of the Moon."
+  },
+  {
+    "id": 32,
+    "type": "Statement",
+    "topic": "Planets — Jupiter and Mars",
+    "difficulty": "medium",
+    "question": "Consider the following facts about prominent solar system bodies:\n\nStatement I: Jupiter's Great Red Spot is a persistent anticyclonic storm.\nStatement II: Mars has two small, irregularly shaped moons.",
+    "options": {
+      "a": "Only Statement I is correct",
+      "b": "Only Statement II is correct",
+      "c": "Both Statement I and Statement II are correct",
+      "d": "Neither Statement I nor Statement II is correct"
+    },
+    "correct": "c",
+    "explanation": "Both statements are correct. Jupiter's Great Red Spot is a massive anticyclonic storm (rotating around a high-pressure centre) that has persisted for at least 350 years. It is larger than Earth in size, though it has been gradually shrinking. Mars's two moons — Phobos (fear) and Deimos (dread) — are small, irregularly shaped, and are believed to be captured asteroids. Phobos is slowly spiralling inward and is expected to either crash into Mars or break apart in about 50 million years."
+  },
+  {
+    "id": 33,
+    "type": "Statement",
+    "topic": "Planets — Jovian Planets and Uranus",
+    "difficulty": "medium",
+    "question": "Regarding solar system planets:\n\nStatement I: All Jovian planets have solid surfaces.\nStatement II: Uranus's axis of rotation is nearly parallel to its orbit.",
+    "options": {
+      "a": "Only Statement I is correct",
+      "b": "Only Statement II is correct",
+      "c": "Both Statement I and Statement II are correct",
+      "d": "Neither Statement I nor Statement II is correct"
+    },
+    "correct": "b",
+    "explanation": "Statement I is incorrect — Jovian (gas giant) planets — Jupiter, Saturn, Uranus, and Neptune — do not have solid surfaces. They are composed mainly of gas and ice, and their density decreases toward the centre with no distinct surface boundary. Statement II is correct — Uranus has an axial tilt of approximately 98°, meaning it essentially rotates on its side (nearly parallel to its orbital plane). This extreme tilt is thought to have been caused by a massive collision early in the solar system's history, giving Uranus its unique rolling motion."
+  },
+  {
+    "id": 34,
+    "type": "MCQ",
+    "topic": "Universe — Big Bang Theory",
+    "difficulty": "medium",
+    "question": "What evidence supports the Big Bang theory of universe origin?",
+    "options": {
+      "a": "Sunspot cycles",
+      "b": "Redshift of galaxies",
+      "c": "Solar wind",
+      "d": "Volcanic eruptions on Earth"
+    },
+    "correct": "b",
+    "explanation": "The redshift of galaxies is a key observational evidence for the Big Bang theory. Edwin Hubble observed that virtually all distant galaxies show a redshift — their light wavelength is stretched toward the red end of the spectrum — indicating they are moving away from us. The further the galaxy, the greater its redshift and recessional speed (Hubble's Law). Other major pieces of evidence include: Cosmic Microwave Background (CMB) radiation (the afterglow of the Big Bang) and the abundance of light elements (hydrogen and helium) matching Big Bang nucleosynthesis predictions."
+  },
+  {
+    "id": 35,
+    "type": "MCQ",
+    "topic": "Astronomy — Square Kilometre Array (SKA)",
+    "difficulty": "medium",
+    "question": "Which of the following statements regarding the Square Kilometre Array (SKA) is correct?",
+    "options": {
+      "a": "It is managed entirely by the European Space Agency.",
+      "b": "It aims to explore cosmic magnetism and dark matter.",
+      "c": "It focuses solely on detecting visible light.",
+      "d": "It will consist of a single telescope in India."
+    },
+    "correct": "b",
+    "explanation": "The Square Kilometre Array (SKA) is the world's largest radio telescope project, with sites in South Africa and Australia (not India, and not managed by ESA alone — it is an intergovernmental organisation). It will study cosmic magnetism, dark matter, the evolution of galaxies, gravitational waves, and the era of cosmic dawn. It detects radio waves, not visible light. India is an associate member of the SKA Organisation. The SKA's combined collecting area will equal one square kilometre, giving it unprecedented sensitivity."
+  },
+  {
+    "id": 36,
+    "type": "MCQ",
+    "topic": "Earth — Insolation",
+    "difficulty": "medium",
+    "question": "Which of the following is NOT a primary factor affecting the variation of insolation on Earth?",
+    "options": {
+      "a": "Presence of water bodies in an area",
+      "b": "Rotation of the Earth on its axis",
+      "c": "Transparency of the atmosphere",
+      "d": "Angle of inclination of the Sun's rays"
+    },
+    "correct": "a",
+    "explanation": "Insolation (Incoming Solar Radiation) is primarily affected by: (1) Angle of inclination of the Sun's rays — lower angles spread radiation over a larger area; (2) Duration of the day — longer days receive more insolation; (3) Transparency of the atmosphere — clouds and aerosols reflect/absorb solar radiation; (4) Earth's rotation — determines day-night cycle. The presence of water bodies does not directly affect the receipt of insolation; instead, it affects how heat is absorbed and distributed after reaching the surface (secondary/local factor affecting temperature, not insolation)."
+  },
+  {
+    "id": 37,
+    "type": "MCQ",
+    "topic": "Solar System — Planetary Parade",
+    "difficulty": "medium",
+    "question": "In early 2025, the planets in a 'planetary parade' appeared lined up in the order of their _________.",
+    "options": {
+      "a": "Size",
+      "b": "Brightness",
+      "c": "Orbital speed",
+      "d": "Distance from the Sun"
+    },
+    "correct": "d",
+    "explanation": "In a planetary parade, planets appear aligned in the sky in the order of their distance from the Sun (i.e., their orbital sequence). This occurs because all planets orbit the Sun in approximately the same plane (the ecliptic plane), so periodically they appear in a line when viewed from Earth. In January 2025, six planets — Venus, Mars, Jupiter, Saturn, Uranus, and Neptune — were visible in a planetary parade. The arrangement reflected their orbital order from the Sun."
+  },
+  {
+    "id": 38,
+    "type": "MCQ",
+    "topic": "Sun — Speed of Light and Earth Distance",
+    "difficulty": "easy",
+    "question": "The light of the Sun takes about ____ minutes to reach the Earth.",
+    "options": {
+      "a": "Three",
+      "b": "Five",
+      "c": "Eight",
+      "d": "Fifteen"
+    },
+    "correct": "c",
+    "explanation": "Sunlight takes approximately 8 minutes and 20 seconds (~8.3 minutes) to travel from the Sun to the Earth. This is calculated as: Average Sun-Earth distance = 1 AU = ~150 million km; Speed of light = 3 × 10⁵ km/s; Time = 150,000,000 ÷ 300,000 ≈ 500 seconds ≈ 8.3 minutes. This means we always see the Sun as it was about 8 minutes ago. Light from the Moon takes ~1.3 seconds; from Proxima Centauri (nearest star) takes ~4.24 years."
+  },
+  {
+    "id": 39,
+    "type": "MCQ",
+    "topic": "Universe — Big Bang Recombination Epoch",
+    "difficulty": "hard",
+    "question": "Within ______ years from the Big Bang, temperature dropped to 4,500 K and gave rise to atomic matter. The universe became transparent.",
+    "options": {
+      "a": "300,000",
+      "b": "3,000",
+      "c": "30,000",
+      "d": "300"
+    },
+    "correct": "a",
+    "explanation": "About 300,000 years after the Big Bang, the universe cooled sufficiently (~4,500 K) for electrons and protons to combine and form neutral hydrogen atoms. This epoch is called the 'Recombination Epoch' or 'Decoupling.' Before this, the universe was opaque (photons constantly scattered by free electrons). After recombination, photons could travel freely — making the universe transparent. The radiation released at this moment is what we observe today as the Cosmic Microwave Background (CMB) radiation, discovered by Penzias and Wilson in 1965."
+  },
+  {
+    "id": 40,
+    "type": "MCQ",
+    "topic": "Sun — Earth Distance in Light Minutes",
+    "difficulty": "medium",
+    "question": "What is the distance between the Sun and the Earth, expressed in light minutes?",
+    "options": {
+      "a": "5.861",
+      "b": "8.311",
+      "c": "9.461",
+      "d": "12.653"
+    },
+    "correct": "b",
+    "explanation": "The average Sun-Earth distance is ~1 AU = 1.5 × 10⁸ km. Speed of light = 3 × 10⁵ km/s. Time = (1.5 × 10⁸) ÷ (3 × 10⁵) = 500 seconds = 500 ÷ 60 ≈ 8.311 light-minutes. Note: 1 light-year = 9.461 × 10¹² km (option c is the numerical value of one light-year in trillion km — a common distractor). Option (a) 5.861 × 10¹² km is one light-year in miles. Remembering 8 minutes for SSC purposes is sufficient, but 8.311 is the precise answer."
+  },
+  {
+    "id": 41,
+    "type": "MCQ",
+    "topic": "Space — Lagrange Points",
+    "difficulty": "medium",
+    "question": "Lagrange points are also known as ________ points.",
+    "options": {
+      "a": "Middle",
+      "b": "Libration",
+      "c": "Centre",
+      "d": "Shortcut"
+    },
+    "correct": "b",
+    "explanation": "Lagrange points (named after mathematician Joseph-Louis Lagrange) are positions in space where the gravitational forces of two large bodies (like the Sun and Earth) and the centrifugal force balance perfectly, allowing a smaller object to remain stationary relative to both bodies. They are also called libration points (from Latin 'librare' = to balance). There are five Lagrange points (L1–L5). ISRO's Aditya-L1 solar observatory is placed at the Sun-Earth L1 point, ~1.5 million km from Earth — a highly relevant SSC current affairs point."
+  },
+  {
+    "id": 42,
+    "type": "Statement",
+    "topic": "Stars — Properties",
+    "difficulty": "easy",
+    "question": "Which of the following statements is/are correct regarding stars?\n\nStatement I: Stars are made up of gases.\nStatement II: Stars do not have their own heat and light.",
+    "options": {
+      "a": "Only Statement I is correct",
+      "b": "Only Statement II is correct",
+      "c": "Both Statement I and Statement II are correct",
+      "d": "Neither Statement I nor Statement II is correct"
+    },
+    "correct": "a",
+    "explanation": "Statement I is correct — stars are primarily composed of gases, mainly hydrogen (~75%) and helium (~24%), with trace amounts of heavier elements. Statement II is incorrect — stars have their own heat and light, generated by the process of nuclear fusion in their core, where hydrogen nuclei fuse to form helium, releasing enormous energy (as per Einstein's E = mc²). This distinguishes stars from planets and moons, which only reflect light. The Sun is the nearest star to Earth and our primary source of light and heat."
+  },
+  {
+    "id": 43,
+    "type": "MCQ",
+    "topic": "Universe — Origin Theories",
+    "difficulty": "easy",
+    "question": "The most popular theory regarding the origin of the universe is the _______.",
+    "options": {
+      "a": "Big Bang Theory",
+      "b": "Plate Tectonics",
+      "c": "Quantum Mechanics",
+      "d": "String Theory"
+    },
+    "correct": "a",
+    "explanation": "The Big Bang Theory is the most widely accepted scientific explanation for the origin of the universe. It states that approximately 13.8 billion years ago, the universe began from an extremely hot, dense point (singularity) and has been expanding ever since. Key evidence includes: (1) Redshift of galaxies (Hubble, 1929); (2) Cosmic Microwave Background radiation (CMB, discovered 1965); (3) Abundance of light elements (hydrogen and helium). Plate Tectonics explains crustal movement; Quantum Mechanics deals with subatomic particles; String Theory is an unproven theoretical framework."
+  },
+  {
+    "id": 44,
+    "type": "Statement",
+    "topic": "Universe — Black Holes and Pulsars",
+    "difficulty": "hard",
+    "question": "Consider these cosmic phenomena:\n\nStatement I: Black holes emit X-rays directly from their event horizon.\nStatement II: Pulsars are rapidly rotating neutron stars.",
+    "options": {
+      "a": "Only Statement I is correct",
+      "b": "Only Statement II is correct",
+      "c": "Both Statement I and Statement II are correct",
+      "d": "Neither Statement I nor Statement II is correct"
+    },
+    "correct": "b",
+    "explanation": "Statement I is incorrect — nothing, not even light, can escape from a black hole's event horizon (the point of no return). X-rays are not emitted from the event horizon itself; they are emitted from the accretion disk — the superheated disc of gas and matter spiralling into the black hole. Friction in this disk generates intense heat, producing X-ray emissions. Statement II is correct — pulsars are highly magnetized, rapidly rotating neutron stars that emit beams of electromagnetic radiation (usually radio waves) from their poles. As they spin, the beam sweeps past Earth like a lighthouse — giving the appearance of regular pulses."
+  },
+  {
+    "id": 45,
+    "type": "MCQ",
+    "topic": "Earth — Atmospheric Composition",
+    "difficulty": "hard",
+    "question": "Argon is produced in Earth's crust via which of the following processes?",
+    "options": {
+      "a": "Decay of K-40",
+      "b": "Volcanoes",
+      "c": "Photosynthesis",
+      "d": "Cosmic rays"
+    },
+    "correct": "a",
+    "explanation": "Argon-40 (⁴⁰Ar), the most abundant isotope of argon in Earth's atmosphere (~0.93%), is produced by the radioactive decay of Potassium-40 (K-40) in Earth's crust. K-40 decays via electron capture to form ⁴⁰Ar. This process forms the basis of Potassium-Argon (K-Ar) radiometric dating, used to determine the age of rocks and minerals, particularly volcanic rocks. Photosynthesis produces oxygen; volcanoes release CO₂, SO₂, and water vapor primarily; cosmic rays interact with the upper atmosphere but do not produce the bulk of crustal argon."
+  },
+  {
+    "id": 46,
+    "type": "MCQ",
+    "topic": "Sun — Space Weather Effects",
+    "difficulty": "medium",
+    "question": "Which of the following is NOT a consequence of space weather events like solar flares and CMEs?",
+    "options": {
+      "a": "Disruption of satellite communication",
+      "b": "Blackouts in radio frequencies",
+      "c": "Alteration of ocean currents",
+      "d": "Damage to power grids"
+    },
+    "correct": "c",
+    "explanation": "Solar flares and Coronal Mass Ejections (CMEs) are massive bursts of energy and plasma from the Sun that impact Earth's magnetosphere and ionosphere, creating geomagnetic storms. Their confirmed consequences include: disruption of satellite communication and GPS (ionospheric disturbances); HF radio blackouts (solar energetic particles); damage to power grids (geomagnetically induced currents — e.g., the 1989 Quebec blackout); pipeline corrosion; and beautiful auroras. Ocean currents, however, are driven by wind, temperature, salinity gradients, and Earth's rotation (Coriolis effect) — entirely unrelated to solar activity."
+  },
+  {
+    "id": 47,
+    "type": "MCQ",
+    "topic": "Moon — Atmosphere",
+    "difficulty": "medium",
+    "question": "Which of the following best explains why the Moon lacks a significant atmosphere?",
+    "options": {
+      "a": "Lack of gravity",
+      "b": "Strong solar winds",
+      "c": "Excessive volcanism",
+      "d": "Rapid rotation"
+    },
+    "correct": "a",
+    "explanation": "The Moon lacks a significant atmosphere primarily because of its low mass and therefore weak gravity. The Moon's surface gravity is only 1/6th of Earth's, which is insufficient to retain gas molecules against their thermal escape velocities (Jean's escape). Any gases released (e.g., from volcanic activity) quickly escape into space. While solar winds also gradually strip away surface-bound gas, the root cause is weak gravity. In contrast, Earth's stronger gravity and magnetic field together retain our atmosphere. The Moon has only an extremely thin exosphere."
   }
 ]
