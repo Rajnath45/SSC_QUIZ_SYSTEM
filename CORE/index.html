@@ -188,6 +188,31 @@
   <div id="paletteOverlay" class="palette-overlay"></div>
   <div id="toastHost" class="toast-host" aria-live="polite"></div>
 
+  <div id="quizCustomizeModal" class="quiz-modal hidden" role="dialog" aria-modal="true" aria-labelledby="customizeTitle">
+    <div class="quiz-modal-panel">
+      <p class="eyebrow">Quiz setup</p>
+      <h2 id="customizeTitle">Customize Your Quiz</h2>
+      <p id="customizeSubtitle" class="customize-subtitle">Choose your attempt length and timer.</p>
+
+      <div class="customize-group">
+        <span class="customize-label">Question count</span>
+        <div class="pill-row" aria-label="Question count">
+          <button class="count-pill" type="button" data-count-choice="25">25</button>
+          <button class="count-pill" type="button" data-count-choice="50">50</button>
+          <button class="count-pill" type="button" data-count-choice="all">All</button>
+        </div>
+        <small id="countAvailability" class="customize-note"></small>
+      </div>
+
+      <div class="customize-group">
+        <span class="customize-label">Time limit</span>
+        <div id="timeLimitOptions" class="pill-row" aria-label="Time limit"></div>
+      </div>
+
+      <button id="startCustomizedQuiz" class="primary-action modal-start" type="button">Start Quiz</button>
+    </div>
+  </div>
+
   <aside id="questionPalette" class="question-palette" aria-label="Question Palette">
     <div class="palette-header">
       <h2>Question Palette</h2>

@@ -324,6 +324,19 @@ a {
   overflow: hidden;
 }
 
+.question-item.clickable {
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+
+.question-item.clickable:hover,
+.question-item.clickable:focus-visible {
+  border-color: var(--primary-color);
+  background: rgba(85, 214, 190, 0.08);
+  outline: none;
+  transform: translateY(-1px);
+}
+
 .loading-state {
   min-height: 260px;
   display: flex;

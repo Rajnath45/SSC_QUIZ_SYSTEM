@@ -879,8 +879,17 @@ main {
 }
 
 /* Statement questions — no double spacing */
+.statement-group,
 .statement-block {
   white-space: normal;
+}
+
+.statement-block {
+  border-left: 3px solid #00bfa5;
+  background: rgba(0, 191, 165, 0.07);
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin: 6px 0;
 }
 
 .statement-line {
@@ -899,9 +908,35 @@ main {
   line-height: 1.6;
 }
 
-/* Match the following — two column side-by-side */
 .match-block {
   white-space: normal;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.match-table {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 12px;
+  margin: 12px 0;
+  min-width: 280px;
+}
+
+.match-header {
+  font-weight: bold;
+  color: #00bfa5;
+  border-bottom: 1px solid #00bfa5;
+  padding-bottom: 4px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.match-cell {
+  padding: 4px 0;
+  line-height: 1.55;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  min-width: 0;
 }
 
 .match-intro {
@@ -1424,7 +1459,13 @@ main {
   font-size: 16px;
   line-height: 1.55;
   margin-bottom: 12px;
-  white-space: pre-wrap;
+}
+
+.review-question-number {
+  display: inline-block;
+  color: var(--primary-color);
+  font-weight: 950;
+  margin-bottom: 8px;
 }
 
 .review-option {
@@ -1448,6 +1489,16 @@ main {
 
 .review-option.user-selected {
   font-weight: 900;
+}
+
+.review-explanation {
+  color: #cc5500;
+  border-left: 3px solid #cc5500;
+  background: rgba(204, 85, 0, 0.08);
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-top: 10px;
+  line-height: 1.55;
 }
 
 .review-actions {
@@ -1513,16 +1564,30 @@ main {
   font-size: 15px;
 }
 
+.action-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 .restart-btn {
   background: var(--danger-color);
 }
 
-.download-btn {
+.review-mistakes-btn {
   background: var(--primary-color);
 }
 
-.print-btn {
+.review-mistakes-btn.active {
+  background: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(85, 214, 190, 0.42);
+}
+
+.show-all-btn {
   background: var(--secondary-color);
+}
+
+.show-all-btn.active {
+  box-shadow: 0 0 0 3px rgba(154, 167, 184, 0.42);
 }
 
 .home-btn {
@@ -1578,6 +1643,86 @@ main {
 .toast.success {
   border-color: rgba(123, 216, 143, 0.36);
   color: var(--success-color);
+}
+
+.quiz-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1300;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(3, 8, 14, 0.76);
+  backdrop-filter: blur(10px);
+}
+
+.quiz-modal-panel {
+  width: min(520px, 100%);
+  border: 1px solid rgba(85, 214, 190, 0.28);
+  border-radius: 8px;
+  background: var(--surface-strong);
+  box-shadow: var(--shadow-lg);
+  padding: 24px;
+}
+
+.quiz-modal-panel h2 {
+  color: var(--text-primary);
+  font-size: 26px;
+  margin: 6px 0 8px;
+}
+
+.customize-subtitle,
+.customize-note {
+  color: var(--text-secondary);
+}
+
+.customize-group {
+  margin-top: 18px;
+}
+
+.customize-label {
+  display: block;
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 950;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.count-pill,
+.time-pill {
+  min-height: 38px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  cursor: pointer;
+  font-weight: 900;
+  padding: 8px 12px;
+}
+
+.count-pill.active,
+.time-pill.active {
+  border-color: #00bfa5;
+  color: #00bfa5;
+  background: rgba(0, 191, 165, 0.1);
+}
+
+.count-pill:disabled,
+.time-pill:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.modal-start {
+  width: 100%;
+  margin-top: 22px;
 }
 
 .hidden {
@@ -1714,6 +1859,25 @@ main {
     gap: 10px;
   }
 
+  .bookmark-btn,
+  .revision-btn {
+    font-size: 11px;
+    padding: 5px 10px;
+    min-height: 32px;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    opacity: 0.75;
+  }
+
+  .bookmark-btn.active,
+  .revision-btn.active {
+    opacity: 1;
+  }
+
+  .question-actions {
+    gap: 6px;
+  }
+
   .hamburger {
     display: flex;
   }
@@ -1787,6 +1951,13 @@ main {
 
   .score-card {
     padding: 22px 16px;
+  }
+}
+
+@media (max-width: 400px) {
+  .match-table {
+    grid-template-columns: minmax(120px, 1fr) minmax(120px, 1fr);
+    font-size: 0.9rem;
   }
 }
 

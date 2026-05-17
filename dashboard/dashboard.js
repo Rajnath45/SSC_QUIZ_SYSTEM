@@ -59,7 +59,7 @@ function renderStats(stats) {
   renderAttempts(stats.latestAttempts || []);
   renderWeakChapters(stats.weakChapters || []);
   renderQuestionList(els.bookmarks, stats.bookmarks || [], "No bookmarks yet. Use Bookmark during a quiz to save doubts here.");
-  renderQuestionList(els.revisionQueue, stats.revisionQueue || [], "Your revision queue is empty. Add wrong or doubtful questions after practice.");
+  renderQuestionList(els.revisionQueue, stats.revisionQueue || [], "Your revision queue is empty. Add wrong or doubtful questions after practice.", { clickable: true });
 }
 
 function renderAttempts(attempts) {
@@ -105,7 +105,8 @@ function renderWeakChapters(chapters) {
   }).join("");
 }
 
-function renderQuestionList(container, items, emptyText) {
+function renderQuestionList(container, items, emptyText, options) {
+  const settings = options || {};
   if (!items.length) {
     container.innerHTML = emptyState(emptyText);
     return;
@@ -113,12 +114,28 @@ function renderQuestionList(container, items, emptyText) {
 
   container.innerHTML = items.slice(0, 8).map(function (item) {
     return `
-      <article class="question-item">
+      <article class="question-item${settings.clickable ? " clickable" : ""}"${settings.clickable ? ' role="button" tabindex="0" data-revision-card="true"' : ""}>
         <span>${escapeHtml(item.chapter || item.chapterId || "General")}</span>
         <p>${escapeHtml(item.questionText || "Saved question")}</p>
       </article>
     `;
   }).join("");
+
+  if (settings.clickable) {
+    container.querySelectorAll("[data-revision-card]").forEach(function (card) {
+      card.addEventListener("click", openRevisionQuiz);
+      card.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openRevisionQuiz();
+        }
+      });
+    });
+  }
+}
+
+function openRevisionQuiz() {
+  window.location.href = "../CORE/index.html?mode=revision";
 }
 
 async function handleLogout() {

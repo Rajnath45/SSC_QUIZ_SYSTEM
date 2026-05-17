@@ -20,12 +20,16 @@ let answers = {};
 let bookmarks = new Set();
 let revisionQueue = new Set();
 let timerSeconds = 0;
+let quizTimeLimitSeconds = 0;
 let timerInterval = null;
 let isPaletteOpen = false;
 let quizSubmitted = false;
 let firebaseApi = null;
 let currentUser = null;
 let firebaseBridgeReady = false;
+let pendingQuizConfig = null;
+let selectedCustomCount = 'all';
+let selectedCustomTime = 'none';
 
 const els = {};
 
@@ -33,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   cacheElements();
   initTheme();
   initEventListeners();
-  initFirebaseBridge();
+  await initFirebaseBridge();
   preventDoubleTapZoom();
   await initQuizCatalog();
   currentQuizFile = getInitialQuizFile();
@@ -42,6 +46,9 @@ document.addEventListener('DOMContentLoaded', async function () {
   updatePageTitle();
   updateDashboardStats();
   updateTimerDisplay();
+  if (getUrlMode() === 'revision') {
+    await launchRevisionQuizFromUrl();
+  }
   setInterval(saveToLocalStorage, 5000);
 });
 
@@ -96,6 +103,12 @@ function cacheElements() {
   els.paletteSearch = document.getElementById('paletteSearch');
   els.paletteGrid = document.getElementById('paletteGrid');
   els.toastHost = document.getElementById('toastHost');
+  els.customizeModal = document.getElementById('quizCustomizeModal');
+  els.customizeSubtitle = document.getElementById('customizeSubtitle');
+  els.countPills = Array.from(document.querySelectorAll('[data-count-choice]'));
+  els.countAvailability = document.getElementById('countAvailability');
+  els.timeLimitOptions = document.getElementById('timeLimitOptions');
+  els.startCustomizedQuiz = document.getElementById('startCustomizedQuiz');
 }
 
 function initTheme() {
@@ -144,6 +157,14 @@ function initEventListeners() {
   els.paletteFab.addEventListener('click', function () { togglePalette(); });
   els.paletteClose.addEventListener('click', function () { togglePalette(false); });
   els.paletteOverlay.addEventListener('click', function () { togglePalette(false); });
+  els.countPills.forEach(function (button) {
+    button.addEventListener('click', function () {
+      if (button.disabled) return;
+      selectedCustomCount = button.dataset.countChoice;
+      updateCustomizeModal();
+    });
+  });
+  if (els.startCustomizedQuiz) els.startCustomizedQuiz.addEventListener('click', startCustomizedQuiz);
 
   els.paletteSearch.addEventListener('change', jumpFromSearch);
   els.paletteSearch.addEventListener('keydown', function (e) {
@@ -218,6 +239,10 @@ async function handleAuthAction() {
 function getLoginUrl() {
   const next = encodeURIComponent(window.location.pathname + window.location.search + window.location.hash);
   return `../auth/login.html?next=${next}`;
+}
+
+function getUrlMode() {
+  return new URLSearchParams(window.location.search).get('mode') || '';
 }
 
 function shouldRequireLoginForTracking() {
@@ -437,9 +462,8 @@ async function launchQuiz(chapterId) {
   if (els.navLinks) els.navLinks.classList.remove('open');
   if (els.headerControls) els.headerControls.classList.remove('open');
   if (els.hamburger) els.hamburger.setAttribute('aria-expanded', 'false');
-  const loaded = await loadSelectedQuiz(file, { updateUrl: true, resume: true });
+  const loaded = await loadSelectedQuiz(file, { updateUrl: true, resume: false, customize: true });
   if (loaded) {
-    startTimer();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } else {
     stopTimer();
@@ -456,6 +480,7 @@ function exitQuiz() {
 
 function resetTimer() {
   timerSeconds = 0;
+  quizTimeLimitSeconds = 0;
   updateTimerDisplay();
 }
 
@@ -495,34 +520,16 @@ async function loadSelectedQuiz(file, options) {
     const normalizedQuestions = normalizeQuizData(data);
     if (!normalizedQuestions.length) throw new Error('No questions found in this quiz file.');
 
-    currentQuizFile = file;
-    currentQuizTitle = getQuizTitle(file, data);
-    questions = normalizedQuestions;
-    const catalogItem = getQuizByFile(currentQuizFile);
-    if (catalogItem) catalogItem.questionCount = questions.length;
-    localStorage.setItem('selectedQuizFile', currentQuizFile);
-
-    resetAttemptState();
-    updatePageTitle();
-    updateActiveChapterState();
-    resetQuizView();
-    updateMarkingInfo();
-    createPalette();
-    renderChapterCards();
-    updateDashboardStats();
-
-    const resumed = settings.resume ? loadFromLocalStorage() : false;
-    if (!resumed) {
-      loadQuestion(0);
+    if (settings.customize) {
+      currentQuizFile = file;
+      currentQuizTitle = getQuizTitle(file, data);
+      updatePageTitle();
+      hideQuizStatus();
+      showCustomizeModal(file, currentQuizTitle, normalizedQuestions, settings);
+      return true;
     }
 
-    hideQuizStatus();
-
-    if (settings.updateUrl) {
-      const url = new URL(window.location.href);
-      url.searchParams.set('quiz', currentQuizFile);
-      window.history.replaceState({}, '', url);
-    }
+    beginQuizSession(file, getQuizTitle(file, data), normalizedQuestions, settings);
     return true;
   } catch (error) {
     questions = [];
@@ -533,10 +540,298 @@ async function loadSelectedQuiz(file, options) {
   }
 }
 
+function beginQuizSession(file, title, quizQuestions, options) {
+  const settings = options || {};
+  currentQuizFile = file;
+  currentQuizTitle = title || 'SSC Quiz';
+  questions = quizQuestions.slice();
+  const catalogItem = getQuizByFile(currentQuizFile);
+  if (catalogItem) catalogItem.questionCount = questions.length;
+  if (isSafeQuizFile(currentQuizFile)) localStorage.setItem('selectedQuizFile', currentQuizFile);
+
+  resetAttemptState();
+  quizTimeLimitSeconds = Number(settings.timeLimitSeconds) || 0;
+  document.body.classList.add('quiz-active');
+  updatePageTitle();
+  if (!settings.skipCatalogUpdate) updateActiveChapterState();
+  resetQuizView();
+  updateMarkingInfo();
+  createPalette();
+  if (!settings.skipCatalogUpdate) renderChapterCards();
+  updateDashboardStats();
+
+  const resumed = settings.resume ? loadFromLocalStorage() : false;
+  if (!resumed) {
+    loadQuestion(0);
+  }
+
+  hideQuizStatus();
+
+  if (settings.updateUrl) {
+    const url = new URL(window.location.href);
+    if (isSafeQuizFile(currentQuizFile)) {
+      url.searchParams.set('quiz', currentQuizFile);
+      url.searchParams.delete('mode');
+    }
+    window.history.replaceState({}, '', url);
+  }
+
+  startTimer();
+}
+
+function showCustomizeModal(file, title, quizQuestions, settings) {
+  pendingQuizConfig = {
+    file: file,
+    title: title,
+    questions: quizQuestions.slice(),
+    updateUrl: Boolean(settings && settings.updateUrl)
+  };
+
+  const prefs = readQuizPrefs();
+  selectedCustomCount = getValidCountChoice(prefs.questionCount, quizQuestions.length);
+  selectedCustomTime = getValidTimeChoice(selectedCustomCount, prefs.timeLimit);
+  if (els.customizeSubtitle) {
+    els.customizeSubtitle.textContent = `${title} · ${quizQuestions.length} questions available`;
+  }
+  updateCustomizeModal();
+  if (els.customizeModal) els.customizeModal.classList.remove('hidden');
+}
+
+function updateCustomizeModal() {
+  if (!pendingQuizConfig) return;
+  const available = pendingQuizConfig.questions.length;
+
+  els.countPills.forEach(function (button) {
+    const choice = button.dataset.countChoice;
+    const numeric = Number(choice);
+    const disabled = choice !== 'all' && available < numeric;
+    button.disabled = disabled;
+    button.classList.toggle('active', choice === selectedCustomCount);
+    if (choice === 'all') {
+      button.textContent = 'All';
+    } else {
+      button.textContent = disabled ? `${choice} (only ${available} available)` : choice;
+    }
+  });
+
+  if (els.countAvailability) {
+    els.countAvailability.textContent = `${available} question${available === 1 ? '' : 's'} available in this chapter`;
+  }
+
+  selectedCustomTime = getValidTimeChoice(selectedCustomCount, selectedCustomTime);
+  renderTimeLimitOptions();
+}
+
+function renderTimeLimitOptions() {
+  if (!els.timeLimitOptions) return;
+  const options = getTimeOptions(selectedCustomCount);
+  els.timeLimitOptions.innerHTML = options.map(function (option) {
+    const disabled = Boolean(option.disabled);
+    const active = option.value === selectedCustomTime;
+    return `<button class="time-pill${active ? ' active' : ''}" type="button" data-time-choice="${option.value}"${disabled ? ' disabled' : ''}>${escHtml(option.label)}</button>`;
+  }).join('');
+
+  els.timeLimitOptions.querySelectorAll('[data-time-choice]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      if (button.disabled) return;
+      selectedCustomTime = button.dataset.timeChoice;
+      renderTimeLimitOptions();
+    });
+  });
+}
+
+function getValidCountChoice(choice, available) {
+  const requested = String(choice || 'all');
+  if (requested === '25' && available >= 25) return '25';
+  if (requested === '50' && available >= 50) return '50';
+  return 'all';
+}
+
+function getValidTimeChoice(countChoice, timeChoice) {
+  const validValues = getTimeOptions(countChoice).map(function (option) { return option.value; });
+  return validValues.includes(String(timeChoice || '')) ? String(timeChoice) : validValues[0];
+}
+
+function getTimeOptions(countChoice) {
+  if (countChoice === '25') {
+    return [
+      { value: '10', label: '10 min' },
+      { value: '15', label: '15 min' },
+      { value: 'none', label: 'No limit' }
+    ];
+  }
+  if (countChoice === '50') {
+    return [
+      { value: '20', label: '20 min' },
+      { value: '30', label: '30 min' },
+      { value: 'none', label: 'No limit' }
+    ];
+  }
+  return [
+    { value: 'none', label: 'No limit', disabled: true }
+  ];
+}
+
+function startCustomizedQuiz() {
+  if (!pendingQuizConfig) return;
+  const count = selectedCustomCount === 'all' ? pendingQuizConfig.questions.length : Number(selectedCustomCount);
+  const shuffled = shuffleQuestions(pendingQuizConfig.questions);
+  const selectedQuestions = shuffled.slice(0, count);
+  const timeLimitSeconds = selectedCustomTime === 'none' ? 0 : Number(selectedCustomTime) * 60;
+
+  localStorage.setItem('quizPrefs', JSON.stringify({
+    questionCount: selectedCustomCount,
+    timeLimit: selectedCustomTime
+  }));
+
+  if (els.customizeModal) els.customizeModal.classList.add('hidden');
+  beginQuizSession(pendingQuizConfig.file, pendingQuizConfig.title, selectedQuestions, {
+    updateUrl: pendingQuizConfig.updateUrl,
+    resume: false,
+    timeLimitSeconds: timeLimitSeconds
+  });
+  pendingQuizConfig = null;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function readQuizPrefs() {
+  try {
+    return JSON.parse(localStorage.getItem('quizPrefs') || '{}') || {};
+  } catch (error) {
+    return {};
+  }
+}
+
+function shuffleQuestions(list) {
+  const copy = list.slice();
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = copy[i];
+    copy[i] = copy[j];
+    copy[j] = temp;
+  }
+  return copy;
+}
+
 async function fetchQuizData(file) {
   const response = await fetch(`${QUIZ_FOLDER}${encodeURIComponent(file)}`, { cache: 'no-store' });
   if (!response.ok) throw new Error(`${file} returned ${response.status}`);
   return response.json();
+}
+
+async function launchRevisionQuizFromUrl() {
+  document.body.classList.add('quiz-active');
+  showQuizStatus('Loading your revision queue...');
+  setQuizControlsDisabled(true);
+
+  if (!firebaseApi || !firebaseApi.isFirebaseReady || !firebaseApi.isFirebaseReady()) {
+    showQuizError('Firebase must be configured to load your revision queue.');
+    return;
+  }
+
+  const user = currentUser || await firebaseApi.authReady;
+  currentUser = user;
+  updateAuthUi();
+  if (!user) {
+    showToast('Login first to open your revision queue.', 'error');
+    setTimeout(function () {
+      window.location.href = getLoginUrl();
+    }, 900);
+    return;
+  }
+
+  try {
+    const result = await firebaseApi.getRevisionQueue(user.uid);
+    if (!result.success) throw new Error(result.error || 'Could not load revision queue.');
+    const revisionItems = result.revisionQueue || [];
+    if (!revisionItems.length) {
+      showQuizError('Your revision queue is empty. Add questions with the + Revision button first.');
+      return;
+    }
+
+    const revisionQuestions = await loadRevisionQuestions(revisionItems);
+    if (!revisionQuestions.length) {
+      showQuizError('No matching revision questions were found in the local quiz JSON files.');
+      return;
+    }
+
+    beginQuizSession('revision-queue', 'Revision Queue', revisionQuestions, {
+      updateUrl: false,
+      resume: false,
+      timeLimitSeconds: 0,
+      skipCatalogUpdate: true
+    });
+    const url = new URL(window.location.href);
+    url.searchParams.set('mode', 'revision');
+    url.searchParams.delete('quiz');
+    window.history.replaceState({}, '', url);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } catch (error) {
+    showQuizError(`Could not start revision quiz: ${error.message}`);
+  } finally {
+    setQuizControlsDisabled(false);
+  }
+}
+
+async function loadRevisionQuestions(revisionItems) {
+  const wanted = new Set(revisionItems.map(function (item) {
+    return revisionKey(item.chapterId || item.chapter, item.questionId);
+  }));
+  const files = getRevisionSourceFiles(revisionItems);
+  const matched = [];
+
+  for (const quiz of files) {
+    try {
+      const data = await fetchQuizData(quiz.file);
+      const normalized = normalizeQuizData(data).map(function (q) {
+        return {
+          ...q,
+          sourceChapterId: quiz.id,
+          sourceChapter: quiz.title,
+          sourceQuizTitle: quiz.title
+        };
+      });
+      normalized.forEach(function (q) {
+        const keys = [
+          revisionKey(quiz.id, q.sr_no),
+          revisionKey(quiz.title, q.sr_no),
+          revisionKey(q.sourceChapter, q.sr_no)
+        ];
+        if (keys.some(function (key) { return wanted.has(key); })) {
+          matched.push(q);
+        }
+      });
+    } catch (error) {
+      console.warn(`Could not load ${quiz.file} for revision mode.`, error);
+    }
+  }
+
+  return matched;
+}
+
+function getRevisionSourceFiles(revisionItems) {
+  const selected = [];
+  const seen = new Set();
+
+  revisionItems.forEach(function (item) {
+    const chapterKey = String(item.chapterId || item.chapter || item.quizTitle || '').toLowerCase();
+    const quiz = quizCatalog.find(function (candidate) {
+      return [candidate.id, candidate.title, candidate.file].some(function (value) {
+        return String(value || '').toLowerCase() === chapterKey;
+      });
+    });
+    if (quiz && !seen.has(quiz.file)) {
+      selected.push(quiz);
+      seen.add(quiz.file);
+    }
+  });
+
+  if (selected.length) return selected;
+  return quizCatalog.filter(function (quiz) { return quiz.file && isSafeQuizFile(quiz.file); });
+}
+
+function revisionKey(chapterId, questionId) {
+  return `${String(chapterId || '').toLowerCase()}::${String(questionId || '')}`;
 }
 
 function normalizeQuizData(data) {
@@ -818,10 +1113,13 @@ function toggleRevisionItem() {
 
 function buildQuestionRecord(q) {
   const quiz = getQuizByFile(currentQuizFile);
+  const chapterId = q.sourceChapterId || (quiz ? quiz.id : slugify(currentQuizTitle));
+  const chapter = q.sourceChapter || currentQuizTitle;
+  const quizTitle = q.sourceQuizTitle || currentQuizTitle;
   return {
-    chapterId: quiz ? quiz.id : slugify(currentQuizTitle),
-    chapter: currentQuizTitle,
-    quizTitle: currentQuizTitle,
+    chapterId: chapterId,
+    chapter: chapter,
+    quizTitle: quizTitle,
     questionId: q.sr_no,
     questionText: cleanHindi(q.question),
     selectedAnswer: answers[q.sr_no] || '',
@@ -904,6 +1202,10 @@ function startTimer() {
   timerInterval = setInterval(function () {
     timerSeconds++;
     updateTimerDisplay();
+    if (quizTimeLimitSeconds && timerSeconds >= quizTimeLimitSeconds) {
+      showToast('Time limit reached. Submitting your quiz.', 'error');
+      submitQuiz();
+    }
   }, 1000);
 }
 
@@ -913,10 +1215,11 @@ function stopTimer() {
 }
 
 function updateTimerDisplay() {
-  const minutes = Math.floor(timerSeconds / 60);
-  const seconds = timerSeconds % 60;
+  const displaySeconds = quizTimeLimitSeconds ? Math.max(quizTimeLimitSeconds - timerSeconds, 0) : timerSeconds;
+  const minutes = Math.floor(displaySeconds / 60);
+  const seconds = displaySeconds % 60;
   els.timer.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-  els.timer.classList.toggle('warning', timerSeconds > 600);
+  els.timer.classList.toggle('warning', quizTimeLimitSeconds ? displaySeconds <= 60 : timerSeconds > 600);
 }
 
 function toggleTheme() {
@@ -1107,6 +1410,7 @@ function calculateQuizResult() {
 
 function buildResultsHtml(result) {
   const reviewHtml = questions.map(buildReviewItem).join('');
+  const mistakeButtonDisabled = result.wrong ? '' : ' disabled';
 
   return `
     <div class="score-card">
@@ -1125,9 +1429,9 @@ function buildResultsHtml(result) {
     <h2 class="review-title">Question Review</h2>
     <div class="review-list">${reviewHtml}</div>
     <div class="action-buttons">
+      <button class="action-btn review-mistakes-btn" type="button" data-result-filter="mistakes"${mistakeButtonDisabled}>Review Mistakes</button>
+      <button class="action-btn show-all-btn" type="button" data-result-filter="all">Show All</button>
       <button class="action-btn restart-btn" type="button" onclick="restartQuiz()">Restart Quiz</button>
-      <button class="action-btn download-btn" type="button" onclick="downloadResults()">Download Results</button>
-      <button class="action-btn print-btn" type="button" onclick="window.print()">Print Results</button>
       <button class="action-btn home-btn" type="button" onclick="exitQuiz()">Go Home</button>
       <a class="action-btn dashboard-btn" href="../dashboard/dashboard.html">Open Dashboard</a>
     </div>
@@ -1137,6 +1441,8 @@ function buildResultsHtml(result) {
 function buildReviewItem(q) {
   const userAnswer = answers[q.sr_no];
   let optionsHtml = '';
+  const isWrong = Boolean(userAnswer && userAnswer !== q.answer);
+  const status = isWrong ? 'wrong' : (userAnswer ? 'correct' : 'unattempted');
 
   for (let i = 1; i <= 4; i++) {
     const isCorrect = q.answer === String(i);
@@ -1153,10 +1459,20 @@ function buildReviewItem(q) {
     optionsHtml += `<div class="${classes.join(' ')}">${prefix}${String.fromCharCode(64 + i)}. ${escHtml(cleanOption(q[`option${i}`]))}</div>`;
   }
 
+  const explanationHtml = (isWrong || !userAnswer) && q.explanation ? `
+      <div class="review-explanation">
+        <strong>Explanation:</strong> ${escHtml(q.explanation)}
+      </div>
+    ` : '';
+
   return `
-    <div class="review-item">
-      <h3 class="review-question-title">Q${q.sr_no}: ${escHtml(cleanHindi(q.question))}</h3>
+    <div class="review-item" data-review-status="${status}">
+      <div class="review-question-title">
+        <span class="review-question-number">Q${escHtml(q.sr_no)}</span>
+        ${formatQuestion(q.question)}
+      </div>
       ${optionsHtml}
+      ${explanationHtml}
       <div class="review-actions">
         <button class="review-mini-btn" type="button" data-review-action="bookmark" data-question-id="${escHtml(q.sr_no)}">Save Bookmark</button>
         <button class="review-mini-btn" type="button" data-review-action="revision" data-question-id="${escHtml(q.sr_no)}">Add to Revision</button>
@@ -1166,6 +1482,12 @@ function buildReviewItem(q) {
 }
 
 function bindResultActions() {
+  els.resultSection.querySelectorAll('[data-result-filter]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      applyResultFilter(button.dataset.resultFilter);
+    });
+  });
+
   els.resultSection.querySelectorAll('[data-review-action]').forEach(function (button) {
     button.addEventListener('click', function () {
       const q = questions.find(function (item) {
@@ -1186,6 +1508,18 @@ function bindResultActions() {
       }
     });
   });
+}
+
+function applyResultFilter(filter) {
+  const showMistakesOnly = filter === 'mistakes';
+  els.resultSection.querySelectorAll('.review-item').forEach(function (item) {
+    item.classList.toggle('hidden', showMistakesOnly && item.dataset.reviewStatus !== 'wrong');
+  });
+  els.resultSection.querySelectorAll('[data-result-filter]').forEach(function (button) {
+    button.classList.toggle('active', button.dataset.resultFilter === filter);
+  });
+  const title = els.resultSection.querySelector('.review-title');
+  if (title) title.textContent = showMistakesOnly ? 'Mistake Review' : 'Question Review';
 }
 
 async function persistQuizAttempt(result) {
@@ -1287,43 +1621,6 @@ function restartQuiz() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function downloadResults() {
-  const clone = els.resultSection.cloneNode(true);
-  const actionButtons = clone.querySelector('.action-buttons');
-  if (actionButtons) actionButtons.remove();
-
-  const html = `<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>${escHtml(currentQuizTitle)} Results</title>
-<style>
-body{font-family:Arial,sans-serif;line-height:1.5;padding:24px;color:#212529}
-.score-card{background:#007bff;color:#fff;padding:24px;border-radius:12px;text-align:center;margin-bottom:18px}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
-.stat-card,.review-item{border:1px solid #dee2e6;border-radius:10px;padding:14px;margin-bottom:12px}
-.review-question-title{white-space:pre-wrap;line-height:1.55}
-.review-option{padding:8px;border:1px solid #dee2e6;border-radius:8px;margin:6px 0}
-.correct{background:#d4edda;border-color:#28a745}.wrong{background:#f8d7da;border-color:#dc3545}.user-selected{font-weight:bold}
-</style>
-</head>
-<body>
-<h1>${escHtml(currentQuizTitle)} Results</h1>
-${clone.innerHTML}
-</body>
-</html>`;
-
-  const blob = new Blob([html], { type: 'text/html' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `${slugify(currentQuizTitle)}-results.html`;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  URL.revokeObjectURL(url);
-}
-
 function formatTime(totalSeconds) {
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds % 60;
@@ -1341,54 +1638,60 @@ function formatQuestion(rawText) {
     return formatStatementQuestion(text);
   }
 
+  // "Consider the following statements:" + numbered list ("1. ...", "2. ...")
+  if (/consider the following/i.test(text) && /^\d+\.\s+\S/m.test(text)) {
+    return formatStatementQuestion(text);
+  }
+
   return `<div class="q-text">${escHtml(text)}</div>`;
 }
 
 function formatMatchQuestion(text) {
-  var lines = text.split('\n').map(function (l) { return l.trim(); }).filter(Boolean);
+  const lines = text.split('\n').map(function (l) { return l.trim(); }).filter(Boolean);
 
-  var colIIdx = lines.findIndex(function (l) {
+  const colIIdx = lines.findIndex(function (l) {
     return /^Column\s+I\b/i.test(l) && !/^Column\s+II\b/i.test(l);
   });
-  var colIIIdx = lines.findIndex(function (l) { return /^Column\s+II\b/i.test(l); });
+  const colIIIdx = lines.findIndex(function (l) { return /^Column\s+II\b/i.test(l); });
 
   if (colIIdx === -1 || colIIIdx === -1) {
     return '<div class="q-text match-block">' + escHtml(text) + '</div>';
   }
 
-  var intro = lines.slice(0, colIIdx).join(' ');
-  var colIItems = lines.slice(colIIdx + 1, colIIIdx);
-  var colIIItems = lines.slice(colIIIdx + 1);
+  const intro = lines.slice(0, colIIdx).join(' ');
+  let colIItems = lines.slice(colIIdx + 1, colIIIdx).filter(function (line) {
+    return /^(?:I|II|III|IV|V|VI|VII|VIII|IX|X)\.\s+/i.test(line);
+  });
+  let colIIItems = lines.slice(colIIIdx + 1).filter(function (line) {
+    return /^[P-S]\.\s+/i.test(line);
+  });
 
-  var colIHtml = colIItems.map(function (item) {
-    return '<div class="match-row">' + escHtml(item) + '</div>';
-  }).join('');
+  if (!colIItems.length) colIItems = lines.slice(colIIdx + 1, colIIIdx);
+  if (!colIIItems.length) colIIItems = lines.slice(colIIIdx + 1);
 
-  var colIIHtml = colIIItems.map(function (item) {
-    return '<div class="match-row">' + escHtml(item) + '</div>';
-  }).join('');
+  const rowCount = Math.max(colIItems.length, colIIItems.length);
+  let tableHtml = '<div class="match-table"><div class="match-header">Column I</div><div class="match-header">Column II</div>';
+  for (let i = 0; i < rowCount; i++) {
+    tableHtml += '<div class="match-cell">' + escHtml(colIItems[i] || '') + '</div>';
+    tableHtml += '<div class="match-cell">' + escHtml(colIIItems[i] || '') + '</div>';
+  }
+  tableHtml += '</div>';
 
   return '<div class="q-text match-block">' +
     (intro ? '<div class="match-intro">' + escHtml(intro) + '</div>' : '') +
-    '<div class="match-columns">' +
-      '<div class="match-col">' +
-        '<div class="match-col-header">Column I</div>' +
-        colIHtml +
-      '</div>' +
-      '<div class="match-col">' +
-        '<div class="match-col-header">Column II</div>' +
-        colIIHtml +
-      '</div>' +
-    '</div>' +
+    tableHtml +
   '</div>';
 }
 
 function formatStatementQuestion(text) {
-  var lines = text.split('\n').map(function (l) { return l.trim(); }).filter(Boolean);
-  var html = '<div class="q-text statement-block">';
+  const lines = text.split('\n').map(function (l) { return l.trim(); }).filter(Boolean);
+  let html = '<div class="q-text statement-group">';
   lines.forEach(function (line) {
     if (/^(Statement\s+(?:I{1,3}|IV|V|\d+)|Assertion\s*\(A\)|Reason\s*\(R\))\s*:/i.test(line)) {
-      html += '<div class="statement-line">' + escHtml(line) + '</div>';
+      html += '<div class="statement-block">' + escHtml(line) + '</div>';
+    } else if (/^\d+\.\s+\S/.test(line) || /^[A-D]\.\s+\S/.test(line)) {
+      // numbered list items ("1. Isochronos...") and lettered items get statement-block style
+      html += '<div class="statement-block">' + escHtml(line) + '</div>';
     } else {
       html += '<div class="statement-plain">' + escHtml(line) + '</div>';
     }
