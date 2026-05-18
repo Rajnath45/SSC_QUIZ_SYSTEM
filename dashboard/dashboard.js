@@ -1,24 +1,18 @@
-import {
-  getUserStats,
-  isFirebaseReady,
-  logoutUser,
-  requireAuth
-} from "../CORE/firebase-module.js";
+import { logoutUser, requireAuth } from "../CORE/firebase-module.js";
 
 const els = {
-  userName: document.getElementById("userName"),
-  userEmail: document.getElementById("userEmail"),
-  currentStreak: document.getElementById("currentStreak"),
-  loadingState: document.getElementById("loadingState"),
-  dashboardContent: document.getElementById("dashboardContent"),
+  firstName: document.getElementById("firstName"),
+  profileName: document.getElementById("profileName"),
+  todayDate: document.getElementById("todayDate"),
+  streakCount: document.getElementById("streakCount"),
+  weekRow: document.getElementById("weekRow"),
   totalQuizzes: document.getElementById("totalQuizzes"),
   totalQuestions: document.getElementById("totalQuestions"),
-  overallAccuracy: document.getElementById("overallAccuracy"),
-  revisionCount: document.getElementById("revisionCount"),
-  latestAttempts: document.getElementById("latestAttempts"),
-  weakChapters: document.getElementById("weakChapters"),
-  bookmarks: document.getElementById("bookmarks"),
-  revisionQueue: document.getElementById("revisionQueue"),
+  accuracy: document.getElementById("accuracy"),
+  continueCard: document.getElementById("continueCard"),
+  revisionDueCard: document.getElementById("revisionDueCard"),
+  profileTab: document.getElementById("profileTab"),
+  profileDropdown: document.getElementById("profileDropdown"),
   logoutBtn: document.getElementById("logoutBtn"),
   toastHost: document.getElementById("toastHost")
 };
@@ -29,113 +23,125 @@ async function initDashboard() {
   const user = await requireAuth({ redirectTo: "../auth/login.html" });
   if (!user) return;
 
-  renderUser(user);
+  const firstName = user.displayName?.split(" ")[0] || "Aspirant";
+  els.firstName.textContent = firstName;
+  els.profileName.textContent = firstName;
+  els.todayDate.textContent = new Date().toLocaleDateString("en-IN", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  });
+
+  bindProfileMenu();
+  renderDashboard();
+}
+
+function bindProfileMenu() {
+  els.profileTab.addEventListener("click", function (event) {
+    event.stopPropagation();
+    els.profileDropdown.classList.toggle("hidden");
+  });
+
+  els.profileDropdown.addEventListener("click", function (event) {
+    event.stopPropagation();
+  });
+
+  document.addEventListener("click", function () {
+    els.profileDropdown.classList.add("hidden");
+  });
+
   els.logoutBtn.addEventListener("click", handleLogout);
-
-  if (!isFirebaseReady()) {
-    showToast("Firebase config is pending. Dashboard data will appear after configuration.", "error");
-  }
-
-  const stats = await getUserStats(user.uid);
-  if (!stats.success && stats.error) showToast(stats.error, "error");
-
-  renderStats(stats);
-  els.loadingState.classList.add("hidden");
-  els.dashboardContent.classList.remove("hidden");
 }
 
-function renderUser(user) {
-  els.userName.textContent = user.displayName || "SSC Aspirant";
-  els.userEmail.textContent = user.email || "Signed in with Firebase Authentication";
+function renderDashboard() {
+  const streakCount = readNumber("streakCount");
+  const streakDays = readArray("streakDays", [false, false, false, false, false, false, false]);
+
+  els.streakCount.textContent = String(streakCount);
+  renderWeek(streakDays);
+
+  els.totalQuizzes.textContent = String(readNumber("totalQuizzes"));
+  els.totalQuestions.textContent = String(readNumber("totalQuestions"));
+  els.accuracy.textContent = `${readNumber("accuracy")}%`;
+
+  renderContinueCard(readJson("lastAttempted"));
+  renderRevisionDue();
 }
 
-function renderStats(stats) {
-  els.totalQuizzes.textContent = String(stats.totalQuizzes || 0);
-  els.totalQuestions.textContent = String(stats.totalQuestions || 0);
-  els.overallAccuracy.textContent = `${stats.accuracy || 0}%`;
-  els.revisionCount.textContent = String((stats.revisionQueue || []).length);
-  els.currentStreak.textContent = String((stats.streak && stats.streak.current) || 0);
+function renderWeek(days) {
+  const uiDays = [
+    { label: "M", index: 1 },
+    { label: "T", index: 2 },
+    { label: "W", index: 3 },
+    { label: "T", index: 4 },
+    { label: "F", index: 5 },
+    { label: "S", index: 6 },
+    { label: "S", index: 0 }
+  ];
 
-  renderAttempts(stats.latestAttempts || []);
-  renderWeakChapters(stats.weakChapters || []);
-  renderQuestionList(els.bookmarks, stats.bookmarks || [], "No bookmarks yet. Use Bookmark during a quiz to save doubts here.");
-  renderQuestionList(els.revisionQueue, stats.revisionQueue || [], "Your revision queue is empty. Add wrong or doubtful questions after practice.", { clickable: true });
-}
-
-function renderAttempts(attempts) {
-  if (!attempts.length) {
-    els.latestAttempts.innerHTML = emptyState("No quiz attempts saved yet. Start a chapter quiz to build your dashboard.");
-    return;
-  }
-
-  els.latestAttempts.innerHTML = attempts.map(function (attempt) {
+  els.weekRow.innerHTML = uiDays.map(function (day) {
+    const done = Boolean(days[day.index]);
     return `
-      <article class="attempt-item">
-        <div>
-          <strong>${escapeHtml(attempt.quizTitle || "SSC Quiz")}</strong>
-          <span>${escapeHtml(attempt.chapter || "General")} &middot; ${formatDate(attempt.timestamp)}</span>
-        </div>
-        <div class="attempt-score">
-          <strong>${Number(attempt.score || 0).toFixed(1)}</strong>
-          <span>${attempt.accuracy || 0}% accuracy</span>
-        </div>
-      </article>
+      <div class="week-day${done ? " is-done" : ""}">
+        <span>${day.label}</span>
+        <i aria-hidden="true"></i>
+      </div>
     `;
   }).join("");
 }
 
-function renderWeakChapters(chapters) {
-  if (!chapters.length) {
-    els.weakChapters.innerHTML = emptyState("No weak chapters detected yet. Submit a few quizzes and this will update automatically.");
+function renderContinueCard(attempt) {
+  if (!attempt || !attempt.url) {
+    els.continueCard.classList.add("hidden");
+    els.continueCard.innerHTML = "";
     return;
   }
 
-  els.weakChapters.innerHTML = chapters.map(function (chapter) {
-    return `
-      <article class="weak-item">
-        <div>
-          <strong>${escapeHtml(chapter.chapter)}</strong>
-          <span>${chapter.wrong} wrong across ${chapter.attempts} attempt${chapter.attempts === 1 ? "" : "s"}</span>
-        </div>
-        <div class="weak-meter" aria-label="${chapter.weakness}% weakness">
-          <span style="width:${Math.min(chapter.weakness, 100)}%"></span>
-        </div>
-      </article>
-    `;
-  }).join("");
+  const subject = String(attempt.subject || "General");
+  const subjectKey = subject.toLowerCase();
+  const progress = clamp(readPercent(attempt.progress), 0, 100);
+
+  els.continueCard.innerHTML = `
+    <p class="card-kicker">Continue where you left off</p>
+    <div class="continue-top">
+      <span class="subject-chip chip-${escapeAttr(subjectKey)}">${escapeHtml(labelFromSubject(subject))}</span>
+      <strong class="continue-title">${escapeHtml(attempt.chapterName || "SSC Quiz")}</strong>
+    </div>
+    <div class="progress-track" aria-label="${progress}% complete">
+      <div class="progress-fill" style="width: ${progress}%"></div>
+    </div>
+    <span class="progress-value">${progress}%</span>
+    <a class="primary-link" href="${escapeAttr(attempt.url)}">Continue →</a>
+  `;
+  els.continueCard.classList.remove("hidden");
 }
 
-function renderQuestionList(container, items, emptyText, options) {
-  const settings = options || {};
-  if (!items.length) {
-    container.innerHTML = emptyState(emptyText);
+function renderRevisionDue() {
+  const queue = readArray("revisionQueue", []);
+  const today = new Date().toISOString().split("T")[0];
+  const dueCount = queue.filter(function (question) {
+    return question && question.nextReview && question.nextReview <= today;
+  }).length;
+
+  if (!dueCount) {
+    els.revisionDueCard.classList.add("hidden");
+    els.revisionDueCard.innerHTML = "";
     return;
   }
 
-  container.innerHTML = items.slice(0, 8).map(function (item) {
-    return `
-      <article class="question-item${settings.clickable ? " clickable" : ""}"${settings.clickable ? ' role="button" tabindex="0" data-revision-card="true"' : ""}>
-        <span>${escapeHtml(item.chapter || item.chapterId || "General")}</span>
-        <p>${escapeHtml(item.questionText || "Saved question")}</p>
-      </article>
-    `;
-  }).join("");
-
-  if (settings.clickable) {
-    container.querySelectorAll("[data-revision-card]").forEach(function (card) {
-      card.addEventListener("click", openRevisionQuiz);
-      card.addEventListener("keydown", function (event) {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          openRevisionQuiz();
-        }
-      });
-    });
-  }
-}
-
-function openRevisionQuiz() {
-  window.location.href = "../CORE/index.html?mode=revision";
+  els.revisionDueCard.innerHTML = `
+    <div class="revision-heading">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 7v14"/>
+        <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>
+      </svg>
+      <span>Revision Due</span>
+    </div>
+    <p>${dueCount} question${dueCount === 1 ? "" : "s"} waiting for review today</p>
+    <a class="primary-link" href="../revision/revision.html">Start Revision →</a>
+  `;
+  els.revisionDueCard.classList.remove("hidden");
 }
 
 async function handleLogout() {
@@ -143,36 +149,53 @@ async function handleLogout() {
   const result = await logoutUser();
   if (result.success) {
     window.location.href = "../auth/login.html";
-  } else {
-    showToast(result.error || "Logout failed.", "error");
-    els.logoutBtn.disabled = false;
+    return;
+  }
+
+  els.logoutBtn.disabled = false;
+  showToast(result.error || "Logout failed.");
+}
+
+function readNumber(key) {
+  const value = Number(localStorage.getItem(key));
+  return Number.isFinite(value) ? value : 0;
+}
+
+function readPercent(value) {
+  const numeric = Number(value);
+  return Number.isFinite(numeric) ? Math.round(numeric) : 0;
+}
+
+function readJson(key) {
+  try {
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : null;
+  } catch (error) {
+    return null;
   }
 }
 
-function showToast(message, type) {
+function readArray(key, fallback) {
+  const value = readJson(key);
+  return Array.isArray(value) ? value : fallback;
+}
+
+function labelFromSubject(subject) {
+  return String(subject || "General")
+    .replace(/[-_]+/g, " ")
+    .replace(/\b\w/g, function (char) { return char.toUpperCase(); });
+}
+
+function clamp(value, min, max) {
+  return Math.min(Math.max(value, min), max);
+}
+
+function showToast(message) {
   const toast = document.createElement("div");
-  toast.className = `toast ${type || ""}`;
+  toast.className = "toast";
   toast.textContent = message;
   els.toastHost.appendChild(toast);
   setTimeout(function () { toast.remove(); }, 5000);
-}
-
-function emptyState(text) {
-  return `<div class="empty-state">${escapeHtml(text)}</div>`;
-}
-
-function formatDate(value) {
-  const date = toDate(value);
-  if (!date) return "Just now";
-  return new Intl.DateTimeFormat("en-IN", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" }).format(date);
-}
-
-function toDate(value) {
-  if (!value) return null;
-  if (typeof value.toDate === "function") return value.toDate();
-  if (value.seconds) return new Date(value.seconds * 1000);
-  const date = new Date(value);
-  return Number.isNaN(date.getTime()) ? null : date;
 }
 
 function escapeHtml(value) {
@@ -181,4 +204,8 @@ function escapeHtml(value) {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
+}
+
+function escapeAttr(value) {
+  return escapeHtml(value).replace(/'/g, "&#39;");
 }

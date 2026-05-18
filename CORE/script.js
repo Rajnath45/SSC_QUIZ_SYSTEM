@@ -1,24 +1,25 @@
-const QUIZ_FOLDER = 'QUIZZES/';
+const QUIZ_FOLDER = '../QUIZZES/';
 const QUIZ_MANIFEST = `${QUIZ_FOLDER}quizzes.json`;
 const DEFAULT_QUIZ_FILE = 'Solar_System.json';
 // To add future chapters: place the new JSON file in /QUIZZES, add it to
 // /QUIZZES/quizzes.json, and keep the file name simple (letters, numbers,
-// spaces, underscores, hyphens). Netlify copies those files into CORE/QUIZZES.
+// spaces, underscores, hyphens).
 const FALLBACK_QUIZZES = [
-  { id: 'solar-system', file: 'Solar_System.json', title: 'Solar System Quiz', subject: 'science', questionCount: 25 },
-  { id: 'world-map', file: 'World_Map.json', title: 'World Map Quiz', subject: 'geography', questionCount: 30 }
+  { id: 'solar-system', file: 'Solar_System.json', title: 'Solar System Quiz', subject: 'science', questionCount: 47 },
+  { id: 'world-map', file: 'World_Map.json', title: 'World Map Quiz', subject: 'geography', questionCount: 60 },
+  { id: 'latitudes-longitudes', file: 'Latitudes_Longitudes.json', title: 'Latitudes and Longitudes Quiz', subject: 'geography', questionCount: 16 }
 ];
 
 let quizCatalog = [];
 let currentQuizFile = DEFAULT_QUIZ_FILE;
 let currentQuizTitle = 'SSC Quiz';
+let currentChapterName = '';
+let currentSubject = '';
 let selectedQuizFile = '';
 let activeSubject = 'all';
 let questions = [];
 let currentQuestion = 0;
 let answers = {};
-let bookmarks = new Set();
-let revisionQueue = new Set();
 let timerSeconds = 0;
 let quizTimeLimitSeconds = 0;
 let timerInterval = null;
@@ -35,11 +36,11 @@ const els = {};
 
 document.addEventListener('DOMContentLoaded', async function () {
   cacheElements();
-  initTheme();
   initEventListeners();
   await initFirebaseBridge();
   preventDoubleTapZoom();
   await initQuizCatalog();
+  applySubjectParamFromUrl();
   currentQuizFile = getInitialQuizFile();
   const initialQuiz = getQuizByFile(currentQuizFile);
   currentQuizTitle = initialQuiz ? initialQuiz.title : 'SSC Quiz';
@@ -47,7 +48,8 @@ document.addEventListener('DOMContentLoaded', async function () {
   updateDashboardStats();
   updateTimerDisplay();
   if (getUrlMode() === 'revision') {
-    await launchRevisionQuizFromUrl();
+    window.location.href = '../revision/revision.html';
+    return;
   }
   setInterval(saveToLocalStorage, 5000);
 });
@@ -72,7 +74,6 @@ function cacheElements() {
   els.homeProgressBar = document.getElementById('homeProgressBar');
   els.quizStatus = document.getElementById('quizStatus');
   els.timer = document.getElementById('timer');
-  els.themeToggle = document.getElementById('themeToggle');
   els.fullscreenBtn = document.getElementById('fullscreenBtn');
   els.markingInfo = document.getElementById('markingInfo');
   els.progressSection = document.getElementById('progressSection');
@@ -81,8 +82,6 @@ function cacheElements() {
   els.progressBar = document.getElementById('progressBar');
   els.questionSection = document.getElementById('questionSection');
   els.questionCounter = document.getElementById('questionCounter');
-  els.bookmarkBtn = document.getElementById('bookmarkBtn');
-  els.revisionBtn = document.getElementById('revisionBtn');
   els.questionText = document.getElementById('questionText');
   els.optionsContainer = document.getElementById('optionsContainer');
   els.resultSection = document.getElementById('result-section');
@@ -99,7 +98,6 @@ function cacheElements() {
   els.paletteClose = document.getElementById('paletteClose');
   els.paletteAnswered = document.getElementById('paletteAnswered');
   els.paletteNotAnswered = document.getElementById('paletteNotAnswered');
-  els.paletteBookmarked = document.getElementById('paletteBookmarked');
   els.paletteSearch = document.getElementById('paletteSearch');
   els.paletteGrid = document.getElementById('paletteGrid');
   els.toastHost = document.getElementById('toastHost');
@@ -109,12 +107,6 @@ function cacheElements() {
   els.countAvailability = document.getElementById('countAvailability');
   els.timeLimitOptions = document.getElementById('timeLimitOptions');
   els.startCustomizedQuiz = document.getElementById('startCustomizedQuiz');
-}
-
-function initTheme() {
-  const savedTheme = localStorage.getItem('quizTheme') || 'dark';
-  document.documentElement.setAttribute('data-theme', savedTheme);
-  els.themeToggle.textContent = savedTheme === 'dark' ? 'Light' : 'Dark';
 }
 
 function initEventListeners() {
@@ -149,10 +141,7 @@ function initEventListeners() {
   els.nextBtn.addEventListener('click', nextQuestion);
   els.clearBtn.addEventListener('click', clearAnswer);
   els.submitBtn.addEventListener('click', submitQuiz);
-  els.bookmarkBtn.addEventListener('click', toggleBookmark);
-  els.revisionBtn.addEventListener('click', toggleRevisionItem);
   if (els.authActionBtn) els.authActionBtn.addEventListener('click', handleAuthAction);
-  els.themeToggle.addEventListener('click', toggleTheme);
   els.fullscreenBtn.addEventListener('click', toggleFullscreen);
   els.paletteFab.addEventListener('click', function () { togglePalette(); });
   els.paletteClose.addEventListener('click', function () { togglePalette(false); });
@@ -192,7 +181,7 @@ async function initFirebaseBridge() {
 
     if (!firebaseApi.isFirebaseReady()) {
       updateAuthUi();
-      showToast('Firebase config is pending. Add real values in CORE/firebase-config.js to enable login and cloud tracking.', 'error');
+      showToast('Firebase config is pending. Add real values in CORE/firebase-config.js to enable login.', 'error');
       return;
     }
 
@@ -211,7 +200,7 @@ function updateAuthUi() {
   if (!els.authStatus || !els.authActionBtn) return;
 
   if (currentUser) {
-    els.authStatus.textContent = currentUser.displayName || currentUser.email || 'Signed in';
+    els.authStatus.textContent = currentUser.displayName?.split(' ')[0] || 'Aspirant';
     els.authActionBtn.textContent = 'Logout';
     if (els.dashboardLink) els.dashboardLink.classList.remove('hidden');
   } else {
@@ -243,6 +232,14 @@ function getLoginUrl() {
 
 function getUrlMode() {
   return new URLSearchParams(window.location.search).get('mode') || '';
+}
+
+function applySubjectParamFromUrl() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const subjectParam = urlParams.get('subject');
+  if (!subjectParam) return;
+  const matchingTab = document.querySelector(`.tab[data-subject="${cssEscape(subjectParam.toLowerCase())}"]`);
+  if (matchingTab) matchingTab.click();
 }
 
 function shouldRequireLoginForTracking() {
@@ -357,7 +354,7 @@ function getChapterDescription(title, index) {
   const descriptions = [
     'Build accuracy with focused SSC-style objective questions and quick review.',
     'Practice recall, eliminate weak areas, and keep your attempt moving.',
-    'Use bookmarks to flag doubts and return to them before submission.'
+    'Use inline explanations to repair mistakes before the next question.'
   ];
 
   if (/map|world|geo/i.test(title)) {
@@ -389,7 +386,7 @@ function inferSubject(title) {
   if (/map|world|geo/i.test(title)) return 'geography';
   if (/solar|science|system/i.test(title)) return 'science';
   if (/history|ancient|medieval|modern/i.test(title)) return 'history';
-  if (/math|arith|algebra|number|geometry/i.test(title)) return 'math';
+  if (/polity|constitution|parliament|governance|rights/i.test(title)) return 'polity';
   return 'general';
 }
 
@@ -447,7 +444,7 @@ async function launchQuiz(chapterId) {
   }
 
   if (shouldRequireLoginForTracking() && !currentUser) {
-    showToast('Login first so your quiz attempt, score, bookmarks, and revision queue can be saved.', 'error');
+    showToast('Login first so your quiz attempt can be started.', 'error');
     setTimeout(function () {
       window.location.href = getLoginUrl();
     }, 900);
@@ -546,6 +543,8 @@ function beginQuizSession(file, title, quizQuestions, options) {
   currentQuizTitle = title || 'SSC Quiz';
   questions = quizQuestions.slice();
   const catalogItem = getQuizByFile(currentQuizFile);
+  currentChapterName = (questions[0] && questions[0].chapterName) || currentQuizTitle;
+  currentSubject = (questions[0] && questions[0].subject) || labelFromSubject((catalogItem && catalogItem.subject) || inferSubject(currentQuizTitle));
   if (catalogItem) catalogItem.questionCount = questions.length;
   if (isSafeQuizFile(currentQuizFile)) localStorage.setItem('selectedQuizFile', currentQuizFile);
 
@@ -719,138 +718,35 @@ async function fetchQuizData(file) {
   return response.json();
 }
 
-async function launchRevisionQuizFromUrl() {
-  document.body.classList.add('quiz-active');
-  showQuizStatus('Loading your revision queue...');
-  setQuizControlsDisabled(true);
-
-  if (!firebaseApi || !firebaseApi.isFirebaseReady || !firebaseApi.isFirebaseReady()) {
-    showQuizError('Firebase must be configured to load your revision queue.');
-    return;
-  }
-
-  const user = currentUser || await firebaseApi.authReady;
-  currentUser = user;
-  updateAuthUi();
-  if (!user) {
-    showToast('Login first to open your revision queue.', 'error');
-    setTimeout(function () {
-      window.location.href = getLoginUrl();
-    }, 900);
-    return;
-  }
-
-  try {
-    const result = await firebaseApi.getRevisionQueue(user.uid);
-    if (!result.success) throw new Error(result.error || 'Could not load revision queue.');
-    const revisionItems = result.revisionQueue || [];
-    if (!revisionItems.length) {
-      showQuizError('Your revision queue is empty. Add questions with the + Revision button first.');
-      return;
-    }
-
-    const revisionQuestions = await loadRevisionQuestions(revisionItems);
-    if (!revisionQuestions.length) {
-      showQuizError('No matching revision questions were found in the local quiz JSON files.');
-      return;
-    }
-
-    beginQuizSession('revision-queue', 'Revision Queue', revisionQuestions, {
-      updateUrl: false,
-      resume: false,
-      timeLimitSeconds: 0,
-      skipCatalogUpdate: true
-    });
-    const url = new URL(window.location.href);
-    url.searchParams.set('mode', 'revision');
-    url.searchParams.delete('quiz');
-    window.history.replaceState({}, '', url);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  } catch (error) {
-    showQuizError(`Could not start revision quiz: ${error.message}`);
-  } finally {
-    setQuizControlsDisabled(false);
-  }
-}
-
-async function loadRevisionQuestions(revisionItems) {
-  const wanted = new Set(revisionItems.map(function (item) {
-    return revisionKey(item.chapterId || item.chapter, item.questionId);
-  }));
-  const files = getRevisionSourceFiles(revisionItems);
-  const matched = [];
-
-  for (const quiz of files) {
-    try {
-      const data = await fetchQuizData(quiz.file);
-      const normalized = normalizeQuizData(data).map(function (q) {
-        return {
-          ...q,
-          sourceChapterId: quiz.id,
-          sourceChapter: quiz.title,
-          sourceQuizTitle: quiz.title
-        };
-      });
-      normalized.forEach(function (q) {
-        const keys = [
-          revisionKey(quiz.id, q.sr_no),
-          revisionKey(quiz.title, q.sr_no),
-          revisionKey(q.sourceChapter, q.sr_no)
-        ];
-        if (keys.some(function (key) { return wanted.has(key); })) {
-          matched.push(q);
-        }
-      });
-    } catch (error) {
-      console.warn(`Could not load ${quiz.file} for revision mode.`, error);
-    }
-  }
-
-  return matched;
-}
-
-function getRevisionSourceFiles(revisionItems) {
-  const selected = [];
-  const seen = new Set();
-
-  revisionItems.forEach(function (item) {
-    const chapterKey = String(item.chapterId || item.chapter || item.quizTitle || '').toLowerCase();
-    const quiz = quizCatalog.find(function (candidate) {
-      return [candidate.id, candidate.title, candidate.file].some(function (value) {
-        return String(value || '').toLowerCase() === chapterKey;
-      });
-    });
-    if (quiz && !seen.has(quiz.file)) {
-      selected.push(quiz);
-      seen.add(quiz.file);
-    }
-  });
-
-  if (selected.length) return selected;
-  return quizCatalog.filter(function (quiz) { return quiz.file && isSafeQuizFile(quiz.file); });
-}
-
-function revisionKey(chapterId, questionId) {
-  return `${String(chapterId || '').toLowerCase()}::${String(questionId || '')}`;
-}
-
 function normalizeQuizData(data) {
   const list = Array.isArray(data) ? data : data.questions;
   if (!Array.isArray(list)) throw new Error('Quiz JSON must be an array or an object with a questions array.');
+  const meta = Array.isArray(data) ? {} : data;
 
   return list.map(function (item, index) {
     const options = normalizeOptions(item);
+    const answer = normalizeAnswer(item.answer ?? item.correct);
+    const correctIndex = Math.max(0, Number(answer) - 1);
+    const chapterName = item.chapterName || meta.chapterName || meta.title || currentQuizTitle || titleFromFileName(currentQuizFile);
+    const subject = labelFromSubject(item.subject || meta.subject || inferSubject(chapterName));
     return {
-      sr_no: item.sr_no || item.id || index + 1,
+      sr_no: item.sr_no || index + 1,
+      id: String(item.id || `${normalizeSubject(subject)}-${slugify(chapterName)}-${String(index + 1).padStart(3, '0')}`),
       question: item.question || '',
       option1: options[0],
       option2: options[1],
       option3: options[2],
       option4: options[3],
-      answer: normalizeAnswer(item.answer || item.correct),
-      positive_marking: String(item.positive_marking || item.positive || data.positive_marking || '1'),
-      negative_marking: String(item.negative_marking || item.negative || data.negative_marking || '0'),
-      explanation: item.explanation || ''
+      options: options.slice(0, 4),
+      answer: answer,
+      correct: correctIndex,
+      positive_marking: String(item.positive_marking || item.positive || meta.positive_marking || '1'),
+      negative_marking: String(item.negative_marking || item.negative || meta.negative_marking || '0'),
+      explanation: item.explanation || '',
+      subject: subject,
+      chapterName: chapterName,
+      pyq: item.pyq ?? null,
+      difficulty: item.difficulty ?? null
     };
   }).filter(function (item) {
     return item.question && item.option1 && item.option2 && item.option3 && item.option4 && item.answer;
@@ -870,6 +766,9 @@ function normalizeOptions(item) {
 }
 
 function normalizeAnswer(value) {
+  if (Number.isInteger(value)) {
+    return String(value >= 0 && value <= 3 ? value + 1 : value);
+  }
   const answer = String(value || '').trim();
   const letterMap = { a: '1', b: '2', c: '3', d: '4' };
   return letterMap[answer.toLowerCase()] || answer;
@@ -877,8 +776,6 @@ function normalizeAnswer(value) {
 
 function resetAttemptState() {
   answers = {};
-  bookmarks = new Set();
-  revisionQueue = new Set();
   currentQuestion = 0;
   timerSeconds = 0;
   quizSubmitted = false;
@@ -925,7 +822,6 @@ function setQuizControlsDisabled(disabled) {
   els.nextBtn.disabled = disabled || currentQuestion >= questions.length - 1;
   els.clearBtn.disabled = disabled;
   els.submitBtn.disabled = disabled;
-  els.bookmarkBtn.disabled = disabled;
   els.paletteFab.disabled = disabled;
 }
 
@@ -981,22 +877,32 @@ function loadQuestion(index) {
   if (index < 0 || index >= questions.length) return;
   currentQuestion = index;
   const q = questions[currentQuestion];
+  const selectedAnswer = answers[q.sr_no];
+  const hasSelected = Boolean(selectedAnswer);
 
   els.questionCounter.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
-  els.questionText.innerHTML = formatQuestion(q.question);
+  els.questionText.innerHTML = `${buildMetaChips(q)}${formatQuestion(q.question)}`;
   els.optionsContainer.innerHTML = '';
 
   for (let i = 1; i <= 4; i++) {
     const label = document.createElement('label');
     label.className = 'option-label';
-    if (answers[q.sr_no] === String(i)) label.classList.add('selected');
+    const isCorrect = q.answer === String(i);
+    const isSelected = selectedAnswer === String(i);
+    if (isSelected) label.classList.add('selected');
+    if (hasSelected) {
+      label.classList.add('is-disabled');
+      if (isCorrect) label.classList.add('correct');
+      if (isSelected && !isCorrect) label.classList.add('wrong');
+    }
 
     const input = document.createElement('input');
     input.type = 'radio';
     input.name = 'option';
     input.id = `option${i}`;
     input.value = String(i);
-    input.checked = answers[q.sr_no] === String(i);
+    input.checked = isSelected;
+    input.disabled = hasSelected;
 
     const content = document.createElement('div');
     content.className = 'option-content';
@@ -1014,20 +920,17 @@ function loadQuestion(index) {
     label.appendChild(content);
 
     input.addEventListener('change', function () {
-      document.querySelectorAll('.option-label').forEach(function (item) {
-        item.classList.remove('selected');
-      });
-      label.classList.add('selected');
-      saveAnswer();
+      saveAnswer(input.value);
     });
 
     els.optionsContainer.appendChild(label);
   }
 
-  els.bookmarkBtn.classList.toggle('active', bookmarks.has(q.sr_no));
-  els.revisionBtn.classList.toggle('active', revisionQueue.has(q.sr_no));
+  if (hasSelected) renderInlineExplanation(q, selectedAnswer);
+
   els.prevBtn.disabled = currentQuestion === 0;
   els.nextBtn.disabled = currentQuestion === questions.length - 1;
+  els.clearBtn.disabled = hasSelected;
   els.nextBtn.classList.toggle('hidden', currentQuestion === questions.length - 1);
   els.submitBtn.classList.toggle('hidden', currentQuestion !== questions.length - 1);
 
@@ -1036,12 +939,11 @@ function loadQuestion(index) {
   saveToLocalStorage();
 }
 
-function saveAnswer() {
+function saveAnswer(value) {
   const q = questions[currentQuestion];
-  const checked = document.querySelector('input[name="option"]:checked');
-  if (checked) {
-    answers[q.sr_no] = checked.value;
-  }
+  if (!q || answers[q.sr_no]) return;
+  answers[q.sr_no] = value;
+  loadQuestion(currentQuestion);
   updateProgress();
   updatePalette();
   saveToLocalStorage();
@@ -1049,6 +951,7 @@ function saveAnswer() {
 
 function clearAnswer() {
   const q = questions[currentQuestion];
+  if (answers[q.sr_no]) return;
   delete answers[q.sr_no];
   document.querySelectorAll('input[name="option"]').forEach(function (input) {
     input.checked = false;
@@ -1061,54 +964,66 @@ function clearAnswer() {
   saveToLocalStorage();
 }
 
-function toggleBookmark() {
-  const srNo = questions[currentQuestion].sr_no;
-  const q = questions[currentQuestion];
-  const shouldAdd = !bookmarks.has(srNo);
+function renderInlineExplanation(q, selectedAnswer) {
+  const isWrong = selectedAnswer !== q.answer;
+  const feedback = document.createElement('div');
+  feedback.className = 'answer-feedback';
+  feedback.innerHTML = `
+    <div class="inline-explanation">
+      <strong>Explanation</strong>
+      <p>${escHtml(q.explanation || 'No explanation added yet.')}</p>
+    </div>
+    ${isWrong ? '<button id="addRevisionBtn" class="add-revision-btn" type="button">+ Add to Revision</button>' : ''}
+  `;
+  els.optionsContainer.appendChild(feedback);
 
-  if (bookmarks.has(srNo)) {
-    bookmarks.delete(srNo);
-  } else {
-    bookmarks.add(srNo);
-  }
-  els.bookmarkBtn.classList.toggle('active', bookmarks.has(srNo));
-  updatePalette();
-  saveToLocalStorage();
-
-  if (currentUser && firebaseApi && firebaseApi.isFirebaseReady && firebaseApi.isFirebaseReady()) {
-    const record = buildQuestionRecord(q);
-    const action = shouldAdd ? firebaseApi.addBookmark(currentUser.uid, record) : firebaseApi.removeBookmark(currentUser.uid, record);
-    action.then(function (result) {
-      if (!result.success) showToast(result.error, 'error');
-      if (result.success && shouldAdd) showToast('Question bookmarked for revision.', 'success');
+  const addRevisionBtn = document.getElementById('addRevisionBtn');
+  if (addRevisionBtn) {
+    addRevisionBtn.addEventListener('click', function () {
+      addToRevision(buildRevisionQuestion(q));
     });
-  } else if (shouldAdd && shouldRequireLoginForTracking()) {
-    showToast('Login to sync bookmarks across devices.', 'error');
   }
 }
 
-function toggleRevisionItem() {
-  const srNo = questions[currentQuestion].sr_no;
-  const q = questions[currentQuestion];
-  const shouldAdd = !revisionQueue.has(srNo);
+function buildMetaChips(q) {
+  const chips = [];
+  if (q.pyq) chips.push(`<span class="chip chip--pyq">${escHtml(q.pyq)}</span>`);
+  if (q.difficulty) chips.push(`<span class="chip chip--difficulty">${escHtml(labelFromSubject(q.difficulty))}</span>`);
+  return chips.length ? `<div class="meta-chips">${chips.join('')}</div>` : '';
+}
 
-  if (revisionQueue.has(srNo)) {
-    revisionQueue.delete(srNo);
-  } else {
-    revisionQueue.add(srNo);
+function buildRevisionQuestion(q) {
+  return {
+    id: q.id,
+    question: cleanHindi(q.question),
+    options: q.options.map(cleanOption),
+    correct: q.correct,
+    explanation: q.explanation || '',
+    subject: q.subject || currentSubject,
+    chapterName: q.chapterName || currentChapterName,
+    pyq: q.pyq ?? null,
+    difficulty: q.difficulty ?? null
+  };
+}
+
+function addToRevision(question) {
+  let queue = JSON.parse(localStorage.getItem('revisionQueue') || '[]');
+  const exists = queue.some(q => q.id === question.id);
+  const btn = document.getElementById('addRevisionBtn');
+  if (exists) {
+    btn.textContent = '✓ Already in Revision';
+    btn.disabled = true;
+    return;
   }
-
-  els.revisionBtn.classList.toggle('active', revisionQueue.has(srNo));
-  saveToLocalStorage();
-
-  if (shouldAdd && currentUser && firebaseApi && firebaseApi.addRevisionItem && firebaseApi.isFirebaseReady()) {
-    firebaseApi.addRevisionItem(currentUser.uid, buildQuestionRecord(q)).then(function (result) {
-      if (result.success) showToast('Added to revision queue.', 'success');
-      else showToast(result.error, 'error');
-    });
-  } else if (shouldAdd && shouldRequireLoginForTracking()) {
-    showToast('Login to sync your revision queue.', 'error');
-  }
+  queue.push({
+    ...question,
+    addedOn: new Date().toISOString().split('T')[0],
+    nextReview: new Date(Date.now() + 86400000).toISOString().split('T')[0],
+    reviewCount: 0
+  });
+  localStorage.setItem('revisionQueue', JSON.stringify(queue));
+  btn.textContent = '✓ Added to Revision';
+  btn.disabled = true;
 }
 
 function buildQuestionRecord(q) {
@@ -1137,16 +1052,16 @@ function buildQuestionRecord(q) {
 function updateProgress() {
   if (!questions.length) {
     els.progressBar.style.width = '0%';
-    els.progressText.textContent = '0/0';
-    els.attemptedText.textContent = '0';
+    els.progressText.textContent = 'Q 0 / 0';
+    if (els.attemptedText) els.attemptedText.textContent = '0';
     updateDashboardStats();
     return;
   }
 
   const progress = ((currentQuestion + 1) / questions.length) * 100;
   els.progressBar.style.width = `${progress}%`;
-  els.progressText.textContent = `${currentQuestion + 1}/${questions.length}`;
-  els.attemptedText.textContent = Object.keys(answers).length;
+  els.progressText.textContent = `Q ${currentQuestion + 1} / ${questions.length}`;
+  if (els.attemptedText) els.attemptedText.textContent = Object.keys(answers).length;
   updateDashboardStats();
 }
 
@@ -1190,8 +1105,6 @@ function handleKeyboard(e) {
 
   if (e.key === 'ArrowLeft') prevQuestion();
   if (e.key === 'ArrowRight' || e.key === 'Enter') nextQuestion();
-  if (e.key.toLowerCase() === 'b') toggleBookmark();
-  if (e.key.toLowerCase() === 'r') toggleRevisionItem();
   if (e.key.toLowerCase() === 'c') clearAnswer();
   if (e.key.toLowerCase() === 'p') togglePalette();
   if (['1', '2', '3', '4'].includes(e.key)) selectOption(e.key);
@@ -1220,14 +1133,6 @@ function updateTimerDisplay() {
   const seconds = displaySeconds % 60;
   els.timer.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
   els.timer.classList.toggle('warning', quizTimeLimitSeconds ? displaySeconds <= 60 : timerSeconds > 600);
-}
-
-function toggleTheme() {
-  const current = document.documentElement.getAttribute('data-theme') || 'dark';
-  const next = current === 'dark' ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', next);
-  localStorage.setItem('quizTheme', next);
-  els.themeToggle.textContent = next === 'dark' ? 'Light' : 'Dark';
 }
 
 function toggleFullscreen() {
@@ -1259,10 +1164,8 @@ function updatePalette() {
   if (!els.paletteGrid || !els.paletteGrid.children.length) return;
 
   const answered = Object.keys(answers).length;
-  const bookmarked = bookmarks.size;
   els.paletteAnswered.textContent = answered;
   els.paletteNotAnswered.textContent = questions.length - answered;
-  els.paletteBookmarked.textContent = bookmarked;
   els.paletteBadge.textContent = answered;
 
   Array.from(els.paletteGrid.children).forEach(function (btn, index) {
@@ -1270,7 +1173,6 @@ function updatePalette() {
     btn.className = 'palette-btn';
     if (answers[q.sr_no]) btn.classList.add('answered');
     if (index === currentQuestion) btn.classList.add('current');
-    if (bookmarks.has(q.sr_no)) btn.classList.add('bookmarked');
   });
 }
 
@@ -1302,8 +1204,6 @@ function saveToLocalStorage() {
   const state = {
     currentQuestion: currentQuestion,
     answers: answers,
-    bookmarks: Array.from(bookmarks),
-    revisionQueue: Array.from(revisionQueue),
     timerSeconds: timerSeconds,
     timestamp: Date.now()
   };
@@ -1320,8 +1220,6 @@ function loadFromLocalStorage() {
     if (age < 24 * 60 * 60 * 1000) {
       if (confirm('Resume your saved quiz attempt?')) {
         answers = state.answers || {};
-        bookmarks = new Set(state.bookmarks || []);
-        revisionQueue = new Set(state.revisionQueue || []);
         timerSeconds = Number(state.timerSeconds) || 0;
         currentQuestion = Math.min(Math.max(Number(state.currentQuestion) || 0, 0), questions.length - 1);
         updateTimerDisplay();
@@ -1360,7 +1258,8 @@ function submitQuiz() {
   els.resultSection.innerHTML = buildResultsHtml(result);
   els.resultSection.classList.remove('hidden');
   bindResultActions();
-  persistQuizAttempt(result);
+  updateStats(result.correct + result.wrong, result.correct);
+  setSaveStatus('Progress saved on this device.', 'success');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -1389,8 +1288,6 @@ function calculateQuizResult() {
   const scorePercentage = totalMarks ? (score / totalMarks) * 100 : 0;
   const answered = correct + wrong;
   const accuracy = answered ? (correct / answered) * 100 : 0;
-  const bookmarkedQuestions = questions.filter(function (q) { return bookmarks.has(q.sr_no); }).map(buildQuestionRecord);
-  const revisionQuestions = questions.filter(function (q) { return revisionQueue.has(q.sr_no); }).map(buildQuestionRecord);
 
   return {
     correct: correct,
@@ -1402,9 +1299,7 @@ function calculateQuizResult() {
     scorePercentage: scorePercentage,
     accuracy: accuracy,
     timeTaken: timerSeconds,
-    wrongAnswers: wrongAnswers,
-    bookmarkedQuestions: bookmarkedQuestions,
-    revisionQuestions: revisionQuestions
+    wrongAnswers: wrongAnswers
   };
 }
 
@@ -1473,10 +1368,6 @@ function buildReviewItem(q) {
       </div>
       ${optionsHtml}
       ${explanationHtml}
-      <div class="review-actions">
-        <button class="review-mini-btn" type="button" data-review-action="bookmark" data-question-id="${escHtml(q.sr_no)}">Save Bookmark</button>
-        <button class="review-mini-btn" type="button" data-review-action="revision" data-question-id="${escHtml(q.sr_no)}">Add to Revision</button>
-      </div>
     </div>
   `;
 }
@@ -1485,27 +1376,6 @@ function bindResultActions() {
   els.resultSection.querySelectorAll('[data-result-filter]').forEach(function (button) {
     button.addEventListener('click', function () {
       applyResultFilter(button.dataset.resultFilter);
-    });
-  });
-
-  els.resultSection.querySelectorAll('[data-review-action]').forEach(function (button) {
-    button.addEventListener('click', function () {
-      const q = questions.find(function (item) {
-        return String(item.sr_no) === String(button.dataset.questionId);
-      });
-      if (!q) return;
-
-      const action = button.dataset.reviewAction;
-      if (action === 'bookmark') {
-        bookmarks.add(q.sr_no);
-        saveToLocalStorage();
-        saveQuestionBookmark(q, button);
-      }
-      if (action === 'revision') {
-        revisionQueue.add(q.sr_no);
-        saveToLocalStorage();
-        saveQuestionRevision(q, button);
-      }
     });
   });
 }
@@ -1522,81 +1392,49 @@ function applyResultFilter(filter) {
   if (title) title.textContent = showMistakesOnly ? 'Mistake Review' : 'Question Review';
 }
 
-async function persistQuizAttempt(result) {
-  if (!firebaseApi || !firebaseApi.isFirebaseReady || !firebaseApi.isFirebaseReady()) {
-    setSaveStatus('Firebase is not configured yet. Result is shown locally; add config to enable cloud tracking.', 'error');
-    return;
-  }
+function updateStats(totalAnswered, correctAnswers) {
+  let totalQ = parseInt(localStorage.getItem('totalQuestions') || '0');
+  let totalQuizzes = parseInt(localStorage.getItem('totalQuizzes') || '0');
+  let correct = parseInt(localStorage.getItem('totalCorrect') || '0') + correctAnswers;
 
-  if (!currentUser) {
-    setSaveStatus('Login required to save this result to your dashboard.', 'error');
-    return;
-  }
+  localStorage.setItem('totalQuestions', totalQ + totalAnswered);
+  localStorage.setItem('totalQuizzes', totalQuizzes + 1);
+  localStorage.setItem('totalCorrect', correct);
 
-  const quiz = getQuizByFile(currentQuizFile);
-  const payload = {
-    chapter: currentQuizTitle,
-    chapterId: quiz ? quiz.id : slugify(currentQuizTitle),
-    quizTitle: currentQuizTitle,
-    score: result.score,
-    totalMarks: result.totalMarks,
-    correct: result.correct,
-    wrong: result.wrong,
-    unattempted: result.unattempted,
-    totalQuestions: result.totalQuestions,
-    accuracy: Number(result.accuracy.toFixed(2)),
-    timeTaken: result.timeTaken,
-    wrongAnswers: result.wrongAnswers,
-    bookmarkedQuestions: result.bookmarkedQuestions,
-    revisionQuestions: result.revisionQuestions
-  };
+  const attemptedTotal = totalQ + totalAnswered;
+  const accuracy = attemptedTotal ? Math.round((correct / attemptedTotal) * 100) : 0;
+  localStorage.setItem('accuracy', accuracy);
 
-  const attemptResult = await firebaseApi.saveQuizAttempt(currentUser.uid, payload);
-  if (!attemptResult.success) {
-    setSaveStatus(attemptResult.error || 'Could not save quiz attempt.', 'error');
-    return;
-  }
+  updateStreak();
 
-  await Promise.all([
-    ...result.bookmarkedQuestions.map(function (item) { return firebaseApi.addBookmark(currentUser.uid, item); }),
-    ...result.revisionQuestions.map(function (item) { return firebaseApi.addRevisionItem(currentUser.uid, item); })
-  ]);
-
-  setSaveStatus('Attempt saved to dashboard with score, accuracy, wrong answers, time taken, bookmarks, and revision items.', 'success');
+  localStorage.setItem('lastAttempted', JSON.stringify({
+    chapterName: currentChapterName,
+    subject: currentSubject,
+    progress: totalAnswered ? Math.round((correctAnswers / totalAnswered) * 100) : 0,
+    url: window.location.href
+  }));
 }
 
-function saveQuestionBookmark(q, button) {
-  if (!currentUser || !firebaseApi || !firebaseApi.addBookmark || !firebaseApi.isFirebaseReady()) {
-    showToast('Login to sync this bookmark to your dashboard.', 'error');
-    return;
-  }
+function updateStreak() {
+  const today = new Date().toISOString().split('T')[0];
+  const lastDate = localStorage.getItem('lastStreakDate');
+  if (lastDate === today) return;
 
-  firebaseApi.addBookmark(currentUser.uid, buildQuestionRecord(q)).then(function (result) {
-    if (result.success) {
-      button.textContent = 'Bookmarked';
-      button.disabled = true;
-      showToast('Bookmark saved.', 'success');
-    } else {
-      showToast(result.error, 'error');
-    }
-  });
-}
+  let streak = parseInt(localStorage.getItem('streakCount') || '0');
+  let days = JSON.parse(localStorage.getItem('streakDays') ||
+    '[false,false,false,false,false,false,false]');
+  const dayIndex = new Date().getDay();
 
-function saveQuestionRevision(q, button) {
-  if (!currentUser || !firebaseApi || !firebaseApi.addRevisionItem || !firebaseApi.isFirebaseReady()) {
-    showToast('Login to sync this revision item to your dashboard.', 'error');
-    return;
-  }
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+  const wasYesterday = lastDate === yesterday.toISOString().split('T')[0];
 
-  firebaseApi.addRevisionItem(currentUser.uid, buildQuestionRecord(q)).then(function (result) {
-    if (result.success) {
-      button.textContent = 'Added';
-      button.disabled = true;
-      showToast('Revision item saved.', 'success');
-    } else {
-      showToast(result.error, 'error');
-    }
-  });
+  streak = wasYesterday ? streak + 1 : 1;
+  days[dayIndex] = true;
+
+  localStorage.setItem('streakCount', streak);
+  localStorage.setItem('streakDays', JSON.stringify(days));
+  localStorage.setItem('lastStreakDate', today);
 }
 
 function setSaveStatus(message, type) {
@@ -1728,6 +1566,11 @@ function cleanOption(text) {
 function escHtml(t) {
   return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;')
                   .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function cssEscape(value) {
+  if (window.CSS && typeof window.CSS.escape === 'function') return window.CSS.escape(value);
+  return String(value || '').replace(/[^a-zA-Z0-9_-]/g, '');
 }
 
 function showToast(message, type) {

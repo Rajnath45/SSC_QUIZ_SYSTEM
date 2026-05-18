@@ -227,8 +227,8 @@ if (currentUser) {
    - Go to [netlify.com](https://netlify.com)
    - Click **Add new site** → **Import an existing project**
    - Connect GitHub repository
-   - Build command: `mkdir -p CORE/QUIZZES && cp QUIZZES/*.json CORE/QUIZZES/`
-   - Publish directory: `CORE`
+   - Build command: leave empty
+   - Publish directory: `.`
    - Click **Deploy**
 
 3. **Configure Environment Variables** (Optional)

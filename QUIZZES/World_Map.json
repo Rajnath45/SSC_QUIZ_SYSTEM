@@ -1,904 +1,962 @@
-{
-  "questions": [
+[
     {
-      "id": 1,
-      "type": "MCQ",
-      "topic": "Continents — Area Rankings",
-      "difficulty": "easy",
-      "question": "Which of the following is the third largest continent in the world by area?",
-      "options": {
-        "a": "South America",
-        "b": "Europe",
-        "c": "Africa",
-        "d": "North America"
-      },
-      "correct": "d",
-      "explanation": "Continents ranked by area: Asia > Africa > North America > South America > Antarctica > Europe > Australia/Oceania. North America ranks third; Africa is second — a common confusion."
+        "id":  "geo-ch01-001",
+        "question":  "Which of the following is the third largest continent in the world by area?",
+        "options":  [
+                        "South America",
+                        "Europe",
+                        "Africa",
+                        "North America"
+                    ],
+        "correct":  3,
+        "explanation":  "Continents ranked by area: Asia \u003e Africa \u003e North America \u003e South America \u003e Antarctica \u003e Europe \u003e Australia/Oceania. North America ranks third; Africa is second â€” a common confusion.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Easy"
     },
     {
-      "id": 2,
-      "type": "Statement",
-      "topic": "Continents — Population Rankings",
-      "difficulty": "easy",
-      "question": "Statement I: Asia is the most populous continent in the world.\n\nStatement II: Africa ranks second in population among all continents.",
-      "options": {
-        "a": "Only Statement I is correct",
-        "b": "Only Statement II is correct",
-        "c": "Both Statement I and Statement II are correct",
-        "d": "Neither Statement I nor Statement II is correct"
-      },
-      "correct": "c",
-      "explanation": "Both statements are correct. Population ranking by continent: Asia (1st) > Africa (2nd) > Europe (3rd) > North America (4th). Asia leads in both area and population."
+        "id":  "geo-ch01-002",
+        "question":  "Statement I: Asia is the most populous continent in the world.\n\nStatement II: Africa ranks second in population among all continents.",
+        "options":  [
+                        "Only Statement I is correct",
+                        "Only Statement II is correct",
+                        "Both Statement I and Statement II are correct",
+                        "Neither Statement I nor Statement II is correct"
+                    ],
+        "correct":  2,
+        "explanation":  "Both statements are correct. Population ranking by continent: Asia (1st) \u003e Africa (2nd) \u003e Europe (3rd) \u003e North America (4th). Asia leads in both area and population.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Easy"
     },
     {
-      "id": 3,
-      "type": "MCQ",
-      "topic": "Southeast Asia — Indonesia",
-      "difficulty": "easy",
-      "question": "What is the new capital of Indonesia, which replaced Jakarta?",
-      "options": {
-        "a": "Surabaya",
-        "b": "Nusantara",
-        "c": "Bali",
-        "d": "Bandung"
-      },
-      "correct": "b",
-      "explanation": "Indonesia's new capital is Nusantara. Jakarta was the old capital. Surabaya, Bali, and Bandung are major Indonesian cities but not the new capital."
+        "id":  "geo-ch01-003",
+        "question":  "What is the new capital of Indonesia, which replaced Jakarta?",
+        "options":  [
+                        "Surabaya",
+                        "Nusantara",
+                        "Bali",
+                        "Bandung"
+                    ],
+        "correct":  1,
+        "explanation":  "Indonesia\u0027s new capital is Nusantara. Jakarta was the old capital. Surabaya, Bali, and Bandung are major Indonesian cities but not the new capital.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Easy"
     },
     {
-      "id": 4,
-      "type": "MCQ",
-      "topic": "Southeast Asia — Straits",
-      "difficulty": "medium",
-      "question": "The Strait of Malacca connects which two water bodies?",
-      "options": {
-        "a": "Indian Ocean and South China Sea",
-        "b": "Bay of Bengal and Andaman Sea",
-        "c": "South China Sea and Andaman Sea",
-        "d": "Java Sea and Indian Ocean"
-      },
-      "correct": "c",
-      "explanation": "The Strait of Malacca connects the South China Sea and the Andaman Sea, separating Malaysia from Indonesia. The Sunda Strait — not the Malacca — connects the Java Sea to the Indian Ocean."
+        "id":  "geo-ch01-004",
+        "question":  "The Strait of Malacca connects which two water bodies?",
+        "options":  [
+                        "Indian Ocean and South China Sea",
+                        "Bay of Bengal and Andaman Sea",
+                        "South China Sea and Andaman Sea",
+                        "Java Sea and Indian Ocean"
+                    ],
+        "correct":  2,
+        "explanation":  "The Strait of Malacca connects the South China Sea and the Andaman Sea, separating Malaysia from Indonesia. The Sunda Strait â€” not the Malacca â€” connects the Java Sea to the Indian Ocean.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 5,
-      "type": "AssertionReason",
-      "topic": "Southwest Asia — Iraq",
-      "difficulty": "hard",
-      "question": "Assertion (A): Iraq was historically known as Mesopotamia, meaning 'the land between two rivers.'\n\nReason (R): Iraq is situated between the Tigris and Euphrates rivers, which flow through its territory.",
-      "options": {
-        "a": "Both A and R are true, and R is the correct explanation of A",
-        "b": "Both A and R are true, but R is NOT the correct explanation of A",
-        "c": "A is true but R is false",
-        "d": "A is false but R is true"
-      },
-      "correct": "a",
-      "explanation": "Both A and R are true. The name 'Mesopotamia' derives from Greek meaning 'land between two rivers,' directly referring to the Tigris and Euphrates — which is precisely what R states, making R the correct explanation of A."
+        "id":  "geo-ch01-005",
+        "question":  "Assertion (A): Iraq was historically known as Mesopotamia, meaning \u0027the land between two rivers.\u0027\n\nReason (R): Iraq is situated between the Tigris and Euphrates rivers, which flow through its territory.",
+        "options":  [
+                        "Both A and R are true, and R is the correct explanation of A",
+                        "Both A and R are true, but R is NOT the correct explanation of A",
+                        "A is true but R is false",
+                        "A is false but R is true"
+                    ],
+        "correct":  0,
+        "explanation":  "Both A and R are true. The name \u0027Mesopotamia\u0027 derives from Greek meaning \u0027land between two rivers,\u0027 directly referring to the Tigris and Euphrates â€” which is precisely what R states, making R the correct explanation of A.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Hard"
     },
     {
-      "id": 6,
-      "type": "Match",
-      "topic": "Southeast Asia — Capitals",
-      "difficulty": "medium",
-      "question": "Match the following:\n\nColumn I\nI. Thailand\nII. Myanmar\nIII. Laos\nIV. Vietnam\n\nColumn II\nP. Naypyidaw\nQ. Bangkok\nR. Hanoi\nS. Vientiane",
-      "options": {
-        "a": "I-P, II-Q, III-R, IV-S",
-        "b": "I-Q, II-P, III-S, IV-R",
-        "c": "I-R, II-S, III-P, IV-Q",
-        "d": "I-S, II-R, III-Q, IV-P"
-      },
-      "correct": "b",
-      "explanation": "Thailand — Bangkok; Myanmar (earlier known as Burma) — Naypyidaw; Laos (a landlocked country) — Vientiane; Vietnam — Hanoi."
+        "id":  "geo-ch01-006",
+        "question":  "Match the following:\n\nColumn I\nI. Thailand\nII. Myanmar\nIII. Laos\nIV. Vietnam\n\nColumn II\nP. Naypyidaw\nQ. Bangkok\nR. Hanoi\nS. Vientiane",
+        "options":  [
+                        "I-P, II-Q, III-R, IV-S",
+                        "I-Q, II-P, III-S, IV-R",
+                        "I-R, II-S, III-P, IV-Q",
+                        "I-S, II-R, III-Q, IV-P"
+                    ],
+        "correct":  1,
+        "explanation":  "Thailand â€” Bangkok; Myanmar (earlier known as Burma) â€” Naypyidaw; Laos (a landlocked country) â€” Vientiane; Vietnam â€” Hanoi.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 7,
-      "type": "MCQ",
-      "topic": "East Asia — Japan",
-      "difficulty": "easy",
-      "question": "Which is the largest island of Japan?",
-      "options": {
-        "a": "Hokkaido",
-        "b": "Kyushu",
-        "c": "Shikoku",
-        "d": "Honshu"
-      },
-      "correct": "d",
-      "explanation": "Honshu is the largest island of Japan, where the capital Tokyo is located. Hokkaido is the second largest, while Kyushu and Shikoku are considerably smaller."
+        "id":  "geo-ch01-007",
+        "question":  "Which is the largest island of Japan?",
+        "options":  [
+                        "Hokkaido",
+                        "Kyushu",
+                        "Shikoku",
+                        "Honshu"
+                    ],
+        "correct":  3,
+        "explanation":  "Honshu is the largest island of Japan, where the capital Tokyo is located. Hokkaido is the second largest, while Kyushu and Shikoku are considerably smaller.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Easy"
     },
     {
-      "id": 8,
-      "type": "Statement",
-      "topic": "East Asia — Taiwan and North Korea",
-      "difficulty": "medium",
-      "question": "Statement I: Taiwan was earlier known as Formosa.\n\nStatement II: The capital of North Korea is Seoul.",
-      "options": {
-        "a": "Only Statement I is correct",
-        "b": "Only Statement II is correct",
-        "c": "Both Statement I and Statement II are correct",
-        "d": "Neither Statement I nor Statement II is correct"
-      },
-      "correct": "a",
-      "explanation": "Statement I is correct — Taiwan was historically known as Formosa, with its capital at Taipei. Statement II is false — Seoul is the capital of South Korea; the capital of North Korea is Pyongyang."
+        "id":  "geo-ch01-008",
+        "question":  "Statement I: Taiwan was earlier known as Formosa.\n\nStatement II: The capital of North Korea is Seoul.",
+        "options":  [
+                        "Only Statement I is correct",
+                        "Only Statement II is correct",
+                        "Both Statement I and Statement II are correct",
+                        "Neither Statement I nor Statement II is correct"
+                    ],
+        "correct":  0,
+        "explanation":  "Statement I is correct â€” Taiwan was historically known as Formosa, with its capital at Taipei. Statement II is false â€” Seoul is the capital of South Korea; the capital of North Korea is Pyongyang.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 9,
-      "type": "MCQ",
-      "topic": "Asia — Trans-Siberian Railway",
-      "difficulty": "easy",
-      "question": "The Trans-Siberian Railway, the world's longest rail link, has an approximate length of ______ km.",
-      "options": {
-        "a": "7,200",
-        "b": "8,500",
-        "c": "10,200",
-        "d": "9,289"
-      },
-      "correct": "d",
-      "explanation": "The Trans-Siberian Railway is 9,289 km (5,772 miles) long, connecting Vladivostok and Siberia. It is the world's longest rail link."
+        "id":  "geo-ch01-009",
+        "question":  "The Trans-Siberian Railway, the world\u0027s longest rail link, has an approximate length of ______ km.",
+        "options":  [
+                        "7,200",
+                        "8,500",
+                        "10,200",
+                        "9,289"
+                    ],
+        "correct":  3,
+        "explanation":  "The Trans-Siberian Railway is 9,289 km (5,772 miles) long, connecting Vladivostok and Siberia. It is the world\u0027s longest rail link.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Easy"
     },
     {
-      "id": 10,
-      "type": "MCQ",
-      "topic": "Central Asia — Doubly Landlocked Countries",
-      "difficulty": "medium",
-      "question": "Which of the following countries in Asia is classified as a doubly landlocked nation — surrounded entirely by other landlocked countries?",
-      "options": {
-        "a": "Mongolia",
-        "b": "Uzbekistan",
-        "c": "Kazakhstan",
-        "d": "Afghanistan"
-      },
-      "correct": "b",
-      "explanation": "Uzbekistan is one of only two doubly landlocked countries in the world (the other being Liechtenstein in Europe). Mongolia, Kazakhstan, and Afghanistan are landlocked but each shares a border with at least one country having sea access."
+        "id":  "geo-ch01-010",
+        "question":  "Which of the following countries in Asia is classified as a doubly landlocked nation â€” surrounded entirely by other landlocked countries?",
+        "options":  [
+                        "Mongolia",
+                        "Uzbekistan",
+                        "Kazakhstan",
+                        "Afghanistan"
+                    ],
+        "correct":  1,
+        "explanation":  "Uzbekistan is one of only two doubly landlocked countries in the world (the other being Liechtenstein in Europe). Mongolia, Kazakhstan, and Afghanistan are landlocked but each shares a border with at least one country having sea access.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 11,
-      "type": "MCQ",
-      "topic": "Straits — Bab-al-Mandab",
-      "difficulty": "easy",
-      "question": "Which of the following straits is also known as the 'Gateway of Grief' or the 'Gateway of Tears'?",
-      "options": {
-        "a": "Kerch Strait",
-        "b": "Strait of Hormuz",
-        "c": "Palk Strait",
-        "d": "Bab-al-Mandab Strait"
-      },
-      "correct": "d",
-      "explanation": "The Bab-al-Mandab Strait is known as the Gateway of Grief or Gateway of Tears. It connects the Red Sea to the Gulf of Aden."
+        "id":  "geo-ch01-011",
+        "question":  "Which of the following straits is also known as the \u0027Gateway of Grief\u0027 or the \u0027Gateway of Tears\u0027?",
+        "options":  [
+                        "Kerch Strait",
+                        "Strait of Hormuz",
+                        "Palk Strait",
+                        "Bab-al-Mandab Strait"
+                    ],
+        "correct":  3,
+        "explanation":  "The Bab-al-Mandab Strait is known as the Gateway of Grief or Gateway of Tears. It connects the Red Sea to the Gulf of Aden.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Easy"
     },
     {
-      "id": 12,
-      "type": "MCQ",
-      "topic": "Southeast Asia — Straits",
-      "difficulty": "medium",
-      "question": "The Sunda Strait connects the Java Sea to the Indian Ocean and separates which two Indonesian islands?",
-      "options": {
-        "a": "Sumatra and Java",
-        "b": "Java and Kalimantan",
-        "c": "Sumatra and Sulawesi",
-        "d": "Java and Bali"
-      },
-      "correct": "a",
-      "explanation": "The Sunda Strait separates the Indonesian islands of Sumatra and Java. The Strait of Malacca, by contrast, separates Malaysia from Indonesia (Sumatra)."
+        "id":  "geo-ch01-012",
+        "question":  "The Sunda Strait connects the Java Sea to the Indian Ocean and separates which two Indonesian islands?",
+        "options":  [
+                        "Sumatra and Java",
+                        "Java and Kalimantan",
+                        "Sumatra and Sulawesi",
+                        "Java and Bali"
+                    ],
+        "correct":  0,
+        "explanation":  "The Sunda Strait separates the Indonesian islands of Sumatra and Java. The Strait of Malacca, by contrast, separates Malaysia from Indonesia (Sumatra).",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 13,
-      "type": "Match",
-      "topic": "Straits — World",
-      "difficulty": "medium",
-      "question": "Match the following:\n\nColumn I\nI. Strait of Hormuz\nII. Bab-al-Mandab\nIII. Palk Strait\nIV. Bosphorus Strait\n\nColumn II\nP. Red Sea and Gulf of Aden\nQ. Persian Gulf and Gulf of Oman\nR. Black Sea and Sea of Marmara\nS. Bay of Bengal and Gulf of Mannar",
-      "options": {
-        "a": "I-P, II-Q, III-R, IV-S",
-        "b": "I-Q, II-P, III-S, IV-R",
-        "c": "I-R, II-S, III-P, IV-Q",
-        "d": "I-S, II-R, III-Q, IV-P"
-      },
-      "correct": "b",
-      "explanation": "Strait of Hormuz — Persian Gulf to Gulf of Oman; Bab-al-Mandab — Red Sea to Gulf of Aden; Palk Strait — Bay of Bengal to Gulf of Mannar (separates India and Sri Lanka); Bosphorus Strait — Black Sea to Sea of Marmara."
+        "id":  "geo-ch01-013",
+        "question":  "Match the following:\n\nColumn I\nI. Strait of Hormuz\nII. Bab-al-Mandab\nIII. Palk Strait\nIV. Bosphorus Strait\n\nColumn II\nP. Red Sea and Gulf of Aden\nQ. Persian Gulf and Gulf of Oman\nR. Black Sea and Sea of Marmara\nS. Bay of Bengal and Gulf of Mannar",
+        "options":  [
+                        "I-P, II-Q, III-R, IV-S",
+                        "I-Q, II-P, III-S, IV-R",
+                        "I-R, II-S, III-P, IV-Q",
+                        "I-S, II-R, III-Q, IV-P"
+                    ],
+        "correct":  1,
+        "explanation":  "Strait of Hormuz â€” Persian Gulf to Gulf of Oman; Bab-al-Mandab â€” Red Sea to Gulf of Aden; Palk Strait â€” Bay of Bengal to Gulf of Mannar (separates India and Sri Lanka); Bosphorus Strait â€” Black Sea to Sea of Marmara.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 14,
-      "type": "MCQ",
-      "topic": "Caspian Sea — Bordering Countries",
-      "difficulty": "medium",
-      "question": "Which of the following countries does NOT share a border with the Caspian Sea?",
-      "options": {
-        "a": "Russia",
-        "b": "Uzbekistan",
-        "c": "Iran",
-        "d": "Kazakhstan"
-      },
-      "correct": "b",
-      "explanation": "The five countries bordering the Caspian Sea are Turkmenistan, Azerbaijan, Russia, Iran, and Kazakhstan (mnemonic: TARIK). Uzbekistan is a Central Asian landlocked country but does not border the Caspian Sea."
+        "id":  "geo-ch01-014",
+        "question":  "Which of the following countries does NOT share a border with the Caspian Sea?",
+        "options":  [
+                        "Russia",
+                        "Uzbekistan",
+                        "Iran",
+                        "Kazakhstan"
+                    ],
+        "correct":  1,
+        "explanation":  "The five countries bordering the Caspian Sea are Turkmenistan, Azerbaijan, Russia, Iran, and Kazakhstan (mnemonic: TARIK). Uzbekistan is a Central Asian landlocked country but does not border the Caspian Sea.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 15,
-      "type": "Statement",
-      "topic": "Africa — Nile River",
-      "difficulty": "medium",
-      "question": "Statement I: The Nile River is the longest river in the world and empties into the Mediterranean Sea.\n\nStatement II: The Blue Nile originates from Lake Victoria in Tanzania.",
-      "options": {
-        "a": "Only Statement I is correct",
-        "b": "Only Statement II is correct",
-        "c": "Both Statement I and Statement II are correct",
-        "d": "Neither Statement I nor Statement II is correct"
-      },
-      "correct": "a",
-      "explanation": "Statement I is correct. Statement II is false — the Blue Nile originates from Lake Tana in Ethiopia; it is the White Nile that originates from Lake Victoria in Tanzania."
+        "id":  "geo-ch01-015",
+        "question":  "Statement I: The Nile River is the longest river in the world and empties into the Mediterranean Sea.\n\nStatement II: The Blue Nile originates from Lake Victoria in Tanzania.",
+        "options":  [
+                        "Only Statement I is correct",
+                        "Only Statement II is correct",
+                        "Both Statement I and Statement II are correct",
+                        "Neither Statement I nor Statement II is correct"
+                    ],
+        "correct":  0,
+        "explanation":  "Statement I is correct. Statement II is false â€” the Blue Nile originates from Lake Tana in Ethiopia; it is the White Nile that originates from Lake Victoria in Tanzania.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 16,
-      "type": "MCQ",
-      "topic": "South America — Andes Mountains",
-      "difficulty": "medium",
-      "question": "Which mountain range is the longest continuous chain on land, running along the western coast of South America?",
-      "options": {
-        "a": "Rocky Mountains",
-        "b": "Andes Mountains",
-        "c": "Himalayas",
-        "d": "Atlas Mountains"
-      },
-      "correct": "b",
-      "explanation": "The Andes is the longest mountain range on land, spanning the western coast of South America across seven countries (Venezuela, Colombia, Ecuador, Peru, Bolivia, Chile, Argentina). It is a Young Fold mountain range."
+        "id":  "geo-ch01-016",
+        "question":  "Which mountain range is the longest continuous chain on land, running along the western coast of South America?",
+        "options":  [
+                        "Rocky Mountains",
+                        "Andes Mountains",
+                        "Himalayas",
+                        "Atlas Mountains"
+                    ],
+        "correct":  1,
+        "explanation":  "The Andes is the longest mountain range on land, spanning the western coast of South America across seven countries (Venezuela, Colombia, Ecuador, Peru, Bolivia, Chile, Argentina). It is a Young Fold mountain range.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 17,
-      "type": "MCQ",
-      "topic": "South America — Mt. Aconcagua",
-      "difficulty": "easy",
-      "question": "Mt. Aconcagua, the highest peak of the Andes located in Argentina, has an elevation of approximately ______ m.",
-      "options": {
-        "a": "6,960",
-        "b": "8,848",
-        "c": "5,642",
-        "d": "7,200"
-      },
-      "correct": "a",
-      "explanation": "Mt. Aconcagua stands at approximately 6,960 m. Option (b) 8,848 m is Mt. Everest's height; option (c) 5,642 m is the height of Mt. Elbrus, the highest peak of Europe."
+        "id":  "geo-ch01-017",
+        "question":  "Mt. Aconcagua, the highest peak of the Andes located in Argentina, has an elevation of approximately ______ m.",
+        "options":  [
+                        "6,960",
+                        "8,848",
+                        "5,642",
+                        "7,200"
+                    ],
+        "correct":  0,
+        "explanation":  "Mt. Aconcagua stands at approximately 6,960 m. Option (b) 8,848 m is Mt. Everest\u0027s height; option (c) 5,642 m is the height of Mt. Elbrus, the highest peak of Europe.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Easy"
     },
     {
-      "id": 18,
-      "type": "Match",
-      "topic": "World — Cities on Rivers",
-      "difficulty": "medium",
-      "question": "Match the following:\n\nColumn I\nI. Budapest\nII. Moscow\nIII. Paris\nIV. Baghdad\n\nColumn II\nP. Tigris\nQ. Seine\nR. Danube\nS. Moskva",
-      "options": {
-        "a": "I-P, II-Q, III-R, IV-S",
-        "b": "I-Q, II-P, III-S, IV-R",
-        "c": "I-R, II-S, III-Q, IV-P",
-        "d": "I-S, II-R, III-Q, IV-P"
-      },
-      "correct": "c",
-      "explanation": "Budapest is on the Danube; Moscow is on the Moskva River; Paris is on the Seine; Baghdad is on the Tigris River."
+        "id":  "geo-ch01-018",
+        "question":  "Match the following:\n\nColumn I\nI. Budapest\nII. Moscow\nIII. Paris\nIV. Baghdad\n\nColumn II\nP. Tigris\nQ. Seine\nR. Danube\nS. Moskva",
+        "options":  [
+                        "I-P, II-Q, III-R, IV-S",
+                        "I-Q, II-P, III-S, IV-R",
+                        "I-R, II-S, III-Q, IV-P",
+                        "I-S, II-R, III-Q, IV-P"
+                    ],
+        "correct":  2,
+        "explanation":  "Budapest is on the Danube; Moscow is on the Moskva River; Paris is on the Seine; Baghdad is on the Tigris River.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 19,
-      "type": "AssertionReason",
-      "topic": "Africa — Latitudes",
-      "difficulty": "hard",
-      "question": "Assertion (A): Africa is the only continent through which all three major latitudes — the Equator, Tropic of Cancer, and Tropic of Capricorn — pass.\n\nReason (R): Africa's vast north-south geographic extent places it across multiple hemispheres, accommodating all three major latitudinal lines.",
-      "options": {
-        "a": "Both A and R are true, and R is the correct explanation of A",
-        "b": "Both A and R are true, but R is NOT the correct explanation of A",
-        "c": "A is true but R is false",
-        "d": "A is false but R is true"
-      },
-      "correct": "b",
-      "explanation": "A is true — Africa is the only continent through which all three major latitudes pass. R is also true — Africa does span a large north-south extent. However, R does not fully explain why Africa is the ONLY such continent; Asia also has great north-south extent but the Tropic of Capricorn does not pass through it. Geographic positioning, not just extent, determines this uniqueness."
+        "id":  "geo-ch01-019",
+        "question":  "Assertion (A): Africa is the only continent through which all three major latitudes â€” the Equator, Tropic of Cancer, and Tropic of Capricorn â€” pass.\n\nReason (R): Africa\u0027s vast north-south geographic extent places it across multiple hemispheres, accommodating all three major latitudinal lines.",
+        "options":  [
+                        "Both A and R are true, and R is the correct explanation of A",
+                        "Both A and R are true, but R is NOT the correct explanation of A",
+                        "A is true but R is false",
+                        "A is false but R is true"
+                    ],
+        "correct":  1,
+        "explanation":  "A is true â€” Africa is the only continent through which all three major latitudes pass. R is also true â€” Africa does span a large north-south extent. However, R does not fully explain why Africa is the ONLY such continent; Asia also has great north-south extent but the Tropic of Capricorn does not pass through it. Geographic positioning, not just extent, determines this uniqueness.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Hard"
     },
     {
-      "id": 20,
-      "type": "MCQ",
-      "topic": "South America — Atacama Desert",
-      "difficulty": "medium",
-      "question": "The Atacama Desert, considered the driest desert in the world, is bordered by the Pacific Ocean to the west and the Andes Mountains to the east. In which country is it primarily located?",
-      "options": {
-        "a": "Peru",
-        "b": "Argentina",
-        "c": "Chile",
-        "d": "Bolivia"
-      },
-      "correct": "c",
-      "explanation": "The Atacama Desert is located in northern Chile, bordered by the Pacific Ocean (west) and the Andes Mountains (east). Although small portions extend into Peru and Bolivia, it is primarily within Chile."
+        "id":  "geo-ch01-020",
+        "question":  "The Atacama Desert, considered the driest desert in the world, is bordered by the Pacific Ocean to the west and the Andes Mountains to the east. In which country is it primarily located?",
+        "options":  [
+                        "Peru",
+                        "Argentina",
+                        "Chile",
+                        "Bolivia"
+                    ],
+        "correct":  2,
+        "explanation":  "The Atacama Desert is located in northern Chile, bordered by the Pacific Ocean (west) and the Andes Mountains (east). Although small portions extend into Peru and Bolivia, it is primarily within Chile.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 21,
-      "type": "Statement",
-      "topic": "Europe — Mountain Ranges",
-      "difficulty": "hard",
-      "question": "Statement I: The Alps are the highest mountain range in Europe and are classified as Young Fold Mountains.\n\nStatement II: The Ural Mountains are Young Fold Mountains that separate Europe from Asia.",
-      "options": {
-        "a": "Only Statement I is correct",
-        "b": "Only Statement II is correct",
-        "c": "Both Statement I and Statement II are correct",
-        "d": "Neither Statement I nor Statement II is correct"
-      },
-      "correct": "a",
-      "explanation": "Statement I is correct — the Alps are the highest mountain range in Europe and are Young Fold Mountains. Statement II is false — the Ural Mountains are Old Fold Mountains, not Young Fold Mountains. They do separate Europe from Asia, but the geological classification is wrong."
+        "id":  "geo-ch01-021",
+        "question":  "Statement I: The Alps are the highest mountain range in Europe and are classified as Young Fold Mountains.\n\nStatement II: The Ural Mountains are Young Fold Mountains that separate Europe from Asia.",
+        "options":  [
+                        "Only Statement I is correct",
+                        "Only Statement II is correct",
+                        "Both Statement I and Statement II are correct",
+                        "Neither Statement I nor Statement II is correct"
+                    ],
+        "correct":  0,
+        "explanation":  "Statement I is correct â€” the Alps are the highest mountain range in Europe and are Young Fold Mountains. Statement II is false â€” the Ural Mountains are Old Fold Mountains, not Young Fold Mountains. They do separate Europe from Asia, but the geological classification is wrong.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Hard"
     },
     {
-      "id": 22,
-      "type": "MCQ",
-      "topic": "Europe — Mt. Elbrus",
-      "difficulty": "medium",
-      "question": "Mt. Elbrus (5,642 m), the highest peak of both Russia and Europe, is located in which mountain range?",
-      "options": {
-        "a": "Alps",
-        "b": "Carpathian Mountains",
-        "c": "Ural Mountains",
-        "d": "Caucasus Mountains"
-      },
-      "correct": "d",
-      "explanation": "Mt. Elbrus is located in the Caucasus Mountains, situated between the Black Sea and the Caspian Sea. The Alps, Carpathians, and Ural Mountains are all separate and distinct European mountain ranges."
+        "id":  "geo-ch01-022",
+        "question":  "Mt. Elbrus (5,642 m), the highest peak of both Russia and Europe, is located in which mountain range?",
+        "options":  [
+                        "Alps",
+                        "Carpathian Mountains",
+                        "Ural Mountains",
+                        "Caucasus Mountains"
+                    ],
+        "correct":  3,
+        "explanation":  "Mt. Elbrus is located in the Caucasus Mountains, situated between the Black Sea and the Caspian Sea. The Alps, Carpathians, and Ural Mountains are all separate and distinct European mountain ranges.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 23,
-      "type": "MCQ",
-      "topic": "North America — International Boundaries",
-      "difficulty": "easy",
-      "question": "The 49th Parallel line serves as the international boundary between which two countries?",
-      "options": {
-        "a": "USA and Mexico",
-        "b": "USA and Canada",
-        "c": "Russia and China",
-        "d": "North Korea and South Korea"
-      },
-      "correct": "b",
-      "explanation": "The 49th Parallel is the boundary between the USA and Canada. The 38th Parallel separates North and South Korea, while the USA-Mexico border does not follow the 49th Parallel."
+        "id":  "geo-ch01-023",
+        "question":  "The 49th Parallel line serves as the international boundary between which two countries?",
+        "options":  [
+                        "USA and Mexico",
+                        "USA and Canada",
+                        "Russia and China",
+                        "North Korea and South Korea"
+                    ],
+        "correct":  1,
+        "explanation":  "The 49th Parallel is the boundary between the USA and Canada. The 38th Parallel separates North and South Korea, while the USA-Mexico border does not follow the 49th Parallel.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Easy"
     },
     {
-      "id": 24,
-      "type": "AssertionReason",
-      "topic": "Africa — Congo River",
-      "difficulty": "hard",
-      "question": "Assertion (A): The Congo River is the only major river in Africa that crosses the equator twice.\n\nReason (R): The Congo River follows a curved basin path through Central Africa, looping across the equator in both directions.",
-      "options": {
-        "a": "Both A and R are true, and R is the correct explanation of A",
-        "b": "Both A and R are true, but R is NOT the correct explanation of A",
-        "c": "A is true but R is false",
-        "d": "A is false but R is true"
-      },
-      "correct": "a",
-      "explanation": "Both A and R are true, and R correctly explains A. The Congo River's curved path through the Congo Basin allows it to cross the equator twice — once flowing northward and once flowing southward through its course."
+        "id":  "geo-ch01-024",
+        "question":  "Assertion (A): The Congo River is the only major river in Africa that crosses the equator twice.\n\nReason (R): The Congo River follows a curved basin path through Central Africa, looping across the equator in both directions.",
+        "options":  [
+                        "Both A and R are true, and R is the correct explanation of A",
+                        "Both A and R are true, but R is NOT the correct explanation of A",
+                        "A is true but R is false",
+                        "A is false but R is true"
+                    ],
+        "correct":  0,
+        "explanation":  "Both A and R are true, and R correctly explains A. The Congo River\u0027s curved path through the Congo Basin allows it to cross the equator twice â€” once flowing northward and once flowing southward through its course.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Hard"
     },
     {
-      "id": 25,
-      "type": "MCQ",
-      "topic": "North America — Great Lakes",
-      "difficulty": "medium",
-      "question": "Which of the following is the world's largest freshwater lake by surface area?",
-      "options": {
-        "a": "Lake Baikal",
-        "b": "Lake Superior",
-        "c": "Lake Huron",
-        "d": "Lake Michigan"
-      },
-      "correct": "b",
-      "explanation": "Lake Superior is the world's largest freshwater lake by surface area. Lake Baikal is the world's deepest lake but smaller in surface area. Both Lake Huron and Lake Michigan are smaller than Lake Superior."
+        "id":  "geo-ch01-025",
+        "question":  "Which of the following is the world\u0027s largest freshwater lake by surface area?",
+        "options":  [
+                        "Lake Baikal",
+                        "Lake Superior",
+                        "Lake Huron",
+                        "Lake Michigan"
+                    ],
+        "correct":  1,
+        "explanation":  "Lake Superior is the world\u0027s largest freshwater lake by surface area. Lake Baikal is the world\u0027s deepest lake but smaller in surface area. Both Lake Huron and Lake Michigan are smaller than Lake Superior.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 26,
-      "type": "Match",
-      "topic": "Africa — Capitals",
-      "difficulty": "medium",
-      "question": "Match the following:\n\nColumn I\nI. Ethiopia\nII. Zimbabwe\nIII. Malawi\nIV. Zambia\n\nColumn II\nP. Lusaka\nQ. Lilongwe\nR. Harare\nS. Addis Ababa",
-      "options": {
-        "a": "I-P, II-Q, III-R, IV-S",
-        "b": "I-Q, II-P, III-S, IV-R",
-        "c": "I-R, II-S, III-P, IV-Q",
-        "d": "I-S, II-R, III-Q, IV-P"
-      },
-      "correct": "d",
-      "explanation": "Ethiopia — Addis Ababa (old name: Abyssinia); Zimbabwe — Harare; Malawi — Lilongwe (old name: Nyasaland); Zambia — Lusaka."
+        "id":  "geo-ch01-026",
+        "question":  "Match the following:\n\nColumn I\nI. Ethiopia\nII. Zimbabwe\nIII. Malawi\nIV. Zambia\n\nColumn II\nP. Lusaka\nQ. Lilongwe\nR. Harare\nS. Addis Ababa",
+        "options":  [
+                        "I-P, II-Q, III-R, IV-S",
+                        "I-Q, II-P, III-S, IV-R",
+                        "I-R, II-S, III-P, IV-Q",
+                        "I-S, II-R, III-Q, IV-P"
+                    ],
+        "correct":  3,
+        "explanation":  "Ethiopia â€” Addis Ababa (old name: Abyssinia); Zimbabwe â€” Harare; Malawi â€” Lilongwe (old name: Nyasaland); Zambia â€” Lusaka.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 27,
-      "type": "MCQ",
-      "topic": "Southeast Asia — Indonesia",
-      "difficulty": "easy",
-      "question": "Which country has the highest Muslim population in the world?",
-      "options": {
-        "a": "Saudi Arabia",
-        "b": "Pakistan",
-        "c": "Bangladesh",
-        "d": "Indonesia"
-      },
-      "correct": "d",
-      "explanation": "Indonesia has the highest Muslim population of any country in the world. Saudi Arabia, Pakistan, and Bangladesh also have very large Muslim populations but rank lower than Indonesia."
+        "id":  "geo-ch01-027",
+        "question":  "Which country has the highest Muslim population in the world?",
+        "options":  [
+                        "Saudi Arabia",
+                        "Pakistan",
+                        "Bangladesh",
+                        "Indonesia"
+                    ],
+        "correct":  3,
+        "explanation":  "Indonesia has the highest Muslim population of any country in the world. Saudi Arabia, Pakistan, and Bangladesh also have very large Muslim populations but rank lower than Indonesia.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Easy"
     },
     {
-      "id": 28,
-      "type": "Statement",
-      "topic": "East Asia — Korean Peninsula",
-      "difficulty": "medium",
-      "question": "Statement I: North Korea and South Korea are separated by the 38th Parallel line.\n\nStatement II: The capital of North Korea is Pyongyang.",
-      "options": {
-        "a": "Only Statement I is correct",
-        "b": "Only Statement II is correct",
-        "c": "Both Statement I and Statement II are correct",
-        "d": "Neither Statement I nor Statement II is correct"
-      },
-      "correct": "c",
-      "explanation": "Both statements are correct. The 38th Parallel (with a Demilitarized Zone) separates North and South Korea. Pyongyang is the capital of North Korea; Seoul is the capital of South Korea."
+        "id":  "geo-ch01-028",
+        "question":  "Statement I: North Korea and South Korea are separated by the 38th Parallel line.\n\nStatement II: The capital of North Korea is Pyongyang.",
+        "options":  [
+                        "Only Statement I is correct",
+                        "Only Statement II is correct",
+                        "Both Statement I and Statement II are correct",
+                        "Neither Statement I nor Statement II is correct"
+                    ],
+        "correct":  2,
+        "explanation":  "Both statements are correct. The 38th Parallel (with a Demilitarized Zone) separates North and South Korea. Pyongyang is the capital of North Korea; Seoul is the capital of South Korea.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 29,
-      "type": "MCQ",
-      "topic": "Australia — Great Barrier Reef",
-      "difficulty": "easy",
-      "question": "The Great Barrier Reef, the world's largest barrier reef and largest coral reef system, is located off which coast of Australia?",
-      "options": {
-        "a": "Western Coast",
-        "b": "North Eastern Coast",
-        "c": "Southern Coast",
-        "d": "South Western Coast"
-      },
-      "correct": "b",
-      "explanation": "The Great Barrier Reef is located off the North Eastern Coast of Australia. It is both the world's largest barrier reef and the world's largest coral reef system."
+        "id":  "geo-ch01-029",
+        "question":  "The Great Barrier Reef, the world\u0027s largest barrier reef and largest coral reef system, is located off which coast of Australia?",
+        "options":  [
+                        "Western Coast",
+                        "North Eastern Coast",
+                        "Southern Coast",
+                        "South Western Coast"
+                    ],
+        "correct":  1,
+        "explanation":  "The Great Barrier Reef is located off the North Eastern Coast of Australia. It is both the world\u0027s largest barrier reef and the world\u0027s largest coral reef system.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Easy"
     },
     {
-      "id": 30,
-      "type": "MCQ",
-      "topic": "Africa — Lakes",
-      "difficulty": "medium",
-      "question": "Lake Tanganyika, the longest lake in Africa, stretches approximately ______ km in a north-south direction.",
-      "options": {
-        "a": "676",
-        "b": "420",
-        "c": "540",
-        "d": "800"
-      },
-      "correct": "a",
-      "explanation": "Lake Tanganyika stretches approximately 676 km (420 miles) in a north-south direction, making it the longest lake in Africa. The 420-mile figure is its length in miles, not kilometres — a common distractor."
+        "id":  "geo-ch01-030",
+        "question":  "Lake Tanganyika, the longest lake in Africa, stretches approximately ______ km in a north-south direction.",
+        "options":  [
+                        "676",
+                        "420",
+                        "540",
+                        "800"
+                    ],
+        "correct":  0,
+        "explanation":  "Lake Tanganyika stretches approximately 676 km (420 miles) in a north-south direction, making it the longest lake in Africa. The 420-mile figure is its length in miles, not kilometres â€” a common distractor.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 31,
-      "type": "MCQ",
-      "topic": "Southwest Asia — Deserts",
-      "difficulty": "medium",
-      "question": "Dasht-e Kavir Desert is located in which country?",
-      "options": {
-        "a": "Saudi Arabia",
-        "b": "Sudan",
-        "c": "Iraq",
-        "d": "Iran"
-      },
-      "correct": "d",
-      "explanation": "Dasht-e Kavir is a great salt desert of north-central Iran, located in a basin southeast of the Elburz Mountains. It is approximately 390 km wide and is distinguished by its salt crust, caused by the almost rainless climate and intense surface evaporation, making it almost uninhabited."
+        "id":  "geo-ch01-031",
+        "question":  "Dasht-e Kavir Desert is located in which country?",
+        "options":  [
+                        "Saudi Arabia",
+                        "Sudan",
+                        "Iraq",
+                        "Iran"
+                    ],
+        "correct":  3,
+        "explanation":  "Dasht-e Kavir is a great salt desert of north-central Iran, located in a basin southeast of the Elburz Mountains. It is approximately 390 km wide and is distinguished by its salt crust, caused by the almost rainless climate and intense surface evaporation, making it almost uninhabited.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 32,
-      "type": "MCQ",
-      "topic": "North America — Volcanoes",
-      "difficulty": "easy",
-      "question": "Mount St. Helens is an active stratovolcano located in which of the following countries?",
-      "options": {
-        "a": "Japan",
-        "b": "United States of America",
-        "c": "Chile",
-        "d": "Italy"
-      },
-      "correct": "b",
-      "explanation": "Mount St. Helens is located in Skamania County, Washington, in the Pacific Northwest region of the United States. It lies on the plate boundary between the Juan de Fuca plate and the North American plate."
+        "id":  "geo-ch01-032",
+        "question":  "Mount St. Helens is an active stratovolcano located in which of the following countries?",
+        "options":  [
+                        "Japan",
+                        "United States of America",
+                        "Chile",
+                        "Italy"
+                    ],
+        "correct":  1,
+        "explanation":  "Mount St. Helens is located in Skamania County, Washington, in the Pacific Northwest region of the United States. It lies on the plate boundary between the Juan de Fuca plate and the North American plate.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Easy"
     },
     {
-      "id": 33,
-      "type": "MCQ",
-      "topic": "Europe — Plateaus",
-      "difficulty": "medium",
-      "question": "In which country is the Meseta Plateau located?",
-      "options": {
-        "a": "Turkey",
-        "b": "Ethiopia",
-        "c": "Spain",
-        "d": "Iran"
-      },
-      "correct": "c",
-      "explanation": "The Meseta occupies most of the Iberian Peninsula's land area. Spain is the third largest country in Europe, and about 45% of it is covered by the Meseta Plateau. In the west the Meseta slopes gently down into neighbouring Portugal."
+        "id":  "geo-ch01-033",
+        "question":  "In which country is the Meseta Plateau located?",
+        "options":  [
+                        "Turkey",
+                        "Ethiopia",
+                        "Spain",
+                        "Iran"
+                    ],
+        "correct":  2,
+        "explanation":  "The Meseta occupies most of the Iberian Peninsula\u0027s land area. Spain is the third largest country in Europe, and about 45% of it is covered by the Meseta Plateau. In the west the Meseta slopes gently down into neighbouring Portugal.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 34,
-      "type": "MCQ",
-      "topic": "Europe/Asia — Mountain Ranges",
-      "difficulty": "easy",
-      "question": "Which among the following mountain ranges is located in Russia?",
-      "options": {
-        "a": "Rocky",
-        "b": "Andes",
-        "c": "Himalayas",
-        "d": "Ural"
-      },
-      "correct": "d",
-      "explanation": "The Ural Mountains run approximately north to south through western Russia, from the coast of the Arctic Ocean to the Ural River and northwestern Kazakhstan. The mountain range forms part of the conventional boundary between the continents of Europe and Asia."
+        "id":  "geo-ch01-034",
+        "question":  "Which among the following mountain ranges is located in Russia?",
+        "options":  [
+                        "Rocky",
+                        "Andes",
+                        "Himalayas",
+                        "Ural"
+                    ],
+        "correct":  3,
+        "explanation":  "The Ural Mountains run approximately north to south through western Russia, from the coast of the Arctic Ocean to the Ural River and northwestern Kazakhstan. The mountain range forms part of the conventional boundary between the continents of Europe and Asia.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Easy"
     },
     {
-      "id": 35,
-      "type": "MCQ",
-      "topic": "World Map — Equatorial Countries",
-      "difficulty": "medium",
-      "question": "The Equator does NOT pass through which of the following countries?",
-      "options": {
-        "a": "Kenya",
-        "b": "Mexico",
-        "c": "Indonesia",
-        "d": "Brazil"
-      },
-      "correct": "b",
-      "explanation": "The equator passes through 13 countries: Ecuador, Colombia, Brazil, São Tomé & Príncipe, Gabon, Republic of Congo, Uganda, Kenya, Somalia, Maldives, Indonesia, and Kiribati. Mexico is entirely in the Northern Hemisphere and is not among them."
+        "id":  "geo-ch01-035",
+        "question":  "The Equator does NOT pass through which of the following countries?",
+        "options":  [
+                        "Kenya",
+                        "Mexico",
+                        "Indonesia",
+                        "Brazil"
+                    ],
+        "correct":  1,
+        "explanation":  "The equator passes through 13 countries: Ecuador, Colombia, Brazil, SÃ£o TomÃ© \u0026 PrÃ­ncipe, Gabon, Republic of Congo, Uganda, Kenya, Somalia, Maldives, Indonesia, and Kiribati. Mexico is entirely in the Northern Hemisphere and is not among them.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 36,
-      "type": "MCQ",
-      "topic": "South America — Volcanoes",
-      "difficulty": "medium",
-      "question": "Where is the world's highest active volcanic mountain Cotopaxi located?",
-      "options": {
-        "a": "Japan",
-        "b": "Philippines",
-        "c": "Ecuador",
-        "d": "Hawaiian Islands"
-      },
-      "correct": "c",
-      "explanation": "Cotopaxi is an active stratovolcano in the Andes Mountains, located in the Latacunga canton of Cotopaxi Province, northeast of the city of Latacunga, Ecuador. It reaches a height of 5,897 m and is the second highest summit in Ecuador."
+        "id":  "geo-ch01-036",
+        "question":  "Where is the world\u0027s highest active volcanic mountain Cotopaxi located?",
+        "options":  [
+                        "Japan",
+                        "Philippines",
+                        "Ecuador",
+                        "Hawaiian Islands"
+                    ],
+        "correct":  2,
+        "explanation":  "Cotopaxi is an active stratovolcano in the Andes Mountains, located in the Latacunga canton of Cotopaxi Province, northeast of the city of Latacunga, Ecuador. It reaches a height of 5,897 m and is the second highest summit in Ecuador.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 37,
-      "type": "MCQ",
-      "topic": "World Map — Volcanoes",
-      "difficulty": "medium",
-      "question": "Which of the following pairs is NOT correctly matched?",
-      "options": {
-        "a": "Etna : Italy",
-        "b": "Fujiyama : Japan",
-        "c": "Popa : Myanmar",
-        "d": "Krakatau : Malaysia"
-      },
-      "correct": "d",
-      "explanation": "Krakatau (or Krakatoa) is a volcanic island in the Sunda Strait between the islands of Java and Sumatra, in the Indonesian province of Lampung — not Malaysia. The massive eruptions of Krakatoa in August 1883 were among the most violent volcanic events in recorded history."
+        "id":  "geo-ch01-037",
+        "question":  "Which of the following pairs is NOT correctly matched?",
+        "options":  [
+                        "Etna : Italy",
+                        "Fujiyama : Japan",
+                        "Popa : Myanmar",
+                        "Krakatau : Malaysia"
+                    ],
+        "correct":  3,
+        "explanation":  "Krakatau (or Krakatoa) is a volcanic island in the Sunda Strait between the islands of Java and Sumatra, in the Indonesian province of Lampung â€” not Malaysia. The massive eruptions of Krakatoa in August 1883 were among the most violent volcanic events in recorded history.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 38,
-      "type": "MCQ",
-      "topic": "Oceania — New Zealand",
-      "difficulty": "easy",
-      "question": "Where is the Southern Alps mountain range located?",
-      "options": {
-        "a": "Australia",
-        "b": "New Zealand",
-        "c": "South Africa",
-        "d": "Indonesia"
-      },
-      "correct": "b",
-      "explanation": "The Southern Alps is a mountain range extending along much of the length of New Zealand's South Island. The range includes the South Island's Main Divide, which separates the water catchments of the more heavily populated eastern side from the west coast."
+        "id":  "geo-ch01-038",
+        "question":  "Where is the Southern Alps mountain range located?",
+        "options":  [
+                        "Australia",
+                        "New Zealand",
+                        "South Africa",
+                        "Indonesia"
+                    ],
+        "correct":  1,
+        "explanation":  "The Southern Alps is a mountain range extending along much of the length of New Zealand\u0027s South Island. The range includes the South Island\u0027s Main Divide, which separates the water catchments of the more heavily populated eastern side from the west coast.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Easy"
     },
     {
-      "id": 39,
-      "type": "MCQ",
-      "topic": "South America — Waterfalls",
-      "difficulty": "hard",
-      "question": "World famous Kaieteur Falls is situated on which river?",
-      "options": {
-        "a": "Potaro",
-        "b": "Mississippi",
-        "c": "St. Lawrence",
-        "d": "Zambezi"
-      },
-      "correct": "a",
-      "explanation": "Kaieteur Falls is located on the Potaro River in the Kaieteur National Park in Guyana. It sits in a section of the Amazon rainforest in the Potaro-Siparuni region, and is the world's largest single-drop waterfall by the volume of water flowing over it."
+        "id":  "geo-ch01-039",
+        "question":  "World famous Kaieteur Falls is situated on which river?",
+        "options":  [
+                        "Potaro",
+                        "Mississippi",
+                        "St. Lawrence",
+                        "Zambezi"
+                    ],
+        "correct":  0,
+        "explanation":  "Kaieteur Falls is located on the Potaro River in the Kaieteur National Park in Guyana. It sits in a section of the Amazon rainforest in the Potaro-Siparuni region, and is the world\u0027s largest single-drop waterfall by the volume of water flowing over it.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Hard"
     },
     {
-      "id": 40,
-      "type": "MCQ",
-      "topic": "Europe — Germany",
-      "difficulty": "easy",
-      "question": "Black Forest is a large forested mountain range found in which country?",
-      "options": {
-        "a": "Brazil",
-        "b": "Germany",
-        "c": "South Africa",
-        "d": "Belgium"
-      },
-      "correct": "b",
-      "explanation": "The Black Forest is a large forested mountain range in the state of Baden-Württemberg in southern Germany. It is bounded by the Rhine valley to the west and south, and is the highest part of the South German Scarplands."
+        "id":  "geo-ch01-040",
+        "question":  "Black Forest is a large forested mountain range found in which country?",
+        "options":  [
+                        "Brazil",
+                        "Germany",
+                        "South Africa",
+                        "Belgium"
+                    ],
+        "correct":  1,
+        "explanation":  "The Black Forest is a large forested mountain range in the state of Baden-WÃ¼rttemberg in southern Germany. It is bounded by the Rhine valley to the west and south, and is the highest part of the South German Scarplands.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Easy"
     },
     {
-      "id": 41,
-      "type": "MCQ",
-      "topic": "Europe — Rivers",
-      "difficulty": "medium",
-      "question": "Which river passes through the maximum number of countries in the world?",
-      "options": {
-        "a": "Rhine",
-        "b": "Danube",
-        "c": "Amazon",
-        "d": "Volga"
-      },
-      "correct": "b",
-      "explanation": "The Danube River flows through more countries than any other river in the world. Originating in Germany, it passes through or borders Austria, Slovakia, Hungary, Croatia, Serbia, Romania, Bulgaria, Moldova, and Ukraine before draining into the Black Sea. Its drainage basin extends into nine additional countries."
+        "id":  "geo-ch01-041",
+        "question":  "Which river passes through the maximum number of countries in the world?",
+        "options":  [
+                        "Rhine",
+                        "Danube",
+                        "Amazon",
+                        "Volga"
+                    ],
+        "correct":  1,
+        "explanation":  "The Danube River flows through more countries than any other river in the world. Originating in Germany, it passes through or borders Austria, Slovakia, Hungary, Croatia, Serbia, Romania, Bulgaria, Moldova, and Ukraine before draining into the Black Sea. Its drainage basin extends into nine additional countries.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 42,
-      "type": "MCQ",
-      "topic": "South Asia — Sri Lanka",
-      "difficulty": "hard",
-      "question": "Which of the following is the highest peak in Sri Lanka?",
-      "options": {
-        "a": "Kirigalpotta",
-        "b": "Hakgala",
-        "c": "Mount Pedro",
-        "d": "Bible Rock"
-      },
-      "correct": "c",
-      "explanation": "Pidurutalagala, or Mount Pedro, at 2,524 m is the tallest and ultra-prominent peak in Sri Lanka, situated near the town of Nuwara Eliya. Its summit houses the central communications array of the Government of Sri Lanka and armed forces."
+        "id":  "geo-ch01-042",
+        "question":  "Which of the following is the highest peak in Sri Lanka?",
+        "options":  [
+                        "Kirigalpotta",
+                        "Hakgala",
+                        "Mount Pedro",
+                        "Bible Rock"
+                    ],
+        "correct":  2,
+        "explanation":  "Pidurutalagala, or Mount Pedro, at 2,524 m is the tallest and ultra-prominent peak in Sri Lanka, situated near the town of Nuwara Eliya. Its summit houses the central communications array of the Government of Sri Lanka and armed forces.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Hard"
     },
     {
-      "id": 43,
-      "type": "MCQ",
-      "topic": "Asia — Volcanoes",
-      "difficulty": "medium",
-      "question": "Which of the following is the only active volcano in South Asia?",
-      "options": {
-        "a": "Dhinodhar Hills",
-        "b": "Tosham Hills",
-        "c": "Barren Island",
-        "d": "Narcondam Island"
-      },
-      "correct": "c",
-      "explanation": "Barren Island is an island in the Andaman Sea dominated by Barren Volcano — the only confirmed active volcano in South Asia, and the only active volcano along a chain from Sumatra to Myanmar. Along with the Andaman Islands, it is part of the Indian Union Territory of Andaman and Nicobar Islands."
+        "id":  "geo-ch01-043",
+        "question":  "Which of the following is the only active volcano in South Asia?",
+        "options":  [
+                        "Dhinodhar Hills",
+                        "Tosham Hills",
+                        "Barren Island",
+                        "Narcondam Island"
+                    ],
+        "correct":  2,
+        "explanation":  "Barren Island is an island in the Andaman Sea dominated by Barren Volcano â€” the only confirmed active volcano in South Asia, and the only active volcano along a chain from Sumatra to Myanmar. Along with the Andaman Islands, it is part of the Indian Union Territory of Andaman and Nicobar Islands.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 44,
-      "type": "MCQ",
-      "topic": "Himalayas — Mountain Peaks",
-      "difficulty": "medium",
-      "question": "Which among the following peaks is NOT located in Nepal Himalayas?",
-      "options": {
-        "a": "Lhotse",
-        "b": "Mount Everest",
-        "c": "Annapurna",
-        "d": "Kamet"
-      },
-      "correct": "d",
-      "explanation": "Kamet is the second highest mountain in the Garhwal region of Uttarakhand, India, lying under Garhwal Himalayas in the Chamoli District. Due to its position near the Tibet Plateau, Kamet is remote and not easily accessible, unlike the Nepalese peaks Lhotse, Everest, and Annapurna."
+        "id":  "geo-ch01-044",
+        "question":  "Which among the following peaks is NOT located in Nepal Himalayas?",
+        "options":  [
+                        "Lhotse",
+                        "Mount Everest",
+                        "Annapurna",
+                        "Kamet"
+                    ],
+        "correct":  3,
+        "explanation":  "Kamet is the second highest mountain in the Garhwal region of Uttarakhand, India, lying under Garhwal Himalayas in the Chamoli District. Due to its position near the Tibet Plateau, Kamet is remote and not easily accessible, unlike the Nepalese peaks Lhotse, Everest, and Annapurna.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 45,
-      "type": "MCQ",
-      "topic": "Africa — Islands",
-      "difficulty": "easy",
-      "question": "Madagascar is located in the ___ Ocean.",
-      "options": {
-        "a": "Pacific",
-        "b": "Arctic",
-        "c": "Indian",
-        "d": "Atlantic"
-      },
-      "correct": "c",
-      "explanation": "Madagascar is an island country in the Indian Ocean, situated off the coast of East Africa across the Mozambique Channel. It was previously known as the Malagasy Republic."
+        "id":  "geo-ch01-045",
+        "question":  "Madagascar is located in the ___ Ocean.",
+        "options":  [
+                        "Pacific",
+                        "Arctic",
+                        "Indian",
+                        "Atlantic"
+                    ],
+        "correct":  2,
+        "explanation":  "Madagascar is an island country in the Indian Ocean, situated off the coast of East Africa across the Mozambique Channel. It was previously known as the Malagasy Republic.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Easy"
     },
     {
-      "id": 46,
-      "type": "MCQ",
-      "topic": "Asia — Lakes",
-      "difficulty": "easy",
-      "question": "Lake Baikal, the world's largest freshwater lake by volume, is located in which country?",
-      "options": {
-        "a": "Russia",
-        "b": "Tanzania",
-        "c": "Canada",
-        "d": "Uganda"
-      },
-      "correct": "a",
-      "explanation": "Lake Baikal is situated in northern Siberia, Russia. It contains 22–23% of the world's fresh surface water and is the world's deepest lake with a maximum depth of 1,642 m. It is also the world's oldest lake. Note: Lake Superior (Q25) is larger by surface area, but Baikal holds far more water by volume."
+        "id":  "geo-ch01-046",
+        "question":  "Lake Baikal, the world\u0027s largest freshwater lake by volume, is located in which country?",
+        "options":  [
+                        "Russia",
+                        "Tanzania",
+                        "Canada",
+                        "Uganda"
+                    ],
+        "correct":  0,
+        "explanation":  "Lake Baikal is situated in northern Siberia, Russia. It contains 22â€“23% of the world\u0027s fresh surface water and is the world\u0027s deepest lake with a maximum depth of 1,642 m. It is also the world\u0027s oldest lake. Note: Lake Superior (Q25) is larger by surface area, but Baikal holds far more water by volume.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Easy"
     },
     {
-      "id": 47,
-      "type": "MCQ",
-      "topic": "World Map — Water Bodies",
-      "difficulty": "medium",
-      "question": "Which water body is adjacent to the Atlantic Ocean, located in the southeast of the Gulf of Mexico?",
-      "options": {
-        "a": "Arabian Sea",
-        "b": "Baltic Sea",
-        "c": "Caspian Sea",
-        "d": "Caribbean Sea"
-      },
-      "correct": "d",
-      "explanation": "The Caribbean Sea is a body of water adjacent to the Atlantic Ocean, southeast of the Gulf of Mexico. It is bordered by Venezuela, Colombia, and Panama to the south; and by Cuba, Jamaica, Dominican Republic, and Puerto Rico on the north. It covers an area of about 2,754,000 km²."
+        "id":  "geo-ch01-047",
+        "question":  "Which water body is adjacent to the Atlantic Ocean, located in the southeast of the Gulf of Mexico?",
+        "options":  [
+                        "Arabian Sea",
+                        "Baltic Sea",
+                        "Caspian Sea",
+                        "Caribbean Sea"
+                    ],
+        "correct":  3,
+        "explanation":  "The Caribbean Sea is a body of water adjacent to the Atlantic Ocean, southeast of the Gulf of Mexico. It is bordered by Venezuela, Colombia, and Panama to the south; and by Cuba, Jamaica, Dominican Republic, and Puerto Rico on the north. It covers an area of about 2,754,000 kmÂ².",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 48,
-      "type": "MCQ",
-      "topic": "Central Asia — Caspian Sea",
-      "difficulty": "easy",
-      "question": "How many countries share the natural heritage of the Caspian Sea?",
-      "options": {
-        "a": "Two",
-        "b": "Five",
-        "c": "Four",
-        "d": "Three"
-      },
-      "correct": "b",
-      "explanation": "Five countries — Azerbaijan, Kazakhstan, Russia, Turkmenistan, and Iran (mnemonic: TARIK) — share the Caspian Sea. The Caspian is the world's largest inland body of water, often described as the world's largest lake or a full-fledged sea."
+        "id":  "geo-ch01-048",
+        "question":  "How many countries share the natural heritage of the Caspian Sea?",
+        "options":  [
+                        "Two",
+                        "Five",
+                        "Four",
+                        "Three"
+                    ],
+        "correct":  1,
+        "explanation":  "Five countries â€” Azerbaijan, Kazakhstan, Russia, Turkmenistan, and Iran (mnemonic: TARIK) â€” share the Caspian Sea. The Caspian is the world\u0027s largest inland body of water, often described as the world\u0027s largest lake or a full-fledged sea.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Easy"
     },
     {
-      "id": 49,
-      "type": "MCQ",
-      "topic": "South Asia — Beaches",
-      "difficulty": "easy",
-      "question": "Cox's Bazar, considered the world's longest natural sea beach, is located in which country?",
-      "options": {
-        "a": "Sri Lanka",
-        "b": "Bangladesh",
-        "c": "Nepal",
-        "d": "India"
-      },
-      "correct": "b",
-      "explanation": "Cox's Bazar Beach in Bangladesh is the longest natural sea beach in the world, running approximately 150 km (93 miles). It is the most popular tourist destination in Bangladesh."
+        "id":  "geo-ch01-049",
+        "question":  "Cox\u0027s Bazar, considered the world\u0027s longest natural sea beach, is located in which country?",
+        "options":  [
+                        "Sri Lanka",
+                        "Bangladesh",
+                        "Nepal",
+                        "India"
+                    ],
+        "correct":  1,
+        "explanation":  "Cox\u0027s Bazar Beach in Bangladesh is the longest natural sea beach in the world, running approximately 150 km (93 miles). It is the most popular tourist destination in Bangladesh.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Easy"
     },
     {
-      "id": 50,
-      "type": "MCQ",
-      "topic": "South Asia — Forests",
-      "difficulty": "easy",
-      "question": "Which of the following is the largest contiguous mangrove forest in the world?",
-      "options": {
-        "a": "Godavari-Krishna Mangroves",
-        "b": "Pichavaram Forest",
-        "c": "Gulf of Panama Mangroves",
-        "d": "Sundarbans Reserve Forest"
-      },
-      "correct": "d",
-      "explanation": "The Sundarbans Reserve Forest (SRF) is the largest contiguous mangrove forest in the world. It is located in the south-west of Bangladesh between the river Baleswar (East) and the Harinbanga (West), adjoining the Bay of Bengal. About 60% lies in Bangladesh and the rest in India."
+        "id":  "geo-ch01-050",
+        "question":  "Which of the following is the largest contiguous mangrove forest in the world?",
+        "options":  [
+                        "Godavari-Krishna Mangroves",
+                        "Pichavaram Forest",
+                        "Gulf of Panama Mangroves",
+                        "Sundarbans Reserve Forest"
+                    ],
+        "correct":  3,
+        "explanation":  "The Sundarbans Reserve Forest (SRF) is the largest contiguous mangrove forest in the world. It is located in the south-west of Bangladesh between the river Baleswar (East) and the Harinbanga (West), adjoining the Bay of Bengal. About 60% lies in Bangladesh and the rest in India.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Easy"
     },
     {
-      "id": 51,
-      "type": "MCQ",
-      "topic": "World Map — Oceans",
-      "difficulty": "easy",
-      "question": "Which is the largest ocean on Earth?",
-      "options": {
-        "a": "Atlantic Ocean",
-        "b": "Indian Ocean",
-        "c": "Arctic Ocean",
-        "d": "Pacific Ocean"
-      },
-      "correct": "d",
-      "explanation": "The Pacific Ocean is the largest ocean on Earth, covering more than one-third of Earth's surface and nearly half of Earth's water surface. It is bound by North and South America on the east, Asia and Australia on the west, and Antarctica in the south."
+        "id":  "geo-ch01-051",
+        "question":  "Which is the largest ocean on Earth?",
+        "options":  [
+                        "Atlantic Ocean",
+                        "Indian Ocean",
+                        "Arctic Ocean",
+                        "Pacific Ocean"
+                    ],
+        "correct":  3,
+        "explanation":  "The Pacific Ocean is the largest ocean on Earth, covering more than one-third of Earth\u0027s surface and nearly half of Earth\u0027s water surface. It is bound by North and South America on the east, Asia and Australia on the west, and Antarctica in the south.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Easy"
     },
     {
-      "id": 52,
-      "type": "MCQ",
-      "topic": "South America — River Basins",
-      "difficulty": "medium",
-      "question": "Which is the world's largest drainage basin with an area of about 70,00,000 km²?",
-      "options": {
-        "a": "Congo basin",
-        "b": "Amur basin",
-        "c": "Amazon basin",
-        "d": "Nile basin"
-      },
-      "correct": "c",
-      "explanation": "The Amazon basin is the largest drainage basin in the world at approximately 7,000,000 km². It includes parts of Bolivia, Brazil, Colombia, Ecuador, Guyana, Peru, Suriname, and Venezuela."
+        "id":  "geo-ch01-052",
+        "question":  "Which is the world\u0027s largest drainage basin with an area of about 70,00,000 kmÂ²?",
+        "options":  [
+                        "Congo basin",
+                        "Amur basin",
+                        "Amazon basin",
+                        "Nile basin"
+                    ],
+        "correct":  2,
+        "explanation":  "The Amazon basin is the largest drainage basin in the world at approximately 7,000,000 kmÂ². It includes parts of Bolivia, Brazil, Colombia, Ecuador, Guyana, Peru, Suriname, and Venezuela.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 53,
-      "type": "MCQ",
-      "topic": "Polar Regions — People",
-      "difficulty": "easy",
-      "question": "\"Eskimos\" are associated with which geographical region?",
-      "options": {
-        "a": "Arid Region",
-        "b": "Polar Region",
-        "c": "Savanna Grassland",
-        "d": "Tropical Rainforest Region"
-      },
-      "correct": "b",
-      "explanation": "The term Eskimos refers to people who inhabit the polar region. It refers to two closely related Indigenous peoples: the Inuit and the Yupik (or Yuit) of eastern Siberia and Alaska."
+        "id":  "geo-ch01-053",
+        "question":  "\"Eskimos\" are associated with which geographical region?",
+        "options":  [
+                        "Arid Region",
+                        "Polar Region",
+                        "Savanna Grassland",
+                        "Tropical Rainforest Region"
+                    ],
+        "correct":  1,
+        "explanation":  "The term Eskimos refers to people who inhabit the polar region. It refers to two closely related Indigenous peoples: the Inuit and the Yupik (or Yuit) of eastern Siberia and Alaska.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Easy"
     },
     {
-      "id": 54,
-      "type": "MCQ",
-      "topic": "World — Mineral Resources",
-      "difficulty": "medium",
-      "question": "Which among the following countries has the world's largest reserves of Uranium?",
-      "options": {
-        "a": "Russia",
-        "b": "China",
-        "c": "Australia",
-        "d": "Jordan"
-      },
-      "correct": "c",
-      "explanation": "Australia has about one-third of the world's known uranium resources. Canada was the world's leading producer until 2008, when it was overtaken by Kazakhstan. Other countries with known resources include Russia, USA, South Africa, Namibia, Niger, Brazil, and Ukraine."
+        "id":  "geo-ch01-054",
+        "question":  "Which among the following countries has the world\u0027s largest reserves of Uranium?",
+        "options":  [
+                        "Russia",
+                        "China",
+                        "Australia",
+                        "Jordan"
+                    ],
+        "correct":  2,
+        "explanation":  "Australia has about one-third of the world\u0027s known uranium resources. Canada was the world\u0027s leading producer until 2008, when it was overtaken by Kazakhstan. Other countries with known resources include Russia, USA, South Africa, Namibia, Niger, Brazil, and Ukraine.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 55,
-      "type": "MCQ",
-      "topic": "World — Mineral Resources",
-      "difficulty": "medium",
-      "question": "Which is the largest uranium producing country in the world?",
-      "options": {
-        "a": "Uzbekistan",
-        "b": "Kazakhstan",
-        "c": "USA",
-        "d": "India"
-      },
-      "correct": "b",
-      "explanation": "Kazakhstan is the world's largest producer of uranium, producing 43% of global mining output as of 2019. Canada ranks second with a 13% share, followed by Australia with 12%. Australia also holds around 30% of the world's largest known uranium reserves."
+        "id":  "geo-ch01-055",
+        "question":  "Which is the largest uranium producing country in the world?",
+        "options":  [
+                        "Uzbekistan",
+                        "Kazakhstan",
+                        "USA",
+                        "India"
+                    ],
+        "correct":  1,
+        "explanation":  "Kazakhstan is the world\u0027s largest producer of uranium, producing 43% of global mining output as of 2019. Canada ranks second with a 13% share, followed by Australia with 12%. Australia also holds around 30% of the world\u0027s largest known uranium reserves.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 56,
-      "type": "MCQ",
-      "topic": "Europe — International Boundaries",
-      "difficulty": "medium",
-      "question": "The Oder-Neisse Line is the international boundary between which of the following countries?",
-      "options": {
-        "a": "Israel and Palestine",
-        "b": "Germany and Poland",
-        "c": "China and Vietnam",
-        "d": "Mexico and USA"
-      },
-      "correct": "b",
-      "explanation": "The Oder-Neisse line is the international border between Germany and Poland. It was drawn at the Potsdam Conference in the aftermath of the Second World War, primarily delineated along the Oder and Lusatian Neisse rivers in Central Europe."
+        "id":  "geo-ch01-056",
+        "question":  "The Oder-Neisse Line is the international boundary between which of the following countries?",
+        "options":  [
+                        "Israel and Palestine",
+                        "Germany and Poland",
+                        "China and Vietnam",
+                        "Mexico and USA"
+                    ],
+        "correct":  1,
+        "explanation":  "The Oder-Neisse line is the international border between Germany and Poland. It was drawn at the Potsdam Conference in the aftermath of the Second World War, primarily delineated along the Oder and Lusatian Neisse rivers in Central Europe.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 57,
-      "type": "MCQ",
-      "topic": "East Asia — China",
-      "difficulty": "medium",
-      "question": "China shares borders with the largest number of countries in the world. How many countries does China border?",
-      "options": {
-        "a": "10",
-        "b": "12",
-        "c": "14",
-        "d": "16"
-      },
-      "correct": "c",
-      "explanation": "China shares its 22,117 km borders with 14 sovereign states — the largest number of any country. These are: India, Pakistan, Afghanistan, Tajikistan, Kyrgyzstan, Kazakhstan, Mongolia, Russia, North Korea, Vietnam, Laos, Myanmar, Bhutan, and Nepal. For comparison, the Russian Federation has 13 neighbours."
+        "id":  "geo-ch01-057",
+        "question":  "China shares borders with the largest number of countries in the world. How many countries does China border?",
+        "options":  [
+                        "10",
+                        "12",
+                        "14",
+                        "16"
+                    ],
+        "correct":  2,
+        "explanation":  "China shares its 22,117 km borders with 14 sovereign states â€” the largest number of any country. These are: India, Pakistan, Afghanistan, Tajikistan, Kyrgyzstan, Kazakhstan, Mongolia, Russia, North Korea, Vietnam, Laos, Myanmar, Bhutan, and Nepal. For comparison, the Russian Federation has 13 neighbours.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 58,
-      "type": "MCQ",
-      "topic": "South Asia — Sri Lanka",
-      "difficulty": "medium",
-      "question": "What is the official capital of Sri Lanka?",
-      "options": {
-        "a": "Colombo",
-        "b": "Sri Jayawardenepura Kotte",
-        "c": "Ceylon",
-        "d": "Kandy"
-      },
-      "correct": "b",
-      "explanation": "Sri Jayawardenepura Kotte is the official and legislative capital of Sri Lanka, situated within the urban area of Colombo. Colombo is the commercial capital. Sri Jayawardenepura Kotte was the capital of the Sinhalese kingdom of Kotte from 1415 to 1565."
+        "id":  "geo-ch01-058",
+        "question":  "What is the official capital of Sri Lanka?",
+        "options":  [
+                        "Colombo",
+                        "Sri Jayawardenepura Kotte",
+                        "Ceylon",
+                        "Kandy"
+                    ],
+        "correct":  1,
+        "explanation":  "Sri Jayawardenepura Kotte is the official and legislative capital of Sri Lanka, situated within the urban area of Colombo. Colombo is the commercial capital. Sri Jayawardenepura Kotte was the capital of the Sinhalese kingdom of Kotte from 1415 to 1565.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     },
     {
-      "id": 59,
-      "type": "MCQ",
-      "topic": "South America — Brazil",
-      "difficulty": "easy",
-      "question": "Copacabana Beach is situated in which country?",
-      "options": {
-        "a": "Peru",
-        "b": "Australia",
-        "c": "Mexico",
-        "d": "Brazil"
-      },
-      "correct": "d",
-      "explanation": "Copacabana Beach is located in Rio de Janeiro, Brazil. It was once called Sacopenapa, from the Tupi word soco, referring to a bird native to the area."
+        "id":  "geo-ch01-059",
+        "question":  "Copacabana Beach is situated in which country?",
+        "options":  [
+                        "Peru",
+                        "Australia",
+                        "Mexico",
+                        "Brazil"
+                    ],
+        "correct":  3,
+        "explanation":  "Copacabana Beach is located in Rio de Janeiro, Brazil. It was once called Sacopenapa, from the Tupi word soco, referring to a bird native to the area.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Easy"
     },
     {
-      "id": 60,
-      "type": "MCQ",
-      "topic": "World Map — Seas",
-      "difficulty": "medium",
-      "question": "Which is the largest sea located in the North Indian Ocean, covering an area of about 3.86 million square kilometres?",
-      "options": {
-        "a": "Bay of Bengal",
-        "b": "Arabian Sea",
-        "c": "Red Sea",
-        "d": "Andaman Sea"
-      },
-      "correct": "b",
-      "explanation": "The Arabian Sea is the largest sea in the North Indian Ocean at about 3.86 million km². It has two important features: (a) the Gulf of Aden in the southwest, connecting with the Red Sea through the Strait of Bab-el-Mandeb, and (b) the Gulf of Oman in the northwest, connecting with the Persian Gulf."
+        "id":  "geo-ch01-060",
+        "question":  "Which is the largest sea located in the North Indian Ocean, covering an area of about 3.86 million square kilometres?",
+        "options":  [
+                        "Bay of Bengal",
+                        "Arabian Sea",
+                        "Red Sea",
+                        "Andaman Sea"
+                    ],
+        "correct":  1,
+        "explanation":  "The Arabian Sea is the largest sea in the North Indian Ocean at about 3.86 million kmÂ². It has two important features: (a) the Gulf of Aden in the southwest, connecting with the Red Sea through the Strait of Bab-el-Mandeb, and (b) the Gulf of Oman in the northwest, connecting with the Persian Gulf.",
+        "subject":  "Geography",
+        "chapterName":  "World Map",
+        "pyq":  null,
+        "difficulty":  "Medium"
     }
-  ]
-}
+]

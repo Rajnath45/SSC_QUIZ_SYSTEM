@@ -1,5 +1,4 @@
 [build]
   # Netlify deploys the full static repo so /auth and /dashboard are available.
-  # The command keeps the legacy CORE/QUIZZES path working for the existing quiz engine.
-  command = "mkdir -p CORE/QUIZZES && cp QUIZZES/*.json CORE/QUIZZES/"
+  # Quizzes are loaded from the single root /QUIZZES directory.
   publish = "."

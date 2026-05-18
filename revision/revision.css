@@ -1,0 +1,262 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:wght@400;600;700;800&display=swap');
+
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { font-size: 16px; font-family: 'DM Sans', sans-serif; }
+
+:root {
+  --bg: #F0F2FF;
+  --primary: #4F46E5;
+  --primary-light: #EEF2FF;
+  --card: #ffffff;
+  --text: #1E1B4B;
+  --muted: #6B7280;
+  --success: #10B981;
+  --success-light: #D1FAE5;
+  --danger: #EF4444;
+  --danger-light: #FEE2E2;
+  --warning: #F59E0B;
+  --warning-light: #FEF3C7;
+  --border: #E2E8F0;
+  --radius: 20px;
+  --radius-sm: 12px;
+  --shadow: 0 2px 12px rgba(79,70,229,0.08);
+  --shadow-md: 0 4px 20px rgba(79,70,229,0.12);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+}
+
+a,
+button {
+  color: inherit;
+  font: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+
+.revision-wrapper {
+  width: min(100%, 480px);
+  margin: 0 auto;
+  padding: 20px 16px;
+}
+
+.revision-card {
+  min-height: calc(100vh - 40px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow-md);
+  padding: 18px;
+}
+
+.revision-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.back-link {
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.due-pill {
+  border-radius: 999px;
+  background: var(--primary-light);
+  color: var(--primary);
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.progress-track {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--border);
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--primary);
+  transition: width 0.25s ease;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.chip {
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.chip-subject {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.chip-chapter {
+  background: var(--warning-light);
+  color: #92400E;
+}
+
+.question-text {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  line-height: 1.45;
+  font-weight: 800;
+  margin-bottom: 18px;
+  white-space: pre-wrap;
+}
+
+.options {
+  display: grid;
+  gap: 10px;
+}
+
+.option {
+  border: 1.5px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  background: #ffffff;
+  color: var(--text);
+  text-align: left;
+  line-height: 1.45;
+}
+
+.option:disabled {
+  cursor: default;
+}
+
+.option-letter {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.option.correct {
+  background: #D1FAE5;
+  border-color: #10B981;
+}
+
+.option.wrong {
+  background: #FEE2E2;
+  border-color: #EF4444;
+}
+
+.explanation-card {
+  border-radius: var(--radius-sm);
+  background: var(--primary-light);
+  color: var(--text);
+  padding: 14px;
+  margin-top: 14px;
+  line-height: 1.55;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.review-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.review-actions button,
+.dashboard-link {
+  min-height: 44px;
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.again-btn {
+  background: var(--danger-light);
+  color: var(--danger);
+}
+
+.got-btn,
+.dashboard-link {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.state-screen {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.state-icon {
+  display: block;
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.state-screen h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.state-screen p {
+  color: var(--muted);
+  font-weight: 700;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+.dashboard-link {
+  margin-top: 22px;
+}
+
+.hidden {
+  display: none !important;
+}

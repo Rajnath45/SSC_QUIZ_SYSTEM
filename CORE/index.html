@@ -33,7 +33,6 @@
       <div class="header-controls">
         <span id="authStatus" class="auth-status">Guest</span>
         <button id="authActionBtn" class="icon-btn" type="button">Login</button>
-        <button id="themeToggle" class="icon-btn" type="button" title="Toggle dark/light mode" aria-label="Toggle theme">Light</button>
         <button id="fullscreenBtn" class="icon-btn" type="button" title="Toggle fullscreen" aria-label="Toggle fullscreen">Full</button>
       </div>
     </nav>
@@ -44,7 +43,7 @@
       <div class="hero-copy">
         <p class="eyebrow">SSC preparation website</p>
         <h1>Practice smarter with chapter-wise quizzes, live progress, and instant review.</h1>
-        <p class="hero-text">Choose a chapter, start a focused attempt, track your answered questions, bookmark doubts, and review every option after submission.</p>
+        <p class="hero-text">Choose a chapter, start a focused attempt, track your answered questions, and review every option after submission.</p>
         <div class="hero-actions">
           <button id="heroStartBtn" class="primary-action" type="button" disabled>Start selected quiz</button>
           <a class="secondary-action" href="#chapters">Explore chapters</a>
@@ -97,7 +96,7 @@
         <article class="step-card">
           <span class="step-icon" aria-hidden="true">✏️</span>
           <h3>Take the Quiz</h3>
-          <p>Answer questions with a live timer, bookmark doubts.</p>
+          <p>Answer questions with a live timer and review explanations inline.</p>
         </article>
         <article class="step-card">
           <span class="step-icon" aria-hidden="true">📊</span>
@@ -119,7 +118,7 @@
           <button class="tab" type="button" data-subject="geography">Geography</button>
           <button class="tab" type="button" data-subject="science">Science</button>
           <button class="tab" type="button" data-subject="history">History</button>
-          <button class="tab" type="button" data-subject="math">Math</button>
+          <button class="tab" type="button" data-subject="polity">Polity</button>
         </div>
       </div>
       <div id="chapterCards" class="chapters-grid chapter-grid" aria-live="polite"></div>
@@ -142,8 +141,7 @@
 
         <section id="progressSection" class="progress-section">
           <div class="progress-meta">
-            <span>Progress: <span id="progressText">0/0</span></span>
-            <span>Attempted: <span id="attemptedText">0</span></span>
+            <span id="progressText">Q 0 / 0</span>
           </div>
           <div class="progress-bar">
             <div id="progressBar" class="progress-fill"></div>
@@ -153,16 +151,6 @@
         <section id="questionSection" class="question">
           <div class="question-header">
             <div id="questionCounter" class="question-counter">Question 0 of 0</div>
-            <div class="question-actions">
-              <button id="bookmarkBtn" class="bookmark-btn" type="button">
-                <span aria-hidden="true">!</span>
-                <span>Bookmark</span>
-              </button>
-              <button id="revisionBtn" class="bookmark-btn revision-btn" type="button">
-                <span aria-hidden="true">+</span>
-                <span>Revision</span>
-              </button>
-            </div>
           </div>
           <div id="questionText" class="question-text"></div>
           <div id="optionsContainer" class="options-container"></div>
@@ -228,10 +216,6 @@
           <strong id="paletteNotAnswered">0</strong>
           <span>Not Answered</span>
         </div>
-        <div class="palette-stat stat-bookmarked">
-          <strong id="paletteBookmarked">0</strong>
-          <span>Bookmarked</span>
-        </div>
       </div>
       <input id="paletteSearch" class="palette-search" type="number" min="1" max="1" placeholder="Jump to question number...">
       <div id="paletteGrid" class="palette-grid"></div>
@@ -239,7 +223,6 @@
         <div class="legend-item"><span class="legend-swatch answered"></span>Answered</div>
         <div class="legend-item"><span class="legend-swatch"></span>Not Answered</div>
         <div class="legend-item"><span class="legend-swatch current"></span>Current</div>
-        <div class="legend-item"><span class="legend-swatch bookmarked"></span>Bookmarked</div>
       </div>
     </div>
   </aside>
