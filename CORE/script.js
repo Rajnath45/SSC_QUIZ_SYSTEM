@@ -47,6 +47,8 @@ document.addEventListener('DOMContentLoaded', async function () {
   updatePageTitle();
   updateDashboardStats();
   updateTimerDisplay();
+  renderRevisionDuePracticeCard();
+  updateRevisionNavBadge();
   if (getUrlMode() === 'revision') {
     window.location.href = '../revision/revision.html';
     return;
@@ -101,6 +103,8 @@ function cacheElements() {
   els.paletteSearch = document.getElementById('paletteSearch');
   els.paletteGrid = document.getElementById('paletteGrid');
   els.toastHost = document.getElementById('toastHost');
+  els.revisionNavLink = document.getElementById('revisionNavLink');
+  els.revisionNavBadge = document.getElementById('revisionNavBadge');
   els.customizeModal = document.getElementById('quizCustomizeModal');
   els.customizeSubtitle = document.getElementById('customizeSubtitle');
   els.countPills = Array.from(document.querySelectorAll('[data-count-choice]'));
@@ -111,7 +115,11 @@ function cacheElements() {
 
 function initEventListeners() {
   els.heroStartBtn.addEventListener('click', function () {
-    if (selectedQuizFile) launchQuiz(selectedQuizFile);
+    if (selectedQuizFile) {
+      launchQuiz(selectedQuizFile);
+    } else {
+      document.getElementById('chapters').scrollIntoView({ behavior: 'smooth' });
+    }
   });
 
   if (els.chapterSearch) els.chapterSearch.addEventListener('input', applyChapterFilters);
@@ -327,7 +335,7 @@ function renderChapterCards() {
       <div>
         <span class="subject-badge">${escHtml(labelFromSubject(quiz.subject))}</span>
         <h3>${escHtml(quiz.title)}</h3>
-        <p>${escHtml(questionText)} · JSON powered · Instant result</p>
+        <p>${escHtml(questionText)} · Based on Latest PYQs · Instant result</p>
         <div class="chapter-meta">
           <span>Chapter ${String(index + 1).padStart(2, '0')}</span>
           <span>${escHtml(getChapterDescription(quiz.title, index))}</span>
@@ -407,8 +415,15 @@ function selectChapterCard(file) {
 function updateHeroStartState() {
   if (!els.heroStartBtn) return;
   const hasSelection = Boolean(selectedQuizFile);
-  els.heroStartBtn.disabled = !hasSelection;
-  els.heroStartBtn.style.opacity = hasSelection ? '1' : '0.55';
+  if (hasSelection) {
+    els.heroStartBtn.textContent = 'Start selected quiz';
+    els.heroStartBtn.disabled = false;
+    els.heroStartBtn.style.opacity = '1';
+  } else {
+    els.heroStartBtn.textContent = 'Browse Chapters';
+    els.heroStartBtn.disabled = false;
+    els.heroStartBtn.style.opacity = '1';
+  }
 }
 
 function applyChapterFilters() {
@@ -1079,7 +1094,16 @@ function updateDashboardStats() {
   els.homeProgressPercent.textContent = attempted === 0 ? 'Start a quiz to track your progress' : `${attemptPercent}%`;
   els.homeProgressBar.style.width = `${attemptPercent}%`;
   els.homeProgressBar.closest('.mini-progress-track').classList.toggle('is-empty', attempted === 0);
-  if (els.dashboardQuizTitle) els.dashboardQuizTitle.textContent = currentQuizTitle;
+
+  // Show quiz title only when a quiz is actively selected; otherwise show generic label
+  if (els.dashboardQuizTitle) {
+    els.dashboardQuizTitle.textContent = (questions.length && currentQuizTitle && currentQuizTitle !== 'SSC Quiz')
+      ? currentQuizTitle
+      : 'Your Progress';
+  }
+
+  renderRevisionDuePracticeCard();
+  updateRevisionNavBadge();
 }
 
 function prevQuestion() {
@@ -1582,6 +1606,63 @@ function showToast(message, type) {
   setTimeout(function () {
     toast.remove();
   }, 4600);
+}
+
+function renderRevisionDuePracticeCard() {
+  const card = document.getElementById('revisionDuePractice');
+  if (!card) return;
+
+  const queue = readRevisionQueue();
+  const today = new Date().toISOString().split('T')[0];
+  const dueCount = queue.filter(function (q) {
+    return q && q.nextReview && q.nextReview <= today;
+  }).length;
+
+  if (!dueCount) {
+    card.classList.add('hidden');
+    card.innerHTML = '';
+    return;
+  }
+
+  card.innerHTML = `
+    <div class="rdp-left">
+      <span class="rdp-icon" aria-hidden="true">📖</span>
+      <div class="rdp-text">
+        <span class="rdp-label">Revision Due</span>
+        <span class="rdp-title">${dueCount} question${dueCount === 1 ? '' : 's'} waiting for review today</span>
+      </div>
+    </div>
+    <a class="rdp-link" href="../revision/revision.html">Start Revision →</a>
+  `;
+  card.classList.remove('hidden');
+}
+
+function updateRevisionNavBadge() {
+  const link = document.getElementById('revisionNavLink');
+  const badge = document.getElementById('revisionNavBadge');
+  if (!link || !badge) return;
+
+  const queue = readRevisionQueue();
+  const today = new Date().toISOString().split('T')[0];
+  const dueCount = queue.filter(function (q) {
+    return q && q.nextReview && q.nextReview <= today;
+  }).length;
+
+  if (dueCount > 0) {
+    badge.textContent = dueCount;
+    link.style.display = '';
+  } else {
+    link.style.display = 'none';
+  }
+}
+
+function readRevisionQueue() {
+  try {
+    const queue = JSON.parse(localStorage.getItem('revisionQueue') || '[]');
+    return Array.isArray(queue) ? queue : [];
+  } catch (e) {
+    return [];
+  }
 }
 
 function preventDoubleTapZoom() {

@@ -12,7 +12,7 @@
       <a class="brand" href="#home" aria-label="SSC Prep Hub home">
         <span class="brand-mark">S</span>
         <span>
-          <strong>SSC Prep Hub</strong>
+          <strong>STUDY WITH ME</strong>
           <small>Practice dashboard</small>
         </span>
       </a>
@@ -27,6 +27,7 @@
         <a href="#home">Home</a>
         <a href="#chapters">Chapters</a>
         <a href="#progressOverview">Progress</a>
+        <a id="revisionNavLink" href="../revision/revision.html" style="display:none">Revision <span id="revisionNavBadge" class="nav-revision-badge"></span></a>
         <a id="dashboardLink" href="../dashboard/dashboard.html">Dashboard</a>
       </div>
 
@@ -45,16 +46,16 @@
         <h1>Practice smarter with chapter-wise quizzes, live progress, and instant review.</h1>
         <p class="hero-text">Choose a chapter, start a focused attempt, track your answered questions, and review every option after submission.</p>
         <div class="hero-actions">
-          <button id="heroStartBtn" class="primary-action" type="button" disabled>Start selected quiz</button>
+          <button id="heroStartBtn" class="primary-action" type="button">Browse Chapters</button>
           <a class="secondary-action" href="#chapters">Explore chapters</a>
         </div>
-        <p class="hero-helper">&darr; Select a chapter below to begin</p>
+        <p class="hero-helper">&darr; Or select a chapter below to begin</p>
       </div>
 
       <div id="progressOverview" class="dashboard-preview dashboard-section" aria-label="Preparation overview">
         <div class="dashboard-topline">
           <span>Live dashboard</span>
-          <strong id="dashboardQuizTitle">SSC Quiz</strong>
+          <strong id="dashboardQuizTitle">Your Progress</strong>
         </div>
         <div class="metric-grid">
           <div class="metric-card">
@@ -105,6 +106,8 @@
         </article>
       </div>
     </section>
+
+    <div id="revisionDuePractice" class="revision-due-practice hidden"></div>
 
     <section id="chapters" class="chapter-section chapters-section">
       <div class="section-heading">
