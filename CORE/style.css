@@ -64,8 +64,8 @@
   --bg-primary:     #0D0D1A;
   --bg-secondary:   #080810;
   --bg-tertiary:    #16162A;
-  --surface:        rgba(22,22,42,0.9);
-  --surface-strong: #1A1A2E;
+  --surface:        #1A1A2E;
+  --surface-strong: #1E1E34;
 
   --text-primary:   #EEF2FF;
   --text-secondary: #94A3B8;
@@ -158,10 +158,10 @@ button, a, select {
 /* ─── HEADER / NAVBAR ─────────────────────────────────────────── */
 /* NO sticky. NO glass. NO float. Simple flat header. */
 .app-header {
-  background: var(--surface);
+  background: var(--surface-strong);
   border-bottom: 1px solid var(--border-color);
   position: relative;
-  z-index: 10;
+  z-index: 100;
 }
 
 .topbar {
@@ -322,9 +322,9 @@ main { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
 .hero-copy h1 {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(36px, 5.5vw, 68px);
+  font-size: clamp(26px, 5.5vw, 68px);
   font-weight: 900;
-  line-height: 1.0;
+  line-height: 1.05;
   color: var(--text-primary);
   margin-top: 16px;
   max-width: 700px;
@@ -1530,7 +1530,7 @@ main { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
   .topbar { padding: 0 16px; }
 
-  .hero-copy h1 { font-size: 36px; }
+  .hero-copy h1 { font-size: clamp(24px, 7vw, 40px); }
   .hero-text    { font-size: 15px; }
 
   .dashboard-topline,
@@ -1555,7 +1555,13 @@ main { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 }
 
 @media (max-width: 640px) {
-  .topbar { grid-template-columns: 1fr auto; }
+  .topbar {
+    grid-template-columns: 1fr auto;
+    height: auto;
+    padding: 12px 16px;
+    row-gap: 0;
+    flex-wrap: wrap;
+  }
 
   .bookmark-btn, .revision-btn {
     font-size: 11px;
@@ -1573,10 +1579,27 @@ main { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
     width: 100%;
   }
 
-  .nav-links { flex-direction: column; align-items: stretch; }
+  .nav-links {
+    flex-direction: column;
+    align-items: stretch;
+    background: var(--surface-strong);
+    border-top: 1px solid var(--border-color);
+    padding: 8px 0 12px;
+    gap: 2px;
+  }
+
   .nav-links.open { display: flex; }
-  .header-controls.open { display: flex; justify-content: flex-start; }
-  .nav-links a { width: 100%; }
+
+  .header-controls.open {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    background: var(--surface-strong);
+    border-top: 1px solid var(--border-color);
+    padding: 10px 0 14px;
+  }
+
+  .nav-links a { width: 100%; padding: 11px 8px; border-radius: var(--r-sm); font-size: 15px; }
 
   .timer-display { flex: 0 0 auto; min-width: 80px; max-width: 120px; }
   .chapters-grid { grid-template-columns: 1fr; }
