@@ -3,46 +3,78 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Signup | SSC Prep Hub</title>
+  <title>Create Account — SSC Prep Hub</title>
   <link rel="stylesheet" href="auth.css">
 </head>
 <body data-auth-page="signup">
-  <main class="auth-shell">
-    <section class="auth-panel" aria-label="Signup form">
-      <a class="brand" href="../CORE/index.html">
-        <span class="brand-mark">S</span>
-        <span>
-          <strong>SSC Prep Hub</strong>
-          <small>Personal SSC practice tracker</small>
-        </span>
-      </a>
 
+  <main class="auth-shell">
+
+    <!-- Brand -->
+    <a class="auth-brand" href="../CORE/index.html" aria-label="SSC Prep Hub home">
+      <span class="auth-brand-mark">S</span>
+      <span class="auth-brand-text">
+        <strong>SSC Prep Hub</strong>
+        <small>Practice workspace</small>
+      </span>
+    </a>
+
+    <!-- Card -->
+    <div class="auth-card">
+
+      <!-- Heading -->
       <div class="auth-heading">
-        <p class="eyebrow">Create your account</p>
-        <h1>Start tracking every chapter from today.</h1>
-        <p>Use email/password or Google sign-in. Your dashboard is generated automatically from saved quiz attempts.</p>
+        <p class="auth-eyebrow">Get started</p>
+        <h1>Create your account</h1>
+        <p>Track attempts, detect weak chapters, and build your revision queue.</p>
       </div>
 
+      <!-- Status message -->
       <div id="authMessage" class="auth-message hidden" role="status" aria-live="polite"></div>
 
+      <!-- Signup form -->
       <form id="signupForm" class="auth-form" novalidate>
+
         <label class="field">
           <span>Full name</span>
-          <input id="signupName" type="text" autocomplete="name" placeholder="Your name" required>
+          <input
+            id="signupName"
+            type="text"
+            autocomplete="name"
+            placeholder="Your name"
+            required
+          >
           <small id="signupNameError" class="form-error"></small>
         </label>
 
         <label class="field">
           <span>Email address</span>
-          <input id="signupEmail" type="email" autocomplete="email" placeholder="you@example.com" required>
+          <input
+            id="signupEmail"
+            type="email"
+            autocomplete="email"
+            placeholder="you@example.com"
+            required
+          >
           <small id="signupEmailError" class="form-error"></small>
         </label>
 
         <label class="field">
           <span>Password</span>
           <div class="password-row">
-            <input id="signupPassword" type="password" autocomplete="new-password" placeholder="Minimum 8 characters" required>
-            <button class="ghost-icon toggle-password" type="button" data-target="signupPassword">Show</button>
+            <input
+              id="signupPassword"
+              type="password"
+              autocomplete="new-password"
+              placeholder="Minimum 8 characters"
+              required
+            >
+            <button
+              class="ghost-icon toggle-password"
+              type="button"
+              data-target="signupPassword"
+              aria-label="Toggle password visibility"
+            >Show</button>
           </div>
           <small id="signupPasswordError" class="form-error"></small>
         </label>
@@ -50,8 +82,19 @@
         <label class="field">
           <span>Confirm password</span>
           <div class="password-row">
-            <input id="signupConfirmPassword" type="password" autocomplete="new-password" placeholder="Repeat password" required>
-            <button class="ghost-icon toggle-password" type="button" data-target="signupConfirmPassword">Show</button>
+            <input
+              id="signupConfirmPassword"
+              type="password"
+              autocomplete="new-password"
+              placeholder="Repeat password"
+              required
+            >
+            <button
+              class="ghost-icon toggle-password"
+              type="button"
+              data-target="signupConfirmPassword"
+              aria-label="Toggle confirm password visibility"
+            >Show</button>
           </div>
           <small id="signupConfirmPasswordError" class="form-error"></small>
         </label>
@@ -62,34 +105,30 @@
         </label>
         <small id="signupTermsError" class="form-error"></small>
 
-        <button id="emailAuthBtn" class="auth-btn primary" type="submit">Create account</button>
+        <button id="emailAuthBtn" class="auth-btn primary" type="submit">
+          Create account
+        </button>
+
       </form>
 
-      <div class="divider"><span>or</span></div>
+      <!-- Divider -->
+      <div class="auth-divider"><span>or</span></div>
+
+      <!-- Google -->
       <button id="googleAuthBtn" class="auth-btn google" type="button">
-        <span class="google-dot">G</span>
+        <span class="google-dot" aria-hidden="true"></span>
         Continue with Google
       </button>
 
-      <p class="auth-switch">Already registered? <a href="login.html">Login</a></p>
-    </section>
+      <!-- Switch -->
+      <p class="auth-switch">
+        Already have an account? <a href="login.html">Sign in</a>
+      </p>
 
-    <aside class="auth-showcase" aria-label="Platform highlights">
-      <div class="showcase-card">
-        <span class="metric">1</span>
-        <small>dashboard for all chapters</small>
-      </div>
-      <div class="showcase-copy">
-        <p class="eyebrow">Built for revision</p>
-        <h2>Turn wrong answers into a focused queue.</h2>
-        <p>Bookmarks and revision items are stored under your Firebase user, ready for the next study session.</p>
-      </div>
-      <div class="feature-list">
-        <span>Google sign-in</span>
-        <span>Email/password login</span>
-        <span>Netlify-ready static pages</span>
-      </div>
-    </aside>
+    </div><!-- /auth-card -->
+
+    <p class="auth-footer">SSC Prep Hub · Practice smarter, not harder.</p>
+
   </main>
 
   <script type="module" src="auth.js"></script>

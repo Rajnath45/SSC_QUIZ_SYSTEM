@@ -3,72 +3,94 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login | SSC Prep Hub</title>
+  <title>Sign In — SSC Prep Hub</title>
   <link rel="stylesheet" href="auth.css">
 </head>
 <body data-auth-page="login">
-  <main class="auth-shell">
-    <section class="auth-panel" aria-label="Login form">
-      <a class="brand" href="../CORE/index.html">
-        <span class="brand-mark">S</span>
-        <span>
-          <strong>SSC Prep Hub</strong>
-          <small>Track every practice attempt</small>
-        </span>
-      </a>
 
+  <main class="auth-shell">
+
+    <!-- Brand -->
+    <a class="auth-brand" href="../CORE/index.html" aria-label="SSC Prep Hub home">
+      <span class="auth-brand-mark">S</span>
+      <span class="auth-brand-text">
+        <strong>SSC Prep Hub</strong>
+        <small>Practice workspace</small>
+      </span>
+    </a>
+
+    <!-- Card -->
+    <div class="auth-card">
+
+      <!-- Heading -->
       <div class="auth-heading">
-        <p class="eyebrow">Welcome back</p>
-        <h1>Sign in to continue your preparation.</h1>
-        <p>Your attempts, weak chapters, bookmarks, and revision queue stay synced with Firebase.</p>
+        <p class="auth-eyebrow">Welcome back</p>
+        <h1>Sign in to your account</h1>
+        <p>Your progress, bookmarks, and revision queue are waiting.</p>
       </div>
 
+      <!-- Status message -->
       <div id="authMessage" class="auth-message hidden" role="status" aria-live="polite"></div>
 
+      <!-- Email + password form -->
       <form id="loginForm" class="auth-form" novalidate>
+
         <label class="field">
           <span>Email address</span>
-          <input id="loginEmail" type="email" autocomplete="email" placeholder="you@example.com" required>
+          <input
+            id="loginEmail"
+            type="email"
+            autocomplete="email"
+            placeholder="you@example.com"
+            required
+          >
           <small id="loginEmailError" class="form-error"></small>
         </label>
 
         <label class="field">
           <span>Password</span>
           <div class="password-row">
-            <input id="loginPassword" type="password" autocomplete="current-password" placeholder="Your password" required>
-            <button class="ghost-icon toggle-password" type="button" data-target="loginPassword">Show</button>
+            <input
+              id="loginPassword"
+              type="password"
+              autocomplete="current-password"
+              placeholder="Your password"
+              required
+            >
+            <button
+              class="ghost-icon toggle-password"
+              type="button"
+              data-target="loginPassword"
+              aria-label="Toggle password visibility"
+            >Show</button>
           </div>
           <small id="loginPasswordError" class="form-error"></small>
         </label>
 
-        <button id="emailAuthBtn" class="auth-btn primary" type="submit">Login</button>
+        <button id="emailAuthBtn" class="auth-btn primary" type="submit">
+          Sign in
+        </button>
+
       </form>
 
-      <div class="divider"><span>or</span></div>
+      <!-- Divider -->
+      <div class="auth-divider"><span>or</span></div>
+
+      <!-- Google -->
       <button id="googleAuthBtn" class="auth-btn google" type="button">
-        <span class="google-dot">G</span>
+        <span class="google-dot" aria-hidden="true"></span>
         Continue with Google
       </button>
 
-      <p class="auth-switch">New here? <a href="signup.html">Create an account</a></p>
-    </section>
+      <!-- Switch -->
+      <p class="auth-switch">
+        No account yet? <a href="signup.html">Create one</a>
+      </p>
 
-    <aside class="auth-showcase" aria-label="Platform highlights">
-      <div class="showcase-card">
-        <span class="metric">92%</span>
-        <small>accuracy target</small>
-      </div>
-      <div class="showcase-copy">
-        <p class="eyebrow">SSC Prep Dashboard</p>
-        <h2>Practice with memory, not guesswork.</h2>
-        <p>Every submitted quiz becomes a progress signal for chapter strength, revision priority, and next-attempt focus.</p>
-      </div>
-      <div class="feature-list">
-        <span>Firestore attempt history</span>
-        <span>Weak chapter detection</span>
-        <span>Bookmark and revision queue</span>
-      </div>
-    </aside>
+    </div><!-- /auth-card -->
+
+    <p class="auth-footer">SSC Prep Hub · Practice smarter, not harder.</p>
+
   </main>
 
   <script type="module" src="auth.js"></script>
