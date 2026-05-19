@@ -37,6 +37,8 @@ const els = {};
 document.addEventListener('DOMContentLoaded', async function () {
   cacheElements();
   initEventListeners();
+  updateActionCenterDate();
+  renderActionCenterMetrics();
   await initFirebaseBridge();
   preventDoubleTapZoom();
   await initQuizCatalog();
@@ -54,26 +56,37 @@ document.addEventListener('DOMContentLoaded', async function () {
     return;
   }
   setInterval(saveToLocalStorage, 5000);
+  setInterval(updateActionCenterDate, 60000);
 });
 
 function cacheElements() {
   els.appTitle = document.getElementById('appTitle');
-  els.heroStartBtn = document.getElementById('heroStartBtn');
+  els.guestContent = document.getElementById('guestContent');
+  els.userActionCenter = document.getElementById('userActionCenter');
+  els.guestLoginBtn = document.getElementById('guestLoginBtn');
+  els.userFirstName = document.getElementById('userFirstName');
+  els.todayDate = document.getElementById('todayDate');
+  els.streakCount = document.getElementById('streakCount');
+  els.weeklyStreakRow = document.getElementById('weeklyStreakRow');
+  els.subjectCards = Array.from(document.querySelectorAll('[data-subject-card]'));
+  els.subjectChapterCounts = {
+    geography: document.getElementById('geographyChapterCount'),
+    history: document.getElementById('historyChapterCount'),
+    polity: document.getElementById('polityChapterCount'),
+    science: document.getElementById('scienceChapterCount')
+  };
+  els.chaptersSection = document.getElementById('chapters');
+  els.chapterSectionTitle = document.getElementById('chapterSectionTitle');
+  els.chapterFilterEyebrow = document.getElementById('chapterFilterEyebrow');
+  els.clearSubjectFilter = document.getElementById('clearSubjectFilter');
   els.chapterCards = document.getElementById('chapterCards');
   els.chapterSearch = document.getElementById('chapterSearch');
-  els.subjectTabs = Array.from(document.querySelectorAll('.tab'));
   els.hamburger = document.getElementById('hamburger');
   els.navLinks = document.querySelector('.nav-links');
   els.headerControls = document.querySelector('.header-controls');
   els.authStatus = document.getElementById('authStatus');
   els.authActionBtn = document.getElementById('authActionBtn');
   els.dashboardLink = document.getElementById('dashboardLink');
-  els.dashboardQuizTitle = document.getElementById('dashboardQuizTitle');
-  els.homeQuizCount = document.getElementById('homeQuizCount');
-  els.homeQuestionCount = document.getElementById('homeQuestionCount');
-  els.homeAttemptedCount = document.getElementById('homeAttemptedCount');
-  els.homeProgressPercent = document.getElementById('homeProgressPercent');
-  els.homeProgressBar = document.getElementById('homeProgressBar');
   els.quizStatus = document.getElementById('quizStatus');
   els.timer = document.getElementById('timer');
   els.fullscreenBtn = document.getElementById('fullscreenBtn');
@@ -114,23 +127,21 @@ function cacheElements() {
 }
 
 function initEventListeners() {
-  els.heroStartBtn.addEventListener('click', function () {
-    if (selectedQuizFile) {
-      launchQuiz(selectedQuizFile);
-    } else {
-      document.getElementById('chapters').scrollIntoView({ behavior: 'smooth' });
-    }
-  });
+  if (els.guestLoginBtn) els.guestLoginBtn.addEventListener('click', handleAuthAction);
 
-  if (els.chapterSearch) els.chapterSearch.addEventListener('input', applyChapterFilters);
-  els.subjectTabs.forEach(function (tab) {
-    tab.addEventListener('click', function () {
-      els.subjectTabs.forEach(function (item) { item.classList.remove('active'); });
-      tab.classList.add('active');
-      activeSubject = tab.dataset.subject || 'all';
-      applyChapterFilters();
+  els.subjectCards.forEach(function (card) {
+    card.addEventListener('click', function () {
+      showSubjectChapters(card.dataset.subjectCard || 'all');
     });
   });
+
+  if (els.clearSubjectFilter) {
+    els.clearSubjectFilter.addEventListener('click', function () {
+      hideChapterList(true);
+    });
+  }
+
+  if (els.chapterSearch) els.chapterSearch.addEventListener('input', applyChapterFilters);
   if (els.hamburger) {
     els.hamburger.addEventListener('click', function () {
       const open = !els.navLinks.classList.contains('open');
@@ -139,9 +150,17 @@ function initEventListeners() {
       els.hamburger.setAttribute('aria-expanded', String(open));
     });
   }
-  document.querySelectorAll('a[href="#home"]').forEach(function (link) {
+  document.querySelectorAll('a[href="#workspaceHome"]').forEach(function (link) {
     link.addEventListener('click', function () {
       if (document.body.classList.contains('quiz-active')) exitQuiz();
+      hideChapterList(false);
+    });
+  });
+  document.querySelectorAll('a[href="#chapters"]').forEach(function (link) {
+    link.addEventListener('click', function (event) {
+      if (!currentUser) return;
+      event.preventDefault();
+      showSubjectChapters('all');
     });
   });
 
@@ -208,13 +227,30 @@ function updateAuthUi() {
   if (!els.authStatus || !els.authActionBtn) return;
 
   if (currentUser) {
-    els.authStatus.textContent = currentUser.displayName?.split(' ')[0] || 'Aspirant';
+    const firstName = getUserFirstName(currentUser);
+    els.authStatus.textContent = firstName;
     els.authActionBtn.textContent = 'Logout';
     if (els.dashboardLink) els.dashboardLink.classList.remove('hidden');
+    if (els.guestContent) els.guestContent.classList.add('hidden');
+    if (els.userActionCenter) els.userActionCenter.classList.remove('hidden');
+    if (els.userFirstName) els.userFirstName.textContent = firstName;
+    if (els.chaptersSection && !els.chaptersSection.dataset.openedBySubject) hideChapterList(false);
+    renderActionCenterMetrics();
   } else {
     els.authStatus.textContent = firebaseBridgeReady ? 'Guest' : 'Offline';
     els.authActionBtn.textContent = 'Login';
+    if (els.dashboardLink) els.dashboardLink.classList.add('hidden');
+    if (els.guestContent) els.guestContent.classList.remove('hidden');
+    if (els.userActionCenter) els.userActionCenter.classList.add('hidden');
+    hideChapterList(false);
   }
+}
+
+function getUserFirstName(user) {
+  const displayName = user && user.displayName ? user.displayName.trim() : '';
+  const emailName = user && user.email ? user.email.split('@')[0] : '';
+  const cleaned = (displayName || emailName || 'Aspirant').replace(/[-_.]+/g, ' ').trim();
+  return cleaned.split(/\s+/)[0] || 'Aspirant';
 }
 
 async function handleAuthAction() {
@@ -246,8 +282,9 @@ function applySubjectParamFromUrl() {
   const urlParams = new URLSearchParams(window.location.search);
   const subjectParam = urlParams.get('subject');
   if (!subjectParam) return;
-  const matchingTab = document.querySelector(`.tab[data-subject="${cssEscape(subjectParam.toLowerCase())}"]`);
-  if (matchingTab) matchingTab.click();
+  const normalized = normalizeSubject(subjectParam);
+  const matchingCard = document.querySelector(`[data-subject-card="${cssEscape(normalized)}"]`);
+  if (matchingCard || normalized === 'all') showSubjectChapters(normalized);
 }
 
 function shouldRequireLoginForTracking() {
@@ -298,7 +335,10 @@ function normalizeQuizCatalog(manifest) {
 }
 
 function populateQuizSelect() {
-  renderChapterCards();
+  updateSubjectCounts();
+  if (els.chaptersSection && !els.chaptersSection.classList.contains('hidden')) {
+    renderChapterCards();
+  }
   updateDashboardStats();
 }
 
@@ -306,19 +346,30 @@ function renderChapterCards() {
   if (!els.chapterCards) return;
 
   els.chapterCards.innerHTML = '';
+  const filteredQuizzes = getFilteredQuizCatalog(activeSubject);
   if (!quizCatalog.length) {
     els.chapterCards.innerHTML = `
       <div class="empty-state">
-        <span>📚</span>
+        <span>&#128218;</span>
         <h3>No chapters available yet</h3>
         <p>Check back soon or contact the admin.</p>
       </div>
     `;
-    updateHeroStartState();
     return;
   }
 
-  quizCatalog.forEach(function (quiz, index) {
+  if (!filteredQuizzes.length) {
+    els.chapterCards.innerHTML = `
+      <div class="empty-state">
+        <span>&#128218;</span>
+        <h3>No matching chapters</h3>
+        <p>${activeSubject === 'all' ? 'Try another search.' : `${escHtml(labelFromSubject(activeSubject))} chapters are not available yet.`}</p>
+      </div>
+    `;
+    return;
+  }
+
+  filteredQuizzes.forEach(function (quiz, index) {
     const card = document.createElement('article');
     card.className = 'chapter-card';
     card.dataset.title = quiz.title;
@@ -330,6 +381,7 @@ function renderChapterCards() {
 
     const questionCount = quiz.file === currentQuizFile && questions.length ? questions.length : quiz.questionCount;
     const questionText = questionCount ? `${questionCount} questions` : 'Practice set';
+    const chapterNumber = quizCatalog.findIndex(function (item) { return item.id === quiz.id; }) + 1;
 
     card.innerHTML = `
       <div>
@@ -337,7 +389,7 @@ function renderChapterCards() {
         <h3>${escHtml(quiz.title)}</h3>
         <p>${escHtml(questionText)} · Based on Latest PYQs · Instant result</p>
         <div class="chapter-meta">
-          <span>Chapter ${String(index + 1).padStart(2, '0')}</span>
+          <span>Chapter ${String(chapterNumber || index + 1).padStart(2, '0')}</span>
           <span>${escHtml(getChapterDescription(quiz.title, index))}</span>
         </div>
       </div>
@@ -347,15 +399,86 @@ function renderChapterCards() {
     card.addEventListener('click', function () {
       selectChapterCard(quiz.file);
     });
-    card.querySelector('.chapter-start').addEventListener('click', function () {
+    card.querySelector('.chapter-start').addEventListener('click', function (event) {
+      event.stopPropagation();
       launchQuiz(quiz.id);
     });
 
     els.chapterCards.appendChild(card);
   });
 
-  applyChapterFilters();
-  updateHeroStartState();
+}
+
+function getFilteredQuizCatalog(subject) {
+  const selectedSubject = normalizeSubject(subject || activeSubject || 'all');
+  const query = (els.chapterSearch && els.chapterSearch.value || '').toLowerCase().trim();
+
+  return quizCatalog.filter(function (quiz) {
+    const matchesSubject = selectedSubject === 'all' || quiz.subject === selectedSubject;
+    const matchesSearch = !query || (quiz.title || '').toLowerCase().includes(query);
+    return matchesSubject && matchesSearch;
+  });
+}
+
+function showSubjectChapters(subject) {
+  activeSubject = normalizeSubject(subject || 'all');
+  if (els.chapterSearch) els.chapterSearch.value = '';
+  if (els.chaptersSection) {
+    els.chaptersSection.dataset.openedBySubject = 'true';
+    els.chaptersSection.classList.remove('hidden');
+  }
+  updateChapterFilterHeading();
+  renderChapterCards();
+  syncSubjectCardState();
+  if (els.chaptersSection) {
+    els.chaptersSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function hideChapterList(shouldScroll) {
+  activeSubject = 'all';
+  selectedQuizFile = '';
+  if (els.chapterSearch) els.chapterSearch.value = '';
+  if (els.chapterCards) els.chapterCards.innerHTML = '';
+  if (els.chaptersSection) {
+    delete els.chaptersSection.dataset.openedBySubject;
+    els.chaptersSection.classList.add('hidden');
+  }
+  updateChapterFilterHeading();
+  syncSubjectCardState();
+
+  if (shouldScroll && els.subjectGrid) {
+    els.subjectGrid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+function updateChapterFilterHeading() {
+  const subjectLabel = activeSubject === 'all' ? 'All Subjects' : labelFromSubject(activeSubject);
+  if (els.chapterFilterEyebrow) {
+    els.chapterFilterEyebrow.textContent = activeSubject === 'all' ? 'Chapter practice' : `${subjectLabel} practice`;
+  }
+  if (els.chapterSectionTitle) {
+    els.chapterSectionTitle.textContent = activeSubject === 'all' ? 'All available chapters' : `${subjectLabel} chapters`;
+  }
+  if (els.clearSubjectFilter) {
+    els.clearSubjectFilter.classList.toggle('hidden', !els.chaptersSection || els.chaptersSection.classList.contains('hidden'));
+  }
+}
+
+function syncSubjectCardState() {
+  els.subjectCards.forEach(function (card) {
+    const isActive = activeSubject !== 'all' && card.dataset.subjectCard === activeSubject && els.chaptersSection && !els.chaptersSection.classList.contains('hidden');
+    card.classList.toggle('active', Boolean(isActive));
+  });
+}
+
+function updateSubjectCounts() {
+  const subjects = ['geography', 'history', 'polity', 'science'];
+  subjects.forEach(function (subject) {
+    const count = quizCatalog.filter(function (quiz) { return quiz.subject === subject; }).length;
+    const el = els.subjectChapterCounts && els.subjectChapterCounts[subject];
+    if (el) el.textContent = `${count} chapter${count === 1 ? '' : 's'}`;
+  });
 }
 
 function getChapterDescription(title, index) {
@@ -409,46 +532,15 @@ function selectChapterCard(file) {
   document.querySelectorAll('.chapter-card').forEach(function (card) {
     card.classList.toggle('selected', card.dataset.file === selectedQuizFile);
   });
-  updateHeroStartState();
-}
-
-function updateHeroStartState() {
-  if (!els.heroStartBtn) return;
-  const hasSelection = Boolean(selectedQuizFile);
-  if (hasSelection) {
-    els.heroStartBtn.textContent = 'Start selected quiz';
-    els.heroStartBtn.disabled = false;
-    els.heroStartBtn.style.opacity = '1';
-  } else {
-    els.heroStartBtn.textContent = 'Browse Chapters';
-    els.heroStartBtn.disabled = false;
-    els.heroStartBtn.style.opacity = '1';
-  }
 }
 
 function applyChapterFilters() {
-  const q = (els.chapterSearch && els.chapterSearch.value || '').toLowerCase().trim();
-  let visibleCount = 0;
-
-  document.querySelectorAll('.chapter-card').forEach(function (card) {
-    const matchesSearch = !q || (card.dataset.title || '').toLowerCase().includes(q);
-    const matchesSubject = activeSubject === 'all' || card.dataset.subject === activeSubject;
-    const visible = matchesSearch && matchesSubject;
-    card.style.display = visible ? '' : 'none';
-    if (visible) visibleCount++;
-  });
-
-  let empty = document.getElementById('chapterFilterEmpty');
-  if (!visibleCount && quizCatalog.length) {
-    if (!empty) {
-      empty = document.createElement('div');
-      empty.id = 'chapterFilterEmpty';
-      empty.className = 'empty-state';
-      empty.innerHTML = '<span>📚</span><h3>No matching chapters</h3><p>Try another search or subject.</p>';
-      els.chapterCards.appendChild(empty);
-    }
-  } else if (empty) {
-    empty.remove();
+  if (els.chaptersSection && els.chaptersSection.classList.contains('hidden')) {
+    els.chaptersSection.classList.remove('hidden');
+  }
+  updateChapterFilterHeading();
+  if (!els.chaptersSection || !els.chaptersSection.classList.contains('hidden')) {
+    renderChapterCards();
   }
 }
 
@@ -487,6 +579,7 @@ function exitQuiz() {
   stopTimer();
   resetTimer();
   togglePalette(false);
+  hideChapterList(false);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -815,7 +908,6 @@ function getQuizTitle(file, data) {
 function updatePageTitle() {
   document.title = `${currentQuizTitle} | SSC Prep Hub`;
   els.appTitle.textContent = currentQuizTitle;
-  if (els.dashboardQuizTitle) els.dashboardQuizTitle.textContent = currentQuizTitle;
 }
 
 function updateActiveChapterState() {
@@ -829,7 +921,9 @@ function updateActiveChapterState() {
     });
     populateQuizSelect();
   }
-  renderChapterCards();
+  if (!els.chaptersSection || !els.chaptersSection.classList.contains('hidden')) {
+    renderChapterCards();
+  }
 }
 
 function setQuizControlsDisabled(disabled) {
@@ -1039,6 +1133,8 @@ function addToRevision(question) {
   localStorage.setItem('revisionQueue', JSON.stringify(queue));
   btn.textContent = '✓ Added to Revision';
   btn.disabled = true;
+  renderRevisionDuePracticeCard();
+  updateRevisionNavBadge();
 }
 
 function buildQuestionRecord(q) {
@@ -1081,27 +1177,7 @@ function updateProgress() {
 }
 
 function updateDashboardStats() {
-  if (!els.homeQuizCount) return;
-
-  const attempted = Object.keys(answers).length;
-  const catalogItem = getQuizByFile(currentQuizFile);
-  const totalQuestions = questions.length || (catalogItem && catalogItem.questionCount) || 0;
-  const attemptPercent = totalQuestions ? Math.round((attempted / totalQuestions) * 100) : 0;
-
-  els.homeQuizCount.textContent = quizCatalog.length;
-  els.homeQuestionCount.textContent = totalQuestions;
-  els.homeAttemptedCount.textContent = attempted;
-  els.homeProgressPercent.textContent = attempted === 0 ? 'Start a quiz to track your progress' : `${attemptPercent}%`;
-  els.homeProgressBar.style.width = `${attemptPercent}%`;
-  els.homeProgressBar.closest('.mini-progress-track').classList.toggle('is-empty', attempted === 0);
-
-  // Show quiz title only when a quiz is actively selected; otherwise show generic label
-  if (els.dashboardQuizTitle) {
-    els.dashboardQuizTitle.textContent = (questions.length && currentQuizTitle && currentQuizTitle !== 'SSC Quiz')
-      ? currentQuizTitle
-      : 'Your Progress';
-  }
-
+  renderActionCenterMetrics();
   renderRevisionDuePracticeCard();
   updateRevisionNavBadge();
 }
@@ -1430,6 +1506,7 @@ function updateStats(totalAnswered, correctAnswers) {
   localStorage.setItem('accuracy', accuracy);
 
   updateStreak();
+  renderActionCenterMetrics();
 
   localStorage.setItem('lastAttempted', JSON.stringify({
     chapterName: currentChapterName,
@@ -1608,25 +1685,76 @@ function showToast(message, type) {
   }, 4600);
 }
 
+function renderActionCenterMetrics() {
+  updateActionCenterDate();
+  updateSubjectCounts();
+
+  if (els.streakCount) {
+    els.streakCount.textContent = String(Math.max(parseInt(localStorage.getItem('streakCount') || '0', 10), 0));
+  }
+
+  if (els.weeklyStreakRow) {
+    const days = readStreakDays();
+    const todayIndex = new Date().getDay();
+    const labels = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+    els.weeklyStreakRow.innerHTML = labels.map(function (label, index) {
+      const classes = ['week-day'];
+      if (days[index]) classes.push('complete');
+      if (index === todayIndex) classes.push('today');
+      return `<span class="${classes.join(' ')}" aria-label="${getWeekdayName(index)}">${label}</span>`;
+    }).join('');
+  }
+}
+
+function updateActionCenterDate() {
+  if (!els.todayDate) return;
+  els.todayDate.textContent = new Date().toLocaleDateString('en-GB', {
+    weekday: 'long',
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric'
+  });
+}
+
+function readStreakDays() {
+  try {
+    const fallback = [false, false, false, false, false, false, false];
+    const days = JSON.parse(localStorage.getItem('streakDays') || JSON.stringify(fallback));
+    return Array.isArray(days) ? days.slice(0, 7).concat(fallback).slice(0, 7) : fallback;
+  } catch (e) {
+    return [false, false, false, false, false, false, false];
+  }
+}
+
+function getWeekdayName(index) {
+  return ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][index] || '';
+}
+
 function renderRevisionDuePracticeCard() {
   const card = document.getElementById('revisionDuePractice');
   if (!card) return;
 
-  const queue = readRevisionQueue();
-  const today = new Date().toISOString().split('T')[0];
-  const dueCount = queue.filter(function (q) {
-    return q && q.nextReview && q.nextReview <= today;
-  }).length;
+  const dueCount = getRevisionDueCount();
 
   if (!dueCount) {
-    card.classList.add('hidden');
-    card.innerHTML = '';
+    card.innerHTML = `
+      <div class="rdp-left">
+        <span class="rdp-icon caught-up" aria-hidden="true">&#10003;</span>
+        <div class="rdp-text">
+          <span class="rdp-label">Revision Due</span>
+          <span class="rdp-title">All Caught Up! &#127881;</span>
+          <span class="rdp-message">0 questions waiting for review today. Keep up the streak!</span>
+        </div>
+      </div>
+      <a class="rdp-link is-muted" href="../revision/revision.html">Open Revision</a>
+    `;
+    card.classList.remove('hidden');
     return;
   }
 
   card.innerHTML = `
     <div class="rdp-left">
-      <span class="rdp-icon" aria-hidden="true">📖</span>
+      <span class="rdp-icon" aria-hidden="true">R</span>
       <div class="rdp-text">
         <span class="rdp-label">Revision Due</span>
         <span class="rdp-title">${dueCount} question${dueCount === 1 ? '' : 's'} waiting for review today</span>
@@ -1637,16 +1765,20 @@ function renderRevisionDuePracticeCard() {
   card.classList.remove('hidden');
 }
 
+function getRevisionDueCount() {
+  const queue = readRevisionQueue();
+  const today = new Date().toISOString().split('T')[0];
+  return queue.filter(function (q) {
+    return q && q.nextReview && q.nextReview <= today;
+  }).length;
+}
+
 function updateRevisionNavBadge() {
   const link = document.getElementById('revisionNavLink');
   const badge = document.getElementById('revisionNavBadge');
   if (!link || !badge) return;
 
-  const queue = readRevisionQueue();
-  const today = new Date().toISOString().split('T')[0];
-  const dueCount = queue.filter(function (q) {
-    return q && q.nextReview && q.nextReview <= today;
-  }).length;
+  const dueCount = getRevisionDueCount();
 
   if (dueCount > 0) {
     badge.textContent = dueCount;
