@@ -1,0 +1,506 @@
+[
+  {
+    "id": "his-ch01-001",
+    "question": "James Mill divided Indian History into three parts. Which of the following does NOT belong to his classification?",
+    "options": [
+      "Hindu",
+      "Muslim",
+      "Dravidian",
+      "British"
+    ],
+    "correct": 2,
+    "explanation": "James Mill divided Indian History into Hindu, Muslim, and British periods in his book 'History of British India.' 'Dravidian' refers to a linguistic-ethnic group and was never a category in Mill's historical framework.",
+    "subject": "History",
+    "chapterName": "Stone Age",
+    "topic": "Division of History",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch01-002",
+    "question": "CJ Thomson categorised ancient history into Stone Age, ______ Age, and Iron Age.",
+    "options": [
+      "Copper",
+      "Silver",
+      "Gold",
+      "Bronze"
+    ],
+    "correct": 3,
+    "explanation": "CJ Thomson's three-age system classifies ancient history into Stone Age, Bronze Age, and Iron Age based on the primary material used for tools. The Copper Age (Chalcolithic) is a separate classification used in Indian prehistory and is not part of Thomson's original scheme.",
+    "subject": "History",
+    "chapterName": "Stone Age",
+    "topic": "Division of History",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch01-003",
+    "question": "Who was the first Director-General of the Archaeological Survey of India (ASI) and is known as the 'Father of Indian Archaeology'?",
+    "options": [
+      "Archibald Carlleyle",
+      "Alexander Cunningham",
+      "V.S. Wakankar",
+      "R.D. Banerjee"
+    ],
+    "correct": 1,
+    "explanation": "Alexander Cunningham was the first Director-General (Archaeological Surveyor) of the ASI and is called the 'Father of Indian Archaeology.' Archibald Carlleyle was the first to identify rock paintings in India; V.S. Wakankar discovered the Bhimbetka caves; R.D. Banerjee excavated Mohenjodaro.",
+    "subject": "History",
+    "chapterName": "Stone Age",
+    "topic": "Archaeology",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch01-004",
+    "question": "The Quaternary Stage of Life, the current geological era, began approximately how many million years ago?",
+    "options": [
+      "2.58",
+      "1.80",
+      "3.50",
+      "4.50"
+    ],
+    "correct": 0,
+    "explanation": "The Quaternary Stage began approximately 2.58 million years ago and continues to the present; it is divided into Pleistocene (Ice Age) and Holocene (After Ice Age). The figure 4.5 refers to the age of the Earth in billions of years, not millions.",
+    "subject": "History",
+    "chapterName": "Stone Age",
+    "topic": "Geological Timeline",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch01-005",
+    "question": "Which of the following is NOT associated with the Lower/Early Palaeolithic period?",
+    "options": [
+      "Soan Valley, Punjab",
+      "Attirampakkam, Tamil Nadu",
+      "Didwana, Rajasthan",
+      "Pahalgam, Kashmir"
+    ],
+    "correct": 1,
+    "explanation": "Attirampakkam in Tamil Nadu is a Middle Palaeolithic site, known for animal footprints discovered there. Soan Valley (Punjab), Didwana (Rajasthan), and Pahalgam (Kashmir) are all documented Lower Palaeolithic sites.",
+    "subject": "History",
+    "chapterName": "Stone Age",
+    "topic": "Palaeolithic Period",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch01-006",
+    "question": "The Middle Palaeolithic period (50,000 BC – 40,000 BC) is primarily characterised by which stone tool-making technique?",
+    "options": [
+      "Blade technology",
+      "Core tool technology",
+      "Burin technology",
+      "Flake technology"
+    ],
+    "correct": 3,
+    "explanation": "The Middle Palaeolithic period is based on Flake Technology, which involves striking a stone core to remove flakes for use as tools. Flint stone technology is associated with the Upper Palaeolithic period, while blade technology became more prominent in later periods.",
+    "subject": "History",
+    "chapterName": "Stone Age",
+    "topic": "Palaeolithic Period",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch01-007",
+    "question": "Statement I: The Bhimbetka rock cave paintings, considered India's oldest paintings, were discovered by V.S. Wakankar in the Vindhyan Mountain Range in 1957.\n\nStatement II: Archibald Carlleyle was the first person to identify and discover rock paintings in India, at Sohagighat in Uttar Pradesh.",
+    "options": [
+      "Only Statement I is correct",
+      "Only Statement II is correct",
+      "Both Statement I and Statement II are correct",
+      "Neither Statement I nor Statement II is correct"
+    ],
+    "correct": 2,
+    "explanation": "Both statements are correct. V.S. Wakankar (also called Father of Indian Rock Art) discovered Bhimbetka caves in 1957 in the Vindhyan Mountain Range, Madhya Pradesh. Archibald Carlleyle independently was the first to discover rock paintings in India at Sohagighat, Uttar Pradesh.",
+    "subject": "History",
+    "chapterName": "Stone Age",
+    "topic": "Cave Paintings",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch01-008",
+    "question": "Which Lower Palaeolithic site in Maharashtra is notable as the location where ostrich evidence was found for the first time in India?",
+    "options": [
+      "Inamgaon",
+      "Patne",
+      "Didwana",
+      "Hunasagi"
+    ],
+    "correct": 1,
+    "explanation": "Patne in Maharashtra is the Lower Palaeolithic site where ostrich evidence was discovered for the first time in India. Inamgaon is associated with Upper Palaeolithic and Chalcolithic contexts; Didwana is in Rajasthan; Hunasagi (Hungsi) is a Lower Palaeolithic site in Karnataka.",
+    "subject": "History",
+    "chapterName": "Stone Age",
+    "topic": "Palaeolithic Period",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch01-009",
+    "question": "Assertion (A): The Upper Palaeolithic period (40,000 BC – 10,000 BC) is associated with the appearance of Homo Sapiens (modern man) and the use of flint stone.\n\nReason (R): The Upper Palaeolithic period coincided with the last phase of the Pleistocene epoch.",
+    "options": [
+      "Both A and R are true, and R is the correct explanation of A",
+      "Both A and R are true, but R is NOT the correct explanation of A",
+      "A is true but R is false",
+      "A is false but R is true"
+    ],
+    "correct": 1,
+    "explanation": "Both A and R are factually correct — Upper Palaeolithic did feature Homo Sapiens and flint stone, and it did coincide with the last Pleistocene phase. However, the Pleistocene coincidence (R) is a chronological correlation, not a causal explanation for the biological emergence of Homo Sapiens; hence R is NOT the correct explanation of A.",
+    "subject": "History",
+    "chapterName": "Stone Age",
+    "topic": "Palaeolithic Period",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch01-010",
+    "question": "Consider the following statements about the Mesolithic Period:\n\n1. The Mesolithic period is also referred to as the Microlithic or Middle Stone Age period.\n2. Domestication of animals began during the Mesolithic period.\n3. The Mesolithic period is a transitional phase between the Palaeolithic and Chalcolithic periods.\n4. According to SSC conventions, the Mesolithic time period is considered 12,000 BC to 10,000 BC.\n\nWhich of the above statements is/are INCORRECT?",
+    "options": [
+      "Only 3",
+      "Only 1 and 2",
+      "Only 2 and 3",
+      "Only 3 and 4"
+    ],
+    "correct": 0,
+    "explanation": "Only Statement 3 is incorrect — the Mesolithic period is a transitional phase between Palaeolithic and Neolithic, not between Palaeolithic and Chalcolithic. Statements 1 (Microlithic is a correct alternate name), 2 (domestication began in Mesolithic), and 4 (SSC's convention of 12,000 BC–10,000 BC) are all accurate.",
+    "subject": "History",
+    "chapterName": "Stone Age",
+    "topic": "Mesolithic Period",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch01-011",
+    "question": "In which mountain range are the Bhimbetka rock caves — containing India's oldest known paintings — located?",
+    "options": [
+      "Vindhyan Mountain Range",
+      "Aravalli Range",
+      "Satpura Range",
+      "Western Ghats"
+    ],
+    "correct": 0,
+    "explanation": "The Bhimbetka rock caves, discovered by V.S. Wakankar in 1957, are located in the Vindhyan Mountain Range of Madhya Pradesh. They are Upper Palaeolithic sites containing India's oldest paintings and are a UNESCO World Heritage Site.",
+    "subject": "History",
+    "chapterName": "Stone Age",
+    "topic": "Cave Paintings",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch01-012",
+    "question": "The Neolithic site of Gufkral, located 41 km southeast of Srinagar in the Kashmir Valley, is known as the ______.",
+    "options": [
+      "Valley of Bones",
+      "Home of Hunters",
+      "Cave of Potters",
+      "Field of Granaries"
+    ],
+    "correct": 2,
+    "explanation": "Gufkral in the Kashmir Valley is called the 'Cave of Potters.' It yielded evidence of agriculture and domestication of animals. Burzahom, another Kashmir Neolithic site 16 km west of Srinagar, is famous for domestic dogs buried alongside their masters.",
+    "subject": "History",
+    "chapterName": "Stone Age",
+    "topic": "Neolithic Period",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch01-013",
+    "question": "Which of the following is NOT a characteristic feature of the Neolithic Period?",
+    "options": [
+      "People were food producers who practised agriculture",
+      "Polished stone tools were used",
+      "People lived in circular or rectangular houses",
+      "People practised 'Urn' burial"
+    ],
+    "correct": 3,
+    "explanation": "'Urn' burial was a practice of the Chalcolithic (Copper Age) people, not the Neolithic period. The Neolithic period is characterised by polished stone tools, agricultural food production, and people living in circular or rectangular houses.",
+    "subject": "History",
+    "chapterName": "Stone Age",
+    "topic": "Neolithic Period",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch01-014",
+    "question": "Match the following Neolithic sites with their correct locations:\n\nColumn I              Column II\nI.   Mehrgarh         P.  Assam\nII.  Chirand          Q.  Jammu & Kashmir\nIII. Daojali Hading   R.  Pakistan\nIV.  Burzahom         S.  Bihar",
+    "options": [
+      "I-R, II-S, III-Q, IV-P",
+      "I-R, II-S, III-P, IV-Q",
+      "I-R, II-P, III-S, IV-Q",
+      "I-Q, II-S, III-P, IV-R"
+    ],
+    "correct": 1,
+    "explanation": "Mehrgarh (I→R) is in present-day Pakistan — the oldest Neolithic site in the Indian subcontinent; Chirand (II→S) is in Bihar, known for bone tools; Daojali Hading (III→P) is in Assam, where jadeite stone was found; Burzahom (IV→Q) is in Jammu & Kashmir, 16 km west of Srinagar. Options (a) and (c) trap students who correctly identify Mehrgarh but misplace the remaining three.",
+    "subject": "History",
+    "chapterName": "Stone Age",
+    "topic": "Neolithic Period",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch01-015",
+    "question": "Which Neolithic site in Uttar Pradesh provides the earliest evidence of rice cultivation in India?",
+    "options": [
+      "Koldihwa",
+      "Mehrgarh",
+      "Chirand",
+      "Burzahom"
+    ],
+    "correct": 0,
+    "explanation": "Koldihwa in the Belan Valley, Uttar Pradesh, provides the earliest evidence of rice cultivation in India. Mehrgarh (Pakistan) is the oldest Neolithic site in the Indian subcontinent; Chirand (Bihar) is known for bone tools; Burzahom (Kashmir) is known for pit-dwelling and dog burials.",
+    "subject": "History",
+    "chapterName": "Stone Age",
+    "topic": "Neolithic Period",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch01-016",
+    "question": "Assertion (A): Mehrgarh is considered the oldest Neolithic site in the Indian subcontinent.\n\nReason (R): Mehrgarh, located in present-day Pakistan, has yielded evidence of houses along with crops such as wheat, barley, and cotton, indicating early settled agricultural life.",
+    "options": [
+      "Both A and R are true, and R is the correct explanation of A",
+      "Both A and R are true, but R is NOT the correct explanation of A",
+      "A is true but R is false",
+      "A is false but R is true"
+    ],
+    "correct": 0,
+    "explanation": "Both A and R are correct, and R directly explains A. Mehrgarh's identification as the oldest Neolithic site in the Indian subcontinent is based precisely on the archaeological evidence of settled habitation with agriculture (wheat, barley, cotton) found there, making R the valid causal explanation of A.",
+    "subject": "History",
+    "chapterName": "Stone Age",
+    "topic": "Neolithic Period",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch01-017",
+    "question": "Statement I: Chalcolithic period people practised 'Urn' burial and were unaware of horses and burnt bricks.\n\nStatement II: The first metal to be discovered and used by humans during the Chalcolithic period was Iron.",
+    "options": [
+      "Only Statement I is correct",
+      "Only Statement II is correct",
+      "Both Statement I and Statement II are correct",
+      "Neither Statement I nor Statement II is correct"
+    ],
+    "correct": 0,
+    "explanation": "Statement I is correct — Chalcolithic people practised Urn burial and had no knowledge of horses or burnt bricks. Statement II is false — the first metal used by humans was Copper (hence 'Chalcolithic' from 'Chalco' = Copper); Iron came into use much later in the Iron Age.",
+    "subject": "History",
+    "chapterName": "Stone Age",
+    "topic": "Chalcolithic Period",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch01-018",
+    "question": "Which of the following is the largest site under the Jorwe Culture of the Chalcolithic period?",
+    "options": [
+      "Inamgaon",
+      "Nevasa",
+      "Chandoli",
+      "Daimabad"
+    ],
+    "correct": 3,
+    "explanation": "Daimabad is the largest site under the Jorwe Culture of the Chalcolithic period. The Jorwe Culture belongs to Western Maharashtra, and its sites include Nevasa, Inamgaon, Chandoli, Nasik, Navdatoli, and Savalda — but Daimabad is the largest among all of them.",
+    "subject": "History",
+    "chapterName": "Stone Age",
+    "topic": "Chalcolithic Period",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch01-019",
+    "question": "Consider the following statements about Stone Age periods:\n\n1. The Lower Palaeolithic period occurred during the Ice Age.\n2. The Middle Palaeolithic period is primarily based on Flake Technology.\n3. The Upper Palaeolithic period coincided with the last phase of the Pleistocene epoch.\n4. The Mesolithic period is a transitional phase between Palaeolithic and Chalcolithic.\n\nWhich of the above statements is/are INCORRECT?",
+    "options": [
+      "Only 1",
+      "Only 2",
+      "Only 4",
+      "Only 1 and 3"
+    ],
+    "correct": 2,
+    "explanation": "Only Statement 4 is incorrect — the Mesolithic period is a transitional phase between Palaeolithic and Neolithic, not between Palaeolithic and Chalcolithic. Statements 1 (Lower Palaeolithic during Ice Age), 2 (Middle Palaeolithic based on Flake Technology), and 3 (Upper Palaeolithic coinciding with the last Pleistocene phase) are all accurate.",
+    "subject": "History",
+    "chapterName": "Stone Age",
+    "topic": "Stone Age Overview",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch01-020",
+    "question": "Which of the following is NOT a site associated with the Upper Palaeolithic period?",
+    "options": [
+      "Bhimbetka, Madhya Pradesh",
+      "Inamgaon, Maharashtra",
+      "Didwana, Rajasthan",
+      "Hunasagi, Karnataka"
+    ],
+    "correct": 3,
+    "explanation": "Hunasagi (Hungsi) in Karnataka is a Lower Palaeolithic site, not Upper Palaeolithic. The Upper Palaeolithic period sites include Bhimbetka (Madhya Pradesh), Inamgaon and Nevada (Maharashtra), and Didwana (Rajasthan).",
+    "subject": "History",
+    "chapterName": "Stone Age",
+    "topic": "Palaeolithic Period",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch01-021",
+    "question": "Match the following archaeologists and historians with their contributions:\n\nColumn I                    Column II\nI.   Alexander Cunningham   P.  First to identify rock paintings in India\nII.  V.S. Wakankar          Q.  Author of 'History of British India'\nIII. Archibald Carlleyle    R.  First Director-General of the ASI\nIV.  James Mill             S.  Discoverer of Bhimbetka caves (1957)",
+    "options": [
+      "I-R, II-S, III-Q, IV-P",
+      "I-R, II-P, III-S, IV-Q",
+      "I-R, II-S, III-P, IV-Q",
+      "I-Q, II-S, III-P, IV-R"
+    ],
+    "correct": 2,
+    "explanation": "Alexander Cunningham (I→R) was the first Director-General of ASI; V.S. Wakankar (II→S) discovered Bhimbetka in 1957; Archibald Carlleyle (III→P) was the first to identify rock paintings in India at Sohagighat; James Mill (IV→Q) wrote 'History of British India.' Option (a) traps students who misplace Carlleyle and Mill; option (b) traps those who confuse Wakankar and Carlleyle.",
+    "subject": "History",
+    "chapterName": "Stone Age",
+    "topic": "Archaeology",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch01-022",
+    "question": "The Lakhudiyar Cave Painting, a prehistoric rock art site located near the Suyal River in Almora District, is situated in which state?",
+    "options": [
+      "Himachal Pradesh",
+      "Uttarakhand",
+      "Uttar Pradesh",
+      "Meghalaya"
+    ],
+    "correct": 1,
+    "explanation": "The Lakhudiyar Cave Painting is located in Uttarakhand, near the Suyal River in Almora District. It is distinct from Bhimbetka (Madhya Pradesh), which holds India's oldest paintings; Lakhudiyar is another significant prehistoric rock art site from the Upper Palaeolithic period.",
+    "subject": "History",
+    "chapterName": "Stone Age",
+    "topic": "Cave Paintings",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch01-023",
+    "question": "Statement I: James Mill divided Indian History into Hindu, Muslim, and British periods in his book 'History of British India.'\n\nStatement II: CJ Thomson categorised ancient history into Stone Age, Bronze Age, and Iron Age.",
+    "options": [
+      "Only Statement I is correct",
+      "Both Statement I and Statement II are correct",
+      "Only Statement II is correct",
+      "Neither Statement I nor Statement II is correct"
+    ],
+    "correct": 1,
+    "explanation": "Both statements are correct. James Mill's tripartite classification (Hindu–Muslim–British) is from 'History of British India,' and CJ Thomson's three-age system (Stone–Bronze–Iron) is a foundational framework for categorising prehistoric periods, both referenced in standard SSC history material.",
+    "subject": "History",
+    "chapterName": "Stone Age",
+    "topic": "Division of History",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch01-024",
+    "question": "Catal Huyuk, described as one of the first human protocities associated with the Neolithic period, is located in ______.",
+    "options": [
+      "Greece",
+      "Iran",
+      "Iraq",
+      "Turkey"
+    ],
+    "correct": 3,
+    "explanation": "Catal Huyuk is located in Turkey and is considered one of the earliest known human settlements or 'protocities' of the Neolithic period. It should not be confused with Mehrgarh (Pakistan), which is the oldest Neolithic site in the Indian subcontinent.",
+    "subject": "History",
+    "chapterName": "Stone Age",
+    "topic": "Neolithic Period",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch01-025",
+    "question": "Which Mesolithic site in Rajasthan provides the earliest evidence of domestication of animals in India?",
+    "options": [
+      "Langhnaj",
+      "Chopani Mand",
+      "Bagor",
+      "Sanganakallu"
+    ],
+    "correct": 2,
+    "explanation": "Bagor in Rajasthan is the Mesolithic site providing the earliest evidence of domestication of animals in India. Langhnaj is in Gujarat; Chopani Mand is in Uttar Pradesh near Belan Valley; Sanganakallu is in Karnataka — all are Mesolithic sites but none holds this specific distinction.",
+    "subject": "History",
+    "chapterName": "Stone Age",
+    "topic": "Mesolithic Period",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch01-026",
+    "question": "Consider the following statements about the Evolution of Man:\n\n1. The correct evolutionary sequence is: Australopithecus → Homo Habilis → Homo Erectus → Homo Neanderthalensis → Homo Sapiens.\n2. The skull of Homo Erectus was found at Hathnora in Madhya Pradesh, near the Narmada River.\n3. V.S. Wakankar is associated with the discovery of the Homo Erectus skull in India.\n4. Homo Sapiens (modern man) first appeared during the Upper Palaeolithic period.\n\nWhich of the above statements is/are INCORRECT?",
+    "options": [
+      "Only 1",
+      "Only 3",
+      "Only 1 and 4",
+      "Only 2 and 3"
+    ],
+    "correct": 1,
+    "explanation": "Only Statement 3 is incorrect — V.S. Wakankar is known for discovering the Bhimbetka rock caves in 1957, not the Homo Erectus skull. The skull of Homo Erectus was found at Hathnora, MP near the Narmada River (Statement 2 is correct). The evolutionary sequence in Statement 1 and the link of Homo Sapiens to the Upper Palaeolithic in Statement 4 are both accurate.",
+    "subject": "History",
+    "chapterName": "Stone Age",
+    "topic": "Evolution of Man",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch01-027",
+    "question": "Match the following Stone Age sub-periods with their correct time ranges:\n\nColumn I                Column II\nI.   Lower Palaeolithic  P.  3500 BC – 1000 BC\nII.  Middle Palaeolithic Q.  50,000 BC – 40,000 BC\nIII. Neolithic           R.  7000 BC – 1000 BC\nIV.  Chalcolithic        S.  5 lakh BC – 50,000 BC",
+    "options": [
+      "I-S, II-Q, III-R, IV-P",
+      "I-S, II-Q, III-P, IV-R",
+      "I-S, II-R, III-Q, IV-P",
+      "I-Q, II-S, III-R, IV-P"
+    ],
+    "correct": 0,
+    "explanation": "Lower Palaeolithic (I→S): 5 lakh BC–50,000 BC (Ice Age); Middle Palaeolithic (II→Q): 50,000 BC–40,000 BC (Flake Technology); Neolithic (III→R): 7000 BC–1000 BC (agriculture, polished stones); Chalcolithic (IV→P): 3500 BC–1000 BC (first use of Copper). Options (b) and (c) trap students who confuse Neolithic and Chalcolithic time ranges.",
+    "subject": "History",
+    "chapterName": "Stone Age",
+    "topic": "Stone Age Overview",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch01-028",
+    "question": "The skull of Homo Erectus, found at Hathnora in Madhya Pradesh, was discovered near which river?",
+    "options": [
+      "Tapti River",
+      "Betwa River",
+      "Narmada River",
+      "Chambal River"
+    ],
+    "correct": 2,
+    "explanation": "The skull of Homo Erectus was found at Hathnora in Madhya Pradesh, near the Narmada River. Homo Erectus is the third stage in the human evolutionary chain: Australopithecus → Homo Habilis → Homo Erectus → Homo Neanderthalensis → Homo Sapiens.",
+    "subject": "History",
+    "chapterName": "Stone Age",
+    "topic": "Evolution of Man",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  }
+]

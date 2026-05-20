@@ -1,0 +1,632 @@
+[
+  {
+    "id": "his-ch02-001",
+    "question": "The Indus Valley Civilisation was named by which scholar who was the Director of the Archaeological Survey of India at the time?",
+    "options": [
+      "Alexander Cunningham",
+      "Dayaram Sahni",
+      "John Marshall",
+      "Rakhal Das Banerjee"
+    ],
+    "correct": 2,
+    "explanation": "John Marshall, Director of the Archaeological Survey of India, named and formally announced the Indus Valley Civilisation. Alexander Cunningham was the first Chairman of ASI; Dayaram Sahni excavated Harappa in 1921; Rakhal Das Banerjee excavated Mohenjodaro in 1922.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Discovery & Overview",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-002",
+    "question": "Which of the following is the correct chronological order of the three phases of the Indus Valley Civilisation?",
+    "options": [
+      "Early Harappan (3000–2500 BCE) → Mature Harappan (2500–2000 BCE) → Late Harappan (2000–1500 BCE)",
+      "Early Harappan (3000–2600 BCE) → Mature Harappan (2600–1900 BCE) → Late Harappan (1900–1700 BCE)",
+      "Early Harappan (2600–2200 BCE) → Mature Harappan (2200–1900 BCE) → Late Harappan (1900–1500 BCE)",
+      "Early Harappan (3500–3000 BCE) → Mature Harappan (3000–2500 BCE) → Late Harappan (2500–2000 BCE)"
+    ],
+    "correct": 3,
+    "explanation": "The IVC has three phases: Early Harappan (3000–2600 BCE), Mature Harappan (2600–1900 BCE), and Late Harappan (1900–1700 BCE). The Mature Harappan phase is also broadly dated 2500–1750 BCE in some classifications.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Timeline & Phases",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-003",
+    "question": "Which site holds the distinction of being the first site of the Indus Valley Civilisation to be discovered, and in which year was it excavated?",
+    "options": [
+      "Mohenjodaro — 1920",
+      "Harappa — 1921",
+      "Kalibangan — 1953",
+      "Lothal — 1954"
+    ],
+    "correct": 1,
+    "explanation": "Harappa was the first IVC site to be discovered, excavated in 1921 by Dayaram Sahni in Punjab (Pakistan). Mohenjodaro was discovered a year later in 1922 by Rakhal Das Banerjee in Sindh.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Discovery & Overview",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-004",
+    "question": "Statement I: The northernmost site of the Indus Valley Civilisation is Manda, located in Kashmir.\n\nStatement II: The southernmost site of the Indus Valley Civilisation is Sutkagendor, located in Pakistan.",
+    "options": [
+      "Only Statement I is correct",
+      "Only Statement II is correct",
+      "Both Statement I and Statement II are correct",
+      "Neither Statement I nor Statement II is correct"
+    ],
+    "correct": 0,
+    "explanation": "Statement I is correct — Manda (Kashmir) is the northernmost IVC site. Statement II is false — Sutkagendor (Pakistan) is the westernmost IVC site, not the southernmost; the southernmost site is Daimabad in Maharashtra.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Geographic Extent",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-005",
+    "question": "Match the following IVC sites with the rivers on which they are located:\n\nColumn I              Column II\nI.   Harappa           P.  Ghaggar\nII.  Mohenjodaro       Q.  Ravi\nIII. Kalibangan        R.  Bhogova\nIV.  Lothal            S.  Indus",
+    "options": [
+      "I-Q, II-S, III-P, IV-R",
+      "I-Q, II-S, III-R, IV-P",
+      "I-Q, II-P, III-S, IV-R",
+      "I-S, II-Q, III-P, IV-R"
+    ],
+    "correct": 0,
+    "explanation": "Harappa is on the Ravi (Q); Mohenjodaro is on the Indus (S); Kalibangan is on the Ghaggar (P); Lothal is on the Bhogova (R). Options (b) and (c) trap students who know Harappa–Ravi but swap the remaining rivers.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "IVC Sites & Rivers",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-006",
+    "question": "Which IVC site is known as the 'City without a Citadel'?",
+    "options": [
+      "Banawali",
+      "Chanhudaro",
+      "Dholavira",
+      "Kalibangan"
+    ],
+    "correct": 1,
+    "explanation": "Chanhudaro, located in Sindh on the Indus River, is the only major IVC city that had no Citadel. Dholavira was divided into three parts; Kalibangan had fire altars; Banawali lacked a grid pattern.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "IVC Sites & Features",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-007",
+    "question": "The Great Bath, one of the most iconic structures of the Indus Valley Civilisation, is located at which site?",
+    "options": [
+      "Harappa",
+      "Dholavira",
+      "Lothal",
+      "Mohenjodaro"
+    ],
+    "correct": 3,
+    "explanation": "The Great Bath is located at Mohenjodaro and is a rectangle-shaped tank-like structure, measuring 12 m × 7 m × 2.4 m depth, possibly used for ritual bathing. Gypsum-based mortar was used for waterproofing.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Town Planning",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-008",
+    "question": "The dimensions of the Great Bath at Mohenjodaro are ______ metres in length, 7 metres in breadth, and 2.4 metres in depth.",
+    "options": [
+      "10",
+      "15",
+      "9",
+      "12"
+    ],
+    "correct": 3,
+    "explanation": "The Great Bath measures 12 metres in length, 7 metres in breadth, and 2.4 metres in depth. Gypsum-based mortar was used to make it watertight, and it is believed to have served ritual bathing purposes.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Town Planning",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-009",
+    "question": "Consider the following statements about the town planning of the Indus Valley Civilisation:\n\n1. Harappan cities used burnt bricks of standardised ratio 1:2:4.\n2. The water reservoir of the IVC is associated with Dholavira.\n3. Roads in Harappan cities intersected each other at 90 degrees.\n4. Limestone slabs were used as drain covers in domestic architecture.\n\nWhich of the above statements is/are INCORRECT?",
+    "options": [
+      "Only 1",
+      "Only 2 and 4",
+      "Only 3",
+      "None of the above"
+    ],
+    "correct": 3,
+    "explanation": "All four statements are correct. Standardised bricks in ratio 1:2:4 were used; Dholavira had a giant water reservoir; roads intersected at 90 degrees (grid pattern); and limestone slabs served as drain covers. There is no incorrect statement in this set.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Town Planning",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-010",
+    "question": "Dholavira was added to the UNESCO World Heritage Sites list in 2021. What number was it on India's UNESCO list?",
+    "options": [
+      "38th",
+      "39th",
+      "41st",
+      "40th"
+    ],
+    "correct": 3,
+    "explanation": "Dholavira (Gujarat) became India's 40th UNESCO World Heritage Site in 2021. The site is also notable for being divided into three parts and housing a giant water reservoir.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "IVC Sites & Features",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-011",
+    "question": "Assertion (A): The Harappan ploughed field discovered at Kalibangan shows two sets of furrows at right angles to each other.\n\nReason (R): Two different crops were grown simultaneously in the same field, requiring furrows in perpendicular directions.",
+    "options": [
+      "Both A and R are true, and R is the correct explanation of A",
+      "Both A and R are true, but R is NOT the correct explanation of A",
+      "A is true but R is false",
+      "A is false but R is true"
+    ],
+    "correct": 0,
+    "explanation": "Both A and R are true and causally linked. The perpendicular furrows found at Kalibangan (Rajasthan) indicate two different crops were grown together — a unique and advanced agricultural practice. Oxen were used for ploughing.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Agriculture",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-012",
+    "question": "Which of the following animals was NOT domesticated by the people of the Indus Valley Civilisation, as evidenced by archaeological findings?",
+    "options": [
+      "Buffalo",
+      "Goat",
+      "Horse",
+      "Pig"
+    ],
+    "correct": 2,
+    "explanation": "Evidence of horses and cows has not been found at IVC sites, indicating they were not domesticated by Harappan people. A single horse bone was found at Surkotada but remains debated. Buffalo, goat, sheep, pig, bull, and oxen were all domesticated.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Agriculture & Animal Domestication",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-013",
+    "question": "Which crop cultivated by the Harappans was so distinctive that the Greeks referred to cotton by the name 'Sindon'?",
+    "options": [
+      "Wheat",
+      "Barley",
+      "Cotton",
+      "Sesame"
+    ],
+    "correct": 2,
+    "explanation": "Cotton was one of the distinguishing features of the IVC, and the Greeks named cotton 'Sindon' after Sindh — the region where it was cultivated. Wheat and barley were major crops, but cotton's Greek name is a well-known SSC fact.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Agriculture",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-014",
+    "question": "The largest building in Mohenjodaro was ______.",
+    "options": [
+      "The Great Bath",
+      "The Assembly Hall",
+      "The Citadel",
+      "The Great Granary"
+    ],
+    "correct": 3,
+    "explanation": "The Great Granary is the largest building at Mohenjodaro, used for storage of grains. The Great Bath is a separate structure at the same site used for ritual bathing; the two are often confused by students.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Town Planning",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-015",
+    "question": "Match the following IVC sites with their characteristic features:\n\nColumn I            Column II\nI.   Rakhigarhi      P.  Ancient Port / Dockyard\nII.  Lothal           Q.  7 Fire Altars, Ploughed Fields\nIII. Kalibangan      R.  Largest IVC Site\nIV.  Banawali        S.  Barley; Lack of Grid Pattern",
+    "options": [
+      "I-R, II-P, III-Q, IV-S",
+      "I-R, II-P, III-S, IV-Q",
+      "I-P, II-R, III-Q, IV-S",
+      "I-R, II-Q, III-P, IV-S"
+    ],
+    "correct": 0,
+    "explanation": "Rakhigarhi (Haryana) is the largest IVC site (R); Lothal (Gujarat) has an ancient port/dockyard (P); Kalibangan (Rajasthan) has 7 fire altars and ploughed fields (Q); Banawali (Haryana) is associated with barley and lacks a grid pattern (S). Options (b) and (d) swap Kalibangan and Banawali features.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "IVC Sites & Features",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-016",
+    "question": "Consider the following statements about burials in the Indus Valley Civilisation:\n\n1. Double Burials have been found at Lothal.\n2. Extended Burial has been found at Sanauli, Uttar Pradesh.\n3. Harappans practised only individual burials and never buried dogs with their masters.\n4. Dead were buried with copper mirrors.\n\nWhich of the above statements is/are INCORRECT?",
+    "options": [
+      "Only 3",
+      "Only 2 and 4",
+      "Only 1 and 3",
+      "Only 4"
+    ],
+    "correct": 0,
+    "explanation": "Only Statement 3 is incorrect — burial of dogs along with their masters has been evidenced at IVC sites. Statements 1, 2, and 4 are all correct: double burials at Lothal, extended burial at Sanauli (UP), and dead buried with copper mirrors are documented Harappan practices.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Social Practices & Burials",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-017",
+    "question": "Which site of the Indus Valley Civilisation was devoted entirely to craft production, including bead making, shell cutting, metal working, and seal making?",
+    "options": [
+      "Nageshwar",
+      "Balakot",
+      "Chanhudaro",
+      "Shortugai"
+    ],
+    "correct": 2,
+    "explanation": "Chanhudaro was the IVC site devoted entirely to craft production. Nageshwar (Gujarat) and Balakot (Pakistan) were centres for shell making (bangles, ladles, inlay); Shortugai (Afghanistan) is associated with Lapis Lazuli trade.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Craft Production & Trade",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-018",
+    "question": "The Harappans obtained Lapis Lazuli from which of the following trade sources?",
+    "options": [
+      "Gujarat (Bharuch)",
+      "Kolar, Karnataka",
+      "Shortugai or Badakhshan",
+      "Rajasthan (Khetri Mines)"
+    ],
+    "correct": 2,
+    "explanation": "Lapis Lazuli, a prized blue gemstone, was sourced by Harappans from Shortugai or Badakhshan (in present-day Afghanistan). Gujarat (Bharuch) supplied Carnelian; Kolar (Karnataka) supplied Gold; Khetri Mines (Rajasthan) supplied Copper.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Trade & Commerce",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-019",
+    "question": "Statement I: Harappan seals were primarily made of steatite, a type of soft stone.\n\nStatement II: The Harappan script has been fully deciphered and is read from left to right.",
+    "options": [
+      "Only Statement I is correct",
+      "Only Statement II is correct",
+      "Both Statement I and Statement II are correct",
+      "Neither Statement I nor Statement II is correct"
+    ],
+    "correct": 0,
+    "explanation": "Statement I is correct — Harappan seals were made of steatite (soft stone) and contained animal motifs and pictographic script. Statement II is false — the Harappan script remains undeciphered to this day, and it was written from right to left (style known as Boustrophedon).",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Harappan Seals & Scripts",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-020",
+    "question": "The Harappan script is written from right to left. The writing style where alternate lines run in opposite directions is known as ______.",
+    "options": [
+      "Cuneiform",
+      "Hieroglyphics",
+      "Boustrophedon",
+      "Pictographic"
+    ],
+    "correct": 2,
+    "explanation": "The Harappan writing style, where alternate lines run in opposite directions (right to left and left to right), is called Boustrophedon. The script itself is pictographic and remains undeciphered; 'Cuneiform' is the Mesopotamian script.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Harappan Seals & Scripts",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-021",
+    "question": "In the Harappan weight system, which denomination followed the binary system and which followed the decimal system?",
+    "options": [
+      "Lower denomination — Decimal; Higher denomination — Binary",
+      "Lower denomination — Binary; Higher denomination — Decimal",
+      "Both lower and higher denominations — Binary",
+      "Both lower and higher denominations — Decimal"
+    ],
+    "correct": 1,
+    "explanation": "In the Harappan measurement system, lower denominations of weights followed the Binary system (1, 2, 4, 8...) while higher denominations followed the Decimal system (10, 20, 40...). Weights were made of a stone called Chert and used in multiples of 16.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Weights & Measures",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-022",
+    "question": "Which of the following statements about the Priest King statue of the Indus Valley Civilisation is correct?",
+    "options": [
+      "It was made of bronze and found at Harappa",
+      "It was made of steatite, found at Mohenjodaro, and stands 17.5 cm tall",
+      "It was made of terracotta and found at Dholavira",
+      "It was made of steatite, found at Kalibangan, and stands 10.5 cm tall"
+    ],
+    "correct": 1,
+    "explanation": "The Priest King statue is made of steatite, was found at Mohenjodaro, and measures 17.5 cm (6.9 inches) in height. The Dancing Girl — a different IVC artefact — is made of bronze in Tribhanga Mudra and is 10.5 cm tall.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Art & Religious Practices",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-023",
+    "question": "The famous Dancing Girl statue of the Indus Valley Civilisation was made of which material and in which posture?",
+    "options": [
+      "Terracotta; Tribhanga Mudra",
+      "Steatite; Nataraja Mudra",
+      "Bronze; Tribhanga Mudra",
+      "Bronze; Namaskara Mudra"
+    ],
+    "correct": 2,
+    "explanation": "The Dancing Girl statue found at Mohenjodaro is made of Bronze and is sculpted in Tribhanga Mudra (three-bend posture). It stands 10.5 cm tall. The Priest King, by contrast, is made of steatite.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Art & Religious Practices",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-024",
+    "question": "Consider the following statements about religious practices of the Indus Valley Civilisation:\n\n1. The Pashupati Seal depicts a figure of Shiva in a yogic posture surrounded by animals.\n2. Lingas were conical stone objects worshipped as symbols of Vishnu.\n3. The Unicorn depicted on Harappan seals is a one-horned animal.\n4. Harappans were not aware of the Lion.\n\nWhich of the above statements is/are INCORRECT?",
+    "options": [
+      "Only 2",
+      "Only 1 and 2",
+      "Only 2 and 4",
+      "Only 3"
+    ],
+    "correct": 0,
+    "explanation": "Only Statement 2 is incorrect — Lingas were conical stone objects worshipped as symbols of Shiva, not Vishnu. Statements 1, 3, and 4 are correct: the Pashupati Seal shows Shiva in yogic posture; the Unicorn is indeed a one-horned animal; and Harappans had no knowledge of the Lion.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Art & Religious Practices",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-025",
+    "question": "Which IVC site is identified as the oldest IVC site discovered so far?",
+    "options": [
+      "Harappa",
+      "Mohenjodaro",
+      "Kalibangan",
+      "Bhirrana"
+    ],
+    "correct": 3,
+    "explanation": "Bhirrana, located in Haryana, has been identified as the oldest IVC site based on radiocarbon dating. Harappa was merely the first site to be excavated (1921) but Bhirrana's occupation dates back further in the archaeological record.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "IVC Sites & Features",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-026",
+    "question": "Assertion (A): The IVC people did not use Iron.\n\nReason (R): The Indus Valley Civilisation belongs to the Bronze Age, and iron smelting technology had not yet been developed in the Indian subcontinent during this period.",
+    "options": [
+      "Both A and R are true, and R is the correct explanation of A",
+      "Both A and R are true, but R is NOT the correct explanation of A",
+      "A is true but R is false",
+      "A is false but R is true"
+    ],
+    "correct": 0,
+    "explanation": "Both A and R are true and causally connected. The IVC is a Bronze Age civilisation; iron technology (Iron Age) came later in Indian history. IVC people knew about gold but not iron, which is consistent with their Bronze Age classification.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Technology & Materials",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-027",
+    "question": "Which of the following sites was the centre for Carnelian bead production in the Indus Valley Civilisation?",
+    "options": [
+      "Shortugai",
+      "Kolar",
+      "Gujarat (Bharuch)",
+      "Nageshwar"
+    ],
+    "correct": 2,
+    "explanation": "Gujarat (Bharuch) was the source of Carnelian for IVC trade. Shortugai or Badakhshan supplied Lapis Lazuli; Kolar (Karnataka) supplied Gold; Nageshwar and Balakot were centres for shell-making, not Carnelian.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Trade & Commerce",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-028",
+    "question": "The Brick Granary at Harappa consisted of how many granaries in total?",
+    "options": [
+      "6",
+      "8",
+      "16",
+      "12"
+    ],
+    "correct": 3,
+    "explanation": "The Brick Granary at Harappa had six granaries in each row, arranged in two rows, giving a total of 12 granaries along with a circular brick platform. This is different from the Great Granary at Mohenjodaro, which was the largest single building.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Town Planning",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-029",
+    "question": "Which of the following is NOT cited as a possible reason for the decline of the Harappan Civilisation?",
+    "options": [
+      "Climate Change",
+      "Foreign Invasion",
+      "Excessive Floods",
+      "Spread of Buddhism"
+    ],
+    "correct": 3,
+    "explanation": "Spread of Buddhism is not considered a reason for the decline of the Harappan Civilisation — Buddhism arose centuries after the IVC's end. The accepted possible reasons include Climate Change, Deforestation, Excessive Floods, Shifting or Drying up of Rivers, and Foreign Invasion.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Decline of IVC",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-030",
+    "question": "Who was the first woman Director of the Archaeological Survey of India, associated with excavations of IVC sites?",
+    "options": [
+      "Iravati Karve",
+      "Debala Mitra",
+      "Kamlesh Kapur",
+      "B.B. Lal"
+    ],
+    "correct": 1,
+    "explanation": "Debala Mitra was the first woman Director of the Archaeological Survey of India (ASI). She played a significant role in documenting and protecting India's ancient heritage, including sites related to the IVC. B.B. Lal was a male archaeologist famous for work on the Ramayana.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Discovery & Overview",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-031",
+    "question": "Match the following IVC sites with the scholars who discovered or excavated them:\n\nColumn I              Column II\nI.   Harappa           P.  S.R. Rao\nII.  Mohenjodaro       Q.  J.P. Joshi\nIII. Lothal            R.  Dayaram Sahni\nIV.  Dholavira         S.  Rakhal Das Banerjee",
+    "options": [
+      "I-R, II-S, III-P, IV-Q",
+      "I-R, II-S, III-Q, IV-P",
+      "I-S, II-R, III-P, IV-Q",
+      "I-R, II-P, III-S, IV-Q"
+    ],
+    "correct": 0,
+    "explanation": "Harappa was discovered by Dayaram Sahni (R); Mohenjodaro by Rakhal Das Banerjee (S); Lothal by S.R. Rao (P); Dholavira by J.P. Joshi (Q). Options (b) and (c) trap students who know Harappa–Dayaram Sahni but swap the remaining discoverers.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Discovery & Overview",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-032",
+    "question": "The Harappans traded with the Mesopotamian Civilisation. What is the present-day name of Mesopotamia?",
+    "options": [
+      "Iran",
+      "Iraq",
+      "Syria",
+      "Kuwait"
+    ],
+    "correct": 1,
+    "explanation": "Mesopotamia, which developed around the Tigris and Euphrates rivers, is present-day Iraq. Evidence of trade between the IVC and Mesopotamia includes discovery of a few Harappan seals in Mesopotamia.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Trade & Commerce",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-033",
+    "question": "Statement I: The Harappan weights were uniform across IVC settlements and were used in multiples of 16.\n\nStatement II: The exchange system in the IVC was primarily based on coinage minted by the central authority.",
+    "options": [
+      "Only Statement I is correct",
+      "Only Statement II is correct",
+      "Both Statement I and Statement II are correct",
+      "Neither Statement I nor Statement II is correct"
+    ],
+    "correct": 0,
+    "explanation": "Statement I is correct — weights were uniform, used in multiples of 16, and made of a stone called Chert. Statement II is false — the IVC used a barter system; there is no evidence of any coinage in the Harappan civilisation.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Weights & Measures",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-034",
+    "question": "Which of the following types of pottery is associated with the Early Harappan phase, found in the Cholistan region of Pakistan in the Hakra-Ghaggar region?",
+    "options": [
+      "Ochre Coloured Pottery",
+      "Hakra Pottery",
+      "Black-Red Ware Pottery",
+      "Painted-Grey Ware Pottery"
+    ],
+    "correct": 1,
+    "explanation": "Hakra Pottery is associated with the Early Harappan phase, found in the Cholistan region of Pakistan in the Hakra-Ghaggar area. Painted-Grey Ware is associated with the later Vedic period; Ochre Coloured Pottery and Black-Red Ware are also IVC pottery types but not specific to Early Harappan Cholistan.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Art & Religious Practices",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  },
+  {
+    "id": "his-ch02-035",
+    "question": "The Terracotta model of the plough — an important agricultural tool of the IVC — has been found at which of the following sites?",
+    "options": [
+      "Kalibangan and Banawali",
+      "Cholistan and Banawali",
+      "Lothal and Harappa",
+      "Surkotada and Dholavira"
+    ],
+    "correct": 1,
+    "explanation": "The terracotta model of the plough has been found at Cholistan and Banawali. The actual ploughed field (not the model) was found at Kalibangan. Oxen were used for ploughing, and the plough model offers evidence of advanced agricultural practices.",
+    "subject": "History",
+    "chapterName": "Indus Valley Civilisation",
+    "topic": "Agriculture",
+    "pyq": null,
+    "pyqYear": null,
+    "pyqExam": null
+  }
+]

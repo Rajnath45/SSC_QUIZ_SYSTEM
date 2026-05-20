@@ -20,6 +20,20 @@
       "subject": "geography",
       "questionCount": 16,
       "file": "Latitudes_Longitudes.json"
+    },
+    {
+      "id": "stone-age",
+      "title": "Stone Age Quiz",
+      "subject": "history",
+      "questionCount": 28,
+      "file": "Stone_Age.json"
+    },
+    {
+      "id": "IVC",
+      "title": "Indus Valley Civilization Quiz",
+      "subject": "history",
+      "questionCount": 35,
+      "file": "IVC.json"
     }
   ]
 }

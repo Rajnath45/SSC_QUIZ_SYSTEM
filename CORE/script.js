@@ -1505,6 +1505,8 @@ function updateStats(totalAnswered, correctAnswers) {
   const accuracy = attemptedTotal ? Math.round((correct / attemptedTotal) * 100) : 0;
   localStorage.setItem('accuracy', accuracy);
 
+  saveQuizToHistory(correctAnswers, totalAnswered);
+
   updateStreak();
   renderActionCenterMetrics();
 
@@ -1514,6 +1516,28 @@ function updateStats(totalAnswered, correctAnswers) {
     progress: totalAnswered ? Math.round((correctAnswers / totalAnswered) * 100) : 0,
     url: window.location.href
   }));
+}
+
+/**
+ * Appends one quiz result to localStorage:quizHistory so dashboard.js
+ * can read and display it. Mirrors the schema dashboard.js expects:
+ * { id, date, subject, chapterName, score, total }
+ */
+function saveQuizToHistory(score, total) {
+  try {
+    const history = JSON.parse(localStorage.getItem('quizHistory') || '[]');
+    history.push({
+      id:          String(Date.now()) + '-' + Math.random().toString(36).slice(2),
+      date:        new Date().toISOString().split('T')[0],          // "YYYY-MM-DD"
+      subject:     String(currentSubject || 'general').toLowerCase(),
+      chapterName: String(currentChapterName || currentQuizTitle || 'Quiz'),
+      score:       Number(score) || 0,
+      total:       Number(total) || 1,
+    });
+    localStorage.setItem('quizHistory', JSON.stringify(history));
+  } catch (e) {
+    console.warn('Could not save quiz history:', e);
+  }
 }
 
 function updateStreak() {
