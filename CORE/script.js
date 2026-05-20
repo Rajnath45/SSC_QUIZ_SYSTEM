@@ -347,6 +347,7 @@ function renderChapterCards() {
 
   els.chapterCards.innerHTML = '';
   const filteredQuizzes = getFilteredQuizCatalog(activeSubject);
+
   if (!quizCatalog.length) {
     els.chapterCards.innerHTML = `
       <div class="empty-state">
@@ -372,41 +373,37 @@ function renderChapterCards() {
   filteredQuizzes.forEach(function (quiz, index) {
     const card = document.createElement('article');
     card.className = 'chapter-card';
-    card.dataset.title = quiz.title;
+    card.dataset.title   = quiz.title;
     card.dataset.subject = quiz.subject;
     card.dataset.chapterId = quiz.id;
-    card.dataset.file = quiz.file;
-    if (quiz.file === selectedQuizFile) card.classList.add('selected');
-    if (quiz.file === currentQuizFile) card.classList.add('active');
+    card.dataset.file    = quiz.file;
 
-    const questionCount = quiz.file === currentQuizFile && questions.length ? questions.length : quiz.questionCount;
-    const questionText = questionCount ? `${questionCount} questions` : 'Practice set';
-    const chapterNumber = quizCatalog.findIndex(function (item) { return item.id === quiz.id; }) + 1;
+    if (quiz.file === selectedQuizFile) card.classList.add('selected');
+    if (quiz.file === currentQuizFile)  card.classList.add('active');
+
+    const questionCount = quiz.file === currentQuizFile && questions.length
+      ? questions.length
+      : quiz.questionCount;
+    const questionText  = questionCount ? `${questionCount} questions` : 'Practice set';
+   // NEW — index within the same subject only
+    const subjectCatalog = quizCatalog.filter(function (item) { return item.subject === quiz.subject; });
+    const chapterNumber = subjectCatalog.findIndex(function (item) { return item.id === quiz.id; }) + 1;
+    const numLabel      = String(chapterNumber || index + 1).padStart(2, '0');
 
     card.innerHTML = `
-      <div>
-        <span class="subject-badge">${escHtml(labelFromSubject(quiz.subject))}</span>
-        <h3>${escHtml(quiz.title)}</h3>
-        <p>${escHtml(questionText)} · Based on Latest PYQs · Instant result</p>
-        <div class="chapter-meta">
-          <span>Chapter ${String(chapterNumber || index + 1).padStart(2, '0')}</span>
-          <span>${escHtml(getChapterDescription(quiz.title, index))}</span>
-        </div>
+      <div class="chapter-num-box" aria-hidden="true">${numLabel}</div>
+      <div class="chapter-info">
+        <strong class="chapter-title">${escHtml(quiz.title)}</strong>
+        <span class="chapter-q-count">${escHtml(questionText)}</span>
       </div>
-      <button class="chapter-start" type="button">Start quiz</button>
     `;
 
     card.addEventListener('click', function () {
-      selectChapterCard(quiz.file);
-    });
-    card.querySelector('.chapter-start').addEventListener('click', function (event) {
-      event.stopPropagation();
       launchQuiz(quiz.id);
     });
 
     els.chapterCards.appendChild(card);
   });
-
 }
 
 function getFilteredQuizCatalog(subject) {
@@ -1095,10 +1092,8 @@ function renderInlineExplanation(q, selectedAnswer) {
 }
 
 function buildMetaChips(q) {
-  const chips = [];
-  if (q.pyq) chips.push(`<span class="chip chip--pyq">${escHtml(q.pyq)}</span>`);
-  if (q.difficulty) chips.push(`<span class="chip chip--difficulty">${escHtml(labelFromSubject(q.difficulty))}</span>`);
-  return chips.length ? `<div class="meta-chips">${chips.join('')}</div>` : '';
+  // PYQ exam / year metadata is intentionally not displayed in the quiz UI.
+  return '';
 }
 
 function buildRevisionQuestion(q) {
@@ -1612,38 +1607,70 @@ function formatQuestion(rawText) {
 function formatMatchQuestion(text) {
   const lines = text.split('\n').map(function (l) { return l.trim(); }).filter(Boolean);
 
+  // Find the first line that starts with "Column I" (covers both inline and separate-line formats)
   const colIIdx = lines.findIndex(function (l) {
-    return /^Column\s+I\b/i.test(l) && !/^Column\s+II\b/i.test(l);
+    return /^Column\s+I\b/i.test(l);
   });
-  const colIIIdx = lines.findIndex(function (l) { return /^Column\s+II\b/i.test(l); });
 
-  if (colIIdx === -1 || colIIIdx === -1) {
+  if (colIIdx === -1) {
     return '<div class="q-text match-block">' + escHtml(text) + '</div>';
   }
 
-  const intro = lines.slice(0, colIIdx).join(' ');
-  let colIItems = lines.slice(colIIdx + 1, colIIIdx).filter(function (line) {
-    return /^(?:I|II|III|IV|V|VI|VII|VIII|IX|X)\.\s+/i.test(line);
-  });
-  let colIIItems = lines.slice(colIIIdx + 1).filter(function (line) {
-    return /^[P-S]\.\s+/i.test(line);
-  });
+  const intro       = lines.slice(0, colIIdx).join(' ');
+  const headerLine  = lines[colIIdx];
+  const colIItems   = [];
+  const colIIItems  = [];
 
-  if (!colIItems.length) colIItems = lines.slice(colIIdx + 1, colIIIdx);
-  if (!colIIItems.length) colIIItems = lines.slice(colIIIdx + 1);
+  // Detect inline format: "Column I        Column II" on ONE line
+  if (/^Column\s+I\b.*Column\s+II\b/i.test(headerLine)) {
+    // Each data line looks like: "I.   Mehrgarh         P.  Assam"
+    // Split at 2+ whitespace chars that precede a P–S letter + dot
+    lines.slice(colIIdx + 1).forEach(function (line) {
+      const m = line.match(/^(.+?)\s{2,}([P-S]\..+)$/);
+      if (m) {
+        colIItems.push(m[1].replace(/\s+/g, ' ').trim());
+        colIIItems.push(m[2].replace(/\s+/g, ' ').trim());
+      }
+    });
+
+  } else {
+    // Separate-lines format (World Map style): Column I header, then items, then Column II header, then items
+    const colIIIdx = lines.findIndex(function (l) { return /^Column\s+II\b/i.test(l); });
+    if (colIIIdx === -1) {
+      return '<div class="q-text match-block">' + escHtml(text) + '</div>';
+    }
+
+    let leftLines  = lines.slice(colIIdx + 1, colIIIdx);
+    let rightLines = lines.slice(colIIIdx + 1);
+
+    leftLines.filter(function (l) {
+      return /^(?:I{1,3}|IV|V|VI|VII|VIII|IX|X)\.\s+/i.test(l);
+    }).forEach(function (l) { colIItems.push(l); });
+
+    rightLines.filter(function (l) {
+      return /^[P-S]\.\s+/i.test(l);
+    }).forEach(function (l) { colIIItems.push(l); });
+
+    // Fallback: take all lines if the regex filters produced nothing
+    if (!colIItems.length)  leftLines.forEach(function (l) { colIItems.push(l); });
+    if (!colIIItems.length) rightLines.forEach(function (l) { colIIItems.push(l); });
+  }
 
   const rowCount = Math.max(colIItems.length, colIIItems.length);
-  let tableHtml = '<div class="match-table"><div class="match-header">Column I</div><div class="match-header">Column II</div>';
+  let tableHtml = '<div class="match-table">'
+    + '<div class="match-header">Column I</div>'
+    + '<div class="match-header">Column II</div>';
+
   for (let i = 0; i < rowCount; i++) {
-    tableHtml += '<div class="match-cell">' + escHtml(colIItems[i] || '') + '</div>';
+    tableHtml += '<div class="match-cell">' + escHtml(colIItems[i]  || '') + '</div>';
     tableHtml += '<div class="match-cell">' + escHtml(colIIItems[i] || '') + '</div>';
   }
   tableHtml += '</div>';
 
-  return '<div class="q-text match-block">' +
-    (intro ? '<div class="match-intro">' + escHtml(intro) + '</div>' : '') +
-    tableHtml +
-  '</div>';
+  return '<div class="q-text match-block">'
+    + (intro ? '<div class="match-intro">' + escHtml(intro) + '</div>' : '')
+    + tableHtml
+    + '</div>';
 }
 
 function formatStatementQuestion(text) {

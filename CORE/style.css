@@ -654,108 +654,94 @@ main { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 }
 
 /* ─── CHAPTER CARDS GRID ────────────────────────────────────────── */
-.chapters-grid, .chapter-grid {
+.chapters-grid,
+.chapter-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
   padding: 4px 0 20px;
 }
 
+/* ─── CHAPTER CARD (compact row — mirrors subject-card aesthetic) ── */
 .chapter-card {
-  position: relative;
-  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
   border: 1px solid var(--border-color);
-  border-radius: var(--r-lg);
+  border-radius: var(--r-md);
   background: var(--surface);
   box-shadow: var(--shadow);
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 200px;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-}
-
-.chapter-card::before {
-  content: '';
-  position: absolute;
-  inset: 0 0 auto;
-  height: 3px;
-  background: linear-gradient(90deg, var(--primary), #7C3AED);
-  border-radius: var(--r-lg) var(--r-lg) 0 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .chapter-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
-  border-color: rgba(79,70,229,0.35);
+  border-color: rgba(79, 70, 229, 0.3);
 }
 
 .chapter-card.active {
   border-color: var(--success);
-  box-shadow: 0 4px 20px rgba(16,185,129,0.18);
+  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.15);
 }
-
-.chapter-card.active::before { background: linear-gradient(90deg, var(--success), #059669); }
 
 .chapter-card.selected {
   border-color: var(--primary);
-  box-shadow: 0 4px 20px rgba(79,70,229,0.22);
+  box-shadow: 0 4px 20px rgba(79, 70, 229, 0.18);
 }
 
-.subject-badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 3px 10px;
-  border-radius: var(--r-full);
-  font-size: 10px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 10px;
-}
-
-[data-subject="geography"] .subject-badge { background: #DBEAFE; color: #1E40AF; }
-[data-subject="science"]   .subject-badge { background: #D1FAE5; color: #065F46; }
-[data-subject="history"]   .subject-badge { background: #FEF3C7; color: #92400E; }
-[data-subject="polity"]    .subject-badge { background: #EDE9FE; color: #6D28D9; }
-[data-subject="general"]   .subject-badge { background: var(--border-color); color: var(--secondary); }
-
-.chapter-card h3 {
+/* Icon box — the "01" rounded square */
+.chapter-num-box {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--r-sm);
+  display: inline-grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--primary), #7C3AED);
+  color: #fff;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 20px;
-  font-weight: 800;
-  line-height: 1.25;
-  color: var(--text-primary);
-  margin-top: 6px;
-}
-
-.chapter-card p {
-  margin-top: 8px;
-  color: var(--text-secondary);
   font-size: 13px;
-  line-height: 1.55;
+  font-weight: 900;
+  letter-spacing: 0.03em;
 }
 
-.chapter-meta {
+/* Subject-specific num-box accent colours (mirror the subject icons) */
+[data-subject="geography"] .chapter-num-box { background: linear-gradient(135deg, #2563EB, #1D4ED8); }
+[data-subject="history"]   .chapter-num-box { background: linear-gradient(135deg, #D97706, #B45309); }
+[data-subject="polity"]    .chapter-num-box { background: linear-gradient(135deg, #7C3AED, #6D28D9); }
+[data-subject="science"]   .chapter-num-box { background: linear-gradient(135deg, #059669, #047857); }
+
+/* Right-side text block */
+.chapter-info {
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin: 14px 0;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0; /* prevents overflow in narrow grid cells */
 }
 
-.chapter-meta span {
-  border: 1px solid var(--border-color);
-  border-radius: var(--r-full);
-  color: var(--text-secondary);
-  font-size: 11px;
-  font-weight: 700;
-  padding: 4px 10px;
-  background: var(--bg-tertiary);
+.chapter-title {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.3;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
+.chapter-q-count {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
 /* ─── REVISION DUE CARD (Practice Page) ─────────────────────────── */
 .revision-due-practice {
   border: 1px solid rgba(79,70,229,0.25);
