@@ -1,873 +1,278 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap');
+/*
+ * revision.css — revision-specific additions only
+ * ─────────────────────────────────────────────────
+ * This file DEPENDS on style.css being loaded first.
+ * It does NOT redeclare fonts, resets, or CSS tokens.
+ * All quiz component styles (option-label, progress-bar,
+ * question-text, inline-explanation, etc.) come from style.css.
+ *
+ * This file only adds:
+ *  1. Page layout wrapper
+ *  2. Revision top bar (back link + due pill)
+ *  3. Chip colour variants (subject / chapter)
+ *  4. Again / Got It buttons
+ *  5. State screen (empty / finished)
+ *  6. Mobile nav suppression
+ */
 
-html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-body { font-size: 16px; font-family: 'DM Sans', sans-serif; }
-
-:root {
-  --bg: #F0F2FF;
-  --primary: #4F46E5;
-  --primary-light: #EEF2FF;
-  --card: #ffffff;
-  --text: #1E1B4B;
-  --muted: #6B7280;
-  --success: #10B981;
-  --success-light: #D1FAE5;
-  --danger: #EF4444;
-  --danger-light: #FEE2E2;
-  --warning: #F59E0B;
-  --warning-light: #FEF3C7;
-  --border: #E2E8F0;
-  --radius: 20px;
-  --radius-sm: 12px;
-  --shadow: 0 2px 12px rgba(79,70,229,0.08);
-  --shadow-md: 0 4px 20px rgba(79,70,229,0.12);
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  min-height: 100vh;
-  background: var(--bg);
-  color: var(--text);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a,
-button {
-  color: inherit;
-  font: inherit;
-}
-
-a {
-  text-decoration: none;
-}
-
-/* ─── Layout ─────────────────────────────────────────────── */
+/* ── 1. Page wrapper ────────────────────────────────────────── */
 
 .revision-wrapper {
-  width: min(100%, 480px);
+  width: min(100%, 840px);
   margin: 0 auto;
-  /* tighter on mobile, roomier on larger screens */
-  padding: 12px 12px;
+  padding: 24px 24px 48px;
 }
 
-@media (min-width: 400px) {
-  .revision-wrapper {
-    padding: 20px 16px;
-  }
+@media (max-width: 768px) {
+  .revision-wrapper { padding: 20px 16px 40px; }
 }
+
+@media (max-width: 480px) {
+  .revision-wrapper { padding: 14px 12px 32px; }
+}
+
+/* ── 2. The card — mirrors .quiz-container from style.css ───── */
 
 .revision-card {
-  min-height: calc(100vh - 24px);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--card);
-  box-shadow: var(--shadow-md);
-  /* compact on tiny screens */
-  padding: 14px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+  padding: 28px;
+  animation: riseIn 0.5s ease both;
 }
 
-@media (min-width: 400px) {
-  .revision-card {
-    min-height: calc(100vh - 40px);
-    padding: 18px 18px;
-  }
+@media (max-width: 768px) {
+  .revision-card { padding: 22px 18px; }
 }
 
-/* ─── Top bar ─────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .revision-card { padding: 18px 14px; }
+}
+
+/* ── 3. Top bar ─────────────────────────────────────────────── */
 
 .revision-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
 }
 
+/* Back link — matches .icon-btn style from main app */
 .back-link {
-  color: var(--text);
-  font-size: 14px;
+  color: var(--text-secondary);
+  font-size: 13px;
   font-weight: 800;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  line-height: 1;
+  gap: 6px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--r-sm);
+  padding: 7px 14px;
+  background: var(--bg-tertiary);
+  transition: all 0.18s;
+  white-space: nowrap;
 }
 
-@media (min-width: 400px) {
-  .back-link {
-    font-size: 15px;
-  }
-}
-
-.due-pill {
-  border-radius: 999px;
-  background: var(--primary-light);
+.back-link:hover {
+  border-color: var(--primary);
   color: var(--primary);
-  padding: 5px 10px;
-  font-size: 11px;
+  background: var(--primary-tint);
+}
+
+.back-link:active { transform: scale(0.97); }
+
+/* Due pill — matches .marking-info from style.css */
+.due-pill {
+  border: 1px solid var(--primary-mid);
+  border-radius: var(--r-full);
+  background: var(--primary-tint);
+  color: var(--primary);
+  padding: 6px 14px;
+  font-size: 13px;
   font-weight: 800;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
-@media (min-width: 400px) {
-  .due-pill {
-    font-size: 12px;
-    padding: 6px 12px;
-  }
+/* ── 4. Progress section spacing (content comes from style.css) */
+
+.revision-progress {
+  margin-bottom: 20px;
 }
 
-/* ─── Progress bar ────────────────────────────────────────── */
-
-.progress-track {
-  height: 6px;
-  border-radius: 999px;
-  background: var(--border);
-  overflow: hidden;
-  margin-bottom: 14px;
-}
-
-@media (min-width: 400px) {
-  .progress-track {
-    height: 8px;
-    margin-bottom: 18px;
-  }
-}
-
-.progress-fill {
-  height: 100%;
-  border-radius: inherit;
-  background: var(--primary);
-  transition: width 0.25s ease;
-}
-
-/* ─── Chips ───────────────────────────────────────────────── */
-
-.chip-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 12px;
-}
-
-@media (min-width: 400px) {
-  .chip-row {
-    gap: 8px;
-    margin-bottom: 16px;
-  }
-}
-
-.chip {
-  border-radius: 999px;
-  padding: 4px 9px;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
-
-@media (min-width: 400px) {
-  .chip {
-    padding: 5px 11px;
-    font-size: 11px;
-  }
-}
-
-.chip-subject {
-  background: var(--primary-light);
+/* ── 5. Meta chips: subject & chapter colour variants ───────── */
+/*
+ * .chip base + .chip--pyq / .chip--difficulty exist in style.css.
+ * We add subject and chapter variants here.
+ */
+.chip--subject {
+  background: var(--primary-tint);
   color: var(--primary);
 }
 
-.chip-chapter {
-  background: var(--warning-light);
+.chip--chapter {
+  background: var(--warning-tint);
   color: #92400E;
 }
 
-/* ─── Question text ───────────────────────────────────────── */
+/* ── 6. Explanation — outside the options grid ──────────────── */
 
-/*
- * Mobile-first: 18px is the baseline.
- * Scales up only when there's enough room.
- * No Syne; DM Sans weight 700 is clean and readable.
- */
-.question-text {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 18px;
-  line-height: 1.55;
-  font-weight: 700;
-  margin-bottom: 14px;
-  white-space: pre-wrap;
-  color: var(--text);
+.revision-explanation {
+  margin-top: 16px;
 }
 
-/* match-type questions use structured HTML — no pre-wrap needed */
-.question-text.question-text--match {
-  white-space: normal;
-}
-
-@media (min-width: 360px) {
-  .question-text {
-    font-size: 18px; /* stay at 18 until wider viewport */
-  }
-}
-
-@media (min-width: 420px) {
-  .question-text {
-    font-size: 19px;
-    margin-bottom: 18px;
-  }
-}
-
-@media (min-width: 480px) {
-  .question-text {
-    font-size: 20px;
-  }
-}
-
-/* ─── Options ─────────────────────────────────────────────── */
-
-.options {
-  display: grid;
-  gap: 8px;
-}
-
-@media (min-width: 400px) {
-  .options {
-    gap: 10px;
-  }
-}
-
-.option {
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-sm);
-  /* tighter padding on small screens so text wraps less */
-  padding: 11px 12px;
-  display: flex;
-  align-items: flex-start; /* top-align for multi-line labels */
-  gap: 10px;
-  cursor: pointer;
-  background: #ffffff;
-  color: var(--text);
-  text-align: left;
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1.5;
-  transition: border-color 0.15s, background 0.15s;
-}
-
-@media (min-width: 380px) {
-  .option {
-    font-size: 13.5px;
-    padding: 12px 13px;
-  }
-}
-
-@media (min-width: 420px) {
-  .option {
-    font-size: 14px;
-    padding: 13px 15px;
-    gap: 12px;
-  }
-}
-
-@media (min-width: 480px) {
-  .option {
-    font-size: 14.5px;
-    padding: 14px 16px;
-  }
-}
-
-.option:disabled {
-  cursor: default;
-}
-
-.option-letter {
-  width: 26px;
-  height: 26px;
-  flex: 0 0 26px;
-  border-radius: 50%;
-  background: var(--primary-light);
-  color: var(--primary);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  font-weight: 800;
-  /* align with first line of text */
-  margin-top: 1px;
-}
-
-@media (min-width: 420px) {
-  .option-letter {
-    width: 28px;
-    height: 28px;
-    flex: 0 0 28px;
-    font-size: 12px;
-  }
-}
-
-.option.correct {
-  background: var(--success-light);
-  border-color: var(--success);
-}
-
-.option.wrong {
-  background: var(--danger-light);
-  border-color: var(--danger);
-}
-
-/* ─── Explanation card ────────────────────────────────────── */
-
-.explanation-card {
-  border-radius: var(--radius-sm);
-  background: var(--primary-light);
-  color: var(--text);
-  padding: 12px 13px;
-  margin-top: 12px;
-  line-height: 1.6;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-@media (min-width: 400px) {
-  .explanation-card {
-    padding: 13px 14px;
-    font-size: 13.5px;
-    margin-top: 14px;
-  }
-}
-
-@media (min-width: 480px) {
-  .explanation-card {
-    padding: 14px;
-    font-size: 14px;
-  }
-}
-
-/* ─── Review actions ──────────────────────────────────────── */
+/* ── 7. Review actions: Again + Got It ──────────────────────── */
 
 .review-actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-top: 14px;
+  gap: 12px;
+  margin-top: 16px;
 }
 
-@media (min-width: 400px) {
-  .review-actions {
-    gap: 10px;
-    margin-top: 16px;
-  }
-}
-
-.review-actions button,
-.dashboard-link {
-  min-height: 42px;
-  border: 0;
-  border-radius: var(--radius-sm);
+.again-btn,
+.got-btn {
+  min-height: 48px;
+  border-radius: var(--r-sm);
+  border: 1.5px solid transparent;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 14px;
-  font-size: 13px;
+  gap: 8px;
+  font-size: 14px;
   font-weight: 800;
-  letter-spacing: 0.01em;
-  transition: opacity 0.15s;
+  padding: 12px 20px;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease,
+    color 0.18s ease,
+    border-color 0.18s ease;
 }
 
-@media (min-width: 400px) {
-  .review-actions button,
-  .dashboard-link {
-    min-height: 44px;
-    font-size: 14px;
-    padding: 10px 16px;
+.again-btn:active,
+.got-btn:active { transform: scale(0.97); }
+
+/* Again — danger tint at rest, full danger on hover (mirrors .danger action-btn pattern) */
+.again-btn {
+  background: var(--danger-tint);
+  color: var(--danger-hover);
+  border-color: rgba(239, 68, 68, 0.28);
+}
+
+.again-btn:hover {
+  background: var(--danger);
+  color: #fff;
+  border-color: var(--danger);
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);
+  transform: translateY(-1px);
+}
+
+/* Got It — success tint at rest, full success on hover */
+.got-btn {
+  background: var(--success-tint);
+  color: var(--success-hover);
+  border-color: rgba(16, 185, 129, 0.28);
+}
+
+.got-btn:hover {
+  background: var(--success);
+  color: #fff;
+  border-color: var(--success);
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 480px) {
+  .again-btn,
+  .got-btn {
+    font-size: 13px;
+    min-height: 46px;
+    padding: 10px 14px;
+    gap: 6px;
   }
 }
 
-.review-actions button:active,
-.dashboard-link:active {
-  opacity: 0.85;
-}
-
-.again-btn {
-  background: var(--danger-light);
-  color: var(--danger);
-}
-
-.got-btn,
-.dashboard-link {
-  background: var(--primary);
-  color: #ffffff;
-}
-
-/* ─── Empty / finish state ────────────────────────────────── */
+/* ── 8. State screen (empty queue / session complete) ───────── */
 
 .state-screen {
-  min-height: calc(100vh - 80px);
+  min-height: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 20px;
+  padding: 48px 24px;
+  gap: 10px;
 }
 
 .state-icon {
+  font-size: 48px;
   display: block;
-  font-size: 44px;
-  margin-bottom: 12px;
-}
-
-@media (min-width: 400px) {
-  .state-icon {
-    font-size: 48px;
-  }
-}
-
-.state-screen h1 {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 24px;
-  font-weight: 800;
-  line-height: 1.25;
-}
-
-@media (min-width: 400px) {
-  .state-screen h1 {
-    font-size: 28px;
-  }
-}
-
-@media (min-width: 480px) {
-  .state-screen h1 {
-    font-size: 30px;
-  }
-}
-
-.state-screen p {
-  color: var(--muted);
-  font-weight: 600;
-  line-height: 1.6;
-  margin-top: 10px;
-  font-size: 14px;
-  max-width: 320px;
-}
-
-.dashboard-link {
-  margin-top: 22px;
-}
-
-/* ─── Question stem label (e.g. "QUESTION 4 OF 25") ──────── */
-
-.question-label {
-  display: block;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--primary);
   margin-bottom: 8px;
 }
 
-@media (min-width: 400px) {
-  .question-label {
-    font-size: 11px;
-    margin-bottom: 10px;
-  }
+.state-screen h1 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(22px, 5vw, 30px);
+  font-weight: 900;
+  color: var(--text-primary);
+  line-height: 1.2;
 }
 
-/* ─── Question stem (intro line like "Match the following:") ─ */
-
-.question-stem {
+.state-screen p {
+  color: var(--text-secondary);
   font-size: 15px;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 14px;
-  line-height: 1.4;
+  line-height: 1.65;
+  max-width: 380px;
 }
 
-@media (min-width: 400px) {
-  .question-stem {
-    font-size: 16px;
-    margin-bottom: 16px;
-  }
-}
-
-/* ─── Match table ─────────────────────────────────────────── */
-/*
- * JS (revision.js / script.js) emits a FLAT grid — no wrapper
- * columns, just alternating header+cell nodes in a 2-col grid:
- *
- *   <div class="q-text match-block">
- *     <div class="match-intro">Match the following…</div>
- *     <div class="match-table">
- *       <div class="match-header">Column I</div>
- *       <div class="match-header">Column II</div>
- *       <div class="match-cell">I. Budapest</div>
- *       <div class="match-cell">P. Tigris</div>
- *       <div class="match-cell">II. Moscow</div>
- *       <div class="match-cell">Q. Seine</div>
- *       …
- *     </div>
- *   </div>
- *
- * The two-column layout is achieved purely via CSS Grid on
- * .match-table — every child auto-places into col 1 or col 2.
- */
-
-/* outer wrapper emitted by formatMatchQuestion */
-.q-text {
-  color: var(--text);
-  line-height: 1.6;
-}
-
-.match-block {
-  white-space: normal;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-/* intro sentence: "Match the following waterbodies…" */
-.match-intro {
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 1.5;
-  margin-bottom: 14px;
-  color: var(--text);
-}
-
-@media (min-width: 400px) {
-  .match-intro { font-size: 16px; margin-bottom: 16px; }
-}
-
-/* the actual 2-col grid */
-.match-table {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  margin-bottom: 16px;
-  background: var(--card);
-  /* ensure it never collapses to 1 col on narrow screens */
-  min-width: 0;
-}
-
-/* "Column I" / "Column II" header cells */
-.match-header {
-  background: var(--primary-light);
-  color: var(--primary);
-  font-size: 11px;
+/* Dashboard / back link button in state screens */
+.dashboard-link {
+  margin-top: 24px;
+  min-height: 46px;
+  padding: 12px 28px;
+  border-radius: var(--r-sm);
+  background: var(--primary);
+  color: #fff;
+  font-size: 14px;
   font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 8px 10px;
-  border-bottom: 1.5px solid var(--border);
-  word-break: break-word;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+  transition: background 0.18s, transform 0.18s, box-shadow 0.18s;
 }
 
-/* draw the vertical separator between the two columns:
-   odd children (col 1) get a right border */
-.match-header:nth-child(odd),
-.match-cell:nth-child(odd) {
-  border-right: 1.5px solid var(--border);
+.dashboard-link:hover {
+  background: var(--primary-hover);
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.45);
+  transform: translateY(-1px);
 }
 
-@media (min-width: 400px) {
-  .match-header {
-    font-size: 12px;
-    padding: 9px 13px;
-  }
-}
+.dashboard-link:active { transform: scale(0.97); }
 
-/* data rows — I. Budapest / P. Tigris etc. */
-.match-cell {
-  padding: 9px 10px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text);
-  line-height: 1.5;
-  word-break: break-word;
-  min-width: 0;
-  /* hairline bottom border between rows */
-  border-bottom: 1px solid var(--border);
-}
-
-/* suppress bottom border on the last two cells (last row) */
-.match-table > .match-cell:nth-last-child(-n+2) {
-  border-bottom: 0;
-}
-
-@media (min-width: 400px) {
-  .match-cell {
-    font-size: 13.5px;
-    padding: 10px 13px;
-  }
-}
-
-@media (min-width: 768px) {
-  .match-intro { font-size: 17px; }
-  .match-header { font-size: 12px; padding: 10px 16px; }
-  .match-cell   { font-size: 15px; padding: 11px 16px; }
-}
-
-/* ── Statement / Assertion-Reason blocks ──────────────────── */
+/* ── 9. Mobile nav suppression ──────────────────────────────── */
 /*
- * JS emits .statement-group > .statement-block / .statement-plain
- * for "Assertion (A): … / Reason (R): …" type questions.
+ * Revision is a standalone page. body.revision-active ensures:
+ *  • No quiz-active bottom padding leaks in
+ *  • Any quiz chrome elements (bottom nav, palette, timer) are hidden
+ *    in case they somehow end up in the DOM
  */
-.statement-group {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 14px;
+body.revision-active {
+  padding-bottom: 0 !important;
 }
 
-.statement-block {
-  padding: 13px 16px;
-  background: var(--primary-light);
-  border-left: 3px solid var(--primary);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.6;
-  color: var(--text);
-}
-
-.statement-plain {
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.6;
-  color: var(--text);
-}
-
-@media (min-width: 768px) {
-  .statement-block  { font-size: 16px; padding: 16px 20px; }
-  .statement-plain  { font-size: 16px; }
-  .statement-group  { gap: 12px; }
-}
-
-/* ═══════════════════════════════════════════════════════════
-   DESKTOP EXPANSION  ≥ 768px
-   The narrow mobile card gives way to a full quiz-style layout:
-   • Wrapper expands to fill the viewport (max 960px)
-   • Card becomes a proper quiz panel with more padding
-   • Options switch to a 2 × 2 grid
-   • Question text and headings scale up
-   • Match table rows get more breathing room
-   • Review actions spread wider
-═══════════════════════════════════════════════════════════ */
-
-@media (min-width: 768px) {
-
-  /* ── Outer wrapper ──────────────────────────────────────── */
-  .revision-wrapper {
-    width: min(100%, 960px);
-    padding: 32px 40px;
-  }
-
-  /* ── Card ───────────────────────────────────────────────── */
-  .revision-card {
-    min-height: auto;           /* no need to fill 100vh on desktop */
-    padding: 36px 40px;
-    border-radius: 24px;
-  }
-
-  /* ── Top bar ────────────────────────────────────────────── */
-  .revision-top {
-    margin-bottom: 20px;
-  }
-
-  .back-link {
-    font-size: 16px;
-  }
-
-  .due-pill {
-    font-size: 13px;
-    padding: 7px 16px;
-  }
-
-  /* ── Progress bar ───────────────────────────────────────── */
-  .progress-track {
-    height: 6px;
-    margin-bottom: 24px;
-  }
-
-  /* ── Chips ──────────────────────────────────────────────── */
-  .chip-row {
-    margin-bottom: 20px;
-    gap: 10px;
-  }
-
-  .chip {
-    font-size: 12px;
-    padding: 5px 13px;
-  }
-
-  /* ── Question label ─────────────────────────────────────── */
-  .question-label {
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    margin-bottom: 12px;
-  }
-
-  /* ── Question text ──────────────────────────────────────── */
-  /*
-   * On desktop the question sits inside a left-bordered accent
-   * block — identical to the "assertion-reason" style in Image 2.
-   * JS should wrap .question-text in a .question-block div.
-   * If it doesn't, we style .question-text directly.
-   */
-  .question-text {
-    font-size: 20px;
-    line-height: 1.6;
-    font-weight: 700;
-    margin-bottom: 28px;
-    padding: 18px 20px;
-    background: var(--primary-light);
-    border-left: 4px solid var(--primary);
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    white-space: pre-wrap;
-  }
-
-  /* Assertion-Reason / Statement blocks ─────────────────────
-   * When a question has two labelled blocks (A + R, St.I + St.II)
-   * JS should render each as:
-   *   <div class="question-block">…text…</div>
-   * inside .question-text or as siblings.
-   */
-  .question-block {
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 1.6;
-    color: var(--text);
-    padding: 16px 20px;
-    background: var(--primary-light);
-    border-left: 4px solid var(--primary);
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    margin-bottom: 12px;
-  }
-
-  .question-block:last-of-type {
-    margin-bottom: 28px;
-  }
-
-  /* ── Question stem ──────────────────────────────────────── */
-  .question-stem {
-    font-size: 18px;
-    margin-bottom: 20px;
-    font-weight: 700;
-  }
-
-  /* ── Options — 2 × 2 grid on desktop ───────────────────── */
-  .options {
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-
-  .option {
-    font-size: 15px;
-    padding: 16px 18px;
-    gap: 14px;
-    border-radius: 12px;
-    align-items: center;  /* centre-align on desktop — less wrapping */
-  }
-
-  .option-letter {
-    width: 32px;
-    height: 32px;
-    flex: 0 0 32px;
-    font-size: 13px;
-    margin-top: 0;
-  }
-
-  /* ── Explanation card ───────────────────────────────────── */
-  .explanation-card {
-    font-size: 15px;
-    padding: 18px 20px;
-    margin-top: 20px;
-    border-radius: var(--radius-sm);
-  }
-
-  /* ── Review actions ─────────────────────────────────────── */
-  .review-actions {
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    margin-top: 24px;
-    max-width: 520px;   /* don't let buttons stretch to full 960px */
-  }
-
-  .review-actions button,
-  .dashboard-link {
-    min-height: 48px;
-    font-size: 15px;
-    padding: 12px 24px;
-    border-radius: var(--radius-sm);
-  }
-
-  /* ── Match table ────────────────────────────────────────── */
-  .match-table {
-    margin-bottom: 28px;
-  }
-
-  .match-intro {
-    font-size: 18px;
-    margin-bottom: 20px;
-  }
-
-  .match-header {
-    font-size: 12px;
-    padding: 10px 18px;
-    letter-spacing: 0.1em;
-  }
-
-  .match-cell {
-    font-size: 15px;
-    padding: 12px 18px;
-  }
-
-  /* ── State / finish screen ──────────────────────────────── */
-  .state-screen {
-    min-height: 480px;
-    padding: 60px 40px;
-  }
-
-  .state-icon {
-    font-size: 56px;
-    margin-bottom: 16px;
-  }
-
-  .state-screen h1 {
-    font-size: 36px;
-  }
-
-  .state-screen p {
-    font-size: 16px;
-    max-width: 440px;
-  }
-
-  .dashboard-link {
-    margin-top: 28px;
-    min-height: 48px;
-    font-size: 15px;
-    padding: 12px 32px;
-  }
-}
-
-/* ── Extra-wide tweak: cap content width for readability ── */
-@media (min-width: 1100px) {
-  .revision-wrapper {
-    padding: 40px 0;
-  }
-}
-
-/* ─── Utility ─────────────────────────────────────────────── */
-
-.hidden {
+body.revision-active .quiz-bottom-bar,
+body.revision-active .navigation,
+body.revision-active .grid-btn,
+body.revision-active .palette-fab,
+body.revision-active .question-palette,
+body.revision-active .palette-overlay,
+body.revision-active .timer-display {
   display: none !important;
 }

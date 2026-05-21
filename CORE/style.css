@@ -82,8 +82,17 @@ body.quiz-active .app-header { display: none !important; }
 
 body.quiz-active .quiz-bottom-bar {
   position: fixed;
-  bottom: 0; left: 0; right: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
+
+  display: flex;
+  gap: 12px;
+}
+
+.quiz-bottom-bar .nav-btn {
+  flex: 1;
 }
 
 body.palette-open { position: fixed; overflow: hidden; width: 100%; }
@@ -1655,6 +1664,33 @@ main { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
 /* ─── UTILITY ───────────────────────────────────────────────────── */
 .hidden { display: none !important; }
+
+.meta-chip {
+  align-self: flex-start;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: fit-content;
+
+  margin-top: 8px;
+  margin-bottom: 18px;
+
+  padding: 6px 12px;
+
+  border-radius: 999px;
+
+  background: rgba(99, 91, 255, 0.08);
+  border: 1px solid rgba(99, 91, 255, 0.18);
+
+  color: #635bff;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  letter-spacing: 0.3px;
+}
 
 .chapter-kicker { color: var(--text-secondary); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
 

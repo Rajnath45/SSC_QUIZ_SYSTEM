@@ -102,7 +102,6 @@ function cacheElements() {
   els.resultSection = document.getElementById('result-section');
   els.bottomNav = document.getElementById('bottomNav');
   els.prevBtn = document.getElementById('prevBtn');
-  els.clearBtn = document.getElementById('clearBtn');
   els.nextBtn = document.getElementById('nextBtn');
   els.submitBtn = document.getElementById('submitBtn');
   els.paletteFab = document.getElementById('paletteFab');
@@ -166,7 +165,6 @@ function initEventListeners() {
 
   els.prevBtn.addEventListener('click', prevQuestion);
   els.nextBtn.addEventListener('click', nextQuestion);
-  els.clearBtn.addEventListener('click', clearAnswer);
   els.submitBtn.addEventListener('click', submitQuiz);
   if (els.authActionBtn) els.authActionBtn.addEventListener('click', handleAuthAction);
   els.fullscreenBtn.addEventListener('click', toggleFullscreen);
@@ -851,6 +849,8 @@ function normalizeQuizData(data) {
       subject: subject,
       chapterName: chapterName,
       pyq: item.pyq ?? null,
+      pyqExam: item.pyqExam ?? null,
+      pyqYear: item.pyqYear ?? null,
       difficulty: item.difficulty ?? null
     };
   }).filter(function (item) {
@@ -926,7 +926,6 @@ function updateActiveChapterState() {
 function setQuizControlsDisabled(disabled) {
   els.prevBtn.disabled = disabled || currentQuestion === 0;
   els.nextBtn.disabled = disabled || currentQuestion >= questions.length - 1;
-  els.clearBtn.disabled = disabled;
   els.submitBtn.disabled = disabled;
   els.paletteFab.disabled = disabled;
 }
@@ -1036,7 +1035,6 @@ function loadQuestion(index) {
 
   els.prevBtn.disabled = currentQuestion === 0;
   els.nextBtn.disabled = currentQuestion === questions.length - 1;
-  els.clearBtn.disabled = hasSelected;
   els.nextBtn.classList.toggle('hidden', currentQuestion === questions.length - 1);
   els.submitBtn.classList.toggle('hidden', currentQuestion !== questions.length - 1);
 
@@ -1050,21 +1048,6 @@ function saveAnswer(value) {
   if (!q || answers[q.sr_no]) return;
   answers[q.sr_no] = value;
   loadQuestion(currentQuestion);
-  updateProgress();
-  updatePalette();
-  saveToLocalStorage();
-}
-
-function clearAnswer() {
-  const q = questions[currentQuestion];
-  if (answers[q.sr_no]) return;
-  delete answers[q.sr_no];
-  document.querySelectorAll('input[name="option"]').forEach(function (input) {
-    input.checked = false;
-  });
-  document.querySelectorAll('.option-label').forEach(function (label) {
-    label.classList.remove('selected');
-  });
   updateProgress();
   updatePalette();
   saveToLocalStorage();
@@ -1092,8 +1075,16 @@ function renderInlineExplanation(q, selectedAnswer) {
 }
 
 function buildMetaChips(q) {
-  // PYQ exam / year metadata is intentionally not displayed in the quiz UI.
-  return '';
+  if (!q.pyqExam && !q.pyqYear) return '';
+
+  const exam = q.pyqExam || '';
+  const year = q.pyqYear || '';
+
+  return `
+    <div class="meta-chip">
+      ${exam} ${year}
+    </div>
+  `;
 }
 
 function buildRevisionQuestion(q) {
@@ -1200,7 +1191,6 @@ function handleKeyboard(e) {
 
   if (e.key === 'ArrowLeft') prevQuestion();
   if (e.key === 'ArrowRight' || e.key === 'Enter') nextQuestion();
-  if (e.key.toLowerCase() === 'c') clearAnswer();
   if (e.key.toLowerCase() === 'p') togglePalette();
   if (['1', '2', '3', '4'].includes(e.key)) selectOption(e.key);
 }

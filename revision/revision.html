@@ -2,11 +2,8 @@
 <html lang="en">
 
 <head>
-  <!-- ── Character encoding & viewport ─────────────────────── -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-
-  <!-- ── SEO / PWA meta ────────────────────────────────────── -->
   <meta name="description" content="Spaced-repetition revision for SSC CGL / CHSL preparation.">
   <meta name="theme-color" content="#4F46E5">
   <meta name="mobile-web-app-capable" content="yes">
@@ -15,32 +12,30 @@
 
   <title>Revision | SSC Prep Hub</title>
 
-  <!-- ── Stylesheet (must load before body paint) ──────────── -->
+  <!--
+    ⚠️  PATH NOTE
+    style.css lives one folder above this file if your layout is:
+      /practice/style.css
+      /revision/revision.html
+    → use  href="../style.css"
+    
+    If style.css and revision.html share the same folder:
+    → use  href="style.css"
+    
+    Adjust the path below to match your project structure.
+  -->
+  <link rel="stylesheet" href="../style.css">
+
+  <!-- Revision-specific additions only — thin layer on top of style.css -->
   <link rel="stylesheet" href="revision.css">
 </head>
 
-<body>
-
-  <!--
-    ╔══════════════════════════════════════════════════════════╗
-    ║  revision.js renders ALL dynamic content into           ║
-    ║  #revisionApp via JS.  This HTML shell is intentionally  ║
-    ║  kept minimal — you should NEVER need to edit it again.  ║
-    ║                                                          ║
-    ║  JS is responsible for building:                         ║
-    ║  • .revision-top  (back link + due pill)                 ║
-    ║  • .progress-track / .progress-fill                      ║
-    ║  • .chip-row (subject + chapter chips)                   ║
-    ║  • .question-label  e.g. "QUESTION 4 OF 25"              ║
-    ║  • .question-stem   e.g. "Match the following:"          ║
-    ║  • .question-text   for regular question stems           ║
-    ║  • .match-table     for match-type questions             ║
-    ║  • .options         list of .option buttons              ║
-    ║  • .explanation-card after answer reveal                 ║
-    ║  • .review-actions  (Again / Got it buttons)             ║
-    ║  • .state-screen    for empty / finished state           ║
-    ╚══════════════════════════════════════════════════════════╝
-  -->
+<!--
+  body.revision-active tells revision.css to:
+  • strip inherited body padding-bottom (quiz-active adds it on the main page)
+  • hide any leaked quiz chrome (bottom nav, palette fab, etc.)
+-->
+<body class="revision-active">
 
   <main class="revision-wrapper" role="main" aria-label="Revision session">
     <section
@@ -49,10 +44,7 @@
       aria-live="polite"
       aria-atomic="true"
     >
-      <!--
-        Loading placeholder — shown before revision.js initialises.
-        JS removes / replaces this node on first render.
-      -->
+      <!-- Loading placeholder — revision.js replaces this on first render -->
       <div class="state-screen" id="loadingState" aria-label="Loading">
         <span class="state-icon" aria-hidden="true">⏳</span>
         <h1>Loading…</h1>
@@ -61,16 +53,10 @@
     </section>
   </main>
 
-  <!-- ── No-JS fallback ────────────────────────────────────── -->
   <noscript>
     <style>
       #loadingState { display: none; }
-      .noscript-msg {
-        font-family: sans-serif;
-        text-align: center;
-        padding: 40px 20px;
-        color: #1E1B4B;
-      }
+      .noscript-msg { font-family: sans-serif; text-align: center; padding: 40px 20px; color: #1E1B4B; }
     </style>
     <div class="noscript-msg">
       <strong>JavaScript is required</strong> to run the revision session.
@@ -78,7 +64,6 @@
     </div>
   </noscript>
 
-  <!-- ── App script (deferred so DOM is ready) ─────────────── -->
   <script src="revision.js" defer></script>
 
 </body>
