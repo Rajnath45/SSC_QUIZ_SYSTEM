@@ -1076,15 +1076,10 @@ function renderInlineExplanation(q, selectedAnswer) {
 
 function buildMetaChips(q) {
   if (!q.pyqExam && !q.pyqYear) return '';
-
-  const exam = q.pyqExam || '';
-  const year = q.pyqYear || '';
-
-  return `
-    <div class="meta-chip">
-      ${exam} ${year}
-    </div>
-  `;
+  const exam = q.pyqExam ? escHtml(q.pyqExam) : '';
+  const year = q.pyqYear ? escHtml(String(q.pyqYear)) : '';
+  const label = [exam, year].filter(Boolean).join(' ');
+  return `<div class="meta-chips"><span class="meta-chip">${label}</span></div>`;
 }
 
 function buildRevisionQuestion(q) {

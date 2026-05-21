@@ -991,13 +991,19 @@ main { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
   white-space: pre-wrap;
 }
 
+/* chip containers must NOT inherit pre-wrap — kills spacing */
+.question-text .meta-chips,
+.question-text .meta-chip {
+  white-space: normal;
+}
+
 .question-text { margin-bottom: 24px; }
 
 .meta-chips {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .chip {
@@ -1666,30 +1672,18 @@ main { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 .hidden { display: none !important; }
 
 .meta-chip {
-  align-self: flex-start;
-
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-
-  width: fit-content;
-
-  margin-top: 8px;
-  margin-bottom: 18px;
-
-  padding: 6px 12px;
-
+  padding: 3px 10px;
   border-radius: 999px;
-
   background: rgba(99, 91, 255, 0.08);
-  border: 1px solid rgba(99, 91, 255, 0.18);
-
+  border: 1px solid rgba(99, 91, 255, 0.20);
   color: #635bff;
-
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
-
   letter-spacing: 0.3px;
+  line-height: 1.4;
+  margin: 0;
 }
 
 .chapter-kicker { color: var(--text-secondary); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
